@@ -65,6 +65,56 @@ APlayer.prototype.init = function () {
     if (this.option.autoplay) {
         this.play();
     }
+
+    this.thumb = this.option.element.getElementsByClassName('aplayer-thumb')[0];
+    this.bar = this.option.element.getElementsByClassName('aplayer-bar')[0];
+    var barWidth;
+
+    this.bar.addEventListener('click', function (event) {
+        var e = event || window.event;
+        barWidth = _self.bar.clientWidth;
+        var percentage = (e.clientX - getElementLeft(_self.bar)) / barWidth;
+        _self.updateBar.call(_self, 'played', percentage);
+        _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(percentage * _self.audio.duration);
+        _self.audio.currentTime = parseFloat(_self.playedBar.style.width) / 100 * _self.audio.duration;
+    });
+
+    this.thumb.addEventListener('mousedown', function (event) {
+        var e = event || window.event;
+        barWidth = _self.bar.clientWidth;
+        clearInterval(_self.playedTime);
+        document.addEventListener('mousemove', thumbMove);
+        document.addEventListener('mouseup', thumbUp);
+    });
+
+    function thumbMove (event) {
+        var e = event || window.event;
+        var percentage = (e.clientX - getElementLeft(_self.bar)) / barWidth;
+        percentage = percentage > 0 ? percentage : 0;
+        percentage = percentage < 1 ? percentage : 1;
+        _self.updateBar.call(_self, 'played', percentage);
+        _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(percentage * _self.audio.duration);
+    }
+
+    function thumbUp () {
+        document.removeEventListener('mouseup', thumbUp);
+        document.removeEventListener('mousemove', thumbMove);
+        _self.audio.currentTime = parseFloat(_self.playedBar.style.width) / 100 * _self.audio.duration;
+        _self.playedTime = setInterval(function () {
+            _self.updateBar.call(_self, 'played', _self.audio.currentTime / _self.audio.duration);
+            _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(_self.audio.currentTime);
+        }, 100);
+    }
+
+    function getElementLeft (element){
+        var actualLeft = element.offsetLeft;
+        var current = element.offsetParent;
+        while (current !== null){
+            actualLeft += current.offsetLeft;
+            current = current.offsetParent;
+        }
+        return actualLeft;
+    }
 };
 
 APlayer.prototype.play = function () {
@@ -86,6 +136,8 @@ APlayer.prototype.pause = function () {
 };
 
 APlayer.prototype.updateBar = function (type, percentage) {
+    percentage = percentage > 0 ? percentage : 0;
+    percentage = percentage < 1 ? percentage : 1;
     this[type + 'Bar'].style.width = percentage * 100 + '%';
 };
 

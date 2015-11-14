@@ -8,7 +8,7 @@ Wow, such a beautiful html5 music player
 
 ## Introduction
 
-[Demo(暂无)](https://www.anotherhome.net/file/APlayer)
+[Demo](https://www.anotherhome.net/file/APlayer)
 
 ## Install
 
@@ -69,9 +69,15 @@ API
 
 ## Todo
 
-- [ ] 播放进度拖拽控制
+- [x] 播放进度拖拽控制
 - [ ] 音量控制
 - [ ] 分享到微博
+- [ ] 播放列表
+- [ ] 歌词展示
+
+## Issues
+
+- [ ] 在 Firefox 中调整进度后，播放到最后时音乐总时间会自动变长
 
 
 ## LICENSE
