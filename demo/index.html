@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AnotherPlayer Demo</title>
+    <link rel="stylesheet" href="../APlayer.css">
+</head>
+<body>
+    <div id="player1" class="aplayer"></div>
+    <script src="../APlayer.js"></script>
+    <script>
+        var ap = new APlayer({
+            element: document.getElementById('player1'),
+            autoplay: true,
+            height: '66px',
+            width: '100%',
+            music: {
+                title: 'Preparation',
+                author: 'Hans Zimmer/Richard Harvey',
+                url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
+                pic: 'Preparation.jpg'
+            }
+        });
+    </script>
+</body>
+</html>

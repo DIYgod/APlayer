@@ -1,0 +1,24 @@
+{
+  "name": "aplayer",
+  "version": "1.0.0",
+  "description": "Wow, such a beautiful html5 music player",
+  "main": "APlayer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DIYgod/APlayer.git"
+  },
+  "keywords": [
+    "player",
+    "music",
+    "html5"
+  ],
+  "author": "DIYgod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DIYgod/APlayer/issues"
+  },
+  "homepage": "https://github.com/DIYgod/APlayer#readme"
+}
