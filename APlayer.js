@@ -18,7 +18,7 @@ APlayer.prototype.init = function () {
         +     '<div class="aplayer-music">'
         +         '<span class="aplayer-title">' + this.option.music.title + '</span>'
         +         '<span class="aplayer-author"> - ' + this.option.music.author + '</span>'
-        +         '<a href="#" title="分享至微博"><i class="demo-icon icon-weibo"></i></a>'
+        +         '<a href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=\'http://v.t.sina.com.cn/share/share.php?appkey=2992571369\',u=z||d.location,p=[\'&url=\',e(u),\'&title=\',e(t||d.title),\'&source=\',e(r),\'&sourceUrl=\',e(l),\'&content=\',c||\'gb2312\',\'&pic=\',e(p||\'\')].join(\'\');function%20a(){if(!window.open([f,p].join(\'\'),\'mb\',[\'toolbar=0,status=0,resizable=1,width=440,height=430,left=\',(s.width-440)/2,\',top=\',(s.height-430)/2].join(\'\')))u.href=[f,p].join(\'\');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,\'\',\'\',\'' + this.option.music.pic + '\',\'' + '#APlayer音乐分享# ' + this.option.music.title + ' - ' + this.option.music.author + ' \',\'\',\'\'));" title="分享至微博"><i class="demo-icon icon-weibo"></i></a>'
         +     '</div>'
         +     '<div class="aplayer-controller">'
         +         '<div class="aplayer-bar-wrap">'

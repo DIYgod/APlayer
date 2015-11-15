@@ -31,7 +31,7 @@ The following HTML structure is used for APlayer:
 <script src="APlayer.js"></script>
 ```
 
-And this is how the jRating is initialized:
+And this is how the APlayer is initialized:
 
 ```
 var ap = new APlayer({
@@ -75,7 +75,8 @@ API
 
 - [x] 播放进度拖拽控制
 - [x] 音量控制
-- [ ] 分享到微博
+- [x] 分享到微博
+- [ ] 错误处理
 - [ ] 播放列表
 - [ ] 歌词展示
 
