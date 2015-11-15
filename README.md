@@ -11,7 +11,7 @@ Wow, such a beautiful html5 music player
 [Demo](https://www.anotherhome.net/file/APlayer)
 
 Screenshot
-![image](http://github.com/DIYgod/APlayer/raw/master/screenshot.png)
+![image](https://github.com/DIYgod/APlayer/raw/master/screenshot.png)
 
 ## Install
 
