@@ -46,6 +46,7 @@ var ap = new APlayer({
         pic: 'Preparation.jpg'
     }
 });
+ap.init();
 ```
 
 The following options are available:
@@ -73,7 +74,7 @@ API
 ## Todo
 
 - [x] 播放进度拖拽控制
-- [ ] 音量控制
+- [x] 音量控制
 - [ ] 分享到微博
 - [ ] 播放列表
 - [ ] 歌词展示
