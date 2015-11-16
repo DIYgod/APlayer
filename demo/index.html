@@ -6,19 +6,19 @@
     <link rel="stylesheet" href="../APlayer.css">
 </head>
 <body>
-    <div id="player1" class="aplayer"></div>
+    <div id="player1" class="aplayer">
+        <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
+    </div>
     <script src="../APlayer.js"></script>
     <script>
         var ap = new APlayer({
             element: document.getElementById('player1'),
-            autoplay: true,
-            height: '66px',
-            width: '100%',
+            autoplay: false,
             music: {
                 title: 'Preparation',
                 author: 'Hans Zimmer/Richard Harvey',
-                url: 'Preparation.mp3',
-                pic: 'https://dn-diygod.qbox.me/Preparation.jpg'
+                url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
+                pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
             }
         });
         ap.init();

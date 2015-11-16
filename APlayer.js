@@ -3,10 +3,13 @@ function APlayer(option) {
 }
 
 APlayer.prototype.init = function () {
+    this.element = this.option.element;
+    this.music = this.option.music;
+
     // 填充HTML
-    this.option.element.innerHTML = ''
+    this.element.innerHTML = ''
         + '<div class="aplayer-pic">'
-        +     '<img src="' + this.option.music.pic + '">'
+        +     '<img src="' + this.music.pic + '">'
         +     '<div class="aplayer-button aplayer-pause aplayer-hide">'
         +         '<i class="demo-icon aplayer-icon-pause"></i>'
         +     '</div>'
@@ -16,9 +19,9 @@ APlayer.prototype.init = function () {
         + '</div>'
         + '<div class="aplayer-info">'
         +     '<div class="aplayer-music">'
-        +         '<a href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=\'http://v.t.sina.com.cn/share/share.php?appkey=2992571369\',u=z||d.location,p=[\'&url=\',e(u),\'&title=\',e(t||d.title),\'&source=\',e(r),\'&sourceUrl=\',e(l),\'&content=\',c||\'gb2312\',\'&pic=\',e(p||\'\')].join(\'\');function%20a(){if(!window.open([f,p].join(\'\'),\'mb\',[\'toolbar=0,status=0,resizable=1,width=440,height=430,left=\',(s.width-440)/2,\',top=\',(s.height-430)/2].join(\'\')))u.href=[f,p].join(\'\');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,\'\',\'\',\'' + this.option.music.pic + '\',\'' + '#APlayer音乐分享# ' + this.option.music.title + ' - ' + this.option.music.author + ' \',\'\',\'\'));" title="分享至微博"><i class="demo-icon aplayer-icon-weibo"></i></a>'
-        +         '<span class="aplayer-title">' + this.option.music.title + '</span>'
-        +         '<span class="aplayer-author"> - ' + this.option.music.author + '</span>'
+        +         '<a href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=\'http://v.t.sina.com.cn/share/share.php?appkey=2992571369\',u=z||d.location,p=[\'&url=\',e(u),\'&title=\',e(t||d.title),\'&source=\',e(r),\'&sourceUrl=\',e(l),\'&content=\',c||\'gb2312\',\'&pic=\',e(p||\'\')].join(\'\');function%20a(){if(!window.open([f,p].join(\'\'),\'mb\',[\'toolbar=0,status=0,resizable=1,width=440,height=430,left=\',(s.width-440)/2,\',top=\',(s.height-430)/2].join(\'\')))u.href=[f,p].join(\'\');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,\'\',\'\',\'' + this.music.pic + '\',\'' + '#APlayer音乐分享# ' + this.music.title + ' - ' + this.music.author + ' \',\'\',\'\'));" title="分享至微博"><i class="demo-icon aplayer-icon-weibo"></i></a>'
+        +         '<span class="aplayer-title">' + this.music.title + '</span>'
+        +         '<span class="aplayer-author"> - (＞﹏＜)加载中,好累的说...</span>'
         +     '</div>'
         +     '<div class="aplayer-controller">'
         +         '<div class="aplayer-bar-wrap">'
@@ -45,17 +48,19 @@ APlayer.prototype.init = function () {
 
     // 创建audio元素
     this.audio = document.createElement("audio");
-    this.audio.src = this.option.music.url;
+    this.audio.src = this.music.url;
     this.audio.loop = true;
+    this.audio.preload = 'metadata';
 
     // 显示音频总时间
     var _self = this;
     this.audio.addEventListener('durationchange', function() {
-        _self.option.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = _self.secondToTime(_self.audio.duration);
+        _self.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = _self.secondToTime(_self.audio.duration);
     });
 
-    // 显示加载进度条
+    // 可以播放, 取消loading样式, 显示加载进度条
     this.audio.addEventListener('canplay', function() {
+        _self.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + _self.music.author;
         _self.loadedTime = setInterval(function () {
             var percentage = _self.audio.buffered.end(_self.audio.buffered.length - 1) / _self.audio.duration;
             _self.updateBar.call(_self, 'loaded', percentage, 'width');
@@ -65,9 +70,13 @@ APlayer.prototype.init = function () {
         }, 500);
     });
 
+    this.audio.addEventListener('error', function () {
+        _self.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + '加载失败 ╥﹏╥';
+    });
+
     // 播放暂停按钮
-    this.playButton = this.option.element.getElementsByClassName('aplayer-play')[0];
-    this.pauseButton = this.option.element.getElementsByClassName('aplayer-pause')[0];
+    this.playButton = this.element.getElementsByClassName('aplayer-play')[0];
+    this.pauseButton = this.element.getElementsByClassName('aplayer-pause')[0];
     this.playButton.addEventListener('click', function () {
         _self.play.call(_self);
     });
@@ -76,17 +85,17 @@ APlayer.prototype.init = function () {
     });
 
     // 播放进度控制(拖拽滑块 点击进度条)
-    this.playedBar = this.option.element.getElementsByClassName('aplayer-played')[0];
-    this.loadedBar = this.option.element.getElementsByClassName('aplayer-loaded')[0];
-    this.thumb = this.option.element.getElementsByClassName('aplayer-thumb')[0];
-    this.bar = this.option.element.getElementsByClassName('aplayer-bar')[0];
+    this.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
+    this.loadedBar = this.element.getElementsByClassName('aplayer-loaded')[0];
+    this.thumb = this.element.getElementsByClassName('aplayer-thumb')[0];
+    this.bar = this.element.getElementsByClassName('aplayer-bar')[0];
     var barWidth;
     this.bar.addEventListener('click', function (event) {
         var e = event || window.event;
         barWidth = _self.bar.clientWidth;
         var percentage = (e.clientX - getElementViewLeft(_self.bar)) / barWidth;
         _self.updateBar.call(_self, 'played', percentage, 'width');
-        _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(percentage * _self.audio.duration);
+        _self.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(percentage * _self.audio.duration);
         _self.audio.currentTime = parseFloat(_self.playedBar.style.width) / 100 * _self.audio.duration;
     });
 
@@ -103,7 +112,7 @@ APlayer.prototype.init = function () {
         percentage = percentage > 0 ? percentage : 0;
         percentage = percentage < 1 ? percentage : 1;
         _self.updateBar.call(_self, 'played', percentage, 'width');
-        _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(percentage * _self.audio.duration);
+        _self.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(percentage * _self.audio.duration);
     }
 
     function thumbUp () {
@@ -112,17 +121,17 @@ APlayer.prototype.init = function () {
         _self.audio.currentTime = parseFloat(_self.playedBar.style.width) / 100 * _self.audio.duration;
         _self.playedTime = setInterval(function () {
             _self.updateBar.call(_self, 'played', _self.audio.currentTime / _self.audio.duration, 'width');
-            _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(_self.audio.currentTime);
+            _self.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(_self.audio.currentTime);
         }, 100);
     }
 
     // 音量控制
     this.audio.volume = 0.8;
-    this.volumeBar = this.option.element.getElementsByClassName('aplayer-volume')[0];
-    var volumeBarWrap = this.option.element.getElementsByClassName('aplayer-volume-bar')[0];
-    var volumeicon = _self.option.element.getElementsByClassName('aplayer-time')[0].getElementsByTagName('i')[0];
+    this.volumeBar = this.element.getElementsByClassName('aplayer-volume')[0];
+    var volumeBarWrap = this.element.getElementsByClassName('aplayer-volume-bar')[0];
+    var volumeicon = _self.element.getElementsByClassName('aplayer-time')[0].getElementsByTagName('i')[0];
     var barHeight = 35;
-    this.option.element.getElementsByClassName('aplayer-volume-bar-wrap')[0].addEventListener('click', function (event) {
+    this.element.getElementsByClassName('aplayer-volume-bar-wrap')[0].addEventListener('click', function (event) {
         var e = event || window.event;
         var percentage = (barHeight - e.clientY + getElementViewTop(volumeBarWrap)) / barHeight;
         percentage = percentage > 0 ? percentage : 0;
@@ -190,7 +199,7 @@ APlayer.prototype.play = function () {
     var _self = this;
     this.playedTime = setInterval(function () {
         _self.updateBar.call(_self, 'played', _self.audio.currentTime / _self.audio.duration, 'width');
-        _self.option.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(_self.audio.currentTime);
+        _self.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = _self.secondToTime(_self.audio.currentTime);
     }, 100);
 };
 

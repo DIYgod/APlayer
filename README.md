@@ -26,7 +26,9 @@ The following HTML structure is used for APlayer:
 ```
 <link rel="stylesheet" href="APlayer.css">
 <!-- ... -->
-<div id="player1" class="aplayer"></div>
+<div id="player1" class="aplayer">
+    <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
+</div>
 <!-- ... -->
 <script src="APlayer.js"></script>
 ```
@@ -37,8 +39,6 @@ And this is how the APlayer is initialized:
 var ap = new APlayer({
     element: document.getElementById('player1'),
     autoplay: true,
-    height: '66px',
-    width: '100%',
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
@@ -55,8 +55,6 @@ The following options are available:
 {
     element: document.getElementById('player1'),
     autoplay: true,
-    height: '66px',
-    width: '100%',
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
@@ -76,7 +74,7 @@ API
 - [x] 播放进度拖拽控制
 - [x] 音量控制
 - [x] 分享到微博
-- [ ] 加载样式及错误处理
+- [x] 加载样式及错误处理
 - [ ] 窄样式
 - [ ] 宽度高度自定义
 - [ ] 播放列表
