@@ -8,6 +8,8 @@ Wow, such a beautiful html5 music player
 
 ## Introduction
 
+UI 参考网易云音乐外链播放器
+
 [Demo](https://www.anotherhome.net/file/APlayer)
 
 Screenshot
