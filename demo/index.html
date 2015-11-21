@@ -2,17 +2,81 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>AnotherPlayer Demo</title>
+    <title>APlayer Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../APlayer.css">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        .container {
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            font-size: 54px;
+            color: #333;
+            margin: 30px 0 10px;
+        }
+        h2 {
+            font-size: 22px;
+            color: #555;
+        }
+        h3 {
+            font-size: 24px;
+            color: #555;
+        }
+        hr {
+            display: block;
+            width: 7rem;
+            height: 1px;
+            margin: 2.5rem 0;
+            background-color: #eee;
+            border: 0;
+        }
+        a {
+            color: #08c;
+            text-decoration: none;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <div id="player1" class="aplayer">
-        <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
+    <a href="https://github.com/DIYgod/APlayer" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+    <div class="container">
+        <h1>APlayer</h1>
+        <h2>Wow, such a beautiful html5 music player</h2>
+        <p>Made by <a href="https://www.anotherhome.net/" target="_blank">DIYgod</a>. Available on <a href="https://github.com/DIYgod/APlayer" target="_blank">GitHub</a>. Licensed MIT.</p>
+        <hr>
+        <h3>Wide style and autoplay</h3>
+        <div id="player1" class="aplayer">
+            <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
+        </div>
+        <h3>Narrow style and no autoplay</h3>
+        <div id="player2" class="aplayer">
+            <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
+        </div>
     </div>
     <script src="../APlayer.js"></script>
     <script>
-        var ap = new APlayer({
+        var ap1 = new APlayer({
             element: document.getElementById('player1'),
+            narrow: false,
+            autoplay: true,
+            music: {
+                title: 'Preparation',
+                author: 'Hans Zimmer/Richard Harvey',
+                url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
+                pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
+            }
+        });
+        ap1.init();
+        var ap2 = new APlayer({
+            element: document.getElementById('player2'),
+            narrow: true,
             autoplay: false,
             music: {
                 title: 'Preparation',
@@ -21,7 +85,7 @@
                 pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
             }
         });
-        ap.init();
+        ap2.init();
     </script>
 </body>
 </html>

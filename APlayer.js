@@ -46,6 +46,11 @@ APlayer.prototype.init = function () {
         +     '</div>'
         + '</div>';
 
+    // 切换窄样式
+    if (this.option.narrow) {
+        this.element.classList.add('aplayer-narrow');
+    }
+
     // 创建audio元素
     this.audio = document.createElement("audio");
     this.audio.src = this.music.url;

@@ -65,6 +65,14 @@
     content: '\e802';
 }
 
+.aplayer-narrow {
+    width: 66px;
+}
+
+.aplayer-narrow .aplayer-info {
+    display: none;
+}
+
 .aplayer {
     font-family: Arial, Helvetica, sans-serif;
     margin: 5px;
