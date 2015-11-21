@@ -6,7 +6,7 @@ APlayer.prototype.init = function () {
     this.element = this.option.element;
     this.music = this.option.music;
 
-    // 填充HTML
+    // fill in HTML
     this.element.innerHTML = ''
         + '<div class="aplayer-pic">'
         +     '<img src="' + this.music.pic + '">'
@@ -46,24 +46,24 @@ APlayer.prototype.init = function () {
         +     '</div>'
         + '</div>';
 
-    // 切换窄样式
+    // switch to narrow style
     if (this.option.narrow) {
         this.element.classList.add('aplayer-narrow');
     }
 
-    // 创建audio元素
+    // create audio element
     this.audio = document.createElement("audio");
     this.audio.src = this.music.url;
     this.audio.loop = true;
     this.audio.preload = 'metadata';
 
-    // 显示音频总时间
+    // show audio time
     var _self = this;
     this.audio.addEventListener('durationchange', function() {
         _self.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = _self.secondToTime(_self.audio.duration);
     });
 
-    // 可以播放, 取消loading样式, 显示加载进度条
+    // can play: remove loading style, show loading progress bar
     this.audio.addEventListener('canplay', function() {
         _self.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + _self.music.author;
         _self.loadedTime = setInterval(function () {
@@ -79,7 +79,7 @@ APlayer.prototype.init = function () {
         _self.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + '加载失败 ╥﹏╥';
     });
 
-    // 播放暂停按钮
+    // play and pause button
     this.playButton = this.element.getElementsByClassName('aplayer-play')[0];
     this.pauseButton = this.element.getElementsByClassName('aplayer-pause')[0];
     this.playButton.addEventListener('click', function () {
@@ -89,7 +89,7 @@ APlayer.prototype.init = function () {
         _self.pause.call(_self);
     });
 
-    // 播放进度控制(拖拽滑块 点击进度条)
+    // control play progress
     this.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
     this.loadedBar = this.element.getElementsByClassName('aplayer-loaded')[0];
     this.thumb = this.element.getElementsByClassName('aplayer-thumb')[0];
@@ -130,7 +130,7 @@ APlayer.prototype.init = function () {
         }, 100);
     }
 
-    // 音量控制
+    // control volume
     this.audio.volume = 0.8;
     this.volumeBar = this.element.getElementsByClassName('aplayer-volume')[0];
     var volumeBarWrap = this.element.getElementsByClassName('aplayer-volume-bar')[0];
@@ -166,7 +166,7 @@ APlayer.prototype.init = function () {
         }
     });
 
-    // 获取元素相对窗口位置
+    // get element's view position
     function getElementViewLeft (element) {
         var actualLeft = element.offsetLeft;
         var current = element.offsetParent;
@@ -190,13 +190,13 @@ APlayer.prototype.init = function () {
         return actualTop - elementScrollTop;
     }
 
-    // 自动播放
+    // autoplay
     if (this.option.autoplay) {
         this.play();
     }
 };
 
-// 播放
+// play
 APlayer.prototype.play = function () {
     this.playButton.classList.add('aplayer-hide');
     this.pauseButton.classList.remove('aplayer-hide');
@@ -208,7 +208,7 @@ APlayer.prototype.play = function () {
     }, 100);
 };
 
-// 暂停
+// pause
 APlayer.prototype.pause = function () {
     this.pauseButton.classList.add('aplayer-hide');
     this.playButton.classList.remove('aplayer-hide');
@@ -216,14 +216,14 @@ APlayer.prototype.pause = function () {
     clearInterval(this.playedTime);
 };
 
-// 更新进度条(加载进度条 播放进度条)
+// update progress bar (loading progress bar, play progress bar)
 APlayer.prototype.updateBar = function (type, percentage, direction) {
     percentage = percentage > 0 ? percentage : 0;
     percentage = percentage < 1 ? percentage : 1;
     this[type + 'Bar'].style[direction] = percentage * 100 + '%';
 };
 
-// 将秒数整理为 00:00 格式
+// format second to 00:00
 APlayer.prototype.secondToTime = function (second) {
     var add0 = function (num) {
         return num < 10 ? '0' + num : '' + num;
