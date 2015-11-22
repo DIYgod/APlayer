@@ -40,30 +40,16 @@ And this is how the APlayer is initialized:
 ```
 var ap = new APlayer({
     element: document.getElementById('player1'),
+    narrow: false,
     autoplay: true,
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
         url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
-        pic: 'Preparation.jpg'
+        pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
     }
 });
 ap.init();
-```
-
-The following options are available:
-
-```
-{
-    element: document.getElementById('player1'),
-    autoplay: true,
-    music: {
-        title: 'Preparation',
-        author: 'Hans Zimmer/Richard Harvey',
-        url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
-        pic: 'Preparation.jpg'
-    }
-}
 ```
 
 API
