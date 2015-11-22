@@ -46,6 +46,12 @@ APlayer.prototype.init = function () {
         +     '</div>'
         + '</div>';
 
+    // set player size
+    if (!this.option.narrow) {
+        this.playerInfo = this.element.getElementsByClassName('aplayer-info')[0];
+        this.setSize(this.option.width, this.option.height);
+    }
+
     // switch to narrow style
     if (this.option.narrow) {
         this.element.classList.add('aplayer-narrow');
@@ -231,4 +237,20 @@ APlayer.prototype.secondToTime = function (second) {
     var min = parseInt(second / 60);
     var sec = parseInt(second - min * 60);
     return add0(min) + ':' + add0(sec);
+};
+
+// set player size
+APlayer.prototype.setSize = function (width, height) {
+    var minWidth = 270, minHeight = 65;
+    if (width) {
+        width = width < minWidth ? minWidth : width;
+        this.element.style.width = width + 'px';
+    }
+    if (height) {
+        height = height < minHeight ? minHeight : height;
+        this.element.style.height = height + 'px';
+        // adjust aplayer-info padding
+        var paddingTop = (height - this.playerInfo.clientHeight) / 2;
+        this.playerInfo.style.paddingTop = paddingTop + 'px';
+    }
 };
