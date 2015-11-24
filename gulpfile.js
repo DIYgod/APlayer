@@ -27,7 +27,9 @@ gulp.task('copy', function () {
 gulp.task('compressJS', function() {
     gulp.src(['src/*.js'])
         .pipe(uglify())
-        .pipe(rename('APlayer.min.js'))
+        .pipe(rename({
+            suffix: ".min"
+        }))
         .pipe(gulp.dest('build'))
         .pipe(browserSync.stream());
 });
@@ -38,7 +40,9 @@ gulp.task('compressCSS', function() {
         .pipe(sass())
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(minifyCSS())
-        .pipe(rename('APlayer.min.css'))
+        .pipe(rename({
+            suffix: ".min"
+        }))
         .pipe(gulp.dest('build'))
         .pipe(browserSync.stream());
 });
