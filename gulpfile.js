@@ -7,7 +7,7 @@ var minifyCSS   = require('gulp-minify-css');
 var rename      = require('gulp-rename');
 var browserSync = require('browser-sync').create();
 
-// Static server
+// Launch the server
 gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
@@ -17,24 +17,24 @@ gulp.task('browser-sync', function() {
     });
 });
 
-// Move font file
+// Move font files
 gulp.task('copy', function () {
     return gulp.src('src/font/*')
-        .pipe(gulp.dest('build/font'));
+        .pipe(gulp.dest('dist/font'));
 });
 
-// Build src js files
+// Build js files
 gulp.task('compressJS', function() {
     gulp.src(['src/*.js'])
         .pipe(uglify())
         .pipe(rename({
             suffix: ".min"
         }))
-        .pipe(gulp.dest('build'))
+        .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
 });
 
-// Build src css files
+// Build css files
 gulp.task('compressCSS', function() {
     gulp.src('src/*.scss')
         .pipe(sass())
@@ -43,7 +43,7 @@ gulp.task('compressCSS', function() {
         .pipe(rename({
             suffix: ".min"
         }))
-        .pipe(gulp.dest('build'))
+        .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
 });
 
@@ -55,5 +55,5 @@ gulp.task('watch', function () {
     gulp.watch('demo/font/*', ['copy']);
 });
 
-// Default task, running just `gulp` will move font, compress js and scss, start server, watch files.
+// Default task, running just `gulp` will move font, compress js and scss, launch server, watch files.
 gulp.task('default', ['copy', 'compressJS', 'compressCSS', 'browser-sync', 'watch']);
