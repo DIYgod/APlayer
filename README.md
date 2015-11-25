@@ -57,6 +57,12 @@ API
 + `ap.play()`
 + `ap.pause()`
 
+Development
+
+```
+gulp
+```
+
 ## Todo
 
 - [x] 播放进度拖拽控制
