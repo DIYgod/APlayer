@@ -11,6 +11,13 @@ $aplayer-height: 66px;
     font-style: normal;
 }
 
+.aplayer-narrow {
+    width: $aplayer-height;
+    .aplayer-info {
+        display: none;
+    }
+}
+
 .aplayer {
     font-family: Arial, Helvetica, sans-serif;
     margin: 5px;
@@ -70,13 +77,6 @@ $aplayer-height: 66px;
 
     .aplayer-icon-volume-up:before {
         content: '\e802';
-    }
-
-    .aplayer-narrow {
-        width: $aplayer-height;
-        .aplayer-info {
-            display: none;
-        }
     }
 
     span {
