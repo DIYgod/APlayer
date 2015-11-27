@@ -14,6 +14,7 @@ UI 参考网易云音乐外链播放器
 
 Screenshot
 ![image](https://github.com/DIYgod/APlayer/raw/master/screenshot.png)
+![image](https://github.com/DIYgod/APlayer/raw/master/screenshot-lrc.png)
 
 ## Install
 
