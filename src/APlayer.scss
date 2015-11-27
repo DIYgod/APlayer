@@ -280,6 +280,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                     right: -5px;
                     width: 25px;
                     height: 40px;
+                    z-index: 99;
 
                     .aplayer-volume-bar {
                         position: absolute;
