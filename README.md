@@ -23,7 +23,7 @@ npm install aplayer
 
 ## Usage
 
-The following HTML structure is used for APlayer:
+### The following HTML structure is used for APlayer:
 
 ```
 <link rel="stylesheet" href="APlayer.css">
@@ -35,13 +35,14 @@ The following HTML structure is used for APlayer:
 <script src="APlayer.js"></script>
 ```
 
-And this is how the APlayer is initialized:
+### And this is how the APlayer is initialized:
 
 ```
 var ap = new APlayer({
     element: document.getElementById('player1'),
     narrow: false,
     autoplay: true,
+    showlrc: false,
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
@@ -52,12 +53,47 @@ var ap = new APlayer({
 ap.init();
 ```
 
-API
+### With lrc
+
+Using [LRC format](https://en.wikipedia.org/wiki/LRC_(file_format))
+
+HTML:
+
+```
+<link rel="stylesheet" href="APlayer.css">
+<!-- ... -->
+<div id="player1" class="aplayer">
+    <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
+    <pre class="aplayer-lrc-content">
+        [ti:平凡之路]
+        [ar:朴树]
+        [al:《后会无期》主题歌]
+        [by:周敏]
+
+        [00:00.00]平凡之路 - 朴树
+        [00:04.01]作词：韩寒 朴树
+        [00:08.02]作曲：朴树 编曲：朴树
+        [00:12.02]徘徊着的 在路上的
+        [00:17.37]你要走吗
+        [00:23.20]易碎的 骄傲着
+        [00:28.75]那也曾是我的模样
+        <!-- ... -->
+    </pre>
+</div>
+<!-- ... -->
+<script src="APlayer.js"></script>
+```
+
+JS:
+
+Init Option: `showlrc: false`
+
+### API
 
 + `ap.play()`
 + `ap.pause()`
 
-Development
+### Development
 
 ```
 gulp
