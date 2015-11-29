@@ -1,4 +1,25 @@
 function APlayer(option) {
+    // handle options error
+    if (!('music' in option && 'title' in option.music && 'author' in option.music && 'url' in option.music && 'pic' in option.music)) {
+        throw 'APlayer Error: Music, music.title, music.author, music.url, music.pic are required in options';
+    }
+    if (option.element === null) {
+        throw 'APlayer Error: element option null';
+    }
+
+    // default options
+    var defaultOption = {
+        element: document.getElementsByClassName('aplayer')[0],
+        narrow: false,
+        autoplay: false,
+        showlrc: false
+    };
+    for (var defaultKey in defaultOption) {
+        if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
+            option[defaultKey] = defaultOption[defaultKey];
+        }
+    }
+
     this.option = option;
 }
 
@@ -8,11 +29,10 @@ APlayer.prototype.init = function () {
 
     // parser lrc
     if (this.option.showlrc) {
-        var lines = [];
         this.lrcTime = [];
         this.lrcLine = [];
         var lrcs = this.element.getElementsByClassName('aplayer-lrc-content')[0].innerHTML;
-        lines = lrcs.split(/\n/);
+        var lines = lrcs.split(/\n/);
         var timeExp = /\[(\d{2})\:(\d{2})\.(\d{2})\]/;
         var lrcExp = /](.*)$/;
         for (var i = 0; i < lines.length; i++) {
@@ -109,6 +129,7 @@ APlayer.prototype.init = function () {
         }, 500);
     });
 
+    // audio download error
     this.audio.addEventListener('error', function () {
         _self.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + '加载失败 ╥﹏╥';
     });

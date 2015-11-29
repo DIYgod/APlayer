@@ -17,10 +17,12 @@ gulp.task('browser-sync', function() {
     });
 });
 
-// Move font files
+// Move files
 gulp.task('copy', function () {
-    return gulp.src('src/font/*')
+    gulp.src('src/font/*')
         .pipe(gulp.dest('dist/font'));
+    gulp.src('src/*.jpg')
+        .pipe(gulp.dest('dist'));
 });
 
 // Build js files

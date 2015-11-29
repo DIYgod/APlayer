@@ -24,7 +24,7 @@ npm install aplayer
 
 ## Usage
 
-### The following HTML structure is used for APlayer:
+### HTML:
 
 ```
 <link rel="stylesheet" href="APlayer.css">
@@ -36,7 +36,7 @@ npm install aplayer
 <script src="APlayer.js"></script>
 ```
 
-### And this is how the APlayer is initialized:
+### JS:
 
 ```
 var ap = new APlayer({
@@ -52,6 +52,23 @@ var ap = new APlayer({
     }
 });
 ap.init();
+```
+
+### JS Initialized Options
+
+```
+{
+    element: document.getElementById('player1'),                       // Optional, player element
+    narrow: false,                                                     // Optional, narrow style
+    autoplay: true,                                                    // Optional, autoplay
+    showlrc: false,                                                    // Optional, show lrc
+    music: {                                                           // Required, musci info
+        title: 'Preparation',                                          // Required, music title
+        author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
+        url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',  // Required, music url
+        pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'   // Required, music picture
+    }
+}
 ```
 
 ### With lrc
@@ -87,10 +104,11 @@ HTML:
 
 JS:
 
-Init Option: `showlrc: false`
+Initialized Option: `showlrc: false`
 
 ### API
 
++ `ap.init()`
 + `ap.play()`
 + `ap.pause()`
 
@@ -107,9 +125,10 @@ gulp
 - [x] 分享到微博
 - [x] 加载样式及错误处理
 - [x] 窄样式 及 移动版样式
+- [x] 歌词展示
+- [x] 默认选项
 - [ ] 移动端兼容性
 - [ ] 播放列表
-- [ ] 歌词展示
 - [ ] 宽度高度自定义
 
 ## Issues

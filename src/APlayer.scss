@@ -187,15 +187,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                 font-size: 12px;
                 color: #666;
             }
-
-            a {
-                margin-right: 7px;
-                font-size: 14px;
-                color: #000;
-                &:hover {
-                    color: #E90F24;
-                }
-            }
         }
 
         .aplayer-controller {
