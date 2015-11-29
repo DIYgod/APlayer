@@ -62,7 +62,7 @@ ap.init();
     narrow: false,                                                     // Optional, narrow style
     autoplay: true,                                                    // Optional, autoplay
     showlrc: false,                                                    // Optional, show lrc
-    music: {                                                           // Required, musci info
+    music: {                                                           // Required, music info
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
         url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',  // Required, music url
