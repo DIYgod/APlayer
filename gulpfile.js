@@ -57,5 +57,8 @@ gulp.task('watch', function () {
     gulp.watch('demo/font/*', ['copy']);
 });
 
+// compile the project, including move font, compress js and scss, also be used to test
+gulp.task('release', ['copy', 'compressJS', 'compressCSS']);
+
 // Default task, running just `gulp` will move font, compress js and scss, launch server, watch files.
-gulp.task('default', ['copy', 'compressJS', 'compressCSS', 'browser-sync', 'watch']);
+gulp.task('default', ['release', 'browser-sync', 'watch']);
