@@ -3,6 +3,8 @@
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
+[![devDependency Status](https://david-dm.org/DIYgod/APlayer/dev-status.svg?style=flat-square)](https://david-dm.org/DIYgod/APlayer#info=devDependencies)
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)]()
 
 Wow, such a beautiful html5 music player
 
