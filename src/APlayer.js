@@ -7,6 +7,12 @@ function APlayer(option) {
         throw 'APlayer Error: element option null';
     }
 
+    this.isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    // compatibility: some mobile browsers don't suppose autoplay
+    if (this.isMobile) {
+        option.autoplay = false;
+    }
+
     // default options
     var defaultOption = {
         element: document.getElementsByClassName('aplayer')[0],
@@ -33,7 +39,7 @@ APlayer.prototype.init = function () {
         this.lrcLine = [];
         var lrcs = this.element.getElementsByClassName('aplayer-lrc-content')[0].innerHTML;
         var lines = lrcs.split(/\n/);
-        var timeExp = /\[(\d{2})\:(\d{2})\.(\d{2})\]/;
+        var timeExp = /\[(\d{2}):(\d{2})\.(\d{2})]/;
         var lrcExp = /](.*)$/;
         for (var i = 0; i < lines.length; i++) {
             var oneTime = timeExp.exec(lines[i]);
@@ -74,7 +80,7 @@ APlayer.prototype.init = function () {
         +             '</div>'
         +         '</div>'
         +         '<div class="aplayer-time">'
-        +             ' - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>'
+        +             ' - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">(oﾟ▽ﾟ)</span>'
         +             '<div class="aplayer-volume-wrap">'
         +                 '<i class="demo-icon aplayer-icon-volume-down"></i>'
         +                 '<div class="aplayer-volume-bar-wrap">'
@@ -114,11 +120,14 @@ APlayer.prototype.init = function () {
     // show audio time
     var _self = this;
     this.audio.addEventListener('durationchange', function() {
-        _self.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = _self.secondToTime(_self.audio.duration);
+        if (_self.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+            _self.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = _self.secondToTime(_self.audio.duration);
+        }
     });
 
-    // can play: remove loading style, show loading progress bar
-    this.audio.addEventListener('canplay', function() {
+    // can play, remove loading style, show loading progress bar
+    // compatibility: different mobile browsers have different triggering time, use loadedmetadata event to take the place of canplay event
+    this.audio.addEventListener('loadedmetadata', function () {
         _self.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + _self.music.author;
         _self.loadedTime = setInterval(function () {
             var percentage = _self.audio.buffered.end(_self.audio.buffered.length - 1) / _self.audio.duration;

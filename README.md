@@ -60,7 +60,7 @@ ap.init();
 {
     element: document.getElementById('player1'),                       // Optional, player element
     narrow: false,                                                     // Optional, narrow style
-    autoplay: true,                                                    // Optional, autoplay
+    autoplay: true,                                                    // Optional, autoplay, not supported by mobile browsers
     showlrc: false,                                                    // Optional, show lrc
     music: {                                                           // Required, music info
         title: 'Preparation',                                          // Required, music title
@@ -127,13 +127,26 @@ gulp
 - [x] 窄样式 及 移动版样式
 - [x] 歌词展示
 - [x] 默认选项
-- [ ] 移动端兼容性
+- [x] 移动端兼容性
 - [ ] 播放列表
-- [ ] 宽度高度自定义
 
 ## Issues
 
-- [ ] 在 Firefox 中调整进度后，播放到最后时音乐总时间会自动变长
+- [ ] 在 Firefox 中调整进度后, 播放到最后时音乐总时间会自动变长
+- [ ] 移动端各种浏览器触发事件的时机不同: 目前使用 loadedmetadata 代替 canplay
+```
+举例:
+WIFI环境:
+iOS: 加载? durationchange(真) loadedmetadata 点击 开始播放 loadeddata canplay canplaythrough
+Android Chrome: durationchange(真) loadedmetadata loadeddata canplay canplaythrough 点击 加载 开始播放
+Android UC: durationchange loadedmetadata loadeddata 加载 durationchange(真) canplay canplaythrough 点击 开始播放
+PC: 加载 开始播放 durationchange(真) loadedmetadata loadeddata canplay canplaythrough
+蜂窝环境:
+Android Chrome: durationchange loadedmetadata loadeddata canplay canplaythrough 点击 加载 开始播放 durationchange(真)
+Android UC: durationchange loadedmetadata loadeddata 点击 加载 开始播放 canplay canplaythrough durationchange(真)
+```
+- [ ] 移动版 Safari 和 部分 Android 浏览器不支持 volume
+- [ ] 部分 Android 浏览器不支持 duration
 
 
 ## LICENSE
