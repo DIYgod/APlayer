@@ -29,13 +29,11 @@ $ npm install aplayer
 ### HTML
 
 ```HTML
-<link rel="stylesheet" href="APlayer.css">
+<link rel="stylesheet" href="APlayer.min.css">
 <!-- ... -->
-<div id="player1" class="aplayer">
-    <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
-</div>
+<div id="player1" class="aplayer"></div>
 <!-- ... -->
-<script src="APlayer.js"></script>
+<script src="APlayer.min.js"></script>
 ```
 
 ### JS
@@ -86,10 +84,9 @@ Using [LRC format](https://en.wikipedia.org/wiki/LRC_(file_format))
 HTML:
 
 ```HTML
-<link rel="stylesheet" href="APlayer.css">
+<link rel="stylesheet" href="APlayer.min.css">
 <!-- ... -->
 <div id="player1" class="aplayer">
-    <div style="padding: 10px; font-size: 10px; text-align: center;">(＞﹏＜) APlayer 加载中,好累的说...</div>
     <pre class="aplayer-lrc-content">
         [ti:平凡之路]
         [ar:朴树]
@@ -107,7 +104,7 @@ HTML:
     </pre>
 </div>
 <!-- ... -->
-<script src="APlayer.js"></script>
+<script src="APlayer.min.js"></script>
 ```
 
 JS:

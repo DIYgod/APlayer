@@ -348,7 +348,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         }
 
         .aplayer-lrc-contents {
-            position: absolute;
             width: 100%;
             transition: all 0.5s ease-out;
         }
