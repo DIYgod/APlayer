@@ -114,7 +114,7 @@ JS:
 
 Option: `showlrc: false`
 
-### Development
+## Development
 
 ```
 $ gulp
