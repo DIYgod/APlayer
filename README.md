@@ -15,8 +15,8 @@ UI 参考网易云音乐外链播放器
 [Demo](https://www.anotherhome.net/file/APlayer)
 
 Screenshot
-![image](https://github.com/DIYgod/APlayer/raw/master/screenshot.png)
-![image](https://github.com/DIYgod/APlayer/raw/master/screenshot-lrc.png)
+![image](https://i.imgur.com/JDrJXCr.png)
+![image](https://i.imgur.com/eIRyqvT.png)
 
 ## Install
 
@@ -114,6 +114,8 @@ Option: `showlrc: false`
 ## Development
 
 ```
+$ npm install
+$ npm install -g gulp
 $ gulp
 ```
 
