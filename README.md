@@ -79,9 +79,16 @@ ap.init();
 
 ### With lrc
 
-Using [LRC format](https://en.wikipedia.org/wiki/LRC_(file_format))
+#### LRC format:
 
-HTML:
+```
+[mm:ss.xx]lyric
+[mm:ss.xx]lyric
+[mm:ss.xx]lyric
+...
+```
+
+#### HTML:
 
 ```HTML
 <link rel="stylesheet" href="APlayer.min.css">
@@ -107,7 +114,7 @@ HTML:
 <script src="APlayer.min.js"></script>
 ```
 
-JS:
+#### JS:
 
 Option: `showlrc: false`
 

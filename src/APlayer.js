@@ -41,12 +41,17 @@ APlayer.prototype.init = function () {
         var lines = lrcs.split(/\n/);
         var timeExp = /\[(\d{2}):(\d{2})\.(\d{2})]/;
         var lrcExp = /](.*)$/;
+        var notLrcLineExp = /\[[A-Za-z]+:/;
         for (var i = 0; i < lines.length; i++) {
+            lines[i] = lines[i].replace(/^\s+|\s+$/g, '');
             var oneTime = timeExp.exec(lines[i]);
             var oneLrc = lrcExp.exec(lines[i]);
-            if (oneTime && oneLrc) {
+            if (oneTime && oneLrc && !lrcExp.exec(oneLrc[1])) {
                 this.lrcTime.push(parseInt(oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / 100);
                 this.lrcLine.push(oneLrc[1]);
+            }
+            else if (lines[i] && !notLrcLineExp.exec(lines[i])) {
+                throw 'APlayer Error: lrc format error : should be like `[mm:ss.xx]lyric` : ' + lines[i];
             }
         }
     }
