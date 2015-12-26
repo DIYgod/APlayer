@@ -1,3 +1,10 @@
+/**
+ * APlayer constructor function
+ *
+ * @param {Object} option - See README
+ * @constructor
+ */
+
 function APlayer(option) {
     // handle options error
     if (!('music' in option && 'title' in option.music && 'author' in option.music && 'url' in option.music && 'pic' in option.music)) {
@@ -29,31 +36,17 @@ function APlayer(option) {
     this.option = option;
 }
 
+/**
+ * AutoLink initialization function
+ */
 APlayer.prototype.init = function () {
     this.element = this.option.element;
     this.music = this.option.music;
 
     // parser lrc
     if (this.option.showlrc) {
-        this.lrcTime = [];
-        this.lrcLine = [];
         var lrcs = this.element.getElementsByClassName('aplayer-lrc-content')[0].innerHTML;
-        var lines = lrcs.split(/\n/);
-        var timeExp = /\[(\d{2}):(\d{2})\.(\d{2})]/;
-        var lrcExp = /](.*)$/;
-        var notLrcLineExp = /\[[A-Za-z]+:/;
-        for (var i = 0; i < lines.length; i++) {
-            lines[i] = lines[i].replace(/^\s+|\s+$/g, '');
-            var oneTime = timeExp.exec(lines[i]);
-            var oneLrc = lrcExp.exec(lines[i]);
-            if (oneTime && oneLrc && !lrcExp.exec(oneLrc[1])) {
-                this.lrcTime.push(parseInt(oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / 100);
-                this.lrcLine.push(oneLrc[1]);
-            }
-            else if (lines[i] && !notLrcLineExp.exec(lines[i])) {
-                throw 'APlayer Error: lrc format error : should be like `[mm:ss.xx]lyric` : ' + lines[i];
-            }
-        }
+        this.lrc = this.parseLrc(lrcs);
     }
 
     // fill in HTML
@@ -103,8 +96,8 @@ APlayer.prototype.init = function () {
         this.element.classList.add('aplayer-withlrc');
         var lrcHTML = '';
         this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
-        for (i = 0; i < this.lrcLine.length; i++) {
-            lrcHTML += '<p>' + this.lrcLine[i] + '</p>';
+        for (var i = 0; i < this.lrc.length; i++) {
+            lrcHTML += '<p>' + this.lrc[i][1] + '</p>';
         }
         this.lrcContents.innerHTML = lrcHTML;
         this.lrcIndex = 0;
@@ -265,7 +258,9 @@ APlayer.prototype.init = function () {
     }
 };
 
-// play
+/**
+ * Play music
+ */
 APlayer.prototype.play = function () {
     this.playButton.classList.add('aplayer-hide');
     this.pauseButton.classList.remove('aplayer-hide');
@@ -280,7 +275,9 @@ APlayer.prototype.play = function () {
     }, 100);
 };
 
-// pause
+/**
+ * Pause music
+ */
 APlayer.prototype.pause = function () {
     this.pauseButton.classList.add('aplayer-hide');
     this.playButton.classList.remove('aplayer-hide');
@@ -288,21 +285,31 @@ APlayer.prototype.pause = function () {
     clearInterval(this.playedTime);
 };
 
-// update progress bar (loading progress bar, play progress bar)
+/**
+ * Update progress bar, including loading progress bar and play progress bar
+ *
+ * @param {String} type - Point out which bar it is, should be played loaded or volume
+ * @param {Number} percentage
+ * @param {String} direction - Point out the direction of this bar, Should be height or width
+ */
 APlayer.prototype.updateBar = function (type, percentage, direction) {
     percentage = percentage > 0 ? percentage : 0;
     percentage = percentage < 1 ? percentage : 1;
     this[type + 'Bar'].style[direction] = percentage * 100 + '%';
 };
 
-// update lrc
+/**
+ * Update lrc
+ *
+ * @param {Number} currentTime
+ */
 APlayer.prototype.updateLrc = function (currentTime) {
     if (!currentTime) {
         currentTime = this.audio.currentTime;
     }
-    if (currentTime < this.lrcTime[this.lrcIndex] || currentTime >= this.lrcTime[this.lrcIndex + 1]) {
-        for (var i = 0; i < this.lrcTime.length; i++) {
-            if (currentTime >= this.lrcTime[i] && (!this.lrcTime[i + 1] || currentTime < this.lrcTime[i + 1])) {
+    if (currentTime < this.lrc[this.lrcIndex][0] || (!this.lrc[this.lrcIndex + 1] || currentTime >= this.lrc[this.lrcIndex + 1][0])) {
+        for (var i = 0; i < this.lrc.length; i++) {
+            if (currentTime >= this.lrc[i][0] && (!this.lrc[i + 1] || currentTime < this.lrc[i + 1][0])) {
                 this.lrcIndex = i;
                 this.lrcContents.style.transform = 'translateY(' + -this.lrcIndex * 20 + 'px)';
                 this.lrcContents.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
@@ -312,7 +319,12 @@ APlayer.prototype.updateLrc = function (currentTime) {
     }
 };
 
-// format second to 00:00
+/**
+ * Parse second to 00:00 format
+ *
+ * @param {Number} second
+ * @return {String} 00:00 format
+ */
 APlayer.prototype.secondToTime = function (second) {
     var add0 = function (num) {
         return num < 10 ? '0' + num : '' + num;
@@ -320,4 +332,38 @@ APlayer.prototype.secondToTime = function (second) {
     var min = parseInt(second / 60);
     var sec = parseInt(second - min * 60);
     return add0(min) + ':' + add0(sec);
+};
+
+/**
+ * Parse lrc, suppose multiple time tag
+ *
+ * @param {String} text - Format: [mm:ss.xx][mm:ss.xx]lyric
+ * @return {Array} [[time, text], [time, text], [time, text], ...]
+ */
+APlayer.prototype.parseLrc = function (text) {
+    var lyric = text.split('\n');
+    var lrc = [];
+    var lyricLen = lyric.length;
+    for (var i = 0; i < lyricLen; i++) {
+        // match lrc time
+        var lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2})]/g);
+        // match lrc text
+        var lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2})]/g, '').replace(/^\s+|\s+$/g, '');
+
+        if (lrcTimes != null) {
+            // handle multiple time tag
+            var timeLen = lrcTimes.length;
+            for (var j = 0; j < timeLen; j++) {
+                var oneTime = /\[(\d{2}):(\d{2})\.(\d{2})]/.exec(lrcTimes[j]);
+                var lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / 100;
+                lrc.push([lrcTime, lrcText]);
+            }
+        }
+    }
+    // sort by time
+    lrc.sort(function (a, b) {
+        return a[0] - b[0];
+    });
+
+    return lrc;
 };
