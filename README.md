@@ -81,9 +81,11 @@ ap.init();
 
 #### LRC format:
 
+Support multiple time tag, support three decimal second
+
 ```
 [mm:ss.xx]lyric
-[mm:ss.xx]lyric
+[mm:ss.xxx]lyric
 [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
 ...
 ```

@@ -337,7 +337,11 @@ APlayer.prototype.secondToTime = function (second) {
 /**
  * Parse lrc, suppose multiple time tag
  *
- * @param {String} text - Format: [mm:ss.xx][mm:ss.xx]lyric
+ * @param {String} text - Format:
+ * [mm:ss.xx]lyric
+ * [mm:ss.xxx]lyric
+ * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
+ *
  * @return {Array} [[time, text], [time, text], [time, text], ...]
  */
 APlayer.prototype.parseLrc = function (text) {
@@ -346,16 +350,16 @@ APlayer.prototype.parseLrc = function (text) {
     var lyricLen = lyric.length;
     for (var i = 0; i < lyricLen; i++) {
         // match lrc time
-        var lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2})]/g);
+        var lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g);
         // match lrc text
-        var lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2})]/g, '').replace(/^\s+|\s+$/g, '');
+        var lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g, '').replace(/^\s+|\s+$/g, '');
 
         if (lrcTimes != null) {
             // handle multiple time tag
             var timeLen = lrcTimes.length;
             for (var j = 0; j < timeLen; j++) {
-                var oneTime = /\[(\d{2}):(\d{2})\.(\d{2})]/.exec(lrcTimes[j]);
-                var lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / 100;
+                var oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j]);
+                var lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
                 lrc.push([lrcTime, lrcText]);
             }
         }
