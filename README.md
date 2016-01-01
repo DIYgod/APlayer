@@ -138,6 +138,10 @@ $ npm install -g gulp
 $ gulp
 ```
 
+## Related Projects
+
++ [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
+
 ## Todo
 
 - [x] 播放进度拖拽控制
