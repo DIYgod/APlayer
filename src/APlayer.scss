@@ -342,6 +342,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             margin: 0;
             transition: all 0.5s ease-out;
             opacity: 0.4;
+            overflow: hidden;
 
             &.aplayer-lrc-current {
                 opacity: 1;
