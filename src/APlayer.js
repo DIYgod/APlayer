@@ -7,7 +7,7 @@
 
 function APlayer(option) {
     // handle options error
-    if (!('music' in option && 'title' in option.music && 'author' in option.music && 'url' in option.music && 'pic' in option.music)) {
+    if (!('music' in option && 'title' in option.music && 'author' in option.music && 'url' in option.music)) {
         throw 'APlayer Error: Music, music.title, music.author, music.url, music.pic are required in options';
     }
     if (option.element === null) {
