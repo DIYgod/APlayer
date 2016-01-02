@@ -172,6 +172,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         padding: 14px 7px 0 10px;
         height: $aplayer-height;
         box-sizing: border-box;
+        line-height: 1em;
 
         .aplayer-music {
             overflow: hidden;
