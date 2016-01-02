@@ -92,7 +92,7 @@ APlayer.prototype.init = function () {
 
     // music pic
     if (this.music.pic) {
-        this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = 'url(' + this.music.pic + ')';
+        this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = 'url(' + encodeURI(this.music.pic) + ')';
     }
 
     // fill in lrc
