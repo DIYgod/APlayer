@@ -21,7 +21,7 @@ gulp.task('browser-sync', function() {
 gulp.task('copy', function () {
     gulp.src('src/font/*')
         .pipe(gulp.dest('dist/font'));
-    gulp.src('src/*.jpg')
+    gulp.src(['src/*.jpg', 'src/*.png'])
         .pipe(gulp.dest('dist'));
 });
 

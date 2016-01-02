@@ -111,11 +111,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         float: left;
         height: $aplayer-height;
         width: $aplayer-height;
-
-        img {
-            height: 100%;
-            width: 100%;
-        }
+        background-image: url(./default.png);
+        background-size: 100%;
 
         .aplayer-button {
             position: absolute;
@@ -336,10 +333,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         p {
             font-size: 12px;
             color: #666;
-            line-height: 20px;
-            height: 20px;
-            padding: 0;
-            margin: 0;
+            line-height: 20px !important;
+            height: 20px !important;
+            padding: 0 !important;
+            margin: 0 !important;
             transition: all 0.5s ease-out;
             opacity: 0.4;
             overflow: hidden;

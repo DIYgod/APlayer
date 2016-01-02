@@ -52,7 +52,6 @@ APlayer.prototype.init = function () {
     // fill in HTML
     this.element.innerHTML = ''
         + '<div class="aplayer-pic">'
-        +     '<img src="' + this.music.pic + '">'
         +     '<div class="aplayer-button aplayer-pause aplayer-hide">'
         +         '<i class="demo-icon aplayer-icon-pause"></i>'
         +     '</div>'
@@ -90,6 +89,11 @@ APlayer.prototype.init = function () {
         +         '</div>'
         +     '</div>'
         + '</div>';
+
+    // music pic
+    if (this.music.pic) {
+        this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = 'url(' + this.music.pic + ')';
+    }
 
     // fill in lrc
     if (this.option.showlrc) {
