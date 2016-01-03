@@ -44,6 +44,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
     border-radius: 2px;
     overflow: hidden;
     user-select: none;
+    line-height: initial;
 
     [class^="aplayer-icon-"]:before, [class*=" aplayer-icon-"]:before {
         font-family: "aplayer-fontello";
