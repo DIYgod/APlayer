@@ -65,7 +65,7 @@ APlayer.prototype.init = function () {
         +         '<span class="aplayer-author"> - (＞﹏＜)加载中,好累的说...</span>'
         +     '</div>'
         +     '<div class="aplayer-lrc">'
-        +         '<div class="aplayer-lrc-contents" style="transform: translateY(0);"></div>'
+        +         '<div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>'
         +     '</div>'
         +     '<div class="aplayer-controller">'
         +         '<div class="aplayer-bar-wrap">'
@@ -311,6 +311,7 @@ APlayer.prototype.updateLrc = function (currentTime) {
             if (currentTime >= this.lrc[i][0] && (!this.lrc[i + 1] || currentTime < this.lrc[i + 1][0])) {
                 this.lrcIndex = i;
                 this.lrcContents.style.transform = 'translateY(' + -this.lrcIndex * 20 + 'px)';
+                this.lrcContents.style.webkitTransform = 'translateY(' + -this.lrcIndex * 20 + 'px)';
                 this.lrcContents.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
                 this.lrcContents.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
             }
