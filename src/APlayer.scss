@@ -12,7 +12,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
     font-weight: normal;
     font-style: normal;
 }
-
+@mixin active {
+    background-color: #d1e8ff;
+    border-color: #64b4db;
+}
 .aplayer-narrow {
     width: $aplayer-height;
     .aplayer-info {
@@ -288,6 +291,39 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                         }
                     }
                 }
+            }
+        }
+    }
+
+    .aplayer-musics-list {
+        overflow-y: auto;
+        height: $aplayer-height-lrc;
+        ul {
+            display: block;
+            list-style-type: disc;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            //-webkit-margin-end: 1em;
+            -webkit-padding-start: 0px;
+            li {
+                display: block;
+                list-style-type: disc;
+                -webkit-margin-before: 0.3em;
+                -webkit-margin-after: 0.3em;
+                //-webkit-margin-start: 0px;
+                //-webkit-margin-end: 0px;
+                //-webkit-padding-start: 0px;
+                border: 1px transparent solid;
+                border-bottom-color: #eeeeee;
+            }
+            .active {
+                background-color: #aec6ff;
+                border-color: #0f55db;
+            }
+            :hover{
+                background-color: #d1e8ff;
+                border-color: #8cbddb;
             }
         }
     }

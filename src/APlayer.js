@@ -7,8 +7,14 @@
 
 function APlayer(option) {
     // handle options error
-    if (!('music' in option && 'title' in option.music && 'author' in option.music && 'url' in option.music)) {
-        throw 'APlayer Error: Music, music.title, music.author, music.url, music.pic are required in options';
+    if (option.multiple) {
+        if (!('music' in option && option.music.length > 1)) {
+            throw 'APlayer Error: Music list are required in options';
+        }
+    } else {
+        if (!('music' in option && 'title' in option.music && 'author' in option.music && 'url' in option.music)) {
+            throw 'APlayer Error: Music, music.title, music.author, music.url, music.pic are required in options';
+        }
     }
     if (option.element === null) {
         throw 'APlayer Error: element option null';
@@ -41,8 +47,12 @@ function APlayer(option) {
  */
 APlayer.prototype.init = function () {
     this.element = this.option.element;
-    this.music = this.option.music;
-
+    if (this.option.multiple) {
+        this.music = this.option.music[0];
+        this.musics = this.option.music;
+    } else {
+        this.music = this.option.music;
+    }
     // parser lrc
     if (this.option.showlrc) {
         var lrcs = this.element.getElementsByClassName('aplayer-lrc-content')[0].innerHTML;
@@ -89,6 +99,21 @@ APlayer.prototype.init = function () {
         +         '</div>'
         +     '</div>'
         + '</div>';
+
+    if (this.option.multiple) {
+        var musics_list = '<div class="aplayer-musics-list">';
+        musics_list += '<ul id ="aplayer-list">';
+        for (var i = 0; i < this.musics.length; i++) {
+            var sb = '';
+            sb = sb.concat(this.musics[i].author, ' - ', this.musics[i].title);
+            musics_list += '<li value="' + i + '">';
+            musics_list += sb;
+            musics_list += ('</li>');
+        }
+        musics_list += ('</ul>');
+        musics_list += '</div>';
+        this.element.innerHTML += musics_list;
+    }
 
     // fill in lrc
     if (this.option.showlrc) {
@@ -149,6 +174,19 @@ APlayer.prototype.init = function () {
     this.pauseButton.addEventListener('click', function () {
         _self.pause.call(_self);
     });
+
+    var elems = document.querySelectorAll('.aplayer-musics-list ul li');
+    var makeActive = function () {
+        for (var i = 0; i < elems.length; i++)
+            elems[i].classList.remove('active');
+        this.classList.add('active');
+        _self.stop();
+        _self.music = _self.musics[this.value];
+        _self.refresh();
+        _self.play();
+    };
+    for (var i = 0; i < elems.length; i++)
+        elems[i].addEventListener('mousedown', makeActive);
 
     // control play progress
     this.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
@@ -282,6 +320,25 @@ APlayer.prototype.pause = function () {
     this.playButton.classList.remove('aplayer-hide');
     this.audio.pause();
     clearInterval(this.playedTime);
+};
+
+/**
+ * stop music
+ */
+APlayer.prototype.stop = function () {
+    this.pauseButton.classList.add('aplayer-hide');
+    this.playButton.classList.remove('aplayer-hide');
+    this.audio.pause();
+    this.audio.currentTime=0;
+    clearInterval(this.playedTime);
+};
+/**
+ * stop music
+ */
+APlayer.prototype.refresh = function () {
+    this.audio.src = this.music.url;
+    this.audio.loop = true;
+    this.audio.preload = 'metadata';
 };
 
 /**

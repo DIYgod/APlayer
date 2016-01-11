@@ -119,12 +119,21 @@
             narrow: false,
             autoplay: false,
             showlrc: false,
-            music: {
-                title: 'Preparation',
-                author: 'Hans Zimmer/Richard Harvey',
-                url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
-                pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
-            }
+            multiple: true,
+            music: [
+                {
+                    title: 'Preparation',
+                    author: 'Hans Zimmer/Richard Harvey',
+                    url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
+                    pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
+                },
+                {
+                    title: 'Preparation',
+                    author: 'Hans Zimmer/Richard Harvey',
+                    url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
+                    pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
+                }
+            ]
         });
         ap1.init();
         var ap2 = new APlayer({
@@ -132,6 +141,7 @@
             narrow: true,
             autoplay: false,
             showlrc: false,
+            multiple: false,
             music: {
                 title: 'Preparation',
                 author: 'Hans Zimmer/Richard Harvey',
@@ -143,14 +153,22 @@
         var ap3 = new APlayer({
             element: document.getElementById('player3'),
             narrow: false,
-            autoplay: true,
+            autoplay: false,
             showlrc: true,
-            music: {
-                title: '平凡之路',
-                author: '朴树',
-                url: 'http://7xifn9.com1.z0.glb.clouddn.com/平凡之路.mp3',
-                pic: 'http://7xifn9.com1.z0.glb.clouddn.com/平凡之路.jpg'
-            }
+            multiple: true,
+            music: [
+                {
+                    title: '平凡之路',
+                    author: '朴树',
+                    url: 'http://7xifn9.com1.z0.glb.clouddn.com/平凡之路.mp3',
+                    pic: 'http://7xifn9.com1.z0.glb.clouddn.com/平凡之路.jpg'
+                },{
+                    title: 'Preparation',
+                    author: 'Hans Zimmer/Richard Harvey',
+                    url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
+                    pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
+                }
+            ]
         });
         ap3.init();
     </script>
