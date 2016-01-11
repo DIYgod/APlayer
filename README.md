@@ -129,7 +129,7 @@ Support multiple time tag, support three decimal second
 
 #### JS:
 
-Option: `showlrc: false`
+Option: `showlrc: true`
 
 ## Development
 
