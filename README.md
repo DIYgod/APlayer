@@ -18,6 +18,7 @@ UI 参考网易云音乐外链播放器
 Screenshot
 ![image](https://i.imgur.com/JDrJXCr.png)
 ![image](https://i.imgur.com/eIRyqvT.png)
+![image](https://i.imgur.com/C9Cl1ad.png)
 
 ## Install
 
@@ -45,6 +46,7 @@ var ap = new APlayer({
     narrow: false,
     autoplay: true,
     showlrc: false,
+    theme: '#e6d0b2',
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
@@ -61,8 +63,9 @@ ap.init();
 {
     element: document.getElementById('player1'),                       // Optional, player element
     narrow: false,                                                     // Optional, narrow style
-    autoplay: true,                                                    // Optional, autoplay, not supported by mobile browsers
+    autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
     showlrc: false,                                                    // Optional, show lrc
+    theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
     music: {                                                           // Required, music info
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
@@ -131,6 +134,30 @@ Support multiple time tag, support three decimal second
 
 Option: `showlrc: true`
 
+### With playlist
+
+#### JS:
+
+Option:
+
+```JS
+music: [
+    {
+        title: '...',
+        author: '...',
+        url: '...',
+        pic: '...'
+    },
+    {
+        title: '...',
+        author: '...',
+        url: '...',
+        pic: '...'
+    },
+    ...
+]
+```
+
 ## Development
 
 ```
@@ -153,7 +180,9 @@ $ gulp
 - [x] 歌词展示
 - [x] 默认选项
 - [x] 移动端兼容性
-- [ ] 播放列表
+- [x] 播放列表
+- [ ] 播放暂停按钮切换动画
+- [ ] 歌词滚动展示
 
 ## Issues
 
