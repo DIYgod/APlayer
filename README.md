@@ -17,8 +17,6 @@ UI 参考网易云音乐外链播放器
 
 Screenshot
 ![image](https://i.imgur.com/JDrJXCr.png)
-![image](https://i.imgur.com/eIRyqvT.png)
-![image](https://i.imgur.com/C9Cl1ad.png)
 
 ## Install
 
