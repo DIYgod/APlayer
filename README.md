@@ -73,6 +73,13 @@ ap.init();
 }
 ```
 
+#### Work with module bundler
+
+```js
+var APlayer = require('aplayer');
+var ap = new APlayer({...});
+```
+
 #### API
 
 + `ap.init()`
