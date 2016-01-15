@@ -518,3 +518,5 @@ APlayer.prototype.parseLrc = function (arr) {
     }
     return lrcs;
 };
+
+module.exports = APlayer;
