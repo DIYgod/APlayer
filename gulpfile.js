@@ -3,7 +3,7 @@ var sass        = require('gulp-sass');
 var prefix      = require('gulp-autoprefixer');
 var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
-var minifyCSS   = require('gulp-cssnano');
+var cssNano     = require('gulp-cssnano');
 var rename      = require('gulp-rename');
 var browserSync = require('browser-sync').create();
 
@@ -41,7 +41,7 @@ gulp.task('compressCSS', function() {
     gulp.src('src/*.scss')
         .pipe(sass())
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
-        .pipe(minifyCSS())
+        .pipe(cssNano())
         .pipe(rename({
             suffix: ".min"
         }))
