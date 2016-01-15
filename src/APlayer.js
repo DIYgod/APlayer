@@ -137,6 +137,7 @@ APlayer.prototype.init = function () {
                 if (musicIndex !== _self.playIndex) {
                     _self.setMusic(musicIndex);
                 }
+                _self.play();
             });
         }
     }
@@ -311,6 +312,7 @@ APlayer.prototype.setMusic = function (index) {
         this.audio = document.createElement("audio");
         this.audio.src = this.music.url;
         this.audio.preload = this.isMobile ?  'none' : 'metadata';
+        this.audio.currentTime = 0;
 
         // show audio time
         var _self = this;
@@ -359,6 +361,7 @@ APlayer.prototype.setMusic = function (index) {
     else {
         this.audio = this.audios[indexMusic];
         this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
+        this.audio.currentTime = 0;
     }
 
     // fill in lrc
