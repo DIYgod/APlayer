@@ -156,12 +156,17 @@ music: [
 ]
 ```
 
-## Development
+## Run in development
 
 ```
 $ npm install
-$ npm install -g gulp
-$ gulp
+$ npm run dev
+```
+
+## Make a release
+
+```
+$ npm run build
 ```
 
 ## Related Projects
