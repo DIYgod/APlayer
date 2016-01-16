@@ -79,6 +79,13 @@ ap.init();
 + `ap.play()`
 + `ap.pause()`
 
+#### Work with module bundler
+
+```js
+var APlayer = require('APlayer');
+var ap = new APlayer({...});
+```
+
 ### With lrc
 
 #### LRC format:
