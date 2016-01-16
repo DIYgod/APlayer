@@ -173,6 +173,7 @@ $ npm run dev
 ## Make a release
 
 ```
+$ npm install
 $ npm run build
 ```
 
