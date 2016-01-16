@@ -117,7 +117,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             background: rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease;
+            transition: all 0.1s ease;
             &:hover {
                 opacity: 1;
             }
@@ -131,9 +131,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             width: 26px;
             height: 26px;
             border: 2px solid #fff;
-            top: 50%;
-            left: 50%;
-            margin: -15px 0 0 -15px;
+            bottom: 50%;
+            right: 50%;
+            margin: 0 -15px -15px 0;
             .aplayer-icon-play {
                 position: absolute;
                 top: 2px;
@@ -416,4 +416,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             }
         }
     }
+}
+
+@keyframes aplayer-roll {
+    0%{left:0}
+    100%{left: -100%}
 }

@@ -54,61 +54,58 @@
         // fill in HTML
         var eleHTML = ''
             + '<div class="aplayer-pic">'
-            + '<div class="aplayer-button aplayer-pause aplayer-hide">'
-            + '<i class="demo-icon aplayer-icon-pause"></i>'
-            + '</div>'
-            + '<div class="aplayer-button aplayer-play">'
-            + '<i class="demo-icon aplayer-icon-play"></i>'
-            + '</div>'
+            +     '<div class="aplayer-button aplayer-play">'
+            +         '<i class="demo-icon aplayer-icon-play"></i>'
+            +     '</div>'
             + '</div>'
             + '<div class="aplayer-info">'
-            + '<div class="aplayer-music">'
-            + '<span class="aplayer-title"></span>'
-            + '<span class="aplayer-author"></span>'
-            + '</div>'
-            + '<div class="aplayer-lrc">'
-            + '<div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>'
-            + '</div>'
-            + '<div class="aplayer-controller">'
-            + '<div class="aplayer-bar-wrap">'
-            + '<div class="aplayer-bar">'
-            + '<div class="aplayer-loaded" style="width: 0"></div>'
-            + '<div class="aplayer-played" style="width: 0; background: ' + this.option.theme + ';">'
-            + '<span class="aplayer-thumb" style="border: 1px solid ' + this.option.theme + ';"></span>'
-            + '</div>'
-            + '</div>'
-            + '</div>'
-            + '<div class="aplayer-time">'
-            + ' - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>'
-            + '<div class="aplayer-volume-wrap">'
-            + '<i class="demo-icon aplayer-icon-volume-down"></i>'
-            + '<div class="aplayer-volume-bar-wrap">'
-            + '<div class="aplayer-volume-bar">'
-            + '<div class="aplayer-volume" style="height: 80%; background: ' + this.option.theme + ';"></div>'
-            + '</div>'
-            + '</div>'
-            + '</div>'
-            + '<i class="demo-icon aplayer-icon-loop"></i>'
-            + (this.playIndex > -1 ? '<i class="demo-icon aplayer-icon-menu"></i>' : '')
-            + '</div>'
-            + '</div>'
+            +     '<div class="aplayer-music">'
+            +         '<span class="aplayer-title"></span>'
+            +         '<span class="aplayer-author"></span>'
+            +     '</div>'
+            +     '<div class="aplayer-lrc">'
+            +         '<div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>'
+            +     '</div>'
+            +     '<div class="aplayer-controller">'
+            +         '<div class="aplayer-bar-wrap">'
+            +             '<div class="aplayer-bar">'
+            +                 '<div class="aplayer-loaded" style="width: 0"></div>'
+            +                 '<div class="aplayer-played" style="width: 0; background: ' + this.option.theme + ';">'
+            +                     '<span class="aplayer-thumb" style="border: 1px solid ' + this.option.theme + ';"></span>'
+            +                 '</div>'
+            +             '</div>'
+            +         '</div>'
+            +         '<div class="aplayer-time">'
+            +             ' - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>'
+            +             '<div class="aplayer-volume-wrap">'
+            +                 '<i class="demo-icon aplayer-icon-volume-down"></i>'
+            +                 '<div class="aplayer-volume-bar-wrap">'
+            +                     '<div class="aplayer-volume-bar">'
+            +                         '<div class="aplayer-volume" style="height: 80%; background: ' + this.option.theme + ';"></div>'
+            +                     '</div>'
+            +                 '</div>'
+            +             '</div>'
+            +             '<i class="demo-icon aplayer-icon-loop"></i>'
+            +             (this.playIndex > -1 ? '<i class="demo-icon aplayer-icon-menu"></i>' : '')
+            +         '</div>'
+            +     '</div>'
             + '</div>';
         if (this.playIndex > -1) {
             eleHTML += ''
-                + '<div class="aplayer-list">'
-                + '<ol>';
+            + '<div class="aplayer-list">'
+            +     '<ol>';
             for (i = 0; i < this.option.music.length; i++) {
                 eleHTML += ''
-                    + '<li>'
-                    + '<span class="aplayer-list-cur" style="background: ' + this.option.theme + ';"></span>'
-                    + '<span class="aplayer-list-index">' + (i + 1) + '</span>'
-                    + '<span class="aplayer-list-title">' + this.option.music[i].title + '</span>'
-                    + '<span class="aplayer-list-author">' + this.option.music[i].author + '</span>'
-                    + '</li>'
+            +         '<li>'
+            +             '<span class="aplayer-list-cur" style="background: ' + this.option.theme + ';"></span>'
+            +             '<span class="aplayer-list-index">' + (i + 1) + '</span>'
+            +             '<span class="aplayer-list-title">' + this.option.music[i].title + '</span>'
+            +             '<span class="aplayer-list-author">' + this.option.music[i].author + '</span>'
+            +         '</li>'
             }
             eleHTML += ''
-                + '</ol>'
-                + '</div>'
+            +     '</ol>'
+            + '</div>'
         }
         this.element.innerHTML = eleHTML;
 
@@ -120,13 +117,14 @@
         var _self = this;
 
         // play and pause button
-        this.playButton = this.element.getElementsByClassName('aplayer-play')[0];
-        this.pauseButton = this.element.getElementsByClassName('aplayer-pause')[0];
-        this.playButton.addEventListener('click', function () {
-            _self.play.call(_self);
-        });
-        this.pauseButton.addEventListener('click', function () {
-            _self.pause.call(_self);
+        this.button = this.element.getElementsByClassName('aplayer-button')[0];
+        this.button.addEventListener('click', function () {
+            if (this.classList.contains('aplayer-play')) {
+               _self.play.call(_self);
+            }
+            else if (this.classList.contains('aplayer-pause')) {
+                _self.pause.call(_self);
+            }
         });
 
         // click music list: change music
@@ -255,10 +253,12 @@
             if (_self.loop) {
                 this.classList.add('aplayer-noloop');
                 _self.loop = false;
+                _self.audio.loop = _self.playIndex > -1 ? false : _self.loop;
             }
             else {
                 this.classList.remove('aplayer-noloop');
                 _self.loop = true;
+                _self.audio.loop = _self.playIndex > -1 ? false : _self.loop;
             }
         });
 
@@ -348,6 +348,13 @@
                     }
                 });
             }
+            else {
+                this.audio.addEventListener('ended', function () {
+                    if (!_self.loop) {
+                        _self.pause();
+                    }
+                });
+            }
 
             // control volume
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
@@ -403,10 +410,14 @@
      * Play music
      */
     APlayer.prototype.play = function () {
-        this.playButton.classList.add('aplayer-hide');
-        this.pauseButton.classList.remove('aplayer-hide');
-        this.audio.play();
         var _self = this;
+        this.button.classList.remove('aplayer-play');
+        this.button.classList.add('aplayer-pause');
+        this.button.innerHTML = '';
+        setTimeout(function () {
+            _self.button.innerHTML = '<i class="demo-icon aplayer-icon-pause"></i>';
+        }, 100);
+        this.audio.play();
         if (this.playedTime) {
             clearInterval(this.playedTime);
         }
@@ -423,8 +434,13 @@
      * Pause music
      */
     APlayer.prototype.pause = function () {
-        this.pauseButton.classList.add('aplayer-hide');
-        this.playButton.classList.remove('aplayer-hide');
+        var _self = this;
+        this.button.classList.remove('aplayer-pause');
+        this.button.classList.add('aplayer-play');
+        this.button.innerHTML = '';
+        setTimeout(function () {
+            _self.button.innerHTML = '<i class="demo-icon aplayer-icon-play"></i>';
+        }, 100);
         this.audio.pause();
         clearInterval(this.playedTime);
     };
