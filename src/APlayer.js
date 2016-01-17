@@ -42,10 +42,11 @@
         this.element = this.option.element;
         this.music = this.playIndex > -1 ? this.option.music[this.playIndex] : this.option.music;
 
+        var i;
         // parser lrc
         if (this.option.showlrc) {
             var lrcs = [];
-            for (var i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
+            for (i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
                 lrcs.push(this.element.getElementsByClassName('aplayer-lrc-content')[i].innerHTML);
             }
             this.lrcs = this.parseLrc(lrcs);
@@ -378,7 +379,7 @@
             this.element.classList.add('aplayer-withlrc');
             var lrcHTML = '';
             this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
-            for (i = 0; i < this.lrc.length; i++) {
+            for (var i = 0; i < this.lrc.length; i++) {
                 lrcHTML += '<p>' + this.lrc[i][1] + '</p>';
             }
             this.lrcContents.innerHTML = lrcHTML;
