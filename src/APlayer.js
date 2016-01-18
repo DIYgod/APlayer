@@ -314,7 +314,6 @@
             this.audio = document.createElement("audio");
             this.audio.src = this.music.url;
             this.audio.preload = this.isMobile ? 'none' : 'metadata';
-            this.audio.currentTime = 0;
 
             // show audio time
             var _self = this;
