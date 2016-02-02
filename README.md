@@ -181,6 +181,8 @@ $ npm run build
 
 + [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
 
++ [hexo-tag-aplayer](https://github.com/grzhan/hexo-tag-aplayer)
+
 ## Todo
 
 - [x] 播放进度拖拽控制
