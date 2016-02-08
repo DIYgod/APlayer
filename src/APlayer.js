@@ -5,6 +5,9 @@
  * @constructor
  */
 (function () {
+    // all created APlayer object for mutex
+    var APlayers = new Array();
+
     function APlayer(option) {
 
         this.isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
@@ -19,6 +22,7 @@
             narrow: false,
             autoplay: false,
             showlrc: false,
+            mutex: false,
             theme: '#b7daff'
         };
         for (var defaultKey in defaultOption) {
@@ -277,6 +281,7 @@
         }
 
         this.setMusic(0);
+        APlayers.push(this);
     };
 
     /**
@@ -417,6 +422,19 @@
         setTimeout(function () {
             _self.button.innerHTML = '<i class="demo-icon aplayer-icon-pause"></i>';
         }, 100);
+        if (_self.option.mutex) {
+            for (var i = 0; i < APlayers.length; i++) {
+                if (this != APlayers[i])
+                {
+                    // if call APlayers[i].pause(), it will show click animation
+                    APlayers[i].button.classList.remove('aplayer-pause');
+                    APlayers[i].button.classList.add('aplayer-play');
+                    APlayers[i].button.innerHTML = '<i class="demo-icon aplayer-icon-play"></i>';
+                    APlayers[i].audio.pause();
+                    clearInterval(APlayers[i].playedTime);
+                }
+            }
+        }
         this.audio.play();
         if (this.playedTime) {
             clearInterval(this.playedTime);
