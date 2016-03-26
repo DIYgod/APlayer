@@ -5,6 +5,8 @@ var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
 var cssNano     = require('gulp-cssnano');
 var rename      = require('gulp-rename');
+var babel       = require("gulp-babel");
+var sourcemaps  = require("gulp-sourcemaps");
 var browserSync = require('browser-sync').create();
 
 // Launch the server
@@ -28,10 +30,15 @@ gulp.task('copy', function () {
 // Build js files
 gulp.task('compressJS', function() {
     gulp.src(['src/*.js'])
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .pipe(rename({
             suffix: ".min"
         }))
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('dist'))
         .pipe(browserSync.stream());
 });

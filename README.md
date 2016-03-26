@@ -183,26 +183,6 @@ $ npm run build
 
 + [hexo-tag-aplayer](https://github.com/grzhan/hexo-tag-aplayer)
 
-## Todo
-
-- [x] 播放进度拖拽控制
-- [x] 音量控制
-- [x] 分享到微博
-- [x] 加载样式及错误处理
-- [x] 窄样式 及 移动版样式
-- [x] 歌词展示
-- [x] 默认选项
-- [x] 移动端兼容性
-- [x] 播放列表
-- [x] 播放暂停按钮切换动画
-
-## Issues
-
-- [ ] 在 Firefox 中调整进度后, 播放到最后时音乐总时间会自动变长
-- [ ] 移动端各种浏览器触发事件的时机不同
-- [ ] 移动版 Safari 和 部分 Android 浏览器不支持 volume
-- [ ] 部分 Android 浏览器不支持 duration
-
 
 ## LICENSE
 
