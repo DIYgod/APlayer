@@ -5,6 +5,8 @@
  * @constructor
  */
 (() => {
+    let APlayers = [];
+
     class APlayer {
         constructor (option) {
 
@@ -19,6 +21,7 @@
                 element: document.getElementsByClassName('aplayer')[0],
                 narrow: false,
                 autoplay: false,
+                mutex: true,
                 showlrc: false,
                 theme: '#b7daff'
             };
@@ -366,6 +369,8 @@
             }
 
             this.setMusic(0);
+
+            APlayers.push(this);
         };
 
         /**
@@ -498,37 +503,50 @@
          * Play music
          */
         play () {
-            this.button.classList.remove('aplayer-play');
-            this.button.classList.add('aplayer-pause');
-            this.button.innerHTML = '';
-            setTimeout(() => {
-                this.button.innerHTML = '<i class="demo-icon aplayer-icon-pause"></i>';
-            }, 100);
-            this.audio.play();
-            if (this.playedTime) {
-                clearInterval(this.playedTime);
-            }
-            this.playedTime = setInterval(() => {
-                this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
-                if (this.option.showlrc) {
-                    this.updateLrc();
+            if (this.audio.paused) {
+                this.button.classList.remove('aplayer-play');
+                this.button.classList.add('aplayer-pause');
+                this.button.innerHTML = '';
+                setTimeout(() => {
+                    this.button.innerHTML = '<i class="demo-icon aplayer-icon-pause"></i>';
+                }, 100);
+
+                // pause other players (Thanks @Aprikyblue)
+                if (this.option.mutex) {
+                    for (let i = 0; i < APlayers.length; i++) {
+                        if (this != APlayers[i]) {
+                            APlayers[i].pause();
+                        }
+                    }
                 }
-                this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
-            }, 100);
+                this.audio.play();
+                if (this.playedTime) {
+                    clearInterval(this.playedTime);
+                }
+                this.playedTime = setInterval(() => {
+                    this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                    if (this.option.showlrc) {
+                        this.updateLrc();
+                    }
+                    this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
+                }, 100);
+            }
         };
 
         /**
          * Pause music
          */
         pause () {
-            this.button.classList.remove('aplayer-pause');
-            this.button.classList.add('aplayer-play');
-            this.button.innerHTML = '';
-            setTimeout(() => {
-                this.button.innerHTML = '<i class="demo-icon aplayer-icon-play"></i>';
-            }, 100);
-            this.audio.pause();
-            clearInterval(this.playedTime);
+            if (!this.audio.paused) {
+                this.button.classList.remove('aplayer-pause');
+                this.button.classList.add('aplayer-play');
+                this.button.innerHTML = '';
+                setTimeout(() => {
+                    this.button.innerHTML = '<i class="demo-icon aplayer-icon-play"></i>';
+                }, 100);
+                this.audio.pause();
+                clearInterval(this.playedTime);
+            }
         };
     }
 

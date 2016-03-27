@@ -63,6 +63,7 @@ ap.init();
     narrow: false,                                                     // Optional, narrow style
     autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
     showlrc: false,                                                    // Optional, show lrc
+    mutex: true,                                                       // Optional, pause other players when this player playing
     theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
     music: {                                                           // Required, music info
         title: 'Preparation',                                          // Required, music title
