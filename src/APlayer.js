@@ -208,6 +208,9 @@
             this.element.innerHTML = eleHTML;
 
             console.log(this.element.getElementsByClassName('aplayer-info')[0].offsetWidth);
+            if (this.element.getElementsByClassName('aplayer-info')[0].offsetWidth < 200) {
+                this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow');
+            }
             // fix the width of aplayer bar
             this.element.getElementsByClassName('aplayer-bar-wrap')[0].style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
 

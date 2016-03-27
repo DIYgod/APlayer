@@ -246,7 +246,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                     transition: all 0.2s ease;
 
                     &.aplayer-icon-loop {
-                        margin: 2px;
+                        margin-right: 4px;
                     }
                     &.aplayer-noloop {
                         color: #ddd;
@@ -259,12 +259,22 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                         color: #000;
                     }
                 }
+
+                &.aplayer-time-narrow {
+                    .aplayer-icon-loop {
+                        display: none;
+                    }
+
+                    .aplayer-icon-menu {
+                        display: none;
+                    }
+                }
             }
 
             .aplayer-volume-wrap {
                 position: relative;
                 display: inline-block;
-                margin-left: 7px;
+                margin-left: 3px;
                 cursor: pointer !important;
 
                 &:hover .aplayer-volume-bar-wrap {
