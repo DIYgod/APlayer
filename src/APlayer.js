@@ -8,7 +8,7 @@
     let APlayers = [];
 
     class APlayer {
-        constructor (option) {
+        constructor(option) {
 
             this.isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
             // compatibility: some mobile browsers don't suppose autoplay
@@ -44,7 +44,7 @@
              * @param {Number} second
              * @return {String} 00:00 format
              */
-            this.secondToTime =  (second) => {
+            this.secondToTime = (second) => {
                 const add0 = (num) => {
                     return num < 10 ? '0' + num : '' + num;
                 };
@@ -63,7 +63,7 @@
              *
              * @return {Array} [[[time, text], [time, text], [time, text], ...], [[time, text], [time, text], [time, text], ...], ...]
              */
-            this.parseLrc =  (arr) => {
+            this.parseLrc = (arr) => {
                 let lrcs = [];
                 for (let k = 0; k < arr.length; k++) {
                     const lyric = arr[k].split('\n');
@@ -131,7 +131,7 @@
         /**
          * AutoLink initialization function
          */
-        init () {
+        init() {
             this.element = this.option.element;
             this.music = this.playIndex > -1 ? this.option.music[this.playIndex] : this.option.music;
 
@@ -145,9 +145,14 @@
                 this.lrcs = this.parseLrc(lrcs);
             }
 
+            // add class aplayer-withlrc
+            if (this.option.showlrc) {
+                this.element.classList.add('aplayer-withlrc');
+            }
+
             // fill in HTML
             let eleHTML = `
-                <div class="aplayer-pic">
+                <div class="aplayer-pic"` + (this.music.pic ? (`style="background-image: url("` + encodeURI(this.music.pic) + `");"`) : ``) + `>
                     <div class="aplayer-button aplayer-play">
                         <i class="demo-icon aplayer-icon-play"></i>
                     </div>
@@ -202,6 +207,10 @@
             }
             this.element.innerHTML = eleHTML;
 
+            console.log(this.element.getElementsByClassName('aplayer-info')[0].offsetWidth);
+            // fix the width of aplayer bar
+            this.element.getElementsByClassName('aplayer-bar-wrap')[0].style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
+
             // switch to narrow style
             if (this.option.narrow) {
                 this.element.classList.add('aplayer-narrow');
@@ -211,7 +220,7 @@
             this.button = this.element.getElementsByClassName('aplayer-button')[0];
             this.button.addEventListener('click', (e) => {
                 if (this.button.classList.contains('aplayer-play')) {
-                   this.play();
+                    this.play();
                 }
                 else if (this.button.classList.contains('aplayer-pause')) {
                     this.pause();
@@ -376,7 +385,7 @@
         /**
          * Set music
          */
-        setMusic (index) {
+        setMusic(index) {
             // get this.music
             if (this.playIndex > -1 && typeof(index) !== 'undefined') {
                 this.playIndex = index;
@@ -468,7 +477,6 @@
             // fill in lrc
             if (this.option.showlrc) {
                 this.lrc = this.playIndex > -1 ? this.lrcs[indexMusic] : this.lrcs[0];
-                this.element.classList.add('aplayer-withlrc');
                 let lrcHTML = '';
                 this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
                 for (let i = 0; i < this.lrc.length; i++) {
@@ -502,7 +510,7 @@
         /**
          * Play music
          */
-        play () {
+        play() {
             if (this.audio.paused) {
                 this.button.classList.remove('aplayer-play');
                 this.button.classList.add('aplayer-pause');
@@ -536,7 +544,7 @@
         /**
          * Pause music
          */
-        pause () {
+        pause() {
             if (!this.audio.paused) {
                 this.button.classList.remove('aplayer-pause');
                 this.button.classList.add('aplayer-play');
