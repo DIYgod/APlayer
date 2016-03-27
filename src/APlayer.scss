@@ -46,6 +46,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
     user-select: none;
     line-height: initial;
 
+    * {
+        box-sizing: content-box;
+    }
+
     [class^="aplayer-icon-"]:before, [class*=" aplayer-icon-"]:before {
         font-family: "aplayer-fontello";
         font-style: normal;
