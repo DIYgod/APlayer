@@ -110,16 +110,13 @@
              *
              * @param {Number} currentTime
              */
-            this.updateLrc = (currentTime) => {
-                if (typeof(currentTime) === 'undefined') {
-                    currentTime = this.audio.currentTime;
-                }
+            this.updateLrc = (currentTime = this.audio.currentTime) => {
                 if (this.lrcIndex > this.lrc.length - 1 || currentTime < this.lrc[this.lrcIndex][0] || (!this.lrc[this.lrcIndex + 1] || currentTime >= this.lrc[this.lrcIndex + 1][0])) {
                     for (let i = 0; i < this.lrc.length; i++) {
                         if (currentTime >= this.lrc[i][0] && (!this.lrc[i + 1] || currentTime < this.lrc[i + 1][0])) {
                             this.lrcIndex = i;
-                            this.lrcContents.style.transform = 'translateY(' + -this.lrcIndex * 20 + 'px)';
-                            this.lrcContents.style.webkitTransform = 'translateY(' + -this.lrcIndex * 20 + 'px)';
+                            this.lrcContents.style.transform = `translateY(${-this.lrcIndex * 20}px)`;
+                            this.lrcContents.style.webkitTransform = `translateY(${-this.lrcIndex * 20}px)`;
                             this.lrcContents.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
                             this.lrcContents.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
                         }
@@ -152,7 +149,7 @@
 
             // fill in HTML
             let eleHTML = `
-                <div class="aplayer-pic"` + (this.music.pic ? (`style="background-image: url("` + encodeURI(this.music.pic) + `");"`) : ``) + `>
+                <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url("${encodeURI(this.music.pic)}");"`) : ``)}>
                     <div class="aplayer-button aplayer-play">
                         <i class="demo-icon aplayer-icon-play"></i>
                     </div>
@@ -169,8 +166,8 @@
                         <div class="aplayer-bar-wrap">
                             <div class="aplayer-bar">
                                 <div class="aplayer-loaded" style="width: 0"></div>
-                                <div class="aplayer-played" style="width: 0; background: ` + this.option.theme + `;">
-                                    <span class="aplayer-thumb" style="border: 1px solid ` + this.option.theme + `;"></span>
+                                <div class="aplayer-played" style="width: 0; background: ${this.option.theme};">
+                                    <span class="aplayer-thumb" style="border: 1px solid ${this.option.theme};"></span>
                                 </div>
                             </div>
                         </div>
@@ -180,11 +177,11 @@
                                 <i class="demo-icon aplayer-icon-volume-down"></i>
                                 <div class="aplayer-volume-bar-wrap">
                                     <div class="aplayer-volume-bar">
-                                        <div class="aplayer-volume" style="height: 80%; background: ` + this.option.theme + `;"></div>
+                                        <div class="aplayer-volume" style="height: 80%; background: ${this.option.theme};"></div>
                                     </div>
                                 </div>
                             </div>
-                            <i class="demo-icon aplayer-icon-loop"></i>` + (this.playIndex > -1 ? `<i class="demo-icon aplayer-icon-menu"></i>` : ``) + `
+                            <i class="demo-icon aplayer-icon-loop"></i>${(this.playIndex > -1 ? `<i class="demo-icon aplayer-icon-menu"></i>` : ``)}
                         </div>
                     </div>
                 </div>`;
@@ -195,10 +192,10 @@
                 for (i = 0; i < this.option.music.length; i++) {
                     eleHTML += `
                         <li>
-                            <span class="aplayer-list-cur" style="background: ` + this.option.theme + `;"></span>
-                            <span class="aplayer-list-index">` + (i + 1) + `</span>
-                            <span class="aplayer-list-title">` + this.option.music[i].title + `</span>
-                            <span class="aplayer-list-author">` + this.option.music[i].author + `</span>
+                            <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
+                            <span class="aplayer-list-index">${(i + 1)}</span>
+                            <span class="aplayer-list-title">${this.option.music[i].title}</span>
+                            <span class="aplayer-list-author">${this.option.music[i].author}</span>
                         </li>`
                 }
                 eleHTML += `
@@ -207,7 +204,6 @@
             }
             this.element.innerHTML = eleHTML;
 
-            console.log(this.element.getElementsByClassName('aplayer-info')[0].offsetWidth);
             if (this.element.getElementsByClassName('aplayer-info')[0].offsetWidth < 200) {
                 this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow');
             }
@@ -398,10 +394,10 @@
 
             // set html
             if (this.music.pic) {
-                this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = 'url(' + encodeURI(this.music.pic) + ')';
+                this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = `url(${encodeURI(this.music.pic)})`;
             }
             this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title;
-            this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + this.music.author;
+            this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ${this.music.author}`;
             if (this.playIndex > -1) {
                 if (this.element.getElementsByClassName('aplayer-list-light')[0]) {
                     this.element.getElementsByClassName('aplayer-list-light')[0].classList.remove('aplayer-list-light');
@@ -436,7 +432,7 @@
 
                 // audio download error
                 this.audio.addEventListener('error', () => {
-                    this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ' - ' + 'Error happens ╥﹏╥';
+                    this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - Error happens ╥﹏╥`;
                 });
 
                 // multiple music play
@@ -483,7 +479,7 @@
                 let lrcHTML = '';
                 this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
                 for (let i = 0; i < this.lrc.length; i++) {
-                    lrcHTML += '<p>' + this.lrc[i][1] + '</p>';
+                    lrcHTML += `<p>${this.lrc[i][1]}</p>`;
                 }
                 this.lrcContents.innerHTML = lrcHTML;
                 if (!this.lrcIndex) {
