@@ -62,14 +62,15 @@ ap.init();
     element: document.getElementById('player1'),                       // Optional, player element
     narrow: false,                                                     // Optional, narrow style
     autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
-    showlrc: false,                                                    // Optional, show lrc
+    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
     mutex: true,                                                       // Optional, pause other players when this player playing
     theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
-    music: {                                                           // Required, music info
+    music: {                                                           // Required, music info, see: ###With playlist
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
         url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',  // Required, music url
         pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'   // Optional, music picture
+        lrc: '[00:00.00]lrc here'                                      // Optional, lrc, see: ###With lrc
     }
 }
 ```
@@ -84,7 +85,9 @@ ap.init();
 
 ```js
 var APlayer = require('APlayer');
-var ap = new APlayer({...});
+var ap = new APlayer({
+    // ...
+});
 ```
 
 ### With lrc
@@ -100,11 +103,32 @@ Support multiple time tag, support three decimal second
 ...
 ```
 
-#### HTML:
+#### LRC in JS:
+
+JS:
+
+```js
+{
+    showlrc: 1,
+    music: {
+        lrc: '[00:00.00]'    // lrc here, separate lines with \n
+    }
+}
+```
+
+#### LRC in HTML:
+
+JS:
+
+```js
+{
+    showlrc: 2
+}
+```
+
+HTML:
 
 ```HTML
-<link rel="stylesheet" href="APlayer.min.css">
-<!-- ... -->
 <div id="player1" class="aplayer">
     <pre class="aplayer-lrc-content">
         [ti:平凡之路]
@@ -132,13 +156,7 @@ Support multiple time tag, support three decimal second
         <!-- ... -->
     </pre>
 </div>
-<!-- ... -->
-<script src="APlayer.min.js"></script>
 ```
-
-#### JS:
-
-Option: `showlrc: true`
 
 ### With playlist
 

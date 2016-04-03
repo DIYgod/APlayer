@@ -22,7 +22,7 @@
                 narrow: false,
                 autoplay: false,
                 mutex: true,
-                showlrc: false,
+                showlrc: 0,
                 theme: '#b7daff'
             };
             for (let defaultKey in defaultOption) {
@@ -130,15 +130,29 @@
          */
         init() {
             this.element = this.option.element;
-            this.music = this.playIndex > -1 ? this.option.music[this.playIndex] : this.option.music;
+            this.multiple = this.playIndex > -1;
+            this.music = this.multiple ? this.option.music[this.playIndex] : this.option.music;
 
             let i;
             // parser lrc
             if (this.option.showlrc) {
                 let lrcs = [];
-                for (i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
-                    lrcs.push(this.element.getElementsByClassName('aplayer-lrc-content')[i].innerHTML);
+                if (this.option.showlrc === 1) {
+                    if (this.multiple) {
+                        for (i = 0; i < this.option.music.length; i++) {
+                            lrcs.push(this.option.music[i].lrc);
+                        }
+                    }
+                    else {
+                        lrcs.push(this.option.music.lrc);
+                    }
                 }
+                else if (this.option.showlrc === 2 || this.option.showlrc === true)  {
+                    for (i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
+                        lrcs.push(this.element.getElementsByClassName('aplayer-lrc-content')[i].innerHTML);
+                    }
+                }
+
                 this.lrcs = this.parseLrc(lrcs);
             }
 
@@ -181,11 +195,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <i class="demo-icon aplayer-icon-loop"></i>${(this.playIndex > -1 ? `<i class="demo-icon aplayer-icon-menu"></i>` : ``)}
+                            <i class="demo-icon aplayer-icon-loop"></i>${(this.multiple ? `<i class="demo-icon aplayer-icon-menu"></i>` : ``)}
                         </div>
                     </div>
                 </div>`;
-            if (this.playIndex > -1) {
+            if (this.multiple) {
                 eleHTML += `
                 <div class="aplayer-list">
                     <ol>`;
@@ -227,7 +241,7 @@
             });
 
             // click music list: change music
-            if (this.playIndex > -1) {
+            if (this.multiple) {
                 const listItem = this.element.getElementsByClassName('aplayer-list')[0].getElementsByTagName('li');
                 for (let i = 0; i < this.option.music.length; i++) {
                     listItem[i].addEventListener('click', () => {
@@ -354,17 +368,17 @@
                 if (this.loop) {
                     loopEle.classList.add('aplayer-noloop');
                     this.loop = false;
-                    this.audio.loop = this.playIndex > -1 ? false : this.loop;
+                    this.audio.loop = this.multiple ? false : this.loop;
                 }
                 else {
                     loopEle.classList.remove('aplayer-noloop');
                     this.loop = true;
-                    this.audio.loop = this.playIndex > -1 ? false : this.loop;
+                    this.audio.loop = this.multiple ? false : this.loop;
                 }
             });
 
             // toggle menu control
-            if (this.playIndex > -1) {
+            if (this.multiple) {
                 this.element.getElementsByClassName('aplayer-icon-menu')[0].addEventListener('click', () => {
                     const list = this.element.getElementsByClassName('aplayer-list')[0];
                     if (!list.classList.contains('aplayer-list-hide')) {
@@ -386,11 +400,11 @@
          */
         setMusic(index) {
             // get this.music
-            if (this.playIndex > -1 && typeof(index) !== 'undefined') {
+            if (this.multiple && typeof(index) !== 'undefined') {
                 this.playIndex = index;
             }
             const indexMusic = this.playIndex;
-            this.music = this.playIndex > -1 ? this.option.music[indexMusic] : this.option.music;
+            this.music = this.multiple ? this.option.music[indexMusic] : this.option.music;
 
             // set html
             if (this.music.pic) {
@@ -398,7 +412,7 @@
             }
             this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title;
             this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ${this.music.author}`;
-            if (this.playIndex > -1) {
+            if (this.multiple) {
                 if (this.element.getElementsByClassName('aplayer-list-light')[0]) {
                     this.element.getElementsByClassName('aplayer-list-light')[0].classList.remove('aplayer-list-light');
                 }
@@ -412,7 +426,7 @@
             }
 
             // get this audio object
-            if ((this.playIndex > -1 && !this.audios[indexMusic]) || this.playIndex === -1) {
+            if ((this.multiple && !this.audios[indexMusic]) || this.playIndex === -1) {
                 this.audio = document.createElement("audio");
                 this.audio.src = this.music.url;
                 this.audio.preload = this.isMobile ? 'none' : 'metadata';
@@ -436,7 +450,7 @@
                 });
 
                 // multiple music play
-                if (this.playIndex > -1) {
+                if (this.multiple) {
                     this.audio.addEventListener('ended', () => {
                         if (this.playIndex < this.option.music.length - 1) {
                             this.setMusic(++this.playIndex);
@@ -461,9 +475,9 @@
                 this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
 
                 // loop
-                this.audio.loop = this.playIndex > -1 ? false : this.loop;
+                this.audio.loop = this.multiple ? false : this.loop;
 
-                if (this.playIndex > -1) {
+                if (this.multiple) {
                     this.audios[indexMusic] = this.audio;
                 }
             }
@@ -475,7 +489,7 @@
 
             // fill in lrc
             if (this.option.showlrc) {
-                this.lrc = this.playIndex > -1 ? this.lrcs[indexMusic] : this.lrcs[0];
+                this.lrc = this.multiple ? this.lrcs[indexMusic] : this.lrcs[0];
                 let lrcHTML = '';
                 this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
                 for (let i = 0; i < this.lrc.length; i++) {
