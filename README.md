@@ -70,7 +70,7 @@ ap.init();
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
         url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',  // Required, music url
         pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'   // Optional, music picture
-        lrc: '[00:00.00]lrc here'                                      // Optional, lrc, see: ###With lrc
+        lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
     }
 }
 ```
@@ -111,7 +111,7 @@ JS:
 {
     showlrc: 1,
     music: {
-        lrc: '[00:00.00]lrc here'    // lrc here, separate lines with \n
+        lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'    // lrc here, separate lines with \n
     }
 }
 ```
