@@ -92,6 +92,8 @@ var ap = new APlayer({
 
 ### With lrc
 
+Show lrc, you can put LRC in JS or HTML as you like.
+
 #### LRC format:
 
 Support multiple time tag, support three decimal second
@@ -143,6 +145,8 @@ HTML:
 ```
 
 ### With playlist
+
+Show multiple music.
 
 #### JS:
 
