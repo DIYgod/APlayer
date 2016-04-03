@@ -24,6 +24,10 @@ Screenshot
 $ npm install aplayer
 ```
 
+## CDN
+
+[cdnjs](https://cdnjs.com/libraries/aplayer)
+
 ## Usage
 
 ### HTML
