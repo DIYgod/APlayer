@@ -21,7 +21,7 @@ Screenshot
 ## Install
 
 ```
-$ npm install aplayer
+$ npm install aplayer --save
 ```
 
 ## CDN

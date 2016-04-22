@@ -1,13 +1,13 @@
-/**
- * APlayer constructor function
- *
- * @param {Object} option - See README
- * @constructor
- */
 (() => {
     let APlayers = [];
 
     class APlayer {
+        /**
+         * APlayer constructor function
+         *
+         * @param {Object} option - See README
+         * @constructor
+         */
         constructor(option) {
 
             this.isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
