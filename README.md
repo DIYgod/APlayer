@@ -43,26 +43,14 @@ $ npm install aplayer --save
 ### JS
 
 ```JS
-var ap = new APlayer({
-    element: document.getElementById('player1'),
-    narrow: false,
-    autoplay: true,
-    showlrc: false,
-    theme: '#e6d0b2',
-    music: {
-        title: 'Preparation',
-        author: 'Hans Zimmer/Richard Harvey',
-        url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
-        pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
-    }
-});
+var ap = new APlayer(option);
 ap.init();
 ```
 
 #### Options
 
 ```JS
-{
+var option = {
     element: document.getElementById('player1'),                       // Optional, player element
     narrow: false,                                                     // Optional, narrow style
     autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
@@ -84,6 +72,18 @@ ap.init();
 + `ap.init()`
 + `ap.play()`
 + `ap.pause()`
+
+#### Event binding
+
+`ap.on(event, handler)`
+
+`event`:
++ `play`: Triggered when APlayer start play
++ `pause`: Triggered when APlayer paused
++ `canplay`: Triggered when enough data is available that APlayer can be played
++ `playing`: Triggered periodically when APlayer is playing
++ `ended`: Triggered when APlayer ended
++ `error`: Triggered when an error occurs
 
 #### Work with module bundler
 

@@ -12,6 +12,27 @@ var ap1 = new APlayer({
         pic: 'http://7xq131.com1.z0.glb.clouddn.com/Preparation.jpg'
     }
 });
+ap1.on('play', function () {
+    console.log('play');
+});
+ap1.on('play', function () {
+    console.log('play play');
+});
+ap1.on('pause', function () {
+    console.log('pause');
+});
+ap1.on('canplay', function () {
+    console.log('canplay');
+});
+ap1.on('playing', function () {
+    console.log('playing');
+});
+ap1.on('ended', function () {
+    console.log('ended');
+});
+ap1.on('error', function () {
+    console.log('error');
+});
 ap1.init();
 
 var ap2 = new APlayer({

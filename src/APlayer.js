@@ -123,6 +123,18 @@
                     }
                 }
             };
+
+            // define APlayer events
+            this.eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
+            this.event = {};
+            for (let type of this.eventTypes) {
+                this.event[type] = [];
+            }
+            this.trigger = (type) => {
+                for (let func of this.event[type]) {
+                    func();
+                }
+            }
         }
 
         /**
@@ -431,25 +443,32 @@
                 this.audio.src = this.music.url;
                 this.audio.preload = this.isMobile ? 'none' : 'metadata';
 
-                // show audio time
+                // show audio time: the metadata has loaded or changed
                 this.audio.addEventListener('durationchange', () => {
                     if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
                         this.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = this.secondToTime(this.audio.duration);
                     }
                 });
 
-                // show audio loaded bar
+                // show audio loaded bar: to inform interested parties of progress downloading the media
                 this.audio.addEventListener('progress', () => {
                     const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0;
                     this.updateBar('loaded', percentage, 'width');
                 });
 
-                // audio download error
+                // audio download error: an error occurs
                 this.audio.addEventListener('error', () => {
                     this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - Error happens ╥﹏╥`;
+                    this.trigger('pause');
+                });
+
+                // audio can play: enough data is available that the media can be played
+                this.audio.addEventListener('canplay', () => {
+                    this.trigger('canplay');
                 });
 
                 // multiple music play
+                this.ended = false;
                 if (this.multiple) {
                     this.audio.addEventListener('ended', () => {
                         if (this.playIndex < this.option.music.length - 1) {
@@ -459,14 +478,18 @@
                             this.setMusic(0);
                         }
                         else if (!this.loop) {
+                            this.ended = true;
                             this.pause();
+                            this.trigger('ended');
                         }
                     });
                 }
                 else {
                     this.audio.addEventListener('ended', () => {
                         if (!this.loop) {
+                            this.ended = true;
                             this.pause();
+                            this.trigger('ended');
                         }
                     });
                 }
@@ -550,7 +573,9 @@
                         this.updateLrc();
                     }
                     this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.trigger('playing');
                 }, 100);
+                this.trigger('play');
             }
         };
 
@@ -558,7 +583,8 @@
          * Pause music
          */
         pause() {
-            if (!this.audio.paused) {
+            if (!this.audio.paused || this.ended) {
+                this.ended = false;
                 this.button.classList.remove('aplayer-pause');
                 this.button.classList.add('aplayer-play');
                 this.button.innerHTML = '';
@@ -567,8 +593,18 @@
                 }, 100);
                 this.audio.pause();
                 clearInterval(this.playedTime);
+                this.trigger('pause');
             }
         };
+
+        /**
+         * attach event
+         */
+        on(name, func) {
+            if (typeof func === 'function') {
+                this.event[name].push(func);
+            }
+        }
     }
 
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
