@@ -1,5 +1,4 @@
-(() => {
-    let APlayers = [];
+((instances) => {
 
     class APlayer {
         /**
@@ -404,8 +403,8 @@
 
             this.setMusic(0);
 
-            APlayers.push(this);
-        };
+            instances.push(this);
+        }
 
         /**
          * Set music
@@ -541,7 +540,7 @@
             if (this.isMobile) {
                 this.pause();
             }
-        };
+        }
 
         /**
          * Play music
@@ -557,9 +556,9 @@
 
                 // pause other players (Thanks @Aprikyblue)
                 if (this.option.mutex) {
-                    for (let i = 0; i < APlayers.length; i++) {
-                        if (this != APlayers[i]) {
-                            APlayers[i].pause();
+                    for (let i = 0; i < instances.length; i++) {
+                        if (this != instances[i]) {
+                            instances[i].pause();
                         }
                     }
                 }
@@ -577,7 +576,7 @@
                 }, 100);
                 this.trigger('play');
             }
-        };
+        }
 
         /**
          * Pause music
@@ -595,7 +594,7 @@
                 clearInterval(this.playedTime);
                 this.trigger('pause');
             }
-        };
+        }
 
         /**
          * attach event
@@ -613,4 +612,4 @@
     else {
         window.APlayer = APlayer;
     }
-})();
+})([]);
