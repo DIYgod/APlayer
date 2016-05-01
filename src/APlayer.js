@@ -541,7 +541,7 @@
             if (this.isMobile) {
                 this.pause();
             }
-        };
+        }
 
         /**
          * Play music
@@ -577,7 +577,7 @@
                 }, 100);
                 this.trigger('play');
             }
-        };
+        }
 
         /**
          * Pause music
@@ -595,7 +595,7 @@
                 clearInterval(this.playedTime);
                 this.trigger('pause');
             }
-        };
+        }
 
         /**
          * attach event
