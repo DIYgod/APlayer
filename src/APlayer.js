@@ -1,5 +1,4 @@
-(() => {
-    let APlayers = [];
+((instances) => {
 
     class APlayer {
         /**
@@ -404,8 +403,8 @@
 
             this.setMusic(0);
 
-            APlayers.push(this);
-        };
+            instances.push(this);
+        }
 
         /**
          * Set music
@@ -557,9 +556,9 @@
 
                 // pause other players (Thanks @Aprikyblue)
                 if (this.option.mutex) {
-                    for (let i = 0; i < APlayers.length; i++) {
-                        if (this != APlayers[i]) {
-                            APlayers[i].pause();
+                    for (let i = 0; i < instances.length; i++) {
+                        if (this != instances[i]) {
+                            instances[i].pause();
                         }
                     }
                 }
@@ -613,4 +612,4 @@
     else {
         window.APlayer = APlayer;
     }
-})();
+})([]);
