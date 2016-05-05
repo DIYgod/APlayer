@@ -57,6 +57,7 @@ var option = {
     showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
     mutex: true,                                                       // Optional, pause other players when this player playing
     theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
+    loop: true,                                                        // Optional, loop play music, default: true
     music: {                                                           // Required, music info, see: ###With playlist
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author

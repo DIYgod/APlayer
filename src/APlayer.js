@@ -22,7 +22,8 @@
                 autoplay: false,
                 mutex: true,
                 showlrc: 0,
-                theme: '#b7daff'
+                theme: '#b7daff',
+                loop: true
             };
             for (let defaultKey in defaultOption) {
                 if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -35,7 +36,7 @@
 
             this.option = option;
             this.audios = [];
-            this.loop = true;
+            this.loop = option.loop;
 
             /**
              * Parse second to 00:00 format
@@ -206,7 +207,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <i class="demo-icon aplayer-icon-loop"></i>${(this.multiple ? `<i class="demo-icon aplayer-icon-menu"></i>` : ``)}
+                            <i class="demo-icon aplayer-icon-loop${(this.loop ? `` : ` aplayer-noloop`)}"></i>${(this.multiple ? `<i class="demo-icon aplayer-icon-menu"></i>` : ``)}
                         </div>
                     </div>
                 </div>`;
@@ -303,7 +304,14 @@
                 document.removeEventListener('mouseup', thumbUp);
                 document.removeEventListener('mousemove', thumbMove);
                 this.audio.currentTime = parseFloat(this.playedBar.style.width) / 100 * this.audio.duration;
-                this.play();
+                this.playedTime = setInterval(() => {
+                    this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                    if (this.option.showlrc) {
+                        this.updateLrc();
+                    }
+                    this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.trigger('playing');
+                }, 100);
             };
 
             this.thumb.addEventListener('mousedown', () => {
