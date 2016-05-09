@@ -230,6 +230,8 @@
             }
             this.element.innerHTML = eleHTML;
 
+            this.ptime = this.element.getElementsByClassName('aplayer-ptime')[0];
+
             if (this.element.getElementsByClassName('aplayer-info')[0].offsetWidth < 200) {
                 this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow');
             }
@@ -579,7 +581,7 @@
                     if (this.option.showlrc) {
                         this.updateLrc();
                     }
-                    this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
                     this.trigger('playing');
                 }, 100);
                 this.trigger('play');
