@@ -1,6 +1,6 @@
 {
   "name": "aplayer",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Wow, such a beautiful html5 music player",
   "main": "dist/APlayer.min.js",
   "scripts": {
