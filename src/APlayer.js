@@ -263,7 +263,12 @@
                         if (musicIndex !== this.playIndex) {
                             this.setMusic(musicIndex);
                         }
-                        this.play();
+                        if (this.isMobile) {
+                            this.pause();
+                        }
+                        else {
+                            this.play();
+                        }
                     });
                 }
             }
@@ -480,16 +485,23 @@
                 this.ended = false;
                 if (this.multiple) {
                     this.audio.addEventListener('ended', () => {
-                        if (this.playIndex < this.option.music.length - 1) {
-                            this.setMusic(++this.playIndex);
-                        }
-                        else if (this.loop) {
-                            this.setMusic(0);
-                        }
-                        else if (!this.loop) {
+                        if (this.isMobile) {
                             this.ended = true;
                             this.pause();
-                            this.trigger('ended');
+                            return;
+                        }
+                        if (this.audio.currentTime !== 0) {
+                            if (this.playIndex < this.option.music.length - 1) {
+                                this.setMusic(++this.playIndex);
+                            }
+                            else if (this.loop) {
+                                this.setMusic(0);
+                            }
+                            else if (!this.loop) {
+                                this.ended = true;
+                                this.pause();
+                                this.trigger('ended');
+                            }
                         }
                     });
                 }
