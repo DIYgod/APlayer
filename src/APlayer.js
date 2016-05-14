@@ -1,4 +1,5 @@
-((instances) => {
+(() => {
+    let instances = [];
 
     class APlayer {
         /**
@@ -622,4 +623,4 @@
     else {
         window.APlayer = APlayer;
     }
-})([]);
+})();
