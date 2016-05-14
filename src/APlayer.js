@@ -1,5 +1,4 @@
-(() => {
-    let instances = [];
+((instances) => {
 
     class APlayer {
         /**
@@ -128,12 +127,12 @@
             // define APlayer events
             this.eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
             this.event = {};
-            for (let type of this.eventTypes) {
-                this.event[type] = [];
+            for (let i = 0; i < this.eventTypes.length; i++) {
+                this.event[this.eventTypes[i]] = [];
             }
             this.trigger = (type) => {
-                for (let func of this.event[type]) {
-                    func();
+                for (let i = 0; i < this.event[type].length; i++) {
+                    this.event[type][i]();
                 }
             }
         }
@@ -623,4 +622,4 @@
     else {
         window.APlayer = APlayer;
     }
-})();
+})([]);
