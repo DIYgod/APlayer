@@ -13,7 +13,7 @@ Wow, such a beautiful html5 music player
 
 UI 参考网易云音乐外链播放器
 
-[Demo](http://diygod.github.io/APlayer/demo)
+[Demo](http://aplayer.js.org)
 
 Screenshot
 ![image](https://i.imgur.com/JDrJXCr.png)
