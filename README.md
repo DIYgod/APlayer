@@ -191,9 +191,11 @@ $ npm run build
 
 ## Related Projects
 
-+ [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
+- [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
 
-+ [hexo-tag-aplayer](https://github.com/grzhan/hexo-tag-aplayer)
+- [hexo-tag-aplayer](https://github.com/grzhan/hexo-tag-aplayer)
+
+- [163music-APlayer-you-get-docker](https://github.com/YUX-IO/163music-APlayer-you-get-docker)
 
 
 ## LICENSE
