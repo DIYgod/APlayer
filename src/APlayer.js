@@ -175,7 +175,7 @@
 
             // fill in HTML
             let eleHTML = `
-                <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url("${encodeURI(this.music.pic)}");"`) : ``)}>
+                <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url(${encodeURI(this.music.pic)});"`) : ``)}>
                     <div class="aplayer-button aplayer-play">
                         <i class="demo-icon aplayer-icon-play"></i>
                     </div>
@@ -629,7 +629,7 @@
     }
 
     if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-        module.exports = APlayer
+        module.exports = APlayer;
     }
     else {
         window.APlayer = APlayer;

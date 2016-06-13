@@ -7,7 +7,7 @@
 [![Travis](https://img.shields.io/travis/DIYgod/APlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/APlayer)
 [![%e2%9d%a4](https://img.shields.io/badge/made%20with-%e2%9d%a4-ff69b4.svg?style=flat-square)](https://www.anotherhome.net/)
 
-Wow, such a beautiful html5 music player
+> Wow, such a beautiful html5 music player
 
 ## Introduction
 
