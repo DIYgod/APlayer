@@ -455,7 +455,12 @@
             if ((this.multiple && !this.audios[indexMusic]) || this.playIndex === -1) {
                 this.audio = document.createElement("audio");
                 this.audio.src = this.music.url;
-                this.audio.preload = this.isMobile ? 'none' : 'metadata';
+                if (this.option.preload) {
+                    this.audio.preload = this.option.preload;
+                }
+                else {
+                    this.audio.preload = this.isMobile ? 'none' : 'metadata';
+                }
 
                 // show audio time: the metadata has loaded or changed
                 this.audio.addEventListener('durationchange', () => {

@@ -58,6 +58,7 @@ var option = {
     mutex: true,                                                       // Optional, pause other players when this player playing
     theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
     loop: true,                                                        // Optional, loop play music, default: true
+    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'metadata' in Desktop, 'none' in mobile
     music: {                                                           // Required, music info, see: ###With playlist
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
