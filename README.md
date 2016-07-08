@@ -204,4 +204,4 @@ $ npm run build
 
 ## LICENSE
 
-MIT © [DIYgod](http://github.com/DIYgod)
+[The Star And Thank Author License (SATA)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
