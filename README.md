@@ -72,8 +72,11 @@ var option = {
 #### API
 
 + `ap.init()`
-+ `ap.play()`
-+ `ap.pause()`
++ `ap.play()`                       // Resume play
++ `ap.play(time)`                   // Set currentTime
++ `ap.pause()`                      // Pause
++ `ap.volume(percentage)`           // Set volume
++ `ap.on(event, handler)`           // Event binding
 
 #### Event binding
 

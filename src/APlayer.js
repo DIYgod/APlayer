@@ -175,7 +175,7 @@
 
             // fill in HTML
             let eleHTML = `
-                <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url(${encodeURI(this.music.pic)});"`) : ``)}>
+                <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
                     <div class="aplayer-button aplayer-play">
                         <i class="demo-icon aplayer-icon-play"></i>
                     </div>
@@ -331,34 +331,24 @@
             // control volume
             this.volumeBar = this.element.getElementsByClassName('aplayer-volume')[0];
             const volumeBarWrap = this.element.getElementsByClassName('aplayer-volume-bar')[0];
-            const volumeicon = this.element.getElementsByClassName('aplayer-time')[0].getElementsByTagName('i')[0];
+            this.volumeicon = this.element.getElementsByClassName('aplayer-time')[0].getElementsByTagName('i')[0];
             const barHeight = 35;
             this.element.getElementsByClassName('aplayer-volume-bar-wrap')[0].addEventListener('click', (event) => {
                 const e = event || window.event;
                 let percentage = (barHeight - e.clientY + getElementViewTop(volumeBarWrap)) / barHeight;
                 percentage = percentage > 0 ? percentage : 0;
                 percentage = percentage < 1 ? percentage : 1;
-                this.updateBar('volume', percentage, 'height');
-                this.audio.volume = percentage;
-                if (this.audio.muted) {
-                    this.audio.muted = false;
-                }
-                if (percentage === 1) {
-                    volumeicon.className = 'demo-icon aplayer-icon-volume-up';
-                }
-                else {
-                    volumeicon.className = 'demo-icon aplayer-icon-volume-down';
-                }
+                this.volume(percentage);
             });
-            volumeicon.addEventListener('click', () => {
+            this.volumeicon.addEventListener('click', () => {
                 if (this.audio.muted) {
                     this.audio.muted = false;
-                    volumeicon.className = this.audio.volume === 1 ? 'demo-icon aplayer-icon-volume-up' : 'demo-icon aplayer-icon-volume-down';
+                    this.volumeicon.className = this.audio.volume === 1 ? 'demo-icon aplayer-icon-volume-up' : 'demo-icon aplayer-icon-volume-down';
                     this.updateBar('volume', this.audio.volume, 'height');
                 }
                 else {
                     this.audio.muted = true;
-                    volumeicon.className = 'demo-icon aplayer-icon-volume-off';
+                    this.volumeicon.className = 'demo-icon aplayer-icon-volume-off';
                     this.updateBar('volume', 0, 'height');
                 }
             });
@@ -434,7 +424,7 @@
 
             // set html
             if (this.music.pic) {
-                this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = `url(${encodeURI(this.music.pic)})`;
+                this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = `url('${this.music.pic}')`;
             }
             this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title;
             this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ${this.music.author}`;
@@ -572,7 +562,10 @@
         /**
          * Play music
          */
-        play() {
+        play(time) {
+            if (Object.prototype.toString.call(time) === '[object Number]') {
+                this.audio.currentTime = time;
+            }
             if (this.audio.paused) {
                 this.button.classList.remove('aplayer-play');
                 this.button.classList.add('aplayer-pause');
@@ -589,6 +582,7 @@
                         }
                     }
                 }
+                console.log(Object.prototype.toString.call(time));
                 this.audio.play();
                 if (this.playedTime) {
                     clearInterval(this.playedTime);
@@ -620,6 +614,23 @@
                 this.audio.pause();
                 clearInterval(this.playedTime);
                 this.trigger('pause');
+            }
+        }
+
+        /**
+         * Set volume
+         */
+        volume(percentage) {
+            this.updateBar('volume', percentage, 'height');
+            this.audio.volume = percentage;
+            if (this.audio.muted) {
+                this.audio.muted = false;
+            }
+            if (percentage === 1) {
+                this.volumeicon.className = 'demo-icon aplayer-icon-volume-up';
+            }
+            else {
+                this.volumeicon.className = 'demo-icon aplayer-icon-volume-down';
             }
         }
 
