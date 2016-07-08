@@ -46,6 +46,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
     user-select: none;
     line-height: initial;
 
+    * {
+        box-sizing: content-box;
+    }
+
     [class^="aplayer-icon-"]:before, [class*=" aplayer-icon-"]:before {
         font-family: "aplayer-fontello";
         font-style: normal;
@@ -57,10 +61,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         font-variant: normal;
         text-transform: none;
         line-height: 1em;
-    }
-
-    .aplayer-icon-weibo:before {
-        content: '\e805';
     }
 
     .aplayer-icon-play:before {
@@ -79,8 +79,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         content: '\e809';
     }
 
-    .aplayer-icon-list:before {
-        content: '\e80a';
+    .aplayer-icon-loop:before {
+        content: '\e803';
     }
 
     .aplayer-icon-menu:before {
@@ -99,10 +99,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         content: '\e802';
     }
 
-    span {
-        cursor: default !important;
-    }
-
     .aplayer-lrc-content {
         display: none;
     }
@@ -114,6 +110,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         width: $aplayer-height;
         background-image: url(./default.jpg);
         background-size: 100%;
+        transition: all 0.3s ease;
 
         .aplayer-button {
             position: absolute;
@@ -124,6 +121,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
             background: rgba(0, 0, 0, 0.2);
+            transition: all 0.1s ease;
             &:hover {
                 opacity: 1;
             }
@@ -137,9 +135,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             width: 26px;
             height: 26px;
             border: 2px solid #fff;
-            top: 50%;
-            left: 50%;
-            margin: -15px 0 0 -15px;
+            bottom: 50%;
+            right: 50%;
+            margin: 0 -15px -15px 0;
             .aplayer-icon-play {
                 position: absolute;
                 top: 2px;
@@ -191,7 +189,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             position: relative;
 
             .aplayer-bar-wrap {
-                margin: 0 120px 0 5px;
+                margin: 0 140px 0 5px;
 
                 .aplayer-bar {
                     position: relative;
@@ -215,7 +213,6 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                         left: 0;
                         top: 0;
                         bottom: 0;
-                        background: #b7daff;
                         height: 2px;
 
                         .aplayer-thumb {
@@ -226,14 +223,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                             margin-right: -10px;
                             height: 8px;
                             width: 8px;
-                            border: 1px solid #b7daff;
                             border-radius: 50%;
                             background: #fff;
                             cursor: pointer !important;
-
-                            &:hover {
-                                background: #b7daff;
-                            }
                         }
                     }
                 }
@@ -250,12 +242,39 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                 i {
                     color: #666;
                     font-size: 15px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+
+                    &.aplayer-icon-loop {
+                        margin-right: 4px;
+                    }
+                    &.aplayer-noloop {
+                        color: #ddd;
+                        &:hover {
+                            color: #bbb;
+                        }
+                    }
+
+                    &:hover {
+                        color: #000;
+                    }
+                }
+
+                &.aplayer-time-narrow {
+                    .aplayer-icon-loop {
+                        display: none;
+                    }
+
+                    .aplayer-icon-menu {
+                        display: none;
+                    }
                 }
             }
 
             .aplayer-volume-wrap {
+                position: relative;
                 display: inline-block;
-                margin-left: 7px;
+                margin-left: 3px;
                 cursor: pointer !important;
 
                 &:hover .aplayer-volume-bar-wrap {
@@ -284,7 +303,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                             bottom: 0;
                             right: 0;
                             width: 5px;
-                            background: #b7daff;
+                            transition: all 0.1s ease;
                         }
                     }
                 }
@@ -352,4 +371,68 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             transition: all 0.5s ease-out;
         }
     }
+
+    .aplayer-list {
+        max-height: 300px;
+        overflow: auto;
+        transition: all 0.5s ease;
+
+        &.aplayer-list-hide {
+            max-height: 0;
+        }
+
+        ol {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                position: relative;
+                height: 32px;
+                line-height: 32px;
+                padding: 0 15px;
+                font-size: 12px;
+                border-top: 1px solid #e9e9e9;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: #efefef;
+                }
+
+                &.aplayer-list-light {
+                    background: #e9e9e9;
+
+                    .aplayer-list-cur {
+                        display: inline-block;
+                    }
+                }
+
+                .aplayer-list-cur {
+                    display: none;
+                    width: 3px;
+                    height: 22px;
+                    position: absolute;
+                    left: 0;
+                    top: 5px;
+                    cursor: pointer;
+                }
+                .aplayer-list-index {
+                    color: #666;
+                    margin-right: 12px;
+                    cursor: pointer;
+                }
+                .aplayer-list-author {
+                    color: #666;
+                    float: right;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+@keyframes aplayer-roll {
+    0%{left:0}
+    100%{left: -100%}
 }

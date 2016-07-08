@@ -7,23 +7,26 @@
 [![Travis](https://img.shields.io/travis/DIYgod/APlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/APlayer)
 [![%e2%9d%a4](https://img.shields.io/badge/made%20with-%e2%9d%a4-ff69b4.svg?style=flat-square)](https://www.anotherhome.net/)
 
-Wow, such a beautiful html5 music player
+> Wow, such a beautiful html5 music player
 
 ## Introduction
 
 UI 参考网易云音乐外链播放器
 
-[Demo](https://www.anotherhome.net/file/APlayer)
+[Demo](http://aplayer.js.org)
 
 Screenshot
 ![image](https://i.imgur.com/JDrJXCr.png)
-![image](https://i.imgur.com/eIRyqvT.png)
 
 ## Install
 
 ```
-$ npm install aplayer
+$ npm install aplayer --save
 ```
+
+## CDN
+
+[cdnjs](https://cdnjs.com/libraries/aplayer)
 
 ## Usage
 
@@ -40,34 +43,28 @@ $ npm install aplayer
 ### JS
 
 ```JS
-var ap = new APlayer({
-    element: document.getElementById('player1'),
-    narrow: false,
-    autoplay: true,
-    showlrc: false,
-    music: {
-        title: 'Preparation',
-        author: 'Hans Zimmer/Richard Harvey',
-        url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',
-        pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'
-    }
-});
+var ap = new APlayer(option);
 ap.init();
 ```
 
 #### Options
 
 ```JS
-{
+var option = {
     element: document.getElementById('player1'),                       // Optional, player element
     narrow: false,                                                     // Optional, narrow style
-    autoplay: true,                                                    // Optional, autoplay, not supported by mobile browsers
-    showlrc: false,                                                    // Optional, show lrc
-    music: {                                                           // Required, music info
+    autoplay: true,                                                    // Optional, autoplay song(s), not supported by mobile browsers
+    showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+    mutex: true,                                                       // Optional, pause other players when this player playing
+    theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
+    loop: true,                                                        // Optional, loop play music, default: true
+    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'metadata' in Desktop, 'none' in mobile
+    music: {                                                           // Required, music info, see: ###With playlist
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author
         url: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.mp3',  // Required, music url
         pic: 'http://7xifn9.com1.z0.glb.clouddn.com/Preparation.jpg'   // Optional, music picture
+        lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
     }
 }
 ```
@@ -75,10 +72,36 @@ ap.init();
 #### API
 
 + `ap.init()`
-+ `ap.play()`
-+ `ap.pause()`
++ `ap.play()`                       // Resume play
++ `ap.play(time)`                   // Set currentTime
++ `ap.pause()`                      // Pause
++ `ap.volume(percentage)`           // Set volume
++ `ap.on(event, handler)`           // Event binding
+
+#### Event binding
+
+`ap.on(event, handler)`
+
+`event`:
++ `play`: Triggered when APlayer start play
++ `pause`: Triggered when APlayer paused
++ `canplay`: Triggered when enough data is available that APlayer can be played
++ `playing`: Triggered periodically when APlayer is playing
++ `ended`: Triggered when APlayer ended
++ `error`: Triggered when an error occurs
+
+#### Work with module bundler
+
+```js
+var APlayer = require('APlayer');
+var ap = new APlayer({
+    // ...
+});
+```
 
 ### With lrc
+
+Show lrc, you can put LRC in JS or HTML as you like.
 
 #### LRC format:
 
@@ -91,76 +114,92 @@ Support multiple time tag, support three decimal second
 ...
 ```
 
-#### HTML:
+#### LRC in JS:
+
+JS:
+
+```js
+{
+    showlrc: 1,
+    music: {
+        lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'    // lrc here, separate lines with \n
+    }
+}
+```
+
+#### LRC in HTML:
+
+JS:
+
+```js
+{
+    showlrc: 2
+}
+```
+
+HTML:
 
 ```HTML
-<link rel="stylesheet" href="APlayer.min.css">
-<!-- ... -->
 <div id="player1" class="aplayer">
     <pre class="aplayer-lrc-content">
-        [ti:平凡之路]
-        [ar:朴树]
-        [al:《后会无期》主题歌]
-        [by:周敏]
-
         [00:00.00]平凡之路 - 朴树
         [00:04.01]作词：韩寒 朴树
         [00:08.02]作曲：朴树 编曲：朴树
         [00:12.02]徘徊着的 在路上的
         [00:17.37]你要走吗
         [00:23.20]易碎的 骄傲着
-        [00:28.75]那也曾是我的模样
-        [00:34.55]沸腾着的 不安着的
-        [00:40.26]你要去哪
-        [00:46.00]谜一样的 沉默着的
-        [00:51.75]故事你真的在听吗
-        [00:56.25][03:25.78][04:10.64]我曾经跨过山和大海
-        [00:59.55][03:28.14][04:13.54]也穿过人山人海
-        [01:02.70][03:30.44]我曾经拥有着一切
-        [01:05.00][03:33.69]转眼都飘散如烟
-        [01:07.75][03:36.24]我曾经失落失望失掉所有方向
-        [01:13.46][03:42.04]直到看见平凡才是唯一的答案
         <!-- ... -->
     </pre>
 </div>
-<!-- ... -->
-<script src="APlayer.min.js"></script>
 ```
+
+### With playlist
+
+Show multiple music.
 
 #### JS:
 
-Option: `showlrc: false`
+Option:
 
-## Development
+```JS
+music: [
+    {
+        title: '',
+        author: '',
+        url: '',
+        pic: ''
+    },
+    {
+        title: '',
+        author: '',
+        url: '',
+        pic: ''
+    },
+    ...
+]
+```
+
+## Run in development
 
 ```
 $ npm install
-$ npm install -g gulp
-$ gulp
+$ npm run dev
+```
+
+## Make a release
+
+```
+$ npm install
+$ npm run build
 ```
 
 ## Related Projects
 
-+ [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
+- [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
 
-## Todo
+- [hexo-tag-aplayer](https://github.com/grzhan/hexo-tag-aplayer)
 
-- [x] 播放进度拖拽控制
-- [x] 音量控制
-- [x] 分享到微博
-- [x] 加载样式及错误处理
-- [x] 窄样式 及 移动版样式
-- [x] 歌词展示
-- [x] 默认选项
-- [x] 移动端兼容性
-- [ ] 播放列表
-
-## Issues
-
-- [ ] 在 Firefox 中调整进度后, 播放到最后时音乐总时间会自动变长
-- [ ] 移动端各种浏览器触发事件的时机不同
-- [ ] 移动版 Safari 和 部分 Android 浏览器不支持 volume
-- [ ] 部分 Android 浏览器不支持 duration
+- [163music-APlayer-you-get-docker](https://github.com/YUX-IO/163music-APlayer-you-get-docker)
 
 
 ## LICENSE
