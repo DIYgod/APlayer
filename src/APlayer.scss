@@ -132,7 +132,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            margin-bottom: 17px;
+            margin-bottom: 13px;
 
             .aplayer-title {
                 font-size: 14px;
@@ -149,13 +149,14 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
 
             .aplayer-bar-wrap {
                 margin: 0 140px 0 5px;
+                padding: 4px 0;
+                cursor: pointer !important;
 
                 .aplayer-bar {
                     position: relative;
                     height: 2px;
                     width: 100%;
                     background: #cdcdcd;
-                    cursor: pointer !important;
 
                     .aplayer-loaded {
                         position: absolute;
@@ -193,7 +194,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             .aplayer-time {
                 position: absolute;
                 right: 0;
-                bottom: -7px;
+                bottom: -3px;
                 height: 17px;
                 color: #999;
                 font-size: 11px;

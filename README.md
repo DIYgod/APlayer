@@ -75,6 +75,7 @@ var option = {
 + `ap.play()`                       // Resume play
 + `ap.play(time)`                   // Set currentTime
 + `ap.pause()`                      // Pause
++ `ap.toggle()`                     // Toggle between play and pause
 + `ap.volume(percentage)`           // Set volume
 + `ap.on(event, handler)`           // Event binding
 

@@ -26,7 +26,7 @@
                 `;
             };
 
-            this.isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+            this.isMobile = /mobile/i.test(window.navigator.userAgent);
             // compatibility: some mobile browsers don't suppose autoplay
             if (this.isMobile) {
                 option.autoplay = false;
@@ -258,13 +258,19 @@
             }
             this.element.innerHTML = eleHTML;
 
+            // hide loop button in arrow container
+            if (this.element.offsetWidth < 300) {
+                this.element.getElementsByClassName('aplayer-icon-loop')[0].style.display = 'none';
+            }
+
             this.ptime = this.element.getElementsByClassName('aplayer-ptime')[0];
 
             if (this.element.getElementsByClassName('aplayer-info')[0].offsetWidth < 200) {
                 this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow');
             }
             // fix the width of aplayer bar
-            this.element.getElementsByClassName('aplayer-bar-wrap')[0].style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
+            this.bar = this.element.getElementsByClassName('aplayer-bar-wrap')[0];
+            this.bar.style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
 
             // switch to narrow style
             if (this.option.narrow) {
@@ -290,12 +296,15 @@
                         const musicIndex = parseInt(listItem[i].getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
                         if (musicIndex !== this.playIndex) {
                             this.setMusic(musicIndex);
-                        }
-                        if (this.isMobile) {
-                            this.pause();
+                            if (this.isMobile) {
+                                this.pause();
+                            }
+                            else {
+                                this.play();
+                            }
                         }
                         else {
-                            this.play();
+                            this.toggle();
                         }
                     });
                 }
@@ -305,7 +314,6 @@
             this.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
             this.loadedBar = this.element.getElementsByClassName('aplayer-loaded')[0];
             this.thumb = this.element.getElementsByClassName('aplayer-thumb')[0];
-            this.bar = this.element.getElementsByClassName('aplayer-bar')[0];
             let barWidth;
             this.bar.addEventListener('click', (event) => {
                 const e = event || window.event;
@@ -685,6 +693,18 @@
         on(name, func) {
             if (typeof func === 'function') {
                 this.event[name].push(func);
+            }
+        }
+
+        /**
+         * toggle between play and pause
+         */
+        toggle() {
+            if (this.audio.paused) {
+                this.play();
+            }
+            else {
+                this.pause();
             }
         }
     }
