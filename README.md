@@ -1,7 +1,7 @@
 # APlayer
 
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
-[![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
+[![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/aplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/APlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![Travis](https://img.shields.io/travis/DIYgod/APlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/APlayer)
@@ -33,8 +33,6 @@ $ npm install aplayer --save
 ### HTML
 
 ```HTML
-<link rel="stylesheet" href="APlayer.min.css">
-<!-- ... -->
 <div id="player1" class="aplayer"></div>
 <!-- ... -->
 <script src="APlayer.min.js"></script>
