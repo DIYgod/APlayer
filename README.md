@@ -1,5 +1,7 @@
 # APlayer
 
+[![Join the chat at https://gitter.im/aplayer-diygod/Lobby](https://badges.gitter.im/aplayer-diygod/Lobby.svg)](https://gitter.im/aplayer-diygod/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/aplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/APlayer#info=devDependencies)
