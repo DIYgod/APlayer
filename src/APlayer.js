@@ -42,7 +42,8 @@ class APlayer {
             mutex: true,
             showlrc: 0,
             theme: '#b7daff',
-            loop: true
+            loop: true,
+            template:null// template is replace to custom style
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -193,12 +194,13 @@ class APlayer {
         }
 
         // fill in HTML
-        let eleHTML = `
-            <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
+        let templateString = this.option.template(this) || function (option) {
+                let eleHTML = `
+            <div class="aplayer-pic" ${(option.music.pic ? (`style="background-image: url('${option.music.pic}');"`) : ``)}>
                 <div class="aplayer-button aplayer-play">
                     <button class="aplayer-icon aplayer-icon-play">`
-            +           this.getSVG('play')
-            + `     </button>
+                    + option.getSVG('play')
+                    + `     </button>
                 </div>
             </div>
             <div class="aplayer-info">
@@ -213,8 +215,8 @@ class APlayer {
                     <div class="aplayer-bar-wrap">
                         <div class="aplayer-bar">
                             <div class="aplayer-loaded" style="width: 0"></div>
-                            <div class="aplayer-played" style="width: 0; background: ${this.option.theme};">
-                                <span class="aplayer-thumb" style="border: 1px solid ${this.option.theme};"></span>
+                            <div class="aplayer-played" style="width: 0; background: ${option.option.theme};">
+                                <span class="aplayer-thumb" style="border: 1px solid ${option.option.theme};"></span>
                             </div>
                         </div>
                     </div>
@@ -224,41 +226,44 @@ class APlayer {
                         </span>
                         <div class="aplayer-volume-wrap">
                             <button class="aplayer-icon aplayer-icon-volume-down">`
-            +                   this.getSVG('volume-down')
-            + `             </button>
+                    + option.getSVG('volume-down')
+                    + `             </button>
                             <div class="aplayer-volume-bar-wrap">
                                 <div class="aplayer-volume-bar">
-                                    <div class="aplayer-volume" style="height: 80%; background: ${this.option.theme};"></div>
+                                    <div class="aplayer-volume" style="height: 80%; background: ${option.option.theme};"></div>
                                 </div>
                             </div>
                         </div>
-                        <button class="aplayer-icon aplayer-icon-loop${(this.loop ? `` : ` aplayer-noloop`)}">`
-            +               this.getSVG('loop')
-            + `         </button>
-                        ${(this.multiple ? `<button class="aplayer-icon aplayer-icon-menu">`
-            +               this.getSVG('menu')
-            + `         </button>` : ``)}
+                        <button class="aplayer-icon aplayer-icon-loop${(option.loop ? `` : ` aplayer-noloop`)}">`
+                    + option.getSVG('loop')
+                    + `         </button>
+                        ${(option.multiple ? `<button class="aplayer-icon aplayer-icon-menu">`
+                    + option.getSVG('menu')
+                    + `         </button>` : ``)}
                     </div>
                 </div>
             </div>`;
-        if (this.multiple) {
-            eleHTML += `
+                if (option.multiple) {
+                    eleHTML += `
             <div class="aplayer-list">
                 <ol>`;
-            for (i = 0; i < this.option.music.length; i++) {
-                eleHTML += `
+                    for (i = 0; i < option.option.music.length; i++) {
+                        eleHTML += `
                     <li>
-                        <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
+                        <span class="aplayer-list-cur" style="background: ${option.option.theme};"></span>
                         <span class="aplayer-list-index">${(i + 1)}</span>
-                        <span class="aplayer-list-title">${this.option.music[i].title}</span>
-                        <span class="aplayer-list-author">${this.option.music[i].author}</span>
+                        <span class="aplayer-list-title">${option.option.music[i].title}</span>
+                        <span class="aplayer-list-author">${option.option.music[i].author}</span>
                     </li>`
-            }
-            eleHTML += `
+                    }
+                    eleHTML += `
                 </ol>
             </div>`
-        }
-        this.element.innerHTML = eleHTML;
+                }
+                return eleHTML;
+            }
+        let str = templateString(this);
+        this.element.innerHTML = str;
 
         // hide loop button in arrow container
         if (this.element.offsetWidth < 300) {
