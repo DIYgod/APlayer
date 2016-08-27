@@ -81,6 +81,7 @@ class APlayer {
                 this.savelrc.push(this.element.getElementsByClassName('aplayer-lrc-content')[i].innerHTML);
             }
         }
+        this.lrcs = [];
 
         /**
          * Update progress bar, including loading progress bar and play progress bar
@@ -557,7 +558,6 @@ class APlayer {
         if (this.option.showlrc) {
             const index = this.multiple ? indexMusic : 0;
 
-            this.lrcs = [];
             if (!this.lrcs[index]) {
                 let lrcs = '';
                 if (this.option.showlrc === 1) {
