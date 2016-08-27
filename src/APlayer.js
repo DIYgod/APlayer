@@ -74,44 +74,13 @@ class APlayer {
             return add0(min) + ':' + add0(sec);
         };
 
-        /**
-         * Parse lrc, suppose multiple time tag
-         *
-         * @param {Array} arr - Format:
-         * [mm:ss.xx]lyric
-         * [mm:ss.xxx]lyric
-         * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
-         *
-         * @return {Array} [[[time, text], [time, text], [time, text], ...], [[time, text], [time, text], [time, text], ...], ...]
-         */
-        const parseLrc = (arr) => {
-            let lrcs = [];
-            for (let k = 0; k < arr.length; k++) {
-                const lyric = arr[k].split('\n');
-                let lrc = [];
-                const lyricLen = lyric.length;
-                for (let i = 0; i < lyricLen; i++) {
-                    // match lrc time
-                    const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g);
-                    // match lrc text
-                    const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g, '').replace(/^\s+|\s+$/g, '');
-
-                    if (lrcTimes != null) {
-                        // handle multiple time tag
-                        const timeLen = lrcTimes.length;
-                        for (let j = 0; j < timeLen; j++) {
-                            const oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j]);
-                            const lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
-                            lrc.push([lrcTime, lrcText]);
-                        }
-                    }
-                }
-                // sort by time
-                lrc.sort((a, b) => a[0] - b[0]);
-                lrcs.push(lrc);
+        // save lrc
+        if (this.option.showlrc === 2 || this.option.showlrc === true)  {
+            this.savelrc = [];
+            for (let i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
+                this.savelrc.push(this.element.getElementsByClassName('aplayer-lrc-content')[i].innerHTML);
             }
-            return lrcs;
-        };
+        }
 
         /**
          * Update progress bar, including loading progress bar and play progress bar
@@ -160,29 +129,6 @@ class APlayer {
         this.element = this.option.element;
         this.multiple = this.playIndex > -1;
         this.music = this.multiple ? this.option.music[this.playIndex] : this.option.music;
-
-        let i;
-        // parser lrc
-        if (this.option.showlrc) {
-            let lrcs = [];
-            if (this.option.showlrc === 1) {
-                if (this.multiple) {
-                    for (i = 0; i < this.option.music.length; i++) {
-                        lrcs.push(this.option.music[i].lrc);
-                    }
-                }
-                else {
-                    lrcs.push(this.option.music.lrc);
-                }
-            }
-            else if (this.option.showlrc === 2 || this.option.showlrc === true)  {
-                for (i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
-                    lrcs.push(this.element.getElementsByClassName('aplayer-lrc-content')[i].innerHTML);
-                }
-            }
-
-            this.lrcs = parseLrc(lrcs);
-        }
 
         // add class aplayer-withlrc
         if (this.option.showlrc) {
@@ -242,7 +188,7 @@ class APlayer {
             eleHTML += `
             <div class="aplayer-list">
                 <ol>`;
-            for (i = 0; i < this.option.music.length; i++) {
+            for (let i = 0; i < this.option.music.length; i++) {
                 eleHTML += `
                     <li>
                         <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
@@ -572,9 +518,104 @@ class APlayer {
             this.audio.currentTime = 0;
         }
 
+        /**
+         * Parse lrc, suppose multiple time tag
+         *
+         * @param {String} lrc_s - Format:
+         * [mm:ss.xx]lyric
+         * [mm:ss.xxx]lyric
+         * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
+         *
+         * @return {String} [[time, text], [time, text], [time, text], ...]
+         */
+        const parseLrc = (lrc_s) => {
+            const lyric = lrc_s.split('\n');
+            let lrc = [];
+            const lyricLen = lyric.length;
+            for (let i = 0; i < lyricLen; i++) {
+                // match lrc time
+                const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g);
+                // match lrc text
+                const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g, '').replace(/^\s+|\s+$/g, '');
+
+                if (lrcTimes != null) {
+                    // handle multiple time tag
+                    const timeLen = lrcTimes.length;
+                    for (let j = 0; j < timeLen; j++) {
+                        const oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j]);
+                        const lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
+                        lrc.push([lrcTime, lrcText]);
+                    }
+                }
+            }
+            // sort by time
+            lrc.sort((a, b) => a[0] - b[0]);
+            return lrc;
+        };
+
         // fill in lrc
         if (this.option.showlrc) {
-            this.lrc = this.multiple ? this.lrcs[indexMusic] : this.lrcs[0];
+            const index = this.multiple ? indexMusic : 0;
+
+            this.lrcs = [];
+            if (!this.lrcs[index]) {
+                let lrcs = '';
+                if (this.option.showlrc === 1) {
+                    if (this.multiple) {
+                        lrcs = this.option.music[index].lrc;
+                    }
+                    else {
+                        lrcs = this.option.music.lrc;
+                    }
+                }
+                else if (this.option.showlrc === 2 || this.option.showlrc === true)  {
+                    lrcs = this.savelrc[index];
+                }
+                else if (this.option.showlrc === 3) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                                lrcs = xhr.responseText;
+                                this.lrcs[index] = parseLrc(lrcs);
+                                this.lrc = this.lrcs[index];
+                                let lrcHTML = '';
+                                this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
+                                for (let i = 0; i < this.lrc.length; i++) {
+                                    lrcHTML += `<p>${this.lrc[i][1]}</p>`;
+                                }
+                                this.lrcContents.innerHTML = lrcHTML;
+                                if (!this.lrcIndex) {
+                                    this.lrcIndex = 0;
+                                }
+                                this.lrcContents.getElementsByTagName('p')[0].classList.add('aplayer-lrc-current');
+                                this.lrcContents.style.transform = 'translateY(0px)';
+                                this.lrcContents.style.webkitTransform = 'translateY(0px)';
+                            }
+                            else {
+                                console.log('Request was unsuccessful: ' + xhr.status);
+                            }
+                        }
+                    };
+                    let apiurl;
+                    if (this.multiple) {
+                        apiurl = this.option.music[index].lrc;
+                    }
+                    else {
+                        apiurl = this.option.music.lrc;
+                    }
+                    xhr.open('get', apiurl, true);
+                    xhr.send(null);
+                }
+                if (lrcs) {
+                    this.lrcs[index] = parseLrc(lrcs);
+                }
+                else {
+                    this.lrcs[index] = [['00:00', 'Loading']];
+                }
+            }
+
+            this.lrc = this.lrcs[index];
             let lrcHTML = '';
             this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
             for (let i = 0; i < this.lrc.length; i++) {

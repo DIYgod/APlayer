@@ -12,8 +12,6 @@
 
 ## Introduction
 
-UI 参考网易云音乐外链播放器
-
 [Demo](http://aplayer.js.org)
 
 Screenshot
@@ -149,6 +147,17 @@ HTML:
         <!-- ... -->
     </pre>
 </div>
+```
+
+#### LRC in lrc file or API:
+
+```js
+{
+    showlrc: 3,
+    music: {
+        lrc: 'path/to/music.lrc'
+    }
+}
 ```
 
 ### With playlist
