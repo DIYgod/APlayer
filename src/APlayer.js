@@ -1,3 +1,5 @@
+console.log("\n %c APlayer 1.5.1 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+
 require('./APlayer.scss');
 
 let instances = [];
@@ -10,7 +12,7 @@ class APlayer {
      * @constructor
      */
     constructor(option) {
-        this.svg = {
+        const svg = {
             'play': ['0 0 16 31', 'M15.552 15.168q0.448 0.32 0.448 0.832 0 0.448-0.448 0.768l-13.696 8.512q-0.768 0.512-1.312 0.192t-0.544-1.28v-16.448q0-0.96 0.544-1.28t1.312 0.192z'],
             'pause': ['0 0 17 32', 'M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z'],
             'volume-up': ['0 0 28 32', 'M13.728 6.272v19.456q0 0.448-0.352 0.8t-0.8 0.32-0.8-0.32l-5.952-5.952h-4.672q-0.48 0-0.8-0.352t-0.352-0.8v-6.848q0-0.48 0.352-0.8t0.8-0.352h4.672l5.952-5.952q0.32-0.32 0.8-0.32t0.8 0.32 0.352 0.8zM20.576 16q0 1.344-0.768 2.528t-2.016 1.664q-0.16 0.096-0.448 0.096-0.448 0-0.8-0.32t-0.32-0.832q0-0.384 0.192-0.64t0.544-0.448 0.608-0.384 0.512-0.64 0.192-1.024-0.192-1.024-0.512-0.64-0.608-0.384-0.544-0.448-0.192-0.64q0-0.48 0.32-0.832t0.8-0.32q0.288 0 0.448 0.096 1.248 0.48 2.016 1.664t0.768 2.528zM25.152 16q0 2.72-1.536 5.056t-4 3.36q-0.256 0.096-0.448 0.096-0.48 0-0.832-0.352t-0.32-0.8q0-0.704 0.672-1.056 1.024-0.512 1.376-0.8 1.312-0.96 2.048-2.4t0.736-3.104-0.736-3.104-2.048-2.4q-0.352-0.288-1.376-0.8-0.672-0.352-0.672-1.056 0-0.448 0.32-0.8t0.8-0.352q0.224 0 0.48 0.096 2.496 1.056 4 3.36t1.536 5.056zM29.728 16q0 4.096-2.272 7.552t-6.048 5.056q-0.224 0.096-0.448 0.096-0.48 0-0.832-0.352t-0.32-0.8q0-0.64 0.704-1.056 0.128-0.064 0.384-0.192t0.416-0.192q0.8-0.448 1.44-0.896 2.208-1.632 3.456-4.064t1.216-5.152-1.216-5.152-3.456-4.064q-0.64-0.448-1.44-0.896-0.128-0.096-0.416-0.192t-0.384-0.192q-0.704-0.416-0.704-1.056 0-0.448 0.32-0.8t0.832-0.352q0.224 0 0.448 0.096 3.776 1.632 6.048 5.056t2.272 7.552z'],
@@ -21,9 +23,9 @@ class APlayer {
         };
         this.getSVG = (type) => {
             return `
-                <svg xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" version="1.1" viewBox="${this.svg[type][0]}" width="100%">
+                <svg xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" version="1.1" viewBox="${svg[type][0]}" width="100%">
                     <use xlink:href="#aplayer-${type}"></use>
-                    <path class="aplayer-fill" d="${this.svg[type][1]}" id="aplayer-${type}"></path>
+                    <path class="aplayer-fill" d="${svg[type][1]}" id="aplayer-${type}"></path>
                 </svg>
             `;
         };
@@ -82,7 +84,7 @@ class APlayer {
          *
          * @return {Array} [[[time, text], [time, text], [time, text], ...], [[time, text], [time, text], [time, text], ...], ...]
          */
-        this.parseLrc = (arr) => {
+        const parseLrc = (arr) => {
             let lrcs = [];
             for (let k = 0; k < arr.length; k++) {
                 const lyric = arr[k].split('\n');
@@ -121,7 +123,7 @@ class APlayer {
         this.updateBar = (type, percentage, direction) => {
             percentage = percentage > 0 ? percentage : 0;
             percentage = percentage < 1 ? percentage : 1;
-            this[type + 'Bar'].style[direction] = percentage * 100 + '%';
+            bar[type + 'Bar'].style[direction] = percentage * 100 + '%';
         };
 
         /**
@@ -144,22 +146,17 @@ class APlayer {
         };
 
         // define APlayer events
-        this.eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
+        const eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
         this.event = {};
-        for (let i = 0; i < this.eventTypes.length; i++) {
-            this.event[this.eventTypes[i]] = [];
+        for (let i = 0; i < eventTypes.length; i++) {
+            this.event[eventTypes[i]] = [];
         }
         this.trigger = (type) => {
             for (let i = 0; i < this.event[type].length; i++) {
                 this.event[type][i]();
             }
-        }
-    }
+        };
 
-    /**
-     * AutoLink initialization function
-     */
-    init() {
         this.element = this.option.element;
         this.multiple = this.playIndex > -1;
         this.music = this.multiple ? this.option.music[this.playIndex] : this.option.music;
@@ -184,7 +181,7 @@ class APlayer {
                 }
             }
 
-            this.lrcs = this.parseLrc(lrcs);
+            this.lrcs = parseLrc(lrcs);
         }
 
         // add class aplayer-withlrc
@@ -271,8 +268,9 @@ class APlayer {
             this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow');
         }
         // fix the width of aplayer bar
-        this.bar = this.element.getElementsByClassName('aplayer-bar-wrap')[0];
-        this.bar.style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
+        let bar = {};
+        bar.barWrap = this.element.getElementsByClassName('aplayer-bar-wrap')[0];
+        bar.barWrap.style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
 
         // switch to narrow style
         if (this.option.narrow) {
@@ -313,34 +311,34 @@ class APlayer {
         }
 
         // control play progress
-        this.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
-        this.loadedBar = this.element.getElementsByClassName('aplayer-loaded')[0];
-        this.thumb = this.element.getElementsByClassName('aplayer-thumb')[0];
+        bar.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
+        bar.loadedBar = this.element.getElementsByClassName('aplayer-loaded')[0];
+        const thumb = this.element.getElementsByClassName('aplayer-thumb')[0];
         let barWidth;
-        this.bar.addEventListener('click', (event) => {
+        bar.barWrap.addEventListener('click', (event) => {
             const e = event || window.event;
-            barWidth = this.bar.clientWidth;
-            const percentage = (e.clientX - getElementViewLeft(this.bar)) / barWidth;
+            barWidth = bar.barWrap.clientWidth;
+            const percentage = (e.clientX - getElementViewLeft(bar.barWrap)) / barWidth;
             this.updateBar('played', percentage, 'width');
             this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(percentage * this.audio.duration);
-            this.audio.currentTime = parseFloat(this.playedBar.style.width) / 100 * this.audio.duration;
+            this.audio.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration;
         });
 
-        this.thumb.addEventListener('mouseover', () => {
-            this.thumb.style.background = this.option.theme;
+        thumb.addEventListener('mouseover', () => {
+            thumb.style.background = this.option.theme;
         });
-        this.thumb.addEventListener('mouseout', () => {
-            this.thumb.style.background = '#fff';
+        thumb.addEventListener('mouseout', () => {
+            thumb.style.background = '#fff';
         });
 
         const thumbMove = (event) => {
             const e = event || window.event;
-            let percentage = (e.clientX - getElementViewLeft(this.bar)) / barWidth;
+            let percentage = (e.clientX - getElementViewLeft(bar.barWrap)) / barWidth;
             percentage = percentage > 0 ? percentage : 0;
             percentage = percentage < 1 ? percentage : 1;
             this.updateBar('played', percentage, 'width');
             if (this.option.showlrc) {
-                this.updateLrc(parseFloat(this.playedBar.style.width) / 100 * this.audio.duration);
+                this.updateLrc(parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration);
             }
             this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(percentage * this.audio.duration);
         };
@@ -348,7 +346,7 @@ class APlayer {
         const thumbUp = () => {
             document.removeEventListener('mouseup', thumbUp);
             document.removeEventListener('mousemove', thumbMove);
-            this.audio.currentTime = parseFloat(this.playedBar.style.width) / 100 * this.audio.duration;
+            this.audio.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration;
             this.playedTime = setInterval(() => {
                 this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
                 if (this.option.showlrc) {
@@ -359,15 +357,15 @@ class APlayer {
             }, 100);
         };
 
-        this.thumb.addEventListener('mousedown', () => {
-            barWidth = this.bar.clientWidth;
+        thumb.addEventListener('mousedown', () => {
+            barWidth = bar.barWrap.clientWidth;
             clearInterval(this.playedTime);
             document.addEventListener('mousemove', thumbMove);
             document.addEventListener('mouseup', thumbUp);
         });
 
         // control volume
-        this.volumeBar = this.element.getElementsByClassName('aplayer-volume')[0];
+        bar.volumeBar = this.element.getElementsByClassName('aplayer-volume')[0];
         const volumeBarWrap = this.element.getElementsByClassName('aplayer-volume-bar')[0];
         this.volumeicon = this.element.getElementsByClassName('aplayer-time')[0].getElementsByTagName('button')[0];
         const barHeight = 35;

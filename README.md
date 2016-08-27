@@ -43,7 +43,6 @@ $ npm install aplayer --save
 
 ```JS
 var ap = new APlayer(option);
-ap.init();
 ```
 
 #### Options
@@ -70,7 +69,6 @@ var option = {
 
 #### API
 
-+ `ap.init()`                       // Load player
 + `ap.play()`                       // Resume play
 + `ap.play(time)`                   // Set currentTime
 + `ap.pause()`                      // Pause
