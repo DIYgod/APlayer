@@ -208,6 +208,7 @@ $ npm run build
 
 - [163music-APlayer-you-get-docker](https://github.com/YUX-IO/163music-APlayer-you-get-docker)
 
+- [Hermit-X(APlayer for WordPress)](https://github.com/liwanglin12/Hermit-X)
 
 ## LICENSE
 
