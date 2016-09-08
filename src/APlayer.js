@@ -75,6 +75,7 @@ class APlayer {
         };
 
         // save lrc
+        this.element = this.option.element;
         if (this.option.showlrc === 2 || this.option.showlrc === true)  {
             this.savelrc = [];
             for (let i = 0; i < this.element.getElementsByClassName('aplayer-lrc-content').length; i++) {
@@ -127,7 +128,6 @@ class APlayer {
             }
         };
 
-        this.element = this.option.element;
         this.multiple = this.playIndex > -1;
         this.music = this.multiple ? this.option.music[this.playIndex] : this.option.music;
 
