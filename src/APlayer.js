@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.5.1 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.5.2 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -190,7 +190,7 @@ class APlayer {
             </div>`;
         if (this.multiple) {
             eleHTML += `
-            <div class="aplayer-list" ${this.option.listmaxhight ? `style="max-height: ${this.option.listmaxhight}` : ``}">
+            <div class="aplayer-list" ${this.option.listmaxheight ? `style="max-height: ${this.option.listmaxheight}` : ``}">
                 <ol>`;
             for (let i = 0; i < this.option.music.length; i++) {
                 eleHTML += `
@@ -406,7 +406,13 @@ class APlayer {
             });
         }
 
-        this.setMusic(0);
+        if (this.mode === 'random') {
+            let random = parseInt(Math.random() * this.option.music.length);
+            this.setMusic(random);
+        }
+        else {
+            this.setMusic(0);
+        }
 
         instances.push(this);
     }
@@ -439,6 +445,10 @@ class APlayer {
         if (this.audio) {
             this.pause();
             this.audio.currentTime = 0;
+        }
+
+        if (this.multiple) {
+            this.element.getElementsByClassName('aplayer-list')[0].scrollTop = indexMusic * 33;
         }
 
         // get this audio object

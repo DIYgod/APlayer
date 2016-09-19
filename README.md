@@ -55,7 +55,7 @@ var option = {
     theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
     mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
     preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'metadata' in Desktop, 'none' in mobile
-    listmaxhight: '513px',                                             // Optional, max height of play list
+    listmaxheight: '513px',                                             // Optional, max height of play list
     music: {                                                           // Required, music info, see: ###With playlist
         title: 'Preparation',                                          // Required, music title
         author: 'Hans Zimmer/Richard Harvey',                          // Required, music author

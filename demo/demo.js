@@ -107,6 +107,7 @@ var ap5 = new APlayer({
     mutex: true,
     theme: '#ad7a86',
     mode: 'random',
+    listmaxheight: '60px',
     music: [
         {
             title: 'あっちゅ～ま青春!',
