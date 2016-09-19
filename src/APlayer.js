@@ -18,7 +18,10 @@ class APlayer {
             'volume-up': ['0 0 28 32', 'M13.728 6.272v19.456q0 0.448-0.352 0.8t-0.8 0.32-0.8-0.32l-5.952-5.952h-4.672q-0.48 0-0.8-0.352t-0.352-0.8v-6.848q0-0.48 0.352-0.8t0.8-0.352h4.672l5.952-5.952q0.32-0.32 0.8-0.32t0.8 0.32 0.352 0.8zM20.576 16q0 1.344-0.768 2.528t-2.016 1.664q-0.16 0.096-0.448 0.096-0.448 0-0.8-0.32t-0.32-0.832q0-0.384 0.192-0.64t0.544-0.448 0.608-0.384 0.512-0.64 0.192-1.024-0.192-1.024-0.512-0.64-0.608-0.384-0.544-0.448-0.192-0.64q0-0.48 0.32-0.832t0.8-0.32q0.288 0 0.448 0.096 1.248 0.48 2.016 1.664t0.768 2.528zM25.152 16q0 2.72-1.536 5.056t-4 3.36q-0.256 0.096-0.448 0.096-0.48 0-0.832-0.352t-0.32-0.8q0-0.704 0.672-1.056 1.024-0.512 1.376-0.8 1.312-0.96 2.048-2.4t0.736-3.104-0.736-3.104-2.048-2.4q-0.352-0.288-1.376-0.8-0.672-0.352-0.672-1.056 0-0.448 0.32-0.8t0.8-0.352q0.224 0 0.48 0.096 2.496 1.056 4 3.36t1.536 5.056zM29.728 16q0 4.096-2.272 7.552t-6.048 5.056q-0.224 0.096-0.448 0.096-0.48 0-0.832-0.352t-0.32-0.8q0-0.64 0.704-1.056 0.128-0.064 0.384-0.192t0.416-0.192q0.8-0.448 1.44-0.896 2.208-1.632 3.456-4.064t1.216-5.152-1.216-5.152-3.456-4.064q-0.64-0.448-1.44-0.896-0.128-0.096-0.416-0.192t-0.384-0.192q-0.704-0.416-0.704-1.056 0-0.448 0.32-0.8t0.832-0.352q0.224 0 0.448 0.096 3.776 1.632 6.048 5.056t2.272 7.552z'],
             'volume-down': ['0 0 28 32', 'M13.728 6.272v19.456q0 0.448-0.352 0.8t-0.8 0.32-0.8-0.32l-5.952-5.952h-4.672q-0.48 0-0.8-0.352t-0.352-0.8v-6.848q0-0.48 0.352-0.8t0.8-0.352h4.672l5.952-5.952q0.32-0.32 0.8-0.32t0.8 0.32 0.352 0.8zM20.576 16q0 1.344-0.768 2.528t-2.016 1.664q-0.16 0.096-0.448 0.096-0.448 0-0.8-0.32t-0.32-0.832q0-0.384 0.192-0.64t0.544-0.448 0.608-0.384 0.512-0.64 0.192-1.024-0.192-1.024-0.512-0.64-0.608-0.384-0.544-0.448-0.192-0.64q0-0.48 0.32-0.832t0.8-0.32q0.288 0 0.448 0.096 1.248 0.48 2.016 1.664t0.768 2.528z'],
             'volume-off': ['0 0 28 32', 'M13.728 6.272v19.456q0 0.448-0.352 0.8t-0.8 0.32-0.8-0.32l-5.952-5.952h-4.672q-0.48 0-0.8-0.352t-0.352-0.8v-6.848q0-0.48 0.352-0.8t0.8-0.352h4.672l5.952-5.952q0.32-0.32 0.8-0.32t0.8 0.32 0.352 0.8z'],
-            'loop': ['0 0 29 32', 'M25.6 9.92q1.344 0 2.272 0.928t0.928 2.272v9.28q0 1.28-0.928 2.24t-2.272 0.96h-22.4q-1.28 0-2.24-0.96t-0.96-2.24v-9.28q0-1.344 0.96-2.272t2.24-0.928h8v-3.52l6.4 5.76-6.4 5.76v-3.52h-6.72v6.72h19.84v-6.72h-4.8v-4.48h6.080z'],
+            'circulation': ['0 0 29 32', 'M25.6 9.92q1.344 0 2.272 0.928t0.928 2.272v9.28q0 1.28-0.928 2.24t-2.272 0.96h-22.4q-1.28 0-2.24-0.96t-0.96-2.24v-9.28q0-1.344 0.96-2.272t2.24-0.928h8v-3.52l6.4 5.76-6.4 5.76v-3.52h-6.72v6.72h19.84v-6.72h-4.8v-4.48h6.080z'],
+            'random': ['0 0 33 31', 'M29.867 9.356l-5.003 5.003c-0.094 0.094-0.235 0.141-0.36 0.141-0.266 0-0.5-0.219-0.5-0.5v-3.002h-4.002c-2.079 0-3.064 1.423-3.94 3.111-0.453 0.875-0.844 1.782-1.219 2.673-1.735 4.033-3.768 8.223-8.849 8.223h-3.502c-0.281 0-0.5-0.219-0.5-0.5v-3.002c0-0.281 0.219-0.5 0.5-0.5h3.502c2.079 0 3.064-1.423 3.94-3.111 0.453-0.875 0.844-1.782 1.219-2.673 1.735-4.033 3.768-8.223 8.849-8.223h4.002v-3.002c0-0.281 0.219-0.5 0.5-0.5 0.141 0 0.266 0.063 0.375 0.156l4.987 4.987c0.094 0.094 0.141 0.235 0.141 0.36s-0.047 0.266-0.141 0.36zM10.262 14.781c-0.907-1.892-1.907-3.783-4.268-3.783h-3.502c-0.281 0-0.5-0.219-0.5-0.5v-3.002c0-0.281 0.219-0.5 0.5-0.5h3.502c2.783 0 4.831 1.298 6.41 3.518-0.876 1.344-1.517 2.798-2.142 4.268zM29.867 23.363l-5.003 5.003c-0.094 0.094-0.235 0.141-0.36 0.141-0.266 0-0.5-0.235-0.5-0.5v-3.002c-4.643 0-7.504 0.547-10.396-3.518 0.86-1.344 1.501-2.798 2.126-4.268 0.907 1.892 1.907 3.783 4.268 3.783h4.002v-3.002c0-0.281 0.219-0.5 0.5-0.5 0.141 0 0.266 0.063 0.375 0.156l4.987 4.987c0.094 0.094 0.141 0.235 0.141 0.36s-0.047 0.266-0.141 0.36z'],
+            'order': ['0 0 32 32', 'M0.622 18.334h19.54v7.55l11.052-9.412-11.052-9.413v7.549h-19.54v3.725z'],
+            'single': ['0 0 34 32', 'M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.5c-7.456 0-13.5-6.044-13.5-13.5s6.044-13.5 13.5-13.5 13.5 6.044 13.5 13.5-6.044 13.5-13.5 13.5zM15.606 12.578h-3.856v-1.563h1.207c0.429 0 0.839-0.076 1.219-0.225 0.386-0.148 0.715-0.353 0.987-0.612 0.272-0.263 0.495-0.578 0.659-0.952 0.171-0.369 0.253-0.781 0.253-1.227h1.675v16h-2.144v-11.422z'],
             'menu': ['0 0 22 32', 'M20.8 14.4q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2zM1.6 11.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2zM20.8 20.8q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2z']
         };
         this.getSVG = (type) => {
@@ -44,7 +47,7 @@ class APlayer {
             mutex: true,
             showlrc: 0,
             theme: '#b7daff',
-            loop: true
+            mode: 'circulation'
         };
         for (let defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
@@ -57,7 +60,7 @@ class APlayer {
 
         this.option = option;
         this.audios = [];
-        this.loop = option.loop;
+        this.mode = option.mode;
 
         /**
          * Parse second to 00:00 format
@@ -176,8 +179,8 @@ class APlayer {
                                 </div>
                             </div>
                         </div>
-                        <button class="aplayer-icon aplayer-icon-loop${(this.loop ? `` : ` aplayer-noloop`)}">`
-            +               this.getSVG('loop')
+                        <button class="aplayer-icon aplayer-icon-mode">`
+            +               this.getSVG(this.mode)
             + `         </button>
                         ${(this.multiple ? `<button class="aplayer-icon aplayer-icon-menu">`
             +               this.getSVG('menu')
@@ -187,7 +190,7 @@ class APlayer {
             </div>`;
         if (this.multiple) {
             eleHTML += `
-            <div class="aplayer-list">
+            <div class="aplayer-list" ${this.option.listmaxhight ? `style="max-height: ${this.option.listmaxhight}` : ``}">
                 <ol>`;
             for (let i = 0; i < this.option.music.length; i++) {
                 eleHTML += `
@@ -204,9 +207,9 @@ class APlayer {
         }
         this.element.innerHTML = eleHTML;
 
-        // hide loop button in arrow container
+        // hide mode button in arrow container
         if (this.element.offsetWidth < 300) {
-            this.element.getElementsByClassName('aplayer-icon-loop')[0].style.display = 'none';
+            this.element.getElementsByClassName('aplayer-icon-mode')[0].style.display = 'none';
         }
 
         this.ptime = this.element.getElementsByClassName('aplayer-ptime')[0];
@@ -370,19 +373,23 @@ class APlayer {
             return actualTop - elementScrollTop;
         }
 
-        // loop control
-        const loopEle = this.element.getElementsByClassName('aplayer-icon-loop')[0];
-        loopEle.addEventListener('click', () => {
-            if (this.loop) {
-                loopEle.classList.add('aplayer-noloop');
-                this.loop = false;
-                this.audio.loop = this.multiple ? false : this.loop;
+        // mode control
+        const modeEle = this.element.getElementsByClassName('aplayer-icon-mode')[0];
+        modeEle.addEventListener('click', () => {
+            if (this.mode === 'random') {
+                this.mode = 'single';
             }
-            else {
-                loopEle.classList.remove('aplayer-noloop');
-                this.loop = true;
-                this.audio.loop = this.multiple ? false : this.loop;
+            else if (this.mode === 'single') {
+                this.mode = 'order';
             }
+            else if (this.mode === 'order') {
+                this.mode = 'circulation';
+            }
+            else if (this.mode === 'circulation') {
+                this.mode = 'random';
+            }
+            modeEle.innerHTML = this.getSVG(this.mode);
+            this.audio.loop = !(this.multiple || this.mode === 'order');
         });
 
         // toggle menu control
@@ -479,23 +486,41 @@ class APlayer {
                         return;
                     }
                     if (this.audio.currentTime !== 0) {
-                        if (this.playIndex < this.option.music.length - 1) {
-                            this.setMusic(++this.playIndex);
+                        if (this.mode === 'random') {
+                            let random = parseInt(Math.random() * this.option.music.length);
+                            if (random === this.playIndex) {
+                                random++;
+                                random = random % this.option.music.length;
+                            }
+                            this.setMusic(random);
                         }
-                        else if (this.loop) {
-                            this.setMusic(0);
+                        else if (this.mode === 'single') {
+                            this.setMusic(this.playIndex);
                         }
-                        else if (!this.loop) {
-                            this.ended = true;
-                            this.pause();
-                            this.trigger('ended');
+                        else if (this.mode === 'order') {
+                            if (this.playIndex < this.option.music.length - 1) {
+                                this.setMusic(++this.playIndex);
+                            }
+                            else {
+                                this.ended = true;
+                                this.pause();
+                                this.trigger('ended');
+                            }
+                        }
+                        else if (this.mode === 'circulation') {
+                            if (this.playIndex < this.option.music.length - 1) {
+                                this.setMusic(++this.playIndex);
+                            }
+                            else {
+                                this.setMusic(0);
+                            }
                         }
                     }
                 });
             }
             else {
                 this.audio.addEventListener('ended', () => {
-                    if (!this.loop) {
+                    if (this.mode === 'order') {
                         this.ended = true;
                         this.pause();
                         this.trigger('ended');
@@ -507,7 +532,7 @@ class APlayer {
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
 
             // loop
-            this.audio.loop = this.multiple ? false : this.loop;
+            this.audio.loop = !(this.multiple || this.mode === 'order');
 
             if (this.multiple) {
                 this.audios[indexMusic] = this.audio;

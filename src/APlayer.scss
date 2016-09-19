@@ -211,18 +211,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                         fill: #666;
                     }
 
-                    &.aplayer-icon-loop {
+                    &.aplayer-icon-mode {
                         margin-right: 4px;
-                    }
-                    &.aplayer-noloop {
-                        .aplayer-fill {
-                            fill: #ddd;
-                        }
-                        &:hover {
-                            .aplayer-fill {
-                                fill: #bbb;
-                            }
-                        }
                     }
 
                     &:hover {
@@ -233,7 +223,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
                 }
 
                 &.aplayer-time-narrow {
-                    .aplayer-icon-loop {
+                    .aplayer-icon-mode {
                         display: none;
                     }
 
@@ -347,6 +337,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
     .aplayer-list {
         overflow: auto;
         transition: all 0.5s ease;
+        will-change: height;
 
         &.aplayer-list-hide {
             height: 0 !important;
