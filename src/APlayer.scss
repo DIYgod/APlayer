@@ -343,6 +343,20 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             height: 0 !important;
         }
 
+        &::-webkit-scrollbar{
+            width: 5px;
+        }
+        &::-webkit-scrollbar-track{
+            background-color: #f9f9f9;
+        }
+        &::-webkit-scrollbar-thumb{
+            border-radius: 3px;
+            background-color: #eee;
+        }
+        &::-webkit-scrollbar-thumb:hover{
+            background-color: #ccc;
+        }
+
         ol {
             list-style-type: none;
             margin: 0;
