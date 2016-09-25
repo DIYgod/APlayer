@@ -785,4 +785,4 @@ class APlayer {
     }
 }
 
-export {APlayer};
+module.exports = APlayer;

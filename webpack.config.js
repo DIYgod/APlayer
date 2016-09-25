@@ -14,6 +14,7 @@ module.exports = {
     output: {
         path: BUILD_PATH,
         filename: 'APlayer.min.js',
+        library: 'APlayer',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
