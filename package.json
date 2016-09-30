@@ -1,11 +1,11 @@
 {
   "name": "aplayer",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Wow, such a beautiful html5 music player",
   "main": "dist/APlayer.min.js",
   "scripts": {
     "test": "webpack",
-    "start": "webpack-dev-server --hot --progress --inline"
+    "start": "webpack-dev-server --hot --progress --inline --host 0.0.0.0"
   },
   "repository": {
     "type": "git",

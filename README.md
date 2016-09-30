@@ -54,7 +54,7 @@ var option = {
     mutex: true,                                                       // Optional, pause other players when this player playing
     theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
     mode: 'random',                                                    // Optional, play mode, can be `random` `single` `circulation`(loop) `order`(no loop), default: `circulation`
-    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'metadata' in Desktop, 'none' in mobile
+    preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'auto'
     listmaxheight: '513px',                                             // Optional, max height of play list
     music: {                                                           // Required, music info, see: ###With playlist
         title: 'Preparation',                                          // Required, music title
@@ -74,6 +74,12 @@ var option = {
 + `ap.toggle()`                     // Toggle between play and pause
 + `ap.volume(percentage)`           // Set volume
 + `ap.on(event, handler)`           // Event binding
++ `ap.setMusic(index)`              // Switch music
++ `ap.lrc`                          // Lrc time and text
++ `ap.playIndex`                    // Current playing index
++ `ap.audio`                        // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
+ + `dp.audio.currentTime`           // Returns the current playback position
+ + Most [native api](http://www.w3schools.com/tags/ref_av_dom.asp)
 
 #### Event binding
 

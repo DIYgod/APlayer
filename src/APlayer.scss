@@ -133,6 +133,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             white-space: nowrap;
             text-overflow: ellipsis;
             margin-bottom: 13px;
+            user-select: text;
+            cursor: default;
 
             .aplayer-title {
                 font-size: 14px;
@@ -331,6 +333,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
         .aplayer-lrc-contents {
             width: 100%;
             transition: all 0.5s ease-out;
+            user-select: text;
+            cursor: default;
         }
     }
 

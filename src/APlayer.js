@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.5.3 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.5.4 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -246,12 +246,7 @@ class APlayer {
                     const musicIndex = parseInt(listItem[i].getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
                     if (musicIndex !== this.playIndex) {
                         this.setMusic(musicIndex);
-                        if (this.isMobile) {
-                            this.pause();
-                        }
-                        else {
-                            this.play();
-                        }
+                        this.play();
                     }
                     else {
                         this.toggle();
@@ -455,12 +450,7 @@ class APlayer {
         if ((this.multiple && !this.audios[indexMusic]) || this.playIndex === -1) {
             this.audio = document.createElement("audio");
             this.audio.src = this.music.url;
-            if (this.option.preload) {
-                this.audio.preload = this.option.preload;
-            }
-            else {
-                this.audio.preload = this.isMobile ? 'none' : 'metadata';
-            }
+            this.audio.preload = this.option.preload ? this.option.preload : 'auto';
 
             // show audio time: the metadata has loaded or changed
             this.audio.addEventListener('durationchange', () => {
