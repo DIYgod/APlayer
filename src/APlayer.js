@@ -112,8 +112,8 @@ class APlayer {
                 for (let i = 0; i < this.lrc.length; i++) {
                     if (currentTime >= this.lrc[i][0] && (!this.lrc[i + 1] || currentTime < this.lrc[i + 1][0])) {
                         this.lrcIndex = i;
-                        this.lrcContents.style.transform = `translateY(${-this.lrcIndex * 20}px)`;
-                        this.lrcContents.style.webkitTransform = `translateY(${-this.lrcIndex * 20}px)`;
+                        this.lrcContents.style.transform = `translateY(${-this.lrcIndex * 16}px)`;
+                        this.lrcContents.style.webkitTransform = `translateY(${-this.lrcIndex * 16}px)`;
                         this.lrcContents.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
                         this.lrcContents.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
                     }
@@ -139,6 +139,9 @@ class APlayer {
         // add class aplayer-withlrc
         if (this.option.showlrc) {
             this.element.classList.add('aplayer-withlrc');
+        }
+        if (this.option.music.length > 1) {
+            this.element.classList.add('aplayer-list');
         }
 
         // fill in HTML
@@ -172,7 +175,7 @@ class APlayer {
                             - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
                         </span>
                         <div class="aplayer-volume-wrap">
-                            <button class="aplayer-icon aplayer-icon-volume-down">`
+                            <button class="aplayer-icon aplayer-icon-volume-down" ${this.isMobile ? 'style="display: none;"' : ''}>`
             +                   this.getSVG('volume-down')
             + `             </button>
                             <div class="aplayer-volume-bar-wrap">
