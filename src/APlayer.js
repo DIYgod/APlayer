@@ -76,7 +76,7 @@ class APlayer {
             const sec = parseInt(second - min * 60);
             const hours = parseInt(min / 60);
             const minAdjust = parseInt((second / 60) - (60 * parseInt((second / 60) / 60)));
-            return second >= 3600? add0(hours) + ':' + add0(minAdjust) + ':' + add0(sec) : add0(min) + ':' + add0(sec);
+            return second >= 3600 ? add0(hours) + ':' + add0(minAdjust) + ':' + add0(sec) : add0(min) + ':' + add0(sec);
         };
 
         // save lrc
@@ -222,7 +222,6 @@ class APlayer {
         // fix the width of aplayer bar
         let bar = {};
         bar.barWrap = this.element.getElementsByClassName('aplayer-bar-wrap')[0];
-        bar.barWrap.style.marginRight = this.element.getElementsByClassName('aplayer-time')[0].offsetWidth + 5 + 'px';
 
         // switch to narrow style
         if (this.option.narrow) {

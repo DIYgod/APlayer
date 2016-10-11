@@ -148,11 +148,13 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
 
         .aplayer-controller {
             position: relative;
+            display: flex;
 
             .aplayer-bar-wrap {
-                margin: 0 140px 0 5px;
+                margin: 0 0 0 5px;
                 padding: 4px 0;
                 cursor: pointer !important;
+                flex: 1;
 
                 .aplayer-bar {
                     position: relative;
@@ -194,12 +196,13 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
             }
 
             .aplayer-time {
-                position: absolute;
+                position: relative;
                 right: 0;
-                bottom: -3px;
+                bottom: 3px;
                 height: 17px;
                 color: #999;
                 font-size: 11px;
+                padding-left: 7px;
 
                 .aplayer-time-inner {
                     vertical-align: middle;
