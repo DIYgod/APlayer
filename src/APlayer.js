@@ -63,10 +63,10 @@ class APlayer {
         this.mode = option.mode;
 
         /**
-         * Parse second to 00:00 format
+         * Parse second to 00:00 format. 00:00:00 if audio is over an hour long.
          *
          * @param {Number} second
-         * @return {String} 00:00 format
+         * @return {String} 00:00 format. 00:00:00 if over an hour long.
          */
         this.secondToTime = (second) => {
             const add0 = (num) => {
@@ -74,7 +74,9 @@ class APlayer {
             };
             const min = parseInt(second / 60);
             const sec = parseInt(second - min * 60);
-            return add0(min) + ':' + add0(sec);
+            const hours = parseInt(min / 60);
+            const minAdjust = parseInt((second / 60) - (60 * parseInt((second / 60) / 60)));
+            return second >= 3600? add0(hours) + ':' + add0(minAdjust) + ':' + add0(sec) : add0(min) + ':' + add0(sec);
         };
 
         // save lrc
