@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.5.4 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.5.5 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -143,6 +143,11 @@ class APlayer {
         if (this.option.music.length > 1) {
             this.element.classList.add('aplayer-list');
         }
+
+        if (!this.multiple && this.mode !== 'circulation' && this.mode !== 'order') {
+            this.mode = 'circulation';
+        }
+        this.getRandomOrder();
 
         // fill in HTML
         let eleHTML = `
@@ -375,17 +380,27 @@ class APlayer {
         // mode control
         const modeEle = this.element.getElementsByClassName('aplayer-icon-mode')[0];
         modeEle.addEventListener('click', () => {
-            if (this.mode === 'random') {
-                this.mode = 'single';
+            if (this.multiple) {
+                if (this.mode === 'random') {
+                    this.mode = 'single';
+                }
+                else if (this.mode === 'single') {
+                    this.mode = 'order';
+                }
+                else if (this.mode === 'order') {
+                    this.mode = 'circulation';
+                }
+                else if (this.mode === 'circulation') {
+                    this.mode = 'random';
+                }
             }
-            else if (this.mode === 'single') {
-                this.mode = 'order';
-            }
-            else if (this.mode === 'order') {
-                this.mode = 'circulation';
-            }
-            else if (this.mode === 'circulation') {
-                this.mode = 'random';
+            else {
+                if (this.mode === 'circulation') {
+                    this.mode = 'order';
+                }
+                else {
+                    this.mode = 'circulation';
+                }
             }
             modeEle.innerHTML = this.getSVG(this.mode);
             this.audio.loop = !(this.multiple || this.mode === 'order');
@@ -406,8 +421,7 @@ class APlayer {
         }
 
         if (this.mode === 'random') {
-            let random = parseInt(Math.random() * this.option.music.length);
-            this.setMusic(random);
+            this.setMusic(this.randomOrder[0]);
         }
         else {
             this.setMusic(0);
@@ -491,12 +505,7 @@ class APlayer {
                     }
                     if (this.audio.currentTime !== 0) {
                         if (this.mode === 'random') {
-                            let random = parseInt(Math.random() * this.option.music.length);
-                            if (random === this.playIndex) {
-                                random++;
-                                random = random % this.option.music.length;
-                            }
-                            this.setMusic(random);
+                            this.setMusic(this.nextRandomNum());
                         }
                         else if (this.mode === 'single') {
                             this.setMusic(this.playIndex);
@@ -775,6 +784,56 @@ class APlayer {
         }
         else {
             this.pause();
+        }
+    }
+
+    /**
+     * get random order, using Fisher–Yates shuffle
+     */
+    getRandomOrder() {
+        function random(min, max) {
+            if (max == null) {
+                max = min;
+                min = 0;
+            }
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        function shuffle(arr) {
+            var length = arr.length,
+                shuffled = new Array(length);
+            for (var index = 0, rand; index < length; index++) {
+                rand = random(0, index);
+                if (rand !== index) shuffled[index] = shuffled[rand];
+                shuffled[rand] = arr[index];
+            }
+            return shuffled;
+        }
+        if (this.multiple) {
+            if (!this.normalOrder) {
+                this.normalOrder = [];
+                for (let i = 0; i < this.option.music.length; i++) {
+                    this.normalOrder[i] = i;
+                }
+            }
+            this.randomOrder = shuffle(this.normalOrder);
+        }
+    }
+
+    /**
+     * get next random number
+     */
+    nextRandomNum() {
+        if (this.multiple) {
+            let index = this.randomOrder.indexOf(this.playIndex);
+            if (index === this.randomOrder.length - 1) {
+                return this.randomOrder[0];
+            }
+            else {
+                return this.randomOrder[index + 1];
+            }
+        }
+        else {
+            return 0;
         }
     }
 }
