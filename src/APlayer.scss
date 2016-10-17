@@ -65,6 +65,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         opacity: .8;
         vertical-align: middle;
         padding: 0;
+        font-size: 12px;
+        margin: 0;
+        display: inline;
 
         .aplayer-fill {
             transition: all .2s ease-in-out;
