@@ -14,6 +14,8 @@
 
 [Demo](http://aplayer.js.org)
 
+Using APlayer on your project? [Let me know!](https://github.com/DIYgod/APlayer/issues/79)
+
 Screenshot
 ![image](https://i.imgur.com/JDrJXCr.png)
 
