@@ -239,12 +239,7 @@ class APlayer {
         // play and pause button
         this.button = this.element.getElementsByClassName('aplayer-button')[0];
         this.button.addEventListener('click', (e) => {
-            if (this.button.classList.contains('aplayer-play')) {
-                this.play();
-            }
-            else if (this.button.classList.contains('aplayer-pause')) {
-                this.pause();
-            }
+            this.toggle();
         });
 
         // click music list: change music
@@ -470,6 +465,14 @@ class APlayer {
             this.audio.src = this.music.url;
             this.audio.preload = this.option.preload ? this.option.preload : 'auto';
 
+            this.audio.addEventListener('play', () => {
+                this.play();
+            });
+
+            this.audio.addEventListener('pause', () => {
+                this.pause();
+            });
+
             // show audio time: the metadata has loaded or changed
             this.audio.addEventListener('durationchange', () => {
                 if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
@@ -691,7 +694,7 @@ class APlayer {
         if (Object.prototype.toString.call(time) === '[object Number]') {
             this.audio.currentTime = time;
         }
-        if (this.audio.paused) {
+        if (this.button.classList.contains('aplayer-play')) {
             this.button.classList.remove('aplayer-play');
             this.button.classList.add('aplayer-pause');
             this.button.innerHTML = '';
@@ -730,7 +733,7 @@ class APlayer {
      * Pause music
      */
     pause() {
-        if (!this.audio.paused || this.ended) {
+        if (this.button.classList.contains('aplayer-pause') || this.ended) {
             this.ended = false;
             this.button.classList.remove('aplayer-pause');
             this.button.classList.add('aplayer-play');
@@ -779,10 +782,10 @@ class APlayer {
      * toggle between play and pause
      */
     toggle() {
-        if (this.audio.paused) {
+        if (this.button.classList.contains('aplayer-play')) {
             this.play();
         }
-        else {
+        else if (this.button.classList.contains('aplayer-pause')) {
             this.pause();
         }
     }

@@ -151,7 +151,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            margin-bottom: 13px;
+            margin: 0 0 13px 5px;
             user-select: text;
             cursor: default;
             padding-bottom: 2px;
