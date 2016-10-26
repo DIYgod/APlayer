@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.5.7 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.5.8 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -464,14 +464,6 @@ class APlayer {
             this.audio = document.createElement("audio");
             this.audio.src = this.music.url;
             this.audio.preload = this.option.preload ? this.option.preload : 'auto';
-
-            this.audio.addEventListener('play', () => {
-                this.play();
-            });
-
-            this.audio.addEventListener('pause', () => {
-                this.pause();
-            });
 
             // show audio time: the metadata has loaded or changed
             this.audio.addEventListener('durationchange', () => {
