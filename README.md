@@ -79,8 +79,8 @@ var option = {
 + `ap.setMusic(index)`              // Switch music
 + `ap.lrc`                          // Lrc time and text
 + `ap.playIndex`                    // Current playing index
-+ `ap.audio`                        // Return native video, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
- + `dp.audio.currentTime`           // Returns the current playback position
++ `ap.audio`                        // Return native audio, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
+ + `ap.audio.currentTime`           // Returns the current playback position
  + Most [native api](http://www.w3schools.com/tags/ref_av_dom.asp)
 
 #### Event binding
