@@ -29,6 +29,8 @@ $ npm install aplayer --save
 
 [cdnjs](https://cdnjs.com/libraries/aplayer)
 
+[BootCDN](http://www.bootcdn.cn/aplayer)
+
 ## Usage
 
 ### HTML
