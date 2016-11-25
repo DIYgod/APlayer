@@ -487,6 +487,9 @@ class APlayer {
             // audio can play: enough data is available that the media can be played
             this.audio.addEventListener('canplay', () => {
                 this.trigger('canplay');
+                if (this.option.autoplay && !this.isMobile) {
+                    this.trigger('play');
+                }
             });
 
             // multiple music play
