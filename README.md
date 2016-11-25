@@ -221,6 +221,8 @@ $ npm run build
 
 - [Hermit-X(APlayer for WordPress)](https://github.com/liwanglin12/Hermit-X)
 
+- [vue-aplayer](https://github.com/SevenOutman/vue-aplayer)
+
 ## LICENSE
 
 [The Star And Thank Author License (SATA)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
