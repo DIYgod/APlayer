@@ -35,7 +35,7 @@ $ npm install aplayer --save
 
 ## Usage
 
-See [docs](http://dplayer.js.org/docs)
+See [docs](http://aplayer.js.org/docs)
 
 ## Run in development
 
