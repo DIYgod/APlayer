@@ -99,16 +99,14 @@ var ap = new APlayer({
 
 ```js
 var APlayer = require('APlayer');
-var ap = new APlayer({
-    // ...
-});
+var ap = new APlayer(option);
 ```
 
 ### With lrc
 
 Show lrc, you can put LRC in JS or HTML as you like.
 
-#### LRC format:
+#### LRC format
 
 Support multiple time tag, support three decimal second
 
@@ -119,7 +117,7 @@ Support multiple time tag, support three decimal second
 ...
 ```
 
-#### LRC in JS:
+#### LRC in JS
 
 JS:
 
@@ -132,7 +130,7 @@ JS:
 }
 ```
 
-#### LRC in HTML:
+#### LRC in HTML
 
 JS:
 
@@ -158,7 +156,7 @@ HTML:
 </div>
 ```
 
-#### LRC in lrc file or API:
+#### LRC in lrc file or API
 
 ```js
 {
@@ -172,8 +170,6 @@ HTML:
 ### With playlist
 
 Show multiple music.
-
-#### JS:
 
 Option:
 
