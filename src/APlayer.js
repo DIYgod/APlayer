@@ -69,6 +69,9 @@ class APlayer {
          * @return {String} 00:00 format. 00:00:00 if over an hour long.
          */
         this.secondToTime = (second) => {
+            if (isNaN(second)) {
+                return '00:00';
+            }
             const add0 = (num) => {
                 return num < 10 ? '0' + num : '' + num;
             };
@@ -268,9 +271,14 @@ class APlayer {
             const e = event || window.event;
             barWidth = bar.barWrap.clientWidth;
             const percentage = (e.clientX - getElementViewLeft(bar.barWrap)) / barWidth;
-            this.updateBar('played', percentage, 'width');
-            this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(percentage * this.audio.duration);
-            this.audio.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration;
+            if (isNaN(this.audio.duration)) {
+                this.updateBar('played', 0, 'width');
+            }
+            else {
+                this.updateBar('played', percentage, 'width');
+                this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(percentage * this.audio.duration);
+                this.audio.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration;
+            }
         });
 
         thumb.addEventListener('mouseover', () => {
@@ -295,15 +303,20 @@ class APlayer {
         const thumbUp = () => {
             document.removeEventListener('mouseup', thumbUp);
             document.removeEventListener('mousemove', thumbMove);
-            this.audio.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration;
-            this.playedTime = setInterval(() => {
-                this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
-                if (this.option.showlrc) {
-                    this.updateLrc();
-                }
-                this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
-                this.trigger('playing');
-            }, 100);
+            if (isNaN(this.audio.duration)) {
+                this.updateBar('played', 0, 'width');
+            }
+            else {
+                this.audio.currentTime = parseFloat(bar.playedBar.style.width) / 100 * this.audio.duration;
+                this.playedTime = setInterval(() => {
+                    this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                    if (this.option.showlrc) {
+                        this.updateLrc();
+                    }
+                    this.element.getElementsByClassName('aplayer-ptime')[0].innerHTML = this.secondToTime(this.audio.currentTime);
+                    this.trigger('playing');
+                }, 100);
+            }
         };
 
         thumb.addEventListener('mousedown', () => {
