@@ -478,6 +478,58 @@ class APlayer {
             this.audio.src = this.music.url;
             this.audio.preload = this.option.preload ? this.option.preload : 'auto';
 
+            this.audio.addEventListener('play', () => {
+                if (this.button.classList.contains('aplayer-play')) {
+                    this.button.classList.remove('aplayer-play');
+                    this.button.classList.add('aplayer-pause');
+                    this.button.innerHTML = '';
+                    setTimeout(() => {
+                        this.button.innerHTML = `
+                                    <button class="aplayer-icon aplayer-icon-pause">`
+                            +           this.getSVG('pause')
+                            + `     </button>`;
+                    }, 100);
+
+                    // pause other players (Thanks @Aprikyblue)
+                    if (this.option.mutex) {
+                        for (let i = 0; i < instances.length; i++) {
+                            if (this != instances[i]) {
+                                instances[i].pause();
+                            }
+                        }
+                    }
+                    if (this.playedTime) {
+                        clearInterval(this.playedTime);
+                    }
+                    this.playedTime = setInterval(() => {
+                        this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
+                        if (this.option.showlrc) {
+                            this.updateLrc();
+                        }
+                        this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
+                        this.trigger('playing');
+                    }, 100);
+                    this.trigger('play');
+                }
+            });
+
+            this.audio.addEventListener('pause', () => {
+                if (this.button.classList.contains('aplayer-pause') || this.ended) {
+                    this.ended = false;
+                    this.button.classList.remove('aplayer-pause');
+                    this.button.classList.add('aplayer-play');
+                    this.button.innerHTML = '';
+                    setTimeout(() => {
+                        this.button.innerHTML = `
+                                    <button class="aplayer-icon aplayer-icon-play">`
+                            +           this.getSVG('play')
+                            + `     </button>`;
+                    }, 100);
+                    clearInterval(this.playedTime);
+                    this.trigger('pause');
+                }
+            });
+
             // show audio time: the metadata has loaded or changed
             this.audio.addEventListener('durationchange', () => {
                 if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
@@ -699,38 +751,8 @@ class APlayer {
         if (Object.prototype.toString.call(time) === '[object Number]') {
             this.audio.currentTime = time;
         }
-        if (this.button.classList.contains('aplayer-play')) {
-            this.button.classList.remove('aplayer-play');
-            this.button.classList.add('aplayer-pause');
-            this.button.innerHTML = '';
-            setTimeout(() => {
-                this.button.innerHTML = `
-                            <button class="aplayer-icon aplayer-icon-pause">`
-                    +           this.getSVG('pause')
-                    + `     </button>`;
-            }, 100);
-
-            // pause other players (Thanks @Aprikyblue)
-            if (this.option.mutex) {
-                for (let i = 0; i < instances.length; i++) {
-                    if (this != instances[i]) {
-                        instances[i].pause();
-                    }
-                }
-            }
+        if (this.audio.paused) {
             this.audio.play();
-            if (this.playedTime) {
-                clearInterval(this.playedTime);
-            }
-            this.playedTime = setInterval(() => {
-                this.updateBar('played', this.audio.currentTime / this.audio.duration, 'width');
-                if (this.option.showlrc) {
-                    this.updateLrc();
-                }
-                this.ptime.innerHTML = this.secondToTime(this.audio.currentTime);
-                this.trigger('playing');
-            }, 100);
-            this.trigger('play');
         }
     }
 
@@ -738,20 +760,8 @@ class APlayer {
      * Pause music
      */
     pause() {
-        if (this.button.classList.contains('aplayer-pause') || this.ended) {
-            this.ended = false;
-            this.button.classList.remove('aplayer-pause');
-            this.button.classList.add('aplayer-play');
-            this.button.innerHTML = '';
-            setTimeout(() => {
-                this.button.innerHTML = `
-                            <button class="aplayer-icon aplayer-icon-play">`
-                    +           this.getSVG('play')
-                    + `     </button>`;
-            }, 100);
+        if (!this.audio.paused) {
             this.audio.pause();
-            clearInterval(this.playedTime);
-            this.trigger('pause');
         }
     }
 
