@@ -195,14 +195,14 @@ music: [
 
 ```
 $ npm install
-$ npm run start
+$ npm run dev
 ```
 
 ## Make a release
 
 ```
 $ npm install
-$ npm run test
+$ npm run build
 ```
 
 ## Related Projects
