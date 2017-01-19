@@ -2,22 +2,36 @@ var webpack = require('webpack');
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 
+var libraryName = 'APlayer';
+var env = process.env.WEBPACK_ENV;
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'dist');
 
-module.exports = {
-    devtool: 'source-map',
+var plugins = [];
+if (env !== 'dev') {
+    plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            minimize: true
+        })
+    );
+}
 
-    entry: './src/APlayer.js',
+module.exports = {
+    entry: './src/' + libraryName + '.js',
 
     output: {
         path: BUILD_PATH,
-        filename: 'APlayer.min.js',
-        library: 'APlayer',
+        filename: libraryName + '.min.js',
+        library: libraryName,
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
+
+    devtool: 'source-map',
 
     devServer: {
         publicPath: "/dist/",
@@ -45,13 +59,7 @@ module.exports = {
         ]
     },
 
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        })
-    ],
+    plugins: plugins,
 
     postcss: [
         autoprefixer({
