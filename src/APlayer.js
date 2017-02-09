@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.5.8 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.5.9 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -156,7 +156,7 @@ class APlayer {
         let eleHTML = `
             <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
                 <div class="aplayer-button aplayer-play">
-                    <button class="aplayer-icon aplayer-icon-play">`
+                    <button type="button" class="aplayer-icon aplayer-icon-play">`
             +           this.getSVG('play')
             + `     </button>
                 </div>
@@ -183,7 +183,7 @@ class APlayer {
                             - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
                         </span>
                         <div class="aplayer-volume-wrap">
-                            <button class="aplayer-icon aplayer-icon-volume-down" ${this.isMobile ? 'style="display: none;"' : ''}>`
+                            <button type="button" class="aplayer-icon aplayer-icon-volume-down" ${this.isMobile ? 'style="display: none;"' : ''}>`
             +                   this.getSVG('volume-down')
             + `             </button>
                             <div class="aplayer-volume-bar-wrap">
@@ -192,10 +192,10 @@ class APlayer {
                                 </div>
                             </div>
                         </div>
-                        <button class="aplayer-icon aplayer-icon-mode">`
+                        <button type="button" class="aplayer-icon aplayer-icon-mode">`
             +               this.getSVG(this.mode)
             + `         </button>
-                        ${(this.multiple ? `<button class="aplayer-icon aplayer-icon-menu">`
+                        ${(this.multiple ? `<button type="button" class="aplayer-icon aplayer-icon-menu">`
             +               this.getSVG('menu')
             + `         </button>` : ``)}
                     </div>
@@ -485,7 +485,7 @@ class APlayer {
                     this.button.innerHTML = '';
                     setTimeout(() => {
                         this.button.innerHTML = `
-                                    <button class="aplayer-icon aplayer-icon-pause">`
+                                    <button type="button" class="aplayer-icon aplayer-icon-pause">`
                             +           this.getSVG('pause')
                             + `     </button>`;
                     }, 100);
@@ -521,7 +521,7 @@ class APlayer {
                     this.button.innerHTML = '';
                     setTimeout(() => {
                         this.button.innerHTML = `
-                                    <button class="aplayer-icon aplayer-icon-play">`
+                                    <button type="button" class="aplayer-icon aplayer-icon-play">`
                             +           this.getSVG('play')
                             + `     </button>`;
                     }, 100);
