@@ -29,6 +29,8 @@ $ npm install aplayer --save
 
 ## CDN
 
+[unpkg](https://unpkg.com/aplayer)
+
 [cdnjs](https://cdnjs.com/libraries/aplayer)
 
 [BootCDN](http://www.bootcdn.cn/aplayer)
