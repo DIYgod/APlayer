@@ -34,10 +34,18 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     }
 }
 
-.aplayer-list {
+.aplayer-withlist {
     &.aplayer {
         .aplayer-info {
             border-bottom: 1px solid #e9e9e9;
+        }
+
+        .aplayer-list {
+            display: block;
+        }
+
+        .aplayer-icon-menu {
+            display: inline !important;
         }
     }
 }
@@ -245,6 +253,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                             fill: #000;
                         }
                     }
+
+                    &.aplayer-icon-menu {
+                        display: none;
+                    }
                 }
 
                 &.aplayer-time-narrow {
@@ -349,6 +361,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
             &.aplayer-lrc-current {
                 opacity: 1;
+                overflow: visible;
+                height: initial !important;
             }
         }
 
@@ -364,6 +378,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         overflow: auto;
         transition: all 0.5s ease;
         will-change: height;
+        display: none;
 
         &.aplayer-list-hide {
             height: 0 !important;

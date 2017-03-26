@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.5.9 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.6.0 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -54,9 +54,6 @@ class APlayer {
                 option[defaultKey] = defaultOption[defaultKey];
             }
         }
-
-        // multiple music
-        this.playIndex = Object.prototype.toString.call(option.music) === '[object Array]' ? 0 : -1;
 
         this.option = option;
         this.audios = [];
@@ -136,15 +133,20 @@ class APlayer {
             }
         };
 
-        this.multiple = this.playIndex > -1;
-        this.music = this.multiple ? this.option.music[this.playIndex] : this.option.music;
+        // multiple music
+        this.playIndex = 0;
+        this.multiple = Object.prototype.toString.call(option.music) === '[object Array]';
+        if (!this.multiple) {
+            this.option.music = [this.option.music];
+        }
+        this.music = this.option.music[this.playIndex];
 
         // add class aplayer-withlrc
         if (this.option.showlrc) {
             this.element.classList.add('aplayer-withlrc');
         }
         if (this.option.music.length > 1) {
-            this.element.classList.add('aplayer-list');
+            this.element.classList.add('aplayer-withlist');
         }
 
         if (!this.multiple && this.mode !== 'circulation' && this.mode !== 'order') {
@@ -195,14 +197,12 @@ class APlayer {
                         <button type="button" class="aplayer-icon aplayer-icon-mode">`
             +               this.getSVG(this.mode)
             + `         </button>
-                        ${(this.multiple ? `<button type="button" class="aplayer-icon aplayer-icon-menu">`
+                        <button type="button" class="aplayer-icon aplayer-icon-menu">`
             +               this.getSVG('menu')
-            + `         </button>` : ``)}
+            + `         </button>
                     </div>
                 </div>
-            </div>`;
-        if (this.multiple) {
-            eleHTML += `
+            </div>
             <div class="aplayer-list" ${this.option.listmaxheight ? `style="max-height: ${this.option.listmaxheight}` : ``}">
                 <ol>`;
             for (let i = 0; i < this.option.music.length; i++) {
@@ -217,7 +217,6 @@ class APlayer {
             eleHTML += `
                 </ol>
             </div>`
-        }
         this.element.innerHTML = eleHTML;
 
         // hide mode button in arrow container
@@ -246,21 +245,24 @@ class APlayer {
         });
 
         // click music list: change music
-        if (this.multiple) {
-            const listItem = this.element.getElementsByClassName('aplayer-list')[0].getElementsByTagName('li');
-            for (let i = 0; i < this.option.music.length; i++) {
-                listItem[i].addEventListener('click', () => {
-                    const musicIndex = parseInt(listItem[i].getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
-                    if (musicIndex !== this.playIndex) {
-                        this.setMusic(musicIndex);
-                        this.play();
-                    }
-                    else {
-                        this.toggle();
-                    }
-                });
+        const list = this.element.getElementsByClassName('aplayer-list')[0];
+        list.addEventListener('click', (e) => {
+            let target;
+            if (e.target.tagName.toUpperCase() === 'LI') {
+                target = e.target;
             }
-        }
+            else {
+                target = e.target.parentElement;
+            }
+            const musicIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
+            if (musicIndex !== this.playIndex) {
+                this.setMusic(musicIndex);
+                this.play();
+            }
+            else {
+                this.toggle();
+            }
+        });
 
         // control play progress
         bar.playedBar = this.element.getElementsByClassName('aplayer-played')[0];
@@ -415,18 +417,15 @@ class APlayer {
         });
 
         // toggle menu control
-        if (this.multiple) {
-            const list = this.element.getElementsByClassName('aplayer-list')[0];
-            list.style.height = list.offsetHeight + 'px';
-            this.element.getElementsByClassName('aplayer-icon-menu')[0].addEventListener('click', () => {
-                if (!list.classList.contains('aplayer-list-hide')) {
-                    list.classList.add('aplayer-list-hide');
-                }
-                else {
-                    list.classList.remove('aplayer-list-hide');
-                }
-            });
-        }
+        list.style.height = list.offsetHeight + 'px';
+        this.element.getElementsByClassName('aplayer-icon-menu')[0].addEventListener('click', () => {
+            if (!list.classList.contains('aplayer-list-hide')) {
+                list.classList.add('aplayer-list-hide');
+            }
+            else {
+                list.classList.remove('aplayer-list-hide');
+            }
+        });
 
         if (this.mode === 'random') {
             this.setMusic(this.randomOrder[0]);
@@ -443,11 +442,11 @@ class APlayer {
      */
     setMusic(index) {
         // get this.music
-        if (this.multiple && typeof(index) !== 'undefined') {
+        if (typeof(index) !== 'undefined') {
             this.playIndex = index;
         }
         const indexMusic = this.playIndex;
-        this.music = this.multiple ? this.option.music[indexMusic] : this.option.music;
+        this.music = this.option.music[indexMusic];
 
         // set html
         if (this.music.pic) {
@@ -455,12 +454,10 @@ class APlayer {
         }
         this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title;
         this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ${this.music.author}`;
-        if (this.multiple) {
-            if (this.element.getElementsByClassName('aplayer-list-light')[0]) {
-                this.element.getElementsByClassName('aplayer-list-light')[0].classList.remove('aplayer-list-light');
-            }
-            this.element.getElementsByClassName('aplayer-list')[0].getElementsByTagName('li')[indexMusic].classList.add('aplayer-list-light');
+        if (this.element.getElementsByClassName('aplayer-list-light')[0]) {
+            this.element.getElementsByClassName('aplayer-list-light')[0].classList.remove('aplayer-list-light');
         }
+        this.element.getElementsByClassName('aplayer-list')[0].getElementsByTagName('li')[indexMusic].classList.add('aplayer-list-light');
 
         // set the previous audio object
         if (this.audio) {
@@ -468,12 +465,10 @@ class APlayer {
             this.audio.currentTime = 0;
         }
 
-        if (this.multiple) {
-            this.element.getElementsByClassName('aplayer-list')[0].scrollTop = indexMusic * 33;
-        }
+        this.element.getElementsByClassName('aplayer-list')[0].scrollTop = indexMusic * 33;
 
         // get this audio object
-        if ((this.multiple && !this.audios[indexMusic]) || this.playIndex === -1) {
+        if (!this.audios[indexMusic]) {
             this.audio = document.createElement("audio");
             this.audio.src = this.music.url;
             this.audio.preload = this.option.preload ? this.option.preload : 'auto';
@@ -514,7 +509,7 @@ class APlayer {
             });
 
             this.audio.addEventListener('pause', () => {
-                if (this.button.classList.contains('aplayer-pause') || this.ended) {
+                if (this.button && (this.button.classList.contains('aplayer-pause') || this.ended)) {
                     this.ended = false;
                     this.button.classList.remove('aplayer-pause');
                     this.button.classList.add('aplayer-play');
@@ -556,8 +551,8 @@ class APlayer {
 
             // multiple music play
             this.ended = false;
-            if (this.multiple) {
-                this.audio.addEventListener('ended', () => {
+            this.audio.addEventListener('ended', () => {
+                if (this.multiple) {
                     if (this.isMobile) {
                         this.ended = true;
                         this.pause();
@@ -589,17 +584,15 @@ class APlayer {
                             }
                         }
                     }
-                });
-            }
-            else {
-                this.audio.addEventListener('ended', () => {
+                }
+                else {
                     if (this.mode === 'order') {
                         this.ended = true;
                         this.pause();
                         this.trigger('ended');
                     }
-                });
-            }
+                }
+            });
 
             // control volume
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
@@ -607,9 +600,7 @@ class APlayer {
             // loop
             this.audio.loop = !(this.multiple || this.mode === 'order');
 
-            if (this.multiple) {
-                this.audios[indexMusic] = this.audio;
-            }
+            this.audios[indexMusic] = this.audio;
         }
         else {
             this.audio = this.audios[indexMusic];
@@ -654,17 +645,12 @@ class APlayer {
 
         // fill in lrc
         if (this.option.showlrc) {
-            const index = this.multiple ? indexMusic : 0;
+            const index = indexMusic;
 
             if (!this.lrcs[index]) {
                 let lrcs = '';
                 if (this.option.showlrc === 1) {
-                    if (this.multiple) {
-                        lrcs = this.option.music[index].lrc;
-                    }
-                    else {
-                        lrcs = this.option.music.lrc;
-                    }
+                    lrcs = this.option.music[index].lrc;
                 }
                 else if (this.option.showlrc === 2 || this.option.showlrc === true)  {
                     lrcs = this.savelrc[index];
@@ -676,32 +662,28 @@ class APlayer {
                             if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
                                 lrcs = xhr.responseText;
                                 this.lrcs[index] = parseLrc(lrcs);
-                                this.lrc = this.lrcs[index];
-                                let lrcHTML = '';
-                                this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
-                                for (let i = 0; i < this.lrc.length; i++) {
-                                    lrcHTML += `<p>${this.lrc[i][1]}</p>`;
-                                }
-                                this.lrcContents.innerHTML = lrcHTML;
-                                if (!this.lrcIndex) {
-                                    this.lrcIndex = 0;
-                                }
-                                this.lrcContents.getElementsByTagName('p')[0].classList.add('aplayer-lrc-current');
-                                this.lrcContents.style.transform = 'translateY(0px)';
-                                this.lrcContents.style.webkitTransform = 'translateY(0px)';
                             }
                             else {
                                 console.log('Request was unsuccessful: ' + xhr.status);
+                                this.lrcs[index] = [['00:00', 'Not available']];
                             }
+                            this.lrc = this.lrcs[index];
+                            let lrcHTML = '';
+                            this.lrcContents = this.element.getElementsByClassName('aplayer-lrc-contents')[0];
+                            for (let i = 0; i < this.lrc.length; i++) {
+                                lrcHTML += `<p>${this.lrc[i][1]}</p>`;
+                            }
+                            this.lrcContents.innerHTML = lrcHTML;
+                            if (!this.lrcIndex) {
+                                this.lrcIndex = 0;
+                            }
+                            this.lrcContents.getElementsByTagName('p')[0].classList.add('aplayer-lrc-current');
+                            this.lrcContents.style.transform = 'translateY(0px)';
+                            this.lrcContents.style.webkitTransform = 'translateY(0px)';
                         }
                     };
                     let apiurl;
-                    if (this.multiple) {
-                        apiurl = this.option.music[index].lrc;
-                    }
-                    else {
-                        apiurl = this.option.music.lrc;
-                    }
+                    apiurl = this.option.music[index].lrc;
                     xhr.open('get', apiurl, true);
                     xhr.send(null);
                 }
@@ -709,7 +691,12 @@ class APlayer {
                     this.lrcs[index] = parseLrc(lrcs);
                 }
                 else {
-                    this.lrcs[index] = [['00:00', 'Loading']];
+                    if (this.option.showlrc === 3) {
+                        this.lrcs[index] = [['00:00', 'Loading']];
+                    }
+                    else {
+                        this.lrcs[index] = [['00:00', 'Not available']];
+                    }
                 }
             }
 
@@ -827,13 +814,9 @@ class APlayer {
             return shuffled;
         }
         if (this.multiple) {
-            if (!this.normalOrder) {
-                this.normalOrder = [];
-                for (let i = 0; i < this.option.music.length; i++) {
-                    this.normalOrder[i] = i;
-                }
-            }
-            this.randomOrder = shuffle(this.normalOrder);
+            this.randomOrder = shuffle([...Array(this.option.music.length)].map(function(item, i) {
+                return i;
+            }));
         }
     }
 
@@ -853,6 +836,55 @@ class APlayer {
         else {
             return 0;
         }
+    }
+
+    /**
+     * destroy this player
+     */
+    destroy() {
+        instances.splice(instances.indexOf(this), 1);
+        this.pause();
+        this.element.innerHTML = '';
+        clearInterval(this.playedTime);
+        for (let key in this) {
+            if (this.hasOwnProperty(key)) {
+                delete this[key];
+            }
+        }
+    }
+
+    /**
+     * add music dynamically
+     *
+     * @param {Array} newMusic
+     */
+    addMusic(newMusic) {
+        this.option.music = this.option.music.concat(newMusic);
+
+        const list = this.element.getElementsByClassName('aplayer-list')[0];
+        const listEle = list.getElementsByTagName('ol')[0];
+        let newItemHTML = ``;
+        for (let i = 0; i < newMusic.length; i++) {
+            newItemHTML += `
+                <li>
+                    <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
+                    <span class="aplayer-list-index">${this.option.music.length - newMusic.length + i + 1}</span>
+                    <span class="aplayer-list-title">${newMusic[i].title}</span>
+                    <span class="aplayer-list-author">${newMusic[i].author}</span>
+                </li>`
+        }
+        listEle.innerHTML += newItemHTML;
+
+        if (!this.multiple) {
+            this.multiple = true;
+            this.element.classList.add('aplayer-withlist');
+            this.audio.loop = false;
+        }
+
+        list.style.height = 'auto';
+        list.style.height = list.offsetHeight + 'px';
+
+        this.getRandomOrder();
     }
 }
 
