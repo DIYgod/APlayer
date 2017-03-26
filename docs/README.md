@@ -75,6 +75,8 @@ var ap = new APlayer({
 + `ap.volume(percentage)`           // Set volume
 + `ap.on(event, handler)`           // Event binding
 + `ap.setMusic(index)`              // Switch music
++ `ap.destroy()`                    // Destroy this player
++ `ap.addMusic(newMusics)`          // Add music dynamically, `newMusics` should be an array
 + `ap.lrc`                          // Lrc time and text
 + `ap.playIndex`                    // Current playing index
 + `ap.audio`                        // Return native audio, most [native api](http://www.w3schools.com/tags/ref_av_dom.asp) are supported
