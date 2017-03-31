@@ -158,9 +158,9 @@ class APlayer {
         let eleHTML = `
             <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
                 <div class="aplayer-button aplayer-play">
-                    <button type="button" class="aplayer-icon aplayer-icon-play">`
-            +           this.getSVG('play')
-            + `     </button>
+                    <button type="button" class="aplayer-icon aplayer-icon-play">
+                        ${this.getSVG('play')}
+                    </button>
                 </div>
             </div>
             <div class="aplayer-info">
@@ -185,21 +185,21 @@ class APlayer {
                             - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
                         </span>
                         <div class="aplayer-volume-wrap">
-                            <button type="button" class="aplayer-icon aplayer-icon-volume-down" ${this.isMobile ? 'style="display: none;"' : ''}>`
-            +                   this.getSVG('volume-down')
-            + `             </button>
+                            <button type="button" class="aplayer-icon aplayer-icon-volume-down" ${this.isMobile ? 'style="display: none;"' : ''}>
+                               ${this.getSVG('volume-down')}
+                            </button>
                             <div class="aplayer-volume-bar-wrap">
                                 <div class="aplayer-volume-bar">
                                     <div class="aplayer-volume" style="height: 80%; background: ${this.option.theme};"></div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="aplayer-icon aplayer-icon-mode">`
-            +               this.getSVG(this.mode)
-            + `         </button>
-                        <button type="button" class="aplayer-icon aplayer-icon-menu">`
-            +               this.getSVG('menu')
-            + `         </button>
+                        <button type="button" class="aplayer-icon aplayer-icon-mode">
+                            ${this.getSVG(this.mode)}
+                        </button>
+                        <button type="button" class="aplayer-icon aplayer-icon-menu">
+                            ${this.getSVG('menu')}
+                        </button>
                     </div>
                 </div>
             </div>
