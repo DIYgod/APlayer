@@ -1,0 +1,121 @@
+/* audioplayer */
+
+#player4
+{
+	box-shadow: none;
+}
+#player4 .aplayer-info
+{
+	height: 76px;
+}
+#player4 .aplayer-info .aplayer-music
+{
+	margin-bottom: 10px;
+}
+#player4 .aplayer-info .aplayer-music .aplayer-title,
+#player4 .aplayer-info .aplayer-music .aplayer-author
+{
+	color: #fff;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+{
+	margin: 0 140px 0 0;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+.aplayer-bar 
+{ 
+	height: auto; 
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+.aplayer-bar .aplayer-loaded 
+{ 
+	height: auto; 
+	background: #5bc0de;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+.aplayer-bar .aplayer-played 
+{ 
+	height: auto;
+}
+#player4 .form-control
+{
+	border: 0;
+	border-radius: 0;
+	padding: 6px 0px;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-time
+{
+	bottom: 0px;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-time
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-ptime,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-dtime,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-volume-wrap .aplayer-icon-volume-down,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-loop,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-menu
+{
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-loop:hover,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-menu:hover
+{
+	color: #e0e0e0;
+}
+#player4 .aplayer-list ol li.aplayer-list-light
+{
+	background: transparent;
+}
+#player4 .aplayer-list ol li
+{
+	padding: 0;
+	border-top: 0;
+}
+#player4 .aplayer-list ol li:hover,
+.nav > li > a:hover, .nav > li > a:focus
+{
+	background: rgba(100, 100, 100, 0.5);
+}
+#player4 .aplayer-list ol li .aplayer-list-cur,
+#player4 .aplayer-list ol li .aplayer-list-index,
+#player4 .aplayer-list ol li .aplayer-list-title,
+#player4 .aplayer-list ol li .aplayer-list-author
+{
+}
+
+#player4 .aplayer-list ol li .aplayer-list-cur {
+    display: none;
+}
+
+#player4 .aplayer-list ol > li
+{
+	padding: 0px 15px;
+	border-radius: 0;
+}
+#player4 .aplayer-list ol > li.active > a
+{
+	border-radius: 0;
+}
+
+@media (max-width: 360px)
+{
+	#player4 .aplayer-list ol > li > a
+	{
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+	{
+		margin: 0;
+	}
+
+	#player4 .aplayer-info .aplayer-controller .aplayer-time
+	{
+		bottom: -15px;
+	}
+
+	#player4 .aplayer-list-author
+	{
+		display: none;
+	}
+}
