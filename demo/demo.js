@@ -36,7 +36,7 @@ ap1.on('error', function () {
     console.log('error');
 });
 
-var ap2 = new APlayer({
+/* var ap2 = new APlayer({
     element: document.getElementById('player2'),
     narrow: true,
     autoplay: false,
@@ -67,7 +67,7 @@ var ap3 = new APlayer({
         pic: 'http://devtest.qiniudn.com/回レ！雪月花.jpg',
         lrc: "回レ！雪月花.lrc"
     }
-});
+}); */
 
 var ap4 = new APlayer({
     element: document.getElementById('player4'),
@@ -99,7 +99,7 @@ var ap4 = new APlayer({
     ]
 });
 
-var ap5 = new APlayer({
+/* var ap5 = new APlayer({
     element: document.getElementById('player5'),
     narrow: false,
     autoplay: false,
@@ -131,4 +131,4 @@ var ap5 = new APlayer({
             lrc: '回レ！雪月花.lrc'
         }
     ]
-});
+}); */

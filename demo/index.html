@@ -51,7 +51,56 @@
         <p>Made by <a href="https://www.anotherhome.net/" target="_blank">DIYgod</a>. Available on <a href="https://github.com/DIYgod/APlayer" target="_blank">GitHub</a>. Licensed MIT.</p>
         <hr>
         <h3>Normal</h3>
-        <div id="player1" class="aplayer"></div>
+        <div id="player1" class="aplayer">
+            <div class="aplayer-pic">
+                <div class="aplayer-button aplayer-play">
+                    <button type="button" class="aplayer-icon aplayer-icon-play">
+                    </button>
+                </div>
+            </div>
+            <div class="aplayer-info">
+                <div class="aplayer-music">
+                    <span class="aplayer-title"></span>
+                    <span class="aplayer-author"></span>
+                </div>
+                <div class="aplayer-lrc">
+                    <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
+                </div>
+                <div class="aplayer-controller">
+                    <div class="aplayer-bar-wrap">
+                        <div class="aplayer-bar">
+                            <div class="aplayer-loaded" style="width: 0"></div>
+                            <div class="aplayer-played" style="width: 0;">
+                                <span class="aplayer-thumb" style="border: ;"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aplayer-time">
+                        <span class="aplayer-time-inner">
+                            - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
+                        </span>
+                        <div class="aplayer-volume-wrap">
+                            <button type="button" class="aplayer-icon aplayer-icon-volume-down">
+                               
+                            </button>
+                            <div class="aplayer-volume-bar-wrap">
+                                <div class="aplayer-volume-bar">
+                                    <div class="aplayer-volume" style="height: 80%; "></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="aplayer-icon aplayer-icon-mode">
+                            
+                        </button>
+                        <button type="button" class="aplayer-icon aplayer-icon-menu">
+                            
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="aplayer-list">
+            </div>
+        </div>
         <p></p>
         <button onclick="ap1.play()">ap.play()</button>
         <button onclick="ap1.play(100)">ap.play(100)</button>
@@ -83,15 +132,60 @@
         ])">ap.addMusic(...)</button>
         <button onclick="ap1.destroy()">ap.destroy()</button>
         <h3>With playlist</h3>
-        <div id="player4" class="aplayer"></div>
+        <div id="player4" class="aplayer">
+          <div class="aplayer-pic">
+            <div class="aplayer-button aplayer-play">
+              <button type="button" class="aplayer-icon aplayer-icon-play">
+              </button>
+            </div>
+          </div>
+          <div class="aplayer-info">
+            <div class="aplayer-music">
+              <span class="aplayer-title"></span>
+              <span class="aplayer-author"></span>
+            </div>
+            
+            <div class="aplayer-lrc">
+              <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
+            </div>
+            <div class="aplayer-controller">
+              <div class="aplayer-bar-wrap">
+                <div class="aplayer-bar progress form-control">
+                  <div class="aplayer-loaded progress-bar progress-bar-info" style="width: 0"></div>
+                  <div class="aplayer-played progress-bar progress-bar-striped active" style="width: 0;">
+                    <span class="aplayer-thumb" style="display: none;"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="aplayer-time">
+                - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
+                <div class="aplayer-volume-wrap">
+                  <button type="button" class="aplayer-icon aplayer-icon-volume-down">
+                  </button>
+                  <div class="aplayer-volume-bar-wrap">
+                    <div class="aplayer-volume-bar">
+                      <div class="aplayer-volume" style="height: 80%;"></div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="aplayer-icon aplayer-icon-mode">
+                </button>
+                <button type="button" class="aplayer-icon aplayer-icon-menu">
+                </button>              
+              </div>
+            </div>
+          </div>
+          <div class="aplayer-list">
+          </div>
+        </div>
         <p></p>
         <button onclick="ap4.setMusic(2)">ap.setMusic(2)</button>
         <h3>With lyrics</h3>
-        <div id="player3" class="aplayer"></div>
+        <!-- <div id="player3" class="aplayer"></div> -->
         <h3>With playlist and lyrics</h3>
-        <div id="player5" class="aplayer"></div>
+        <!-- <div id="player5" class="aplayer"></div> -->
         <h3>Narrow</h3>
-        <div id="player2" class="aplayer"></div>
+        <!-- <div id="player2" class="aplayer"></div> -->
     </div>
     <script src="../dist/APlayer.min.js"></script>
     <script src="demo.js"></script>
