@@ -154,10 +154,60 @@ class APlayer {
         }
         this.getRandomOrder();
 
-        
+        let eleHTML = ``;
 
-        // fill in HTML
-        let eleHTML = `<ol>`;
+        // if it's empty, use a default
+        if (this.element.innerHTML.trim() == '') {
+            eleHTML = `
+                <div class="aplayer-pic">
+                    <div class="aplayer-button aplayer-play">
+                        <button type="button" class="aplayer-icon aplayer-icon-play">
+                        </button>
+                    </div>
+                </div>
+                <div class="aplayer-info">
+                    <div class="aplayer-music">
+                        <span class="aplayer-title"></span>
+                        <span class="aplayer-author"></span>
+                    </div>
+                    <div class="aplayer-lrc">
+                        <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
+                    </div>
+                    <div class="aplayer-controller">
+                        <div class="aplayer-bar-wrap">
+                            <div class="aplayer-bar">
+                                <div class="aplayer-loaded" style="width: 0"></div>
+                                <div class="aplayer-played" style="width: 0;">
+                                    <span class="aplayer-thumb" style=""></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aplayer-time">
+                            <span class="aplayer-time-inner">
+                                - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
+                            </span>
+                            <div class="aplayer-volume-wrap">
+                                <button type="button" class="aplayer-icon aplayer-icon-volume-down">
+                                </button>
+                                <div class="aplayer-volume-bar-wrap">
+                                    <div class="aplayer-volume-bar">
+                                        <div class="aplayer-volume" style="height: 80%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="aplayer-icon aplayer-icon-mode">
+                            </button>
+                            <button type="button" class="aplayer-icon aplayer-icon-menu">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="aplayer-list">
+                    <ol>`;
+            this.element.innerHTML = eleHTML;
+        }
+
+        eleHTML = `<ol>`;
         for (let i = 0; i < this.option.music.length; i++) {
             eleHTML += `
                 <li>
@@ -169,7 +219,6 @@ class APlayer {
         }
         eleHTML += `</ol>`
 
-        console.log(this.element);
         this.element.querySelector('.aplayer-list').innerHTML += eleHTML;
 
         if (this.music.pic) {
