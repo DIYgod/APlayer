@@ -226,7 +226,13 @@ class APlayer {
         }
 
         this.element.querySelector('.aplayer-icon-play').innerHTML += this.getSVG('play');
-        this.element.querySelector('.aplayer-played').style.background = this.option.theme;
+        
+        // If not using Bootstrap style, use default background
+        // TODO: find a better way than hardcoding a very specific check
+        if (!this.element.querySelector('.progress')) {
+            this.element.querySelector('.aplayer-played').style.background = this.option.theme;
+        }
+
         this.element.querySelector('.aplayer-thumb').style.border = `1px solid ${this.option.theme}`;
 
         if (this.isMobile) {
