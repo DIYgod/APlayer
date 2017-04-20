@@ -1,7 +1,6 @@
 # APlayer
 
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
-[![CDNJS](https://img.shields.io/cdnjs/v/aplayer.svg?style=flat-square)](https://cdnjs.com/libraries/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/aplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/APlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
@@ -53,6 +52,12 @@ $ npm install
 $ npm run build
 ```
 
+## Communication Groups
+
+[Telegram Group](https://t.me/adplayer)
+
+[QQ Group: 415835947](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17)
+
 ## Related Projects
 
 - [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
@@ -64,6 +69,8 @@ $ npm run build
 - [Hermit-X(APlayer for WordPress)](https://github.com/liwanglin12/Hermit-X)
 
 - [vue-aplayer](https://github.com/SevenOutman/vue-aplayer)
+
+- [APlayer_for_Z-BlogPHP](https://github.com/fghrsh/APlayer_for_Z-BlogPHP)
 
 ## LICENSE
 
