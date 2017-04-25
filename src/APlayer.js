@@ -612,6 +612,7 @@ class APlayer {
          * Parse lrc, suppose multiple time tag
          *
          * @param {String} lrc_s - Format:
+		 * [mm:ss]lyric
          * [mm:ss.xx]lyric
          * [mm:ss.xxx]lyric
          * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
@@ -619,28 +620,40 @@ class APlayer {
          * @return {String} [[time, text], [time, text], [time, text], ...]
          */
         const parseLrc = (lrc_s) => {
-            const lyric = lrc_s.split('\n');
+            var lyric = lrc_s.split('\n');
+            var offset = lrc_s.match(/\[offset:(\w+)\]/i);
+            
+            if (lyric.length < 1) lyric = lrc_s.split(/\s+/);
+			var offset = offset !== null && !isNaN(offset[1]) ? Number(offset[1]) : 0;
+			
             let lrc = [];
-            const lyricLen = lyric.length;
-            for (let i = 0; i < lyricLen; i++) {
+            const lrcLen = lyric.length;
+            
+            for (let i = 0; i < lrcLen; i++) {
                 // match lrc time
-                const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g);
+                const lrcTimes = lyric[i].match(/\[\d*:\d*((\.|\:)\d*)*\]/g);
                 // match lrc text
-                const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g, '').replace(/^\s+|\s+$/g, '');
+				const lrcText = lyric[i].replace(/\[\d*:\d*((\.|\:)\d*)*\]/g, '').replace(/^\s+|\s+$/g, '');
 
                 if (lrcTimes != null) {
                     // handle multiple time tag
                     const timeLen = lrcTimes.length;
+                    
                     for (let j = 0; j < timeLen; j++) {
-                        const oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j]);
-                        const lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
-                        lrc.push([lrcTime, lrcText]);
+                        const min = Number(String(lrcTimes[j]).match(/\[(\d*)/i)[1]);
+                        const sec = Number(String(lrcTimes[j]).match(/\:(\d+(\.\d*)*)/i)[1]);
+                        
+                        var ms = 0;
+                        try { ms = Number(String(lrcTimes[j]).match(/\:.*\:(\d*)/i)[1]) } catch (l) { ms = 0 };
+                        
+    					const lrcTime = parseInt((1000 * (60 * min) + sec) + (ms * String(ms).length === 2 ? 10 : 1) + offset);
+    					lrc.push([parseInt(lrcTime / 1000), String(lrcText).replace(/[-\x1f]/g, '')]);
                     }
                 }
             }
+            
             // sort by time
-            lrc.sort((a, b) => a[0] - b[0]);
-            return lrc;
+            return lrc.sort((a, b) => a[0] - b[0]);
         };
 
         // fill in lrc
