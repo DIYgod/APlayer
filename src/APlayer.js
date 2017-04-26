@@ -612,9 +612,11 @@ class APlayer {
          * Parse lrc, suppose multiple time tag
          *
          * @param {String} lrc_s - Format:
-         * [mm:ss.xx]lyric
-         * [mm:ss.xxx]lyric
-         * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
+         * [mm:ss]lyric
+         * [mm:ss.ff]lyric
+         * [mm:ss:ff]lyric
+         * [mm:ss.fff]lyric
+         * [mm:ss.ff][mm:ss.ff][mm:ss.ff]lyric
          *
          * @return {String} [[time, text], [time, text], [time, text], ...]
          */
@@ -643,9 +645,13 @@ class APlayer {
                         const sec = Number(String(lrcTimes[j]).match(/\:(\d*)/i)[1]);
                         
                         var ms = 0;
-                        try { ms = Number(String(lrcTimes[j]).match(/\.(\d*)/i)[1]) } catch (l) { ms = 0 };
+                        try {
+                            ms = Number(String(lrcTimes[j]).match(/\:\d*((\.|\:)\d*)/i)[1].replace(':', '.'));
+                        } catch (l) {
+                            ms = 0;
+                        };
                         
-                        const lrcTime = parseInt((1000 * ((60 * min) + sec)) + (ms * (String(ms).length === 2 ? 10 : 1)) + offset);
+                        const lrcTime = parseInt(1000 * (min*60 + sec + ms) - offset);
                         lrc.push([parseInt(lrcTime / 1000), String(lrcText).replace(/[-\x1f]/g, '')]);
                     }
                 }
