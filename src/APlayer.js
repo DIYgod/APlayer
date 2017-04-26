@@ -613,10 +613,10 @@ class APlayer {
          *
          * @param {String} lrc_s - Format:
          * [mm:ss]lyric
-         * [mm:ss.ff]lyric
-         * [mm:ss:ff]lyric
-         * [mm:ss.fff]lyric
-         * [mm:ss.ff][mm:ss.ff][mm:ss.ff]lyric
+         * [mm:ss.xx]lyric
+         * [mm:ss:xx]lyric
+         * [mm:ss.xxx]lyric
+         * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
          *
          * @return {String} [[time, text], [time, text], [time, text], ...]
          */
