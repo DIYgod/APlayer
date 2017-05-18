@@ -72,6 +72,8 @@ $ npm run build
 
 - [APlayer_for_Z-BlogPHP](https://github.com/fghrsh/APlayer_for_Z-BlogPHP)
 
+- [php-aplayer](https://github.com/Daryl-L/php-aplayer)
+
 ## LICENSE
 
 [The Star And Thank Author License (SATA)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
