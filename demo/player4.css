@@ -1,0 +1,220 @@
+/* Bootstrap progress
+ * https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
+ */
+
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+.progress {
+  height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+          box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: width .6s ease;
+       -o-transition: width .6s ease;
+          transition: width .6s ease;
+}
+.progress-striped .progress-bar,
+.progress-bar-striped {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:      -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  -webkit-background-size: 40px 40px;
+          background-size: 40px 40px;
+}
+.progress.active .progress-bar,
+.progress-bar.active {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+       -o-animation: progress-bar-stripes 2s linear infinite;
+          animation: progress-bar-stripes 2s linear infinite;
+}
+.progress-bar-success {
+  background-color: #5cb85c;
+}
+.progress-striped .progress-bar-success {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:      -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+.progress-bar-info {
+  background-color: #5bc0de;
+}
+.progress-striped .progress-bar-info {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:      -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+.progress-bar-warning {
+  background-color: #f0ad4e;
+}
+.progress-striped .progress-bar-warning {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:      -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+.progress-bar-danger {
+  background-color: #d9534f;
+}
+.progress-striped .progress-bar-danger {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:      -o-linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+  background-image:         linear-gradient(45deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+}
+
+/* audioplayer */
+
+#player4
+{
+	box-shadow: none;
+}
+#player4 .aplayer-info
+{
+	height: 76px;
+}
+#player4 .aplayer-info .aplayer-music
+{
+	margin-bottom: 10px;
+}
+#player4 .aplayer-info .aplayer-music .aplayer-title,
+#player4 .aplayer-info .aplayer-music .aplayer-author
+{
+	color: #fff;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+{
+	margin: 0 140px 0 0;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+.aplayer-bar 
+{ 
+	height: auto; 
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+.aplayer-bar .aplayer-loaded 
+{ 
+	height: auto; 
+	background: #5bc0de;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+.aplayer-bar .aplayer-played 
+{ 
+	height: auto;
+}
+#player4 .form-control
+{
+	border: 0;
+	border-radius: 0;
+	padding: 6px 0px;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-time
+{
+	bottom: 0px;
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-time
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-ptime,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-dtime,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-volume-wrap .aplayer-icon-volume-down,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-loop,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-menu
+{
+}
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-loop:hover,
+#player4 .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon-menu:hover
+{
+	color: #e0e0e0;
+}
+#player4 .aplayer-list ol li.aplayer-list-light
+{
+	background: transparent;
+}
+#player4 .aplayer-list ol li
+{
+	padding: 0;
+	border-top: 0;
+}
+#player4 .aplayer-list ol li:hover,
+.nav > li > a:hover, .nav > li > a:focus
+{
+	background: rgba(100, 100, 100, 0.5);
+}
+#player4 .aplayer-list ol li .aplayer-list-cur,
+#player4 .aplayer-list ol li .aplayer-list-index,
+#player4 .aplayer-list ol li .aplayer-list-title,
+#player4 .aplayer-list ol li .aplayer-list-author
+{
+}
+
+#player4 .aplayer-list ol li .aplayer-list-cur {
+    display: none;
+}
+
+#player4 .aplayer-list ol > li
+{
+	padding: 0px 15px;
+	border-radius: 0;
+}
+#player4 .aplayer-list ol > li.active > a
+{
+	border-radius: 0;
+}
+
+@media (max-width: 360px)
+{
+	#player4 .aplayer-list ol > li > a
+	{
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	#player4 .aplayer-info .aplayer-controller .aplayer-bar-wrap
+	{
+		margin: 0;
+	}
+
+	#player4 .aplayer-info .aplayer-controller .aplayer-time
+	{
+		bottom: -15px;
+	}
+
+	#player4 .aplayer-list-author
+	{
+		display: none;
+	}
+}

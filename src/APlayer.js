@@ -154,70 +154,100 @@ class APlayer {
         }
         this.getRandomOrder();
 
-        // fill in HTML
-        let eleHTML = `
-            <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
-                <div class="aplayer-button aplayer-play">
-                    <button type="button" class="aplayer-icon aplayer-icon-play">
-                        ${this.getSVG('play')}
-                    </button>
-                </div>
-            </div>
-            <div class="aplayer-info">
-                <div class="aplayer-music">
-                    <span class="aplayer-title"></span>
-                    <span class="aplayer-author"></span>
-                </div>
-                <div class="aplayer-lrc">
-                    <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
-                </div>
-                <div class="aplayer-controller">
-                    <div class="aplayer-bar-wrap">
-                        <div class="aplayer-bar">
-                            <div class="aplayer-loaded" style="width: 0"></div>
-                            <div class="aplayer-played" style="width: 0; background: ${this.option.theme};">
-                                <span class="aplayer-thumb" style="border: 1px solid ${this.option.theme};"></span>
-                            </div>
-                        </div>
+        let eleHTML = ``;
+
+        // if it's empty, use a default
+        if (this.element.innerHTML.trim() == '') {
+            eleHTML = `
+                <div class="aplayer-pic">
+                    <div class="aplayer-button aplayer-play">
+                        <button type="button" class="aplayer-icon aplayer-icon-play">
+                        </button>
                     </div>
-                    <div class="aplayer-time">
-                        <span class="aplayer-time-inner">
-                            - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
-                        </span>
-                        <div class="aplayer-volume-wrap">
-                            <button type="button" class="aplayer-icon aplayer-icon-volume-down" ${this.isMobile ? 'style="display: none;"' : ''}>
-                               ${this.getSVG('volume-down')}
-                            </button>
-                            <div class="aplayer-volume-bar-wrap">
-                                <div class="aplayer-volume-bar">
-                                    <div class="aplayer-volume" style="height: 80%; background: ${this.option.theme};"></div>
+                </div>
+                <div class="aplayer-info">
+                    <div class="aplayer-music">
+                        <span class="aplayer-title"></span>
+                        <span class="aplayer-author"></span>
+                    </div>
+                    <div class="aplayer-lrc">
+                        <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
+                    </div>
+                    <div class="aplayer-controller">
+                        <div class="aplayer-bar-wrap">
+                            <div class="aplayer-bar">
+                                <div class="aplayer-loaded" style="width: 0"></div>
+                                <div class="aplayer-played" style="width: 0;">
+                                    <span class="aplayer-thumb" style=""></span>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="aplayer-icon aplayer-icon-mode">
-                            ${this.getSVG(this.mode)}
-                        </button>
-                        <button type="button" class="aplayer-icon aplayer-icon-menu">
-                            ${this.getSVG('menu')}
-                        </button>
+                        <div class="aplayer-time">
+                            <span class="aplayer-time-inner">
+                                - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
+                            </span>
+                            <div class="aplayer-volume-wrap">
+                                <button type="button" class="aplayer-icon aplayer-icon-volume-down">
+                                </button>
+                                <div class="aplayer-volume-bar-wrap">
+                                    <div class="aplayer-volume-bar">
+                                        <div class="aplayer-volume" style="height: 80%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="aplayer-icon aplayer-icon-mode">
+                            </button>
+                            <button type="button" class="aplayer-icon aplayer-icon-menu">
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="aplayer-list" ${this.option.listmaxheight ? `style="max-height: ${this.option.listmaxheight}` : ``}">
-                <ol>`;
-            for (let i = 0; i < this.option.music.length; i++) {
-                eleHTML += `
-                    <li>
-                        <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
-                        <span class="aplayer-list-index">${(i + 1)}</span>
-                        <span class="aplayer-list-title">${this.option.music[i].title}</span>
-                        <span class="aplayer-list-author">${this.option.music[i].author}</span>
-                    </li>`
-            }
+                <div class="aplayer-list">
+                    <ol>`;
+            this.element.innerHTML = eleHTML;
+        }
+
+        eleHTML = `<ol>`;
+        for (let i = 0; i < this.option.music.length; i++) {
             eleHTML += `
-                </ol>
-            </div>`
-        this.element.innerHTML = eleHTML;
+                <li>
+                    <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
+                    <span class="aplayer-list-index">${(i + 1)}</span>
+                    <span class="aplayer-list-title">${this.option.music[i].title}</span>
+                    <span class="aplayer-list-author">${this.option.music[i].author}</span>
+                </li>`
+        }
+        eleHTML += `</ol>`
+
+        this.element.querySelector('.aplayer-list').innerHTML += eleHTML;
+
+        if (this.music.pic) {
+            this.element.querySelector('.aplayer-pic').style.backgroundImage = `url('${this.music.pic}')`;
+        }
+
+        this.element.querySelector('.aplayer-icon-play').innerHTML += this.getSVG('play');
+        
+        // If not using Bootstrap style, use default background
+        // TODO: find a better way than hardcoding a very specific check
+        if (!this.element.querySelector('.progress')) {
+            this.element.querySelector('.aplayer-played').style.background = this.option.theme;
+        }
+
+        this.element.querySelector('.aplayer-thumb').style.border = `1px solid ${this.option.theme}`;
+
+        if (this.isMobile) {
+            this.element.querySelector('.aplayer-icon-volume-down').style.display = "none";
+        } else {
+            this.element.querySelector('.aplayer-icon-volume-down').innerHTML += this.getSVG('volume-down');
+        }
+
+        this.element.querySelector('.aplayer-volume').style.background = this.option.theme;
+        this.element.querySelector('.aplayer-icon-mode').innerHTML += this.getSVG(this.mode);
+        this.element.querySelector('.aplayer-icon-menu').innerHTML += this.getSVG('menu');
+
+        if (this.option.listmaxheight) {
+            this.element.querySelector('.aplayer-list').style.maxHeight = this.option.listmaxheight;
+        }
 
         // hide mode button in arrow container
         if (this.element.offsetWidth < 300) {
