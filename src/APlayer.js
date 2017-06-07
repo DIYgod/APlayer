@@ -1,4 +1,4 @@
-console.log("\n %c APlayer 1.6.0 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.6.1 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
 
 require('./APlayer.scss');
 
@@ -460,7 +460,7 @@ class APlayer {
         this.element.getElementsByClassName('aplayer-list')[0].getElementsByTagName('li')[indexMusic].classList.add('aplayer-list-light');
 
         // set the previous audio object
-        if (this.audio) {
+        if (!this.isMobile && this.audio) {
             this.pause();
             this.audio.currentTime = 0;
         }
@@ -468,7 +468,16 @@ class APlayer {
         this.element.getElementsByClassName('aplayer-list')[0].scrollTop = indexMusic * 33;
 
         // get this audio object
-        if (!this.audios[indexMusic]) {
+        if (this.isMobile && this.audio) {
+            this.audio.src = this.music.url;
+            this.play();
+        }
+        else if (!this.isMobile && this.audios[indexMusic]) {
+            this.audio = this.audios[indexMusic];
+            this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
+            this.audio.currentTime = 0;
+        }
+        else {
             this.audio = document.createElement("audio");
             this.audio.src = this.music.url;
             this.audio.preload = this.option.preload ? this.option.preload : 'auto';
@@ -553,11 +562,6 @@ class APlayer {
             this.ended = false;
             this.audio.addEventListener('ended', () => {
                 if (this.multiple) {
-                    if (this.isMobile) {
-                        this.ended = true;
-                        this.pause();
-                        return;
-                    }
                     if (this.audio.currentTime !== 0) {
                         if (this.mode === 'random') {
                             this.setMusic(this.nextRandomNum());
@@ -601,11 +605,6 @@ class APlayer {
             this.audio.loop = !(this.multiple || this.mode === 'order');
 
             this.audios[indexMusic] = this.audio;
-        }
-        else {
-            this.audio = this.audios[indexMusic];
-            this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
-            this.audio.currentTime = 0;
         }
 
         /**
@@ -725,10 +724,6 @@ class APlayer {
             this.play();
         }
         this.option.autoplay = true;  // autoplay next music
-
-        if (this.isMobile) {
-            this.pause();
-        }
     }
 
     /**

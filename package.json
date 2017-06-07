@@ -1,6 +1,6 @@
 {
   "name": "aplayer",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Wow, such a beautiful html5 music player",
   "main": "dist/APlayer.min.js",
   "scripts": {
@@ -24,19 +24,19 @@
   },
   "homepage": "https://github.com/DIYgod/APlayer#readme",
   "devDependencies": {
-    "autoprefixer": "^6.7.2",
+    "autoprefixer": "^7.1.1",
     "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.22.0",
-    "css-loader": "^0.27.1",
+    "css-loader": "^0.28.4",
     "exports-loader": "^0.6.3",
-    "file-loader": "^0.10.0",
+    "file-loader": "^0.11.2",
     "node-sass": "^4.5.0",
-    "postcss-loader": "^1.2.2",
+    "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.3",
-    "style-loader": "^0.13.1",
+    "style-loader": "^0.18.2",
     "url-loader": "^0.5.7",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
