@@ -1,24 +1,38 @@
-# APlayer
+<p align="center">
+<img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fhu01y9uy7j305k04s3yc.jpg" alt="ADPlayer" width="100">
+</p>
+<h1 align="center">APlayer</h1>
+
+> Wow, such a lovely HTML5 music player
 
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
 [![devDependency Status](https://img.shields.io/david/dev/DIYgod/aplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/APlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![Travis](https://img.shields.io/travis/DIYgod/APlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/APlayer)
-[![%e2%9d%a4](https://img.shields.io/badge/made%20with-%e2%9d%a4-ff69b4.svg?style=flat-square)](https://www.anotherhome.net/)
-
-> Wow, such a beautiful html5 music player
+[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/DIYgod/APlayer#donate)
 
 ## Introduction
 
-[Demo](http://aplayer.js.org)
+![image](https://i.imgur.com/JDrJXCr.png)
 
-[Docs](http://aplayer.js.org/docs)
+APlayer is a lovely HTML5 music player to help people build audio easily.
+
+**APlayer supports:**
+
+- Media formats
+	- MP3
+	- WAVE PCM
+	- Ogg Theora Vorbis
+- Features
+	- Playlist
+	- Lyrics
 
 Using APlayer on your project? [Let me know!](https://github.com/DIYgod/APlayer/issues/79)
 
-Screenshot
-![image](https://i.imgur.com/JDrJXCr.png)
+**[Demo](http://aplayer.js.org)**
+
+**[Docs](http://aplayer.js.org/docs)**
 
 ## Install
 
@@ -26,54 +40,76 @@ Screenshot
 $ npm install aplayer --save
 ```
 
-## CDN
+## Quick Start
 
-[unpkg](https://unpkg.com/aplayer)
+```html
+<div id="alayer1"></div>
+<script src="dist/APlayer.min.js"></script>
+```
 
-[cdnjs](https://cdnjs.com/libraries/aplayer)
-
-[BootCDN](http://www.bootcdn.cn/aplayer)
+```js
+var ap = new APlayer({
+    element: document.getElementById('player1'),
+    music: {
+        title: 'Preparation',
+        author: 'Hans Zimmer/Richard Harvey',
+        url: 'Preparation.mp3',
+    }
+});
+```
 
 ## Usage
 
-See [docs](http://aplayer.js.org/docs)
+[Read the Docs](http://aplayer.js.org/docs)
 
-## Run in development
+## Join the Discussion
 
-```
-$ npm install
-$ npm run dev
-```
-
-## Make a release
-
-```
-$ npm install
-$ npm run build
-```
-
-## Communication Groups
-
-[Telegram Group](https://t.me/adplayer)
-
-[QQ Group: 415835947](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17)
+- [Telegram Group](https://t.me/adplayer)
+- [QQ Group](https://shang.qq.com/wpa/qunwpa?idkey=bf22213ae0028a82e5adf3f286dfd4f01e0997dc9f1dcd8e831a0a85e799be17): 415835947
 
 ## Related Projects
 
 - [APlayer-Typecho-Plugin](https://github.com/zgq354/APlayer-Typecho-Plugin)
-
 - [hexo-tag-aplayer](https://github.com/grzhan/hexo-tag-aplayer)
-
 - [163music-APlayer-you-get-docker](https://github.com/YUX-IO/163music-APlayer-you-get-docker)
-
 - [Hermit-X(APlayer for WordPress)](https://github.com/liwanglin12/Hermit-X)
-
 - [vue-aplayer](https://github.com/SevenOutman/vue-aplayer)
-
 - [APlayer_for_Z-BlogPHP](https://github.com/fghrsh/APlayer_for_Z-BlogPHP)
-
 - [php-aplayer](https://github.com/Daryl-L/php-aplayer)
+- [react-aplayer](https://github.com/sabrinaluo/react-aplayer)
+- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/APlayer/issues/79)
 
-## LICENSE
+## Who use APlayer?
 
-[The Star And Thank Author License (SATA)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
+- [Anotherhome](https://www.anotherhome.net/2717)
+- [站长之家](http://www.chinaz.com/15year/index.html)
+- [TheFatRat](http://thefatrat.cn/)
+- [Jelly Rue](http://jellyrue.com/)
+- [LWL的自由天空](https://blog.lwl12.com/read/hermit-x.html)
+- [萨摩公园](https://i-meto.com/meting-typecho/)
+- [ZGQ's Blog](https://blog.izgq.net/archives/456/)
+- [FGHRSH 的博客](https://www.fghrsh.net/post/77.html)
+- [Blessing Studio](https://blessing.studio/generate-aplayer-config-from-netease-automatically/)
+- [暮光博客](https://muguang.me/guff/2645.html)
+- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/APlayer/issues/79)
+
+## CDN
+
+- [unpkg](https://unpkg.com/aplayer)
+- [cdnjs](https://cdnjs.com/libraries/aplayer)
+- [BootCDN](http://www.bootcdn.cn/aplayer/)
+- [RawGit](https://rawgit.com/DIYgod/APlayer/master/dist/APlayer.min.js)
+
+## Donate
+
+- [Donate via Paypal](https://www.paypal.me/DIYgod)
+- [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
+- [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
+- Donate via Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+
+## Author
+
+**APlayer** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
+Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/APlayer/contributors)).
+
+> Blog [@Anotherhome](https://www.anotherhome.net) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Weibo [@DIYgod酱](http://weibo.com/anotherhome) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
