@@ -77,6 +77,7 @@ var ap = new APlayer({
 - [APlayer_for_Z-BlogPHP](https://github.com/fghrsh/APlayer_for_Z-BlogPHP)
 - [php-aplayer](https://github.com/Daryl-L/php-aplayer)
 - [react-aplayer](https://github.com/sabrinaluo/react-aplayer)
+- [vue-aplayer](https://github.com/MoeFE/vue-aplayer)
 - Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/APlayer/issues/79)
 
 ## Who use APlayer?
