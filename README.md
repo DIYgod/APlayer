@@ -21,7 +21,7 @@ APlayer is a lovely HTML5 music player to help people build audio easily.
 **APlayer supports:**
 
 - Media formats
-	- MP3
+	- MP4 H.264 (AAC or MP3)
 	- WAVE PCM
 	- Ogg Theora Vorbis
 - Features
