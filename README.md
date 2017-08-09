@@ -6,11 +6,11 @@
 > Wow, such a lovely HTML5 music player
 
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
-[![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/DIYgod/APlayer/blob/master/LICENSE)
-[![devDependency Status](https://img.shields.io/david/dev/DIYgod/aplayer.svg?style=flat-square)](https://david-dm.org/DIYgod/APlayer#info=devDependencies)
+[![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/MoePlayer/APlayer/blob/master/LICENSE)
+[![devDependency Status](https://img.shields.io/david/dev/MoePlayer/aplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/APlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
-[![Travis](https://img.shields.io/travis/DIYgod/APlayer.svg?style=flat-square)](https://travis-ci.org/DIYgod/APlayer)
-[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/DIYgod/APlayer#donate)
+[![Travis](https://img.shields.io/travis/MoePlayer/APlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/APlayer)
+[![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/APlayer#donate)
 
 ## Introduction
 
@@ -28,7 +28,7 @@ APlayer is a lovely HTML5 music player to help people build audio easily.
 	- Playlist
 	- Lyrics
 
-Using APlayer on your project? [Let me know!](https://github.com/DIYgod/APlayer/issues/79)
+Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlayer/issues/79)
 
 **[Demo](http://aplayer.js.org)**
 
@@ -78,7 +78,7 @@ var ap = new APlayer({
 - [php-aplayer](https://github.com/Daryl-L/php-aplayer)
 - [react-aplayer](https://github.com/sabrinaluo/react-aplayer)
 - [vue-aplayer](https://github.com/MoeFE/vue-aplayer)
-- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/APlayer/issues/79)
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## Who use APlayer?
 
@@ -92,14 +92,17 @@ var ap = new APlayer({
 - [FGHRSH 的博客](https://www.fghrsh.net/post/77.html)
 - [Blessing Studio](https://blessing.studio/generate-aplayer-config-from-netease-automatically/)
 - [暮光博客](https://muguang.me/guff/2645.html)
-- Feel free to submit yours in [`Let me know!`](https://github.com/DIYgod/APlayer/issues/79)
+- [Justice_Eternal吧曲谱资源站](http://lightmoon.pw)
+- [Justice_Eternal吧曲谱资源站(移动端)](https://justice-eternal.github.io/)
+- [歌词千寻](https://www.lrcgc.com/diy)
+- Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## CDN
 
 - [unpkg](https://unpkg.com/aplayer)
 - [cdnjs](https://cdnjs.com/libraries/aplayer)
 - [BootCDN](http://www.bootcdn.cn/aplayer/)
-- [RawGit](https://rawgit.com/DIYgod/APlayer/master/dist/APlayer.min.js)
+- [RawGit](https://rawgit.com/MoePlayer/APlayer/master/dist/APlayer.min.js)
 
 ## Donate
 
