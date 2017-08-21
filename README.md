@@ -97,6 +97,7 @@ var ap = new APlayer({
 - [Justice_Eternal吧曲谱资源站(移动端)](https://justice-eternal.github.io/)
 - [歌词千寻](https://www.lrcgc.com/diy)
 - [SORA](http://mashirosorata.vicp.io/APlayer-Controler%E2%80%94%E2%80%94%E5%8F%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84ap%E6%8E%A7%E5%88%B6%E5%99%A8.html)
+- [iSearch](http://i.oppsu.cn)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## CDN
