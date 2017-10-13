@@ -47,13 +47,13 @@ $ npm install aplayer --save
 ## Quick Start
 
 ```html
-<div id="alayer1"></div>
+<div id="aplayer1"></div>
 <script src="dist/APlayer.min.js"></script>
 ```
 
 ```js
 var ap = new APlayer({
-    element: document.getElementById('player1'),
+    element: document.getElementById('aplayer1'),
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
