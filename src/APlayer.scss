@@ -92,7 +92,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         height: $aplayer-height;
         width: $aplayer-height;
         background-image: url(./default.jpg);
-        background-size: 100%;
+        background-size: cover;
         transition: all 0.3s ease;
 
         .aplayer-button {
