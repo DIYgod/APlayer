@@ -443,6 +443,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                     color: #666;
                     margin-right: 12px;
                     cursor: pointer;
+                    float: left;
+                    width: 20px;
+                    text-align: right;
                 }
                 .aplayer-list-author {
                     color: #666;
