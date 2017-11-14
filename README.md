@@ -47,7 +47,7 @@ $ npm install aplayer --save
 ## Quick Start
 
 ```html
-<div id="aplayer1"></div>
+<div id="aplayer1" class="aplayer"></div>
 <script src="dist/APlayer.min.js"></script>
 ```
 

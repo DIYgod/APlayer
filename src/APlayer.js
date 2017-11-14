@@ -452,6 +452,9 @@ class APlayer {
         if (this.music.pic) {
             this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = `url('${this.music.pic}')`;
         }
+        else {
+            this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = '';
+        }
         this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title;
         this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ${this.music.author}`;
         if (this.element.getElementsByClassName('aplayer-list-light')[0]) {
