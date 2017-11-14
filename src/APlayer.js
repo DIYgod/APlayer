@@ -203,7 +203,7 @@ class APlayer {
                     </div>
                 </div>
             </div>
-            <div class="aplayer-list" ${this.option.listmaxheight ? `style="max-height: ${this.option.listmaxheight}` : ``}">
+            <div class="aplayer-list" ${this.option.listmaxheight ? `style="max-height: ${this.option.listmaxheight}"` : ``}>
                 <ol>`;
             for (let i = 0; i < this.option.music.length; i++) {
                 eleHTML += `
