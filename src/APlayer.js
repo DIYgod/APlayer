@@ -456,7 +456,7 @@ class APlayer {
             this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = '';
         }
         this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title;
-        this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ${this.music.author}`;
+        this.element.getElementsByClassName('aplayer-author')[0].innerHTML = this.music.author ? ' - ' + this.music.author : '';
         if (this.element.getElementsByClassName('aplayer-list-light')[0]) {
             this.element.getElementsByClassName('aplayer-list-light')[0].classList.remove('aplayer-list-light');
         }
