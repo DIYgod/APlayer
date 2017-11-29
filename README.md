@@ -83,6 +83,7 @@ var ap = new APlayer({
 - [react-aplayer](https://github.com/sabrinaluo/react-aplayer)
 - [vue-aplayer](https://github.com/MoeFE/vue-aplayer)
 - [APlayer-Controler](https://github.com/Mashiro-Sorata/APlayer-Controler)
+- [APlayerHandle](https://github.com/kn007/APlayerHandle)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## Who use APlayer?
@@ -103,6 +104,9 @@ var ap = new APlayer({
 - [SORA](http://mashirosorata.vicp.io/APlayer-Controler%E2%80%94%E2%80%94%E5%8F%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84ap%E6%8E%A7%E5%88%B6%E5%99%A8.html)
 - [iSearch](http://i.oppsu.cn)
 - [LRC歌词编辑器](https://github.com/MoeFE/Lyric)
+- [kn007的个人博客](https://kn007.net/topics/wordpress-blog-use-new-html5-player-aplayer/)
+- [LLSupport](https://www.lovelivesupport.com/)
+- [Аэростатика](https://aerostatica.ru/)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## CDN
@@ -118,6 +122,10 @@ var ap = new APlayer({
 - [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
 - [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
 - Donate via Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+
+## Sponsor
+
+- The CDN service is sponsored by [又拍云](https://console.upyun.com/register/?invite=BkLZ2Xqob)
 
 ## Author
 
