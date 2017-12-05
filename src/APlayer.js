@@ -850,7 +850,59 @@ class APlayer {
             }
         }
     }
-
+    /**
+     * Remove song from playlist 
+     */
+    removeSong(indexOfSong) {
+        
+                indexOfSong = indexOfSong - 1;
+        
+                if (this.option.music[indexOfSong] != null) { // Check if song exists 
+                    console.info("Removing song(" + indexOfSong + ")");
+                    const list = this.element.getElementsByClassName('aplayer-list')[0];
+                    var oList = list.firstElementChild; // OL tag
+                    var liList = []; // Holds the index of the LI tags
+        
+                    for (let i = 0; i < oList.childNodes.length; i++) {
+                        if (oList.childNodes[i].tagName == 'LI') {
+                            liList.push(i); //Adds the LI tag indexes to array
+                        }
+                    }
+        
+                    if (this.option.music[indexOfSong + 1] != null || this.option.music[indexOfSong - 1] != null) {
+                        if (this.option.music[indexOfSong + 1] != null) { // Play next song if it exists
+                            this.pause();
+                            this.setMusic(indexOfSong + 1);
+                            this.play();
+                        } else if (this.option.music[indexOfSong + 1] == null) { // Play previous song if it exists
+                            this.pause();
+                            this.setMusic(indexOfSong - 1);
+                            this.play();
+                        }
+        
+                        if (oList.childNodes[liList[indexOfSong + 1]] == null) {
+                            var targetSong = oList.childNodes[liList[indexOfSong - 1]];
+                            targetSong.childNodes[3].textContent = indexOfSong;
+                        } else {
+                            for (let i = 1; i < liList.length; i++) {
+                                if (oList.childNodes[liList[indexOfSong + i]] != null) {
+                                    var targetSong = oList.childNodes[liList[indexOfSong + i]];
+                                    targetSong.childNodes[3].textContent = indexOfSong + i;
+                                }
+                            }
+                        }
+                        this.option.music.splice(indexOfSong, 1); // Delete song from music array
+                        this.audios.splice(indexOfSong, 1); // Delete song from audios array (Has to be)
+                        oList.childNodes[liList[indexOfSong]].remove();
+                        
+                    }
+                                       
+                    list.style.height = "";
+                } else {
+                    console.error("ERROR: Song does not exist");
+                }
+        
+            }
     /**
      * add music dynamically
      *
