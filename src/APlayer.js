@@ -434,6 +434,11 @@ class APlayer {
             this.setMusic(0);
         }
 
+        // autoplay
+        if (this.option.autoplay && !this.isMobile) {
+            this.play();
+        }
+
         instances.push(this);
     }
 
@@ -717,12 +722,6 @@ class APlayer {
         if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
             this.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = this.audio.duration ? this.secondToTime(this.audio.duration) : '00:00';
         }
-
-        // autoplay
-        if (this.option.autoplay && !this.isMobile) {
-            this.play();
-        }
-        this.option.autoplay = true;  // autoplay next music
     }
 
     /**
