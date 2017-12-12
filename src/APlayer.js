@@ -573,13 +573,16 @@ class APlayer {
                     if (this.audio.currentTime !== 0) {
                         if (this.mode === 'random') {
                             this.setMusic(this.nextRandomNum());
+                            this.play();
                         }
                         else if (this.mode === 'single') {
                             this.setMusic(this.playIndex);
+                            this.play();
                         }
                         else if (this.mode === 'order') {
                             if (this.playIndex < this.option.music.length - 1) {
                                 this.setMusic(++this.playIndex);
+                                this.play();
                             }
                             else {
                                 this.ended = true;
@@ -590,6 +593,7 @@ class APlayer {
                         else if (this.mode === 'circulation') {
                             this.playIndex = (this.playIndex + 1) % this.option.music.length;
                             this.setMusic(this.playIndex);
+                            this.play();
                         }
                     }
                 }
