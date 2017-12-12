@@ -478,7 +478,6 @@ class APlayer {
         // get this audio object
         if (this.isMobile && this.audio) {
             this.audio.src = this.music.url;
-            this.play();
         }
         else if (!this.isMobile && this.audios[indexMusic]) {
             this.audio = this.audios[indexMusic];
