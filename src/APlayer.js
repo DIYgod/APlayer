@@ -435,7 +435,7 @@ class APlayer {
         }
 
         // autoplay
-        if (this.option.autoplay && !this.isMobile) {
+        if (this.option.autoplay) {
             this.play();
         }
 
