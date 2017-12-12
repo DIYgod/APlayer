@@ -135,8 +135,7 @@ class APlayer {
 
         // multiple music
         this.playIndex = 0;
-        this.multiple = Object.prototype.toString.call(option.music) === '[object Array]';
-        if (!this.multiple) {
+        if (Object.prototype.toString.call(option.music) !== '[object Array]') {
             this.option.music = [this.option.music];
         }
         this.music = this.option.music[this.playIndex];
@@ -149,7 +148,8 @@ class APlayer {
             this.element.classList.add('aplayer-withlist');
         }
 
-        if (!this.multiple && this.mode !== 'circulation' && this.mode !== 'order') {
+        // Assume "circulation" mode if single music is loaded and mode isn't already "circulation" or "order".
+        if (!this.isMultiple() && this.mode !== 'circulation' && this.mode !== 'order') {
             this.mode = 'circulation';
         }
         this.getRandomOrder();
@@ -390,7 +390,7 @@ class APlayer {
         // mode control
         const modeEle = this.element.getElementsByClassName('aplayer-icon-mode')[0];
         modeEle.addEventListener('click', () => {
-            if (this.multiple) {
+            if (this.isMultiple()) {
                 if (this.mode === 'random') {
                     this.mode = 'single';
                 }
@@ -413,7 +413,7 @@ class APlayer {
                 }
             }
             modeEle.innerHTML = this.getSVG(this.mode);
-            this.audio.loop = !(this.multiple || this.mode === 'order');
+            this.audio.loop = !(this.isMultiple() || this.mode === 'order');
         });
 
         // toggle menu control
@@ -564,7 +564,7 @@ class APlayer {
             // multiple music play
             this.ended = false;
             this.audio.addEventListener('ended', () => {
-                if (this.multiple) {
+                if (this.isMultiple()) {
                     if (this.audio.currentTime !== 0) {
                         if (this.mode === 'random') {
                             this.setMusic(this.nextRandomNum());
@@ -601,7 +601,7 @@ class APlayer {
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
 
             // loop
-            this.audio.loop = !(this.multiple || this.mode === 'order');
+            this.audio.loop = !(this.isMultiple() || this.mode === 'order');
 
             this.audios[indexMusic] = this.audio;
         }
@@ -787,6 +787,13 @@ class APlayer {
     }
 
     /**
+     * get whether multiple music definitions are loaded
+     */
+    isMultiple() {
+        return this.option.music.length > 1;
+    }
+
+    /**
      * get random order, using Fisher–Yates shuffle
      */
     getRandomOrder() {
@@ -807,7 +814,7 @@ class APlayer {
             }
             return shuffled;
         }
-        if (this.multiple) {
+        if (this.isMultiple()) {
             this.randomOrder = shuffle([...Array(this.option.music.length)].map(function(item, i) {
                 return i;
             }));
@@ -818,7 +825,7 @@ class APlayer {
      * get next random number
      */
     nextRandomNum() {
-        if (this.multiple) {
+        if (this.isMultiple()) {
             let index = this.randomOrder.indexOf(this.playIndex);
             if (index === this.randomOrder.length - 1) {
                 return this.randomOrder[0];
@@ -853,6 +860,8 @@ class APlayer {
      * @param {Array} newMusic
      */
     addMusic(newMusic) {
+        let wasSingle = !this.isMultiple();
+
         this.option.music = this.option.music.concat(newMusic);
 
         const list = this.element.getElementsByClassName('aplayer-list')[0];
@@ -869,8 +878,7 @@ class APlayer {
         }
         listEle.innerHTML += newItemHTML;
 
-        if (!this.multiple) {
-            this.multiple = true;
+        if (wasSingle && this.isMultiple()) {
             this.element.classList.add('aplayer-withlist');
             this.audio.loop = false;
         }
