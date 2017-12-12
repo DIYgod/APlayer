@@ -434,6 +434,11 @@ class APlayer {
             this.setMusic(0);
         }
 
+        // autoplay
+        if (this.option.autoplay) {
+            this.play();
+        }
+
         instances.push(this);
     }
 
@@ -473,12 +478,12 @@ class APlayer {
         // get this audio object
         if (this.isMobile && this.audio) {
             this.audio.src = this.music.url;
-            this.play();
         }
         else if (!this.isMobile && this.audios[indexMusic]) {
             this.audio = this.audios[indexMusic];
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
             this.audio.currentTime = 0;
+            this.audio.src = this.music.url;
         }
         else {
             this.audio = document.createElement("audio");
@@ -568,13 +573,16 @@ class APlayer {
                     if (this.audio.currentTime !== 0) {
                         if (this.mode === 'random') {
                             this.setMusic(this.nextRandomNum());
+                            this.play();
                         }
                         else if (this.mode === 'single') {
                             this.setMusic(this.playIndex);
+                            this.play();
                         }
                         else if (this.mode === 'order') {
                             if (this.playIndex < this.option.music.length - 1) {
                                 this.setMusic(++this.playIndex);
+                                this.play();
                             }
                             else {
                                 this.ended = true;
@@ -585,6 +593,7 @@ class APlayer {
                         else if (this.mode === 'circulation') {
                             this.playIndex = (this.playIndex + 1) % this.option.music.length;
                             this.setMusic(this.playIndex);
+                            this.play();
                         }
                     }
                 }
@@ -717,12 +726,6 @@ class APlayer {
         if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
             this.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = this.audio.duration ? this.secondToTime(this.audio.duration) : '00:00';
         }
-
-        // autoplay
-        if (this.option.autoplay && !this.isMobile) {
-            this.play();
-        }
-        this.option.autoplay = true;  // autoplay next music
     }
 
     /**
