@@ -583,12 +583,8 @@ class APlayer {
                             }
                         }
                         else if (this.mode === 'circulation') {
-                            if (this.playIndex < this.option.music.length - 1) {
-                                this.setMusic(++this.playIndex);
-                            }
-                            else {
-                                this.setMusic(0);
-                            }
+                            this.playIndex = (this.playIndex + 1) % this.option.music.length;
+                            this.setMusic(this.playIndex);
                         }
                     }
                 }
