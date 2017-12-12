@@ -483,6 +483,7 @@ class APlayer {
             this.audio = this.audios[indexMusic];
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
             this.audio.currentTime = 0;
+            this.audio.src = this.music.url;
         }
         else {
             this.audio = document.createElement("audio");
