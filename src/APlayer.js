@@ -525,7 +525,7 @@ class APlayer {
                 }
             });
 
-            this.audio.addEventListener('pause', () => {
+            let pauseHandler = () => {
                 if (this.button && (this.button.classList.contains('aplayer-pause') || this.ended)) {
                     this.ended = false;
                     this.button.classList.remove('aplayer-pause');
@@ -540,7 +540,11 @@ class APlayer {
                     clearInterval(this.playedTime);
                     this.trigger('pause');
                 }
-            });
+            };
+
+            this.audio.addEventListener('pause', pauseHandler);
+
+            this.audio.addEventListener('abort', pauseHandler);
 
             // show audio time: the metadata has loaded or changed
             this.audio.addEventListener('durationchange', () => {
