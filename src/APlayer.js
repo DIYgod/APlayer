@@ -525,7 +525,7 @@ class APlayer {
                 }
             });
 
-            let pauseHandler = () => {
+            const pauseHandler = () => {
                 if (this.button && (this.button.classList.contains('aplayer-pause') || this.ended)) {
                     this.ended = false;
                     this.button.classList.remove('aplayer-pause');
@@ -867,7 +867,7 @@ class APlayer {
      * @param {Array} newMusic
      */
     addMusic(newMusic) {
-        let wasSingle = !this.isMultiple();
+        const wasSingle = !this.isMultiple();
 
         this.option.music = this.option.music.concat(newMusic);
 
