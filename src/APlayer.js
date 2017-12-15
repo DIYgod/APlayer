@@ -135,8 +135,7 @@ class APlayer {
 
         // multiple music
         this.playIndex = 0;
-        this.multiple = Object.prototype.toString.call(option.music) === '[object Array]';
-        if (!this.multiple) {
+        if (Object.prototype.toString.call(option.music) !== '[object Array]') {
             this.option.music = [this.option.music];
         }
         this.music = this.option.music[this.playIndex];
@@ -149,7 +148,8 @@ class APlayer {
             this.element.classList.add('aplayer-withlist');
         }
 
-        if (!this.multiple && this.mode !== 'circulation' && this.mode !== 'order') {
+        // Assume "circulation" mode if single music is loaded and mode isn't already "circulation" or "order".
+        if (!this.isMultiple() && this.mode !== 'circulation' && this.mode !== 'order') {
             this.mode = 'circulation';
         }
         this.getRandomOrder();
@@ -390,7 +390,7 @@ class APlayer {
         // mode control
         const modeEle = this.element.getElementsByClassName('aplayer-icon-mode')[0];
         modeEle.addEventListener('click', () => {
-            if (this.multiple) {
+            if (this.isMultiple()) {
                 if (this.mode === 'random') {
                     this.mode = 'single';
                 }
@@ -413,7 +413,7 @@ class APlayer {
                 }
             }
             modeEle.innerHTML = this.getSVG(this.mode);
-            this.audio.loop = !(this.multiple || this.mode === 'order');
+            this.audio.loop = !(this.isMultiple() || this.mode === 'order');
         });
 
         // toggle menu control
@@ -432,6 +432,11 @@ class APlayer {
         }
         else {
             this.setMusic(0);
+        }
+
+        // autoplay
+        if (this.option.autoplay) {
+            this.play();
         }
 
         instances.push(this);
@@ -473,12 +478,12 @@ class APlayer {
         // get this audio object
         if (this.isMobile && this.audio) {
             this.audio.src = this.music.url;
-            this.play();
         }
         else if (!this.isMobile && this.audios[indexMusic]) {
             this.audio = this.audios[indexMusic];
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
             this.audio.currentTime = 0;
+            this.audio.src = this.music.url;
         }
         else {
             this.audio = document.createElement("audio");
@@ -520,7 +525,7 @@ class APlayer {
                 }
             });
 
-            this.audio.addEventListener('pause', () => {
+            const pauseHandler = () => {
                 if (this.button && (this.button.classList.contains('aplayer-pause') || this.ended)) {
                     this.ended = false;
                     this.button.classList.remove('aplayer-pause');
@@ -535,7 +540,11 @@ class APlayer {
                     clearInterval(this.playedTime);
                     this.trigger('pause');
                 }
-            });
+            };
+
+            this.audio.addEventListener('pause', pauseHandler);
+
+            this.audio.addEventListener('abort', pauseHandler);
 
             // show audio time: the metadata has loaded or changed
             this.audio.addEventListener('durationchange', () => {
@@ -564,17 +573,20 @@ class APlayer {
             // multiple music play
             this.ended = false;
             this.audio.addEventListener('ended', () => {
-                if (this.multiple) {
+                if (this.isMultiple()) {
                     if (this.audio.currentTime !== 0) {
                         if (this.mode === 'random') {
                             this.setMusic(this.nextRandomNum());
+                            this.play();
                         }
                         else if (this.mode === 'single') {
                             this.setMusic(this.playIndex);
+                            this.play();
                         }
                         else if (this.mode === 'order') {
                             if (this.playIndex < this.option.music.length - 1) {
                                 this.setMusic(++this.playIndex);
+                                this.play();
                             }
                             else {
                                 this.ended = true;
@@ -583,12 +595,9 @@ class APlayer {
                             }
                         }
                         else if (this.mode === 'circulation') {
-                            if (this.playIndex < this.option.music.length - 1) {
-                                this.setMusic(++this.playIndex);
-                            }
-                            else {
-                                this.setMusic(0);
-                            }
+                            this.playIndex = (this.playIndex + 1) % this.option.music.length;
+                            this.setMusic(this.playIndex);
+                            this.play();
                         }
                     }
                 }
@@ -605,7 +614,7 @@ class APlayer {
             this.audio.volume = parseInt(this.element.getElementsByClassName('aplayer-volume')[0].style.height) / 100;
 
             // loop
-            this.audio.loop = !(this.multiple || this.mode === 'order');
+            this.audio.loop = !(this.isMultiple() || this.mode === 'order');
 
             this.audios[indexMusic] = this.audio;
         }
@@ -721,12 +730,6 @@ class APlayer {
         if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
             this.element.getElementsByClassName('aplayer-dtime')[0].innerHTML = this.audio.duration ? this.secondToTime(this.audio.duration) : '00:00';
         }
-
-        // autoplay
-        if (this.option.autoplay && !this.isMobile) {
-            this.play();
-        }
-        this.option.autoplay = true;  // autoplay next music
     }
 
     /**
@@ -791,6 +794,13 @@ class APlayer {
     }
 
     /**
+     * get whether multiple music definitions are loaded
+     */
+    isMultiple() {
+        return this.option.music.length > 1;
+    }
+
+    /**
      * get random order, using Fisher–Yates shuffle
      */
     getRandomOrder() {
@@ -811,7 +821,7 @@ class APlayer {
             }
             return shuffled;
         }
-        if (this.multiple) {
+        if (this.isMultiple()) {
             this.randomOrder = shuffle([...Array(this.option.music.length)].map(function(item, i) {
                 return i;
             }));
@@ -822,7 +832,7 @@ class APlayer {
      * get next random number
      */
     nextRandomNum() {
-        if (this.multiple) {
+        if (this.isMultiple()) {
             let index = this.randomOrder.indexOf(this.playIndex);
             if (index === this.randomOrder.length - 1) {
                 return this.randomOrder[0];
@@ -836,84 +846,67 @@ class APlayer {
         }
     }
 
-       /**
+  /**
     * Remove song from playlist 
     */
-   removeSong(indexOfSong) {
-    
-           if (this.option.music[indexOfSong] != null) { // Check if song exists 
-               const list = this.element.getElementsByClassName('aplayer-list')[0];
-               var oList = list.firstElementChild; // OL tag
-               var liList = []; // Holds the index of the LI tags
-    
-               for (let i = 0; i < oList.childNodes.length; i++) {
-                   if (oList.childNodes[i].tagName == 'LI') {
-                       liList.push(i); //Adds the LI tag indexes to array
-                   }
-               }
-               if (this.option.music[indexOfSong + 1] != null || this.option.music[indexOfSong - 1] != null) {
-                   if (indexOfSong == this.playIndex) {
-    
-                       if (this.option.music[indexOfSong + 1] != null && !this.audio.paused) { // Play next song if it exists. If not paused.
-                           this.pause();
-                           this.setMusic(indexOfSong + 1);
-                           this.play();
-                       } else if (this.option.music[indexOfSong + 1] == null && !this.audio.paused) { // Play previous song if it exists. If not paused.
-                           this.pause();
-                           this.setMusic(indexOfSong - 1);
-                           this.play();
+    removeSong(indexOfSong) {
+        
+               if (this.option.music[indexOfSong] != null) { // Check if song exists 
+                   const list = this.element.getElementsByClassName('aplayer-list')[0];
+                   var oList = list.firstElementChild; // OL tag
+                   var liList = []; // Holds the index of the LI tags
+        
+                   for (let i = 0; i < oList.childNodes.length; i++) {
+                       if (oList.childNodes[i].tagName == 'LI') {
+                           liList.push(i); //Adds the LI tag indexes to array
                        }
-    
-                       if (this.option.music[indexOfSong + 1] != null && this.audio.paused) { // Play next song if it exists. If paused.
-    
-                           this.setMusic(indexOfSong + 1);
-                           this.pause();
-                       } else if (this.option.music[indexOfSong + 1] == null && this.audio.paused) { // Play previous song if it exists. If not paused.
-    
-                           this.setMusic(indexOfSong - 1);
-                           this.pause();
-                       }
-                       this.playIndex = this.playIndex - 1
-    
-                   } else {
-    
-                       if (indexOfSong < this.playIndex) {
-                           this.playIndex = this.playIndex - 1;
-    
-    
-                       } else {}
                    }
-    
-                   if (oList.childNodes[liList[indexOfSong + 1]] == null) {
-                       var targetSong = oList.childNodes[liList[indexOfSong - 1]];
-                       targetSong.childNodes[3].textContent = indexOfSong;
-                   } else {
-                       for (let i = 1; i < liList.length; i++) {
-                           if (oList.childNodes[liList[indexOfSong + i]] != null) {
-                               var targetSong = oList.childNodes[liList[indexOfSong + i]];
-                               targetSong.childNodes[3].textContent = indexOfSong + i;
+                   if (this.option.music[indexOfSong + 1] != null || this.option.music[indexOfSong - 1] != null) {
+                       if (indexOfSong == this.playIndex) {
+        
+                           if (this.option.music[indexOfSong + 1] != null) { // Play next song if it exists. If not paused.
+                               this.setMusic(indexOfSong + 1);
+                           } else if (this.option.music[indexOfSong + 1] == null) { // Play previous song if it exists. If not paused.
+                               this.setMusic(indexOfSong - 1);
+                           }
+             
+                           this.playIndex = this.playIndex - 1
+        
+                       } else {
+                           if (indexOfSong < this.playIndex) {
+                               this.playIndex = this.playIndex - 1;   
                            }
                        }
+        
+                       if (oList.childNodes[liList[indexOfSong + 1]] == null) {
+                           var targetSong = oList.childNodes[liList[indexOfSong - 1]];
+                           targetSong.childNodes[3].textContent = indexOfSong;
+                       } else {
+                           for (let i = 1; i < liList.length; i++) {
+                               if (oList.childNodes[liList[indexOfSong + i]] != null) {
+                                   var targetSong = oList.childNodes[liList[indexOfSong + i]];
+                                   targetSong.childNodes[3].textContent = indexOfSong + i;
+                               }
+                           }
+                       }
+                       this.option.music.splice(indexOfSong, 1); // Delete song from music array
+                       this.audios.splice(indexOfSong, 1); // Delete song from audios array (Has to be)
+                       oList.childNodes[liList[indexOfSong]].remove();
+        
+                       if (this.option.music[0] != null && this.option.music[1] == null) {
+                           this.multiple = false;
+                           this.element.classList.remove('aplayer-withlist');
+                       }
                    }
-                   this.option.music.splice(indexOfSong, 1); // Delete song from music array
-                   this.audios.splice(indexOfSong, 1); // Delete song from audios array (Has to be)
-                   oList.childNodes[liList[indexOfSong]].remove();
-    
-                   if (this.option.music[0] != null && this.option.music[1] == null) {
-                       this.multiple = false;
-                       this.element.classList.remove('aplayer-withlist');
-                   }
+        
+                   list.style.height = "";
+        
+               } else {
+                   console.error("ERROR: Song does not exist");
                }
-    
-    
-               list.style.height = "";
-    
-           } else {
-               console.error("ERROR: Song does not exist");
+        
            }
-    
-       }
-       
+
     /**
      * destroy this player
      */
@@ -935,6 +928,8 @@ class APlayer {
      * @param {Array} newMusic
      */
     addMusic(newMusic) {
+        const wasSingle = !this.isMultiple();
+
         this.option.music = this.option.music.concat(newMusic);
 
         const list = this.element.getElementsByClassName('aplayer-list')[0];
@@ -951,8 +946,7 @@ class APlayer {
         }
         listEle.innerHTML += newItemHTML;
 
-        if (!this.multiple) {
-            this.multiple = true;
+        if (wasSingle && this.isMultiple()) {
             this.element.classList.add('aplayer-withlist');
             this.audio.loop = false;
         }
