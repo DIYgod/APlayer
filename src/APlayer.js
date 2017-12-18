@@ -853,18 +853,18 @@ class APlayer {
         if (this.option.music[indexOfSong] != null) { // Check if song exists 
             const list = this.element.getElementsByClassName('aplayer-list')[0];
             var oList = list.getElementsByTagName('ol')[0];
-            var liList = oList.getElementsByTagName('li'); // Holds the index of the LI tags   
+            var liList = oList.getElementsByTagName('li');
             if (this.option.music[indexOfSong + 1] != null || this.option.music[indexOfSong - 1] != null) {
                 if (indexOfSong == this.playIndex) {
-                    if (this.option.music[indexOfSong + 1] != null) { // Play next song if it exists. If not paused.
+                    if (this.option.music[indexOfSong + 1] != null) { // Play next song if it exists.
                         this.setMusic(indexOfSong + 1);
-                        this.playIndex = this.playIndex -1; //Adjust play index for removed song
+                        this.playIndex = this.playIndex - 1; // Adjust play index for removed song
                     } 
-                    else if (this.option.music[indexOfSong + 1] == null) { // Play previous song if it exists. If not paused.
+                    else if (this.option.music[indexOfSong + 1] == null) { // Play previous song if it exists.
                              this.setMusic(indexOfSong - 1);
                     }
                 }
-                else {  
+                else { 
                     if (indexOfSong < this.playIndex) {
                         this.playIndex = this.playIndex - 1;   
                     }
@@ -882,7 +882,7 @@ class APlayer {
                     }
                 }
                 this.option.music.splice(indexOfSong, 1); // Delete song from music array
-                this.audios.splice(indexOfSong, 1); // Delete song from audios array (Has to be)
+                this.audios.splice(indexOfSong, 1); // Delete song from audios array
                 liList[indexOfSong].remove();
                 if (this.option.music[0] != null && this.option.music[1] == null) {
                     this.multiple = false;
@@ -891,7 +891,6 @@ class APlayer {
             }
             var listHeight = parseInt(list.style.height, 10);
             list.style.height = (listHeight - 33) + "px";
-        
         } 
         else {
             console.error("ERROR: Song does not exist");
