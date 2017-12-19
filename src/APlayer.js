@@ -847,6 +847,57 @@ class APlayer {
     }
 
     /**
+    * Remove song from playlist 
+    */
+    removeSong(indexOfSong) {
+        if (this.option.music[indexOfSong] != null) { // Check if song exists 
+            const list = this.element.getElementsByClassName('aplayer-list')[0];
+            var oList = list.getElementsByTagName('ol')[0];
+            var liList = oList.getElementsByTagName('li');
+            if (this.option.music[indexOfSong + 1] != null || this.option.music[indexOfSong - 1] != null) {
+                if (indexOfSong == this.playIndex) {
+                    if (this.option.music[indexOfSong + 1] != null) { // Play next song if it exists.
+                        this.setMusic(indexOfSong + 1);
+                        this.playIndex = this.playIndex - 1; // Adjust play index for removed song
+                    } 
+                    else if (this.option.music[indexOfSong + 1] == null) { // Play previous song if it exists.
+                             this.setMusic(indexOfSong - 1);
+                    }
+                }
+                else { 
+                    if (indexOfSong < this.playIndex) {
+                        this.playIndex = this.playIndex - 1;   
+                    }
+                }
+                if (liList[indexOfSong + 1] == null) {
+                    var targetSong = liList[indexOfSong - 1];
+                    targetSong.getElementsByClassName('aplayer-list-index')[0].textContent = indexOfSong;
+                } 
+                else {
+                    for (let i = 1; i < liList.length; i++) {
+                        if (liList[indexOfSong + i] != null) {
+                            var targetSong = liList[indexOfSong + i];
+                            targetSong.getElementsByClassName('aplayer-list-index')[0].textContent = indexOfSong + i;
+                        }
+                    }
+                }
+                this.option.music.splice(indexOfSong, 1); // Delete song from music array
+                this.audios.splice(indexOfSong, 1); // Delete song from audios array
+                liList[indexOfSong].remove();
+                if (this.option.music[0] != null && this.option.music[1] == null) {
+                    this.multiple = false;
+                    this.element.classList.remove('aplayer-withlist');
+                }
+            }
+            var listHeight = parseInt(list.style.height, 10);
+            list.style.height = (listHeight - 33) + "px";
+        } 
+        else {
+            console.error("ERROR: Song does not exist");
+        }      
+    }
+
+    /**
      * destroy this player
      */
     destroy() {
