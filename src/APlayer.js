@@ -943,7 +943,7 @@ class APlayer {
         var songListLength = listEle.getElementsByTagName('li').length;
 
         if(list.classList.contains('aplayer-list-hide')) {
-            list.style.height = (songListLength * 32.75) + 'px';
+            list.style.height = (songListLength * 33) + 'px';
         }    
         else {
             list.style.height = 'auto';
