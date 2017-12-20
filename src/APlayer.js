@@ -940,10 +940,16 @@ class APlayer {
             this.element.classList.add('aplayer-withlist');
             this.audio.loop = false;
         }
+        var songListLength = listEle.getElementsByTagName('li').length;
 
-        list.style.height = 'auto';
-        list.style.height = list.offsetHeight + 'px';
-
+        if(list.classList.contains('aplayer-list-hide')) {
+            list.style.height = (songListLength * 32.75) + 'px';
+        }    
+        else {
+            list.style.height = 'auto';
+            list.style.height = list.offsetHeight + 'px';
+        }
+            
         this.getRandomOrder();
     }
 }
