@@ -941,14 +941,7 @@ class APlayer {
             this.audio.loop = false;
         }
         var songListLength = listEle.getElementsByTagName('li').length;
-
-        if(list.classList.contains('aplayer-list-hide')) {
-            list.style.height = (songListLength * 33) + 'px';
-        }    
-        else {
-            list.style.height = 'auto';
-            list.style.height = list.offsetHeight + 'px';
-        }
+        list.style.height = (songListLength * 33) + 'px';
             
         this.getRandomOrder();
     }
