@@ -940,10 +940,9 @@ class APlayer {
             this.element.classList.add('aplayer-withlist');
             this.audio.loop = false;
         }
-
-        list.style.height = 'auto';
-        list.style.height = list.offsetHeight + 'px';
-
+        var songListLength = listEle.getElementsByTagName('li').length;
+        list.style.height = (songListLength * 33) + 'px';
+            
         this.getRandomOrder();
     }
 }
