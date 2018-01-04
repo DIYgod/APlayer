@@ -12,9 +12,7 @@
 [![Travis](https://img.shields.io/travis/MoePlayer/APlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/APlayer)
 [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/APlayer#donate)
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/ucdjQF7wcNNiWY9mCEpAeGLz/MoePlayer/APlayer'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/ucdjQF7wcNNiWY9mCEpAeGLz/MoePlayer/APlayer.svg' />
-</a>
+
 
 ## Introduction
 
