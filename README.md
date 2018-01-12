@@ -13,10 +13,6 @@
 [![devDependency Status](https://img.shields.io/david/dev/MoePlayer/aplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/APlayer#info=devDependencies)
 [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/APlayer#donate)
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/ucdjQF7wcNNiWY9mCEpAeGLz/MoePlayer/APlayer'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/ucdjQF7wcNNiWY9mCEpAeGLz/MoePlayer/APlayer.svg' />
-</a>
-
 ## Introduction
 
 ![image](https://i.imgur.com/JDrJXCr.png)
@@ -134,4 +130,4 @@ var ap = new APlayer({
 **APlayer** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/APlayer/contributors)).
 
-> Blog [@Anotherhome](https://www.anotherhome.net) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Weibo [@DIYgod酱](http://weibo.com/anotherhome) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
+> [Blog](https://diygod.me) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Weibo [@DIYgod酱](http://weibo.com/anotherhome) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
