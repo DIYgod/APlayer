@@ -7,9 +7,10 @@
 
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/MoePlayer/APlayer/blob/master/LICENSE)
-[![devDependency Status](https://img.shields.io/david/dev/MoePlayer/aplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/APlayer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
+[![size](https://badge-size.herokuapp.com/MoePlayer/APlayer/master/dist/APlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/DPlayer/tree/master/dist)
 [![Travis](https://img.shields.io/travis/MoePlayer/APlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/APlayer)
+[![devDependency Status](https://img.shields.io/david/dev/MoePlayer/aplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/APlayer#info=devDependencies)
 [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/APlayer#donate)
 
 <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/ucdjQF7wcNNiWY9mCEpAeGLz/MoePlayer/APlayer'>
@@ -84,6 +85,7 @@ var ap = new APlayer({
 - [vue-aplayer](https://github.com/MoeFE/vue-aplayer)
 - [APlayer-Controler](https://github.com/Mashiro-Sorata/APlayer-Controler)
 - [APlayerHandle](https://github.com/kn007/APlayerHandle)
+- [MetingJS](https://github.com/metowolf/MetingJS)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## Who use APlayer?
