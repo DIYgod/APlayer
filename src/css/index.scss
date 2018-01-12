@@ -9,6 +9,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     }
 }
 
+.aplayer-previous {
+    padding-left: 4px !important;
+}
+
 .aplayer-withlrc {
     &.aplayer-narrow {
         width: $aplayer-height-lrc;
