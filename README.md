@@ -8,7 +8,7 @@
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/MoePlayer/APlayer/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
-[![size](https://badge-size.herokuapp.com/MoePlayer/APlayer/master/dist/APlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/DPlayer/tree/master/dist)
+[![size](https://badge-size.herokuapp.com/MoePlayer/APlayer/master/dist/APlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/APlayer/tree/master/dist)
 [![Travis](https://img.shields.io/travis/MoePlayer/APlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/APlayer)
 [![devDependency Status](https://img.shields.io/david/dev/MoePlayer/aplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/APlayer#info=devDependencies)
 [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/APlayer#donate)
@@ -109,9 +109,9 @@ var ap = new APlayer({
 
 ## CDN
 
-- [unpkg](https://unpkg.com/aplayer)
+- [jsDelivr](https://www.jsdelivr.com/package/npm/aplayer)
 - [cdnjs](https://cdnjs.com/libraries/aplayer)
-- [BootCDN](http://www.bootcdn.cn/aplayer/)
+- [unpkg](https://unpkg.com/aplayer)
 - [RawGit](https://rawgit.com/MoePlayer/APlayer/master/dist/APlayer.min.js)
 
 ## Donate
@@ -125,9 +125,13 @@ var ap = new APlayer({
 
 - The CDN service is sponsored by [又拍云](https://console.upyun.com/register/?invite=BkLZ2Xqob)
 
+- Donate via OpenCollective
+
+  [![OpenCollective](https://opencollective.com/aplayer/backers.svg?width=890)](https://opencollective.com/aplayer)
+
 ## Author
 
 **APlayer** © [DIYgod](https://github.com/DIYgod), Released under the [MIT](./LICENSE) License.<br>
 Authored and maintained by DIYgod with help from contributors ([list](https://github.com/DIYgod/APlayer/contributors)).
 
-> [Blog](https://diygod.me) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Weibo [@DIYgod酱](http://weibo.com/anotherhome) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
+> [Blog](https://diygod.me) · GitHub [@DIYgod](https://github.com/DIYgod) · Twitter [@DIYgod](https://twitter.com/DIYgod) · Telegram Channel [@awesomeDIYgod](https://t.me/awesomeDIYgod)
