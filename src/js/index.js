@@ -1,17 +1,18 @@
-console.log("\n %c APlayer 1.6.1 %c http://aplayer.js.org \n\n","color: #fadfa3; background: #030307; padding:5px 0;","background: #fadfa3; padding:5px 0;");
+console.log("\n %c APlayer 1.6.1 %c http://aplayer.js.org \n\n", "color: #fadfa3; background: #030307; padding:5px 0;", "background: #fadfa3; padding:5px 0;");
 
-require('./APlayer.scss');
+import '../css/index.scss';
 
-let instances = [];
+const instances = [];
 
 class APlayer {
+
     /**
      * APlayer constructor function
      *
      * @param {Object} option - See README
      * @constructor
      */
-    constructor(option) {
+    constructor (option) {
         const svg = {
             'play': ['0 0 16 31', 'M15.552 15.168q0.448 0.32 0.448 0.832 0 0.448-0.448 0.768l-13.696 8.512q-0.768 0.512-1.312 0.192t-0.544-1.28v-16.448q0-0.96 0.544-1.28t1.312 0.192z'],
             'pause': ['0 0 17 32', 'M14.080 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048zM2.88 4.8q2.88 0 2.88 2.048v18.24q0 2.112-2.88 2.112t-2.88-2.112v-18.24q0-2.048 2.88-2.048z'],
@@ -24,14 +25,12 @@ class APlayer {
             'single': ['0 0 38 32', 'M2.072 21.577c0.71-0.197 1.125-0.932 0.928-1.641-0.221-0.796-0.333-1.622-0.333-2.457 0-5.049 4.108-9.158 9.158-9.158h5.428c0.056-0.922 0.221-1.816 0.482-2.667h-5.911c-3.158 0-6.128 1.23-8.361 3.463s-3.463 5.203-3.463 8.361c0 1.076 0.145 2.143 0.431 3.171 0.164 0.59 0.7 0.976 1.284 0.976 0.117 0 0.238-0.016 0.357-0.049zM21.394 25.613h-12.409v-2.362c0-0.758-0.528-1.052-1.172-0.652l-5.685 3.522c-0.644 0.4-0.651 1.063-0.014 1.474l5.712 3.69c0.637 0.411 1.158 0.127 1.158-0.63v-2.374h12.409c3.158 0 6.128-1.23 8.361-3.463 1.424-1.424 2.44-3.148 2.99-5.029-0.985 0.368-2.033 0.606-3.125 0.691-1.492 3.038-4.619 5.135-8.226 5.135zM28.718 0c-4.985 0-9.026 4.041-9.026 9.026s4.041 9.026 9.026 9.026 9.026-4.041 9.026-9.026-4.041-9.026-9.026-9.026zM30.392 13.827h-1.728v-6.822c-0.635 0.576-1.433 1.004-2.407 1.285v-1.713c0.473-0.118 0.975-0.325 1.506-0.62 0.532-0.325 0.975-0.665 1.329-1.034h1.3v8.904z'],
             'menu': ['0 0 22 32', 'M20.8 14.4q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2zM1.6 11.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2zM20.8 20.8q0.704 0 1.152 0.48t0.448 1.12-0.48 1.12-1.12 0.48h-19.2q-0.64 0-1.12-0.48t-0.48-1.12 0.448-1.12 1.152-0.48h19.2z']
         };
-        this.getSVG = (type) => {
-            return `
+        this.getSVG = (type) => `
                 <svg xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" version="1.1" viewBox="${svg[type][0]}" width="100%">
                     <use xlink:href="#aplayer-${type}"></use>
                     <path class="aplayer-fill" d="${svg[type][1]}" id="aplayer-${type}"></path>
                 </svg>
             `;
-        };
 
         this.isMobile = /mobile/i.test(window.navigator.userAgent);
         // compatibility: some mobile browsers don't suppose autoplay
@@ -49,7 +48,7 @@ class APlayer {
             theme: '#b7daff',
             mode: 'circulation'
         };
-        for (let defaultKey in defaultOption) {
+        for (const defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
                 option[defaultKey] = defaultOption[defaultKey];
             }
@@ -69,13 +68,11 @@ class APlayer {
             if (isNaN(second)) {
                 return '00:00';
             }
-            const add0 = (num) => {
-                return num < 10 ? '0' + num : '' + num;
-            };
+            const add0 = (num) => num < 10 ? '0' + num : '' + num;
             const min = parseInt(second / 60);
             const sec = parseInt(second - min * 60);
             const hours = parseInt(min / 60);
-            const minAdjust = parseInt((second / 60) - (60 * parseInt((second / 60) / 60)));
+            const minAdjust = parseInt(second / 60 - 60 * parseInt(second / 60 / 60));
             return second >= 3600 ? add0(hours) + ':' + add0(minAdjust) + ':' + add0(sec) : add0(min) + ':' + add0(sec);
         };
 
@@ -156,7 +153,7 @@ class APlayer {
 
         // fill in HTML
         let eleHTML = `
-            <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
+            <div class="aplayer-pic" ${(this.music.pic ? `style="background-image: url('${this.music.pic}');"` : ``)}>
                 <div class="aplayer-button aplayer-play">
                     <button type="button" class="aplayer-icon aplayer-icon-play">
                         ${this.getSVG('play')}
@@ -205,18 +202,18 @@ class APlayer {
             </div>
             <div class="aplayer-list" ${this.option.listmaxheight ? `style="max-height: ${this.option.listmaxheight}"` : ``}>
                 <ol>`;
-            for (let i = 0; i < this.option.music.length; i++) {
-                eleHTML += `
+        for (let i = 0; i < this.option.music.length; i++) {
+            eleHTML += `
                     <li>
                         <span class="aplayer-list-cur" style="background: ${this.option.theme};"></span>
                         <span class="aplayer-list-index">${(i + 1)}</span>
                         <span class="aplayer-list-title">${this.option.music[i].title}</span>
                         <span class="aplayer-list-author">${this.option.music[i].author}</span>
-                    </li>`
-            }
-            eleHTML += `
+                    </li>`;
+        }
+        eleHTML += `
                 </ol>
-            </div>`
+            </div>`;
         this.element.innerHTML = eleHTML;
 
         // hide mode button in arrow container
@@ -230,7 +227,7 @@ class APlayer {
             this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow');
         }
         // fix the width of aplayer bar
-        let bar = {};
+        const bar = {};
         bar.barWrap = this.element.getElementsByClassName('aplayer-bar-wrap')[0];
 
         // switch to narrow style
@@ -240,7 +237,7 @@ class APlayer {
 
         // play and pause button
         this.button = this.element.getElementsByClassName('aplayer-button')[0];
-        this.button.addEventListener('click', (e) => {
+        this.button.addEventListener('click', () => {
             this.toggle();
         });
 
@@ -363,10 +360,10 @@ class APlayer {
         });
 
         // get element's view position
-        function getElementViewLeft(element) {
+        function getElementViewLeft (element) {
             let actualLeft = element.offsetLeft;
             let current = element.offsetParent;
-            let elementScrollLeft;
+            let elementScrollLeft = 0;
             while (current !== null) {
                 actualLeft += current.offsetLeft;
                 current = current.offsetParent;
@@ -375,10 +372,10 @@ class APlayer {
             return actualLeft - elementScrollLeft;
         }
 
-        function getElementViewTop(element) {
+        function getElementViewTop (element) {
             let actualTop = element.offsetTop;
             let current = element.offsetParent;
-            let elementScrollTop;
+            let elementScrollTop = 0;
             while (current !== null) {
                 actualTop += current.offsetTop;
                 current = current.offsetParent;
@@ -445,9 +442,9 @@ class APlayer {
     /**
      * Set music
      */
-    setMusic(index) {
+    setMusic (index) {
         // get this.music
-        if (typeof(index) !== 'undefined') {
+        if (typeof  index !== 'undefined') {
             this.playIndex = index;
         }
         const indexMusic = this.playIndex;
@@ -505,7 +502,7 @@ class APlayer {
                     // pause other players (Thanks @Aprikyblue)
                     if (this.option.mutex) {
                         for (let i = 0; i < instances.length; i++) {
-                            if (this != instances[i]) {
+                            if (this !== instances[i]) {
                                 instances[i].pause();
                             }
                         }
@@ -631,7 +628,7 @@ class APlayer {
          */
         const parseLrc = (lrc_s) => {
             const lyric = lrc_s.split('\n');
-            let lrc = [];
+            const lrc = [];
             const lyricLen = lyric.length;
             for (let i = 0; i < lyricLen; i++) {
                 // match lrc time
@@ -639,12 +636,12 @@ class APlayer {
                 // match lrc text
                 const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g, '').replace(/^\s+|\s+$/g, '');
 
-                if (lrcTimes != null) {
+                if (lrcTimes) {
                     // handle multiple time tag
                     const timeLen = lrcTimes.length;
                     for (let j = 0; j < timeLen; j++) {
                         const oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j]);
-                        const lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
+                        const lrcTime = oneTime[1] * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
                         lrc.push([lrcTime, lrcText]);
                     }
                 }
@@ -693,8 +690,7 @@ class APlayer {
                             this.lrcContents.style.webkitTransform = 'translateY(0px)';
                         }
                     };
-                    let apiurl;
-                    apiurl = this.option.music[index].lrc;
+                    const apiurl = this.option.music[index].lrc;
                     xhr.open('get', apiurl, true);
                     xhr.send(null);
                 }
@@ -735,7 +731,7 @@ class APlayer {
     /**
      * Play music
      */
-    play(time) {
+    play (time) {
         if (Object.prototype.toString.call(time) === '[object Number]') {
             this.audio.currentTime = time;
         }
@@ -747,7 +743,7 @@ class APlayer {
     /**
      * Pause music
      */
-    pause() {
+    pause () {
         if (!this.audio.paused) {
             this.audio.pause();
         }
@@ -756,7 +752,7 @@ class APlayer {
     /**
      * Set volume
      */
-    volume(percentage) {
+    volume (percentage) {
         this.updateBar('volume', percentage, 'height');
         this.audio.volume = percentage;
         if (this.audio.muted) {
@@ -775,7 +771,7 @@ class APlayer {
     /**
      * attach event
      */
-    on(name, func) {
+    on (name, func) {
         if (typeof func === 'function') {
             this.event[name].push(func);
         }
@@ -784,7 +780,7 @@ class APlayer {
     /**
      * toggle between play and pause
      */
-    toggle() {
+    toggle () {
         if (this.button.classList.contains('aplayer-play')) {
             this.play();
         }
@@ -796,33 +792,33 @@ class APlayer {
     /**
      * get whether multiple music definitions are loaded
      */
-    isMultiple() {
+    isMultiple () {
         return this.option.music.length > 1;
     }
 
     /**
      * get random order, using Fisher–Yates shuffle
      */
-    getRandomOrder() {
-        function random(min, max) {
-            if (max == null) {
+    getRandomOrder () {
+        function random (min, max) {
+            if (max) {
                 max = min;
                 min = 0;
             }
             return min + Math.floor(Math.random() * (max - min + 1));
         }
-        function shuffle(arr) {
-            var length = arr.length,
+        function shuffle (arr) {
+            const length = arr.length,
                 shuffled = new Array(length);
-            for (var index = 0, rand; index < length; index++) {
+            for (let index = 0, rand; index < length; index++) {
                 rand = random(0, index);
-                if (rand !== index) shuffled[index] = shuffled[rand];
+                if (rand !== index) {shuffled[index] = shuffled[rand];}
                 shuffled[rand] = arr[index];
             }
             return shuffled;
         }
         if (this.isMultiple()) {
-            this.randomOrder = shuffle([...Array(this.option.music.length)].map(function(item, i) {
+            this.randomOrder = shuffle([...Array(this.option.music.length)].map(function (item, i) {
                 return i;
             }));
         }
@@ -831,9 +827,9 @@ class APlayer {
     /**
      * get next random number
      */
-    nextRandomNum() {
+    nextRandomNum () {
         if (this.isMultiple()) {
-            let index = this.randomOrder.indexOf(this.playIndex);
+            const index = this.randomOrder.indexOf(this.playIndex);
             if (index === this.randomOrder.length - 1) {
                 return this.randomOrder[0];
             }
@@ -847,36 +843,36 @@ class APlayer {
     }
 
     /**
-    * Remove song from playlist 
+    * Remove song from playlist
     */
-    removeSong(indexOfSong) {
-        if (this.option.music[indexOfSong] != null) { // Check if song exists 
+    removeSong (indexOfSong) {
+        if (this.option.music[indexOfSong]) { // Check if song exists
             const list = this.element.getElementsByClassName('aplayer-list')[0];
-            var oList = list.getElementsByTagName('ol')[0];
-            var liList = oList.getElementsByTagName('li');
-            if (this.option.music[indexOfSong + 1] != null || this.option.music[indexOfSong - 1] != null) {
-                if (indexOfSong == this.playIndex) {
-                    if (this.option.music[indexOfSong + 1] != null) { // Play next song if it exists.
+            const oList = list.getElementsByTagName('ol')[0];
+            const liList = oList.getElementsByTagName('li');
+            if (this.option.music[indexOfSong + 1] || this.option.music[indexOfSong - 1]) {
+                if (indexOfSong === this.playIndex) {
+                    if (this.option.music[indexOfSong + 1]) { // Play next song if it exists.
                         this.setMusic(indexOfSong + 1);
                         this.playIndex = this.playIndex - 1; // Adjust play index for removed song
-                    } 
-                    else if (this.option.music[indexOfSong + 1] == null) { // Play previous song if it exists.
-                             this.setMusic(indexOfSong - 1);
+                    }
+                    else if (!this.option.music[indexOfSong + 1]) { // Play previous song if it exists.
+                        this.setMusic(indexOfSong - 1);
                     }
                 }
-                else { 
+                else {
                     if (indexOfSong < this.playIndex) {
-                        this.playIndex = this.playIndex - 1;   
+                        this.playIndex = this.playIndex - 1;
                     }
                 }
-                if (liList[indexOfSong + 1] == null) {
-                    var targetSong = liList[indexOfSong - 1];
+                if (liList[indexOfSong + 1]) {
+                    const targetSong = liList[indexOfSong - 1];
                     targetSong.getElementsByClassName('aplayer-list-index')[0].textContent = indexOfSong;
-                } 
+                }
                 else {
                     for (let i = 1; i < liList.length; i++) {
-                        if (liList[indexOfSong + i] != null) {
-                            var targetSong = liList[indexOfSong + i];
+                        if (liList[indexOfSong + i]) {
+                            const targetSong = liList[indexOfSong + i];
                             targetSong.getElementsByClassName('aplayer-list-index')[0].textContent = indexOfSong + i;
                         }
                     }
@@ -884,28 +880,28 @@ class APlayer {
                 this.option.music.splice(indexOfSong, 1); // Delete song from music array
                 this.audios.splice(indexOfSong, 1); // Delete song from audios array
                 liList[indexOfSong].remove();
-                if (this.option.music[0] != null && this.option.music[1] == null) {
+                if (this.option.music[0] && this.option.music[1]) {
                     this.multiple = false;
                     this.element.classList.remove('aplayer-withlist');
                 }
             }
-            var listHeight = parseInt(list.style.height, 10);
-            list.style.height = (listHeight - 33) + "px";
-        } 
+            const listHeight = parseInt(list.style.height, 10);
+            list.style.height = listHeight - 33 + "px";
+        }
         else {
             console.error("ERROR: Song does not exist");
-        }      
+        }
     }
 
     /**
      * destroy this player
      */
-    destroy() {
+    destroy () {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
         this.element.innerHTML = '';
         clearInterval(this.playedTime);
-        for (let key in this) {
+        for (const key in this) {
             if (this.hasOwnProperty(key)) {
                 delete this[key];
             }
@@ -917,7 +913,7 @@ class APlayer {
      *
      * @param {Array} newMusic
      */
-    addMusic(newMusic) {
+    addMusic (newMusic) {
         const wasSingle = !this.isMultiple();
 
         this.option.music = this.option.music.concat(newMusic);
@@ -932,7 +928,7 @@ class APlayer {
                     <span class="aplayer-list-index">${this.option.music.length - newMusic.length + i + 1}</span>
                     <span class="aplayer-list-title">${newMusic[i].title}</span>
                     <span class="aplayer-list-author">${newMusic[i].author}</span>
-                </li>`
+                </li>`;
         }
         listEle.innerHTML += newItemHTML;
 
@@ -940,11 +936,11 @@ class APlayer {
             this.element.classList.add('aplayer-withlist');
             this.audio.loop = false;
         }
-        var songListLength = listEle.getElementsByTagName('li').length;
-        list.style.height = (songListLength * 33) + 'px';
-            
+        const songListLength = listEle.getElementsByTagName('li').length;
+        list.style.height = songListLength * 33 + 'px';
+
         this.getRandomOrder();
     }
 }
 
-module.exports = APlayer;
+export default APlayer;
