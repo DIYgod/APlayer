@@ -7,6 +7,7 @@ const ap1 = new APlayer({
     theme: '#e6d0b2',
     preload: 'metadata',
     mode: 'circulation',
+    error: "Error: Song could not load",
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',

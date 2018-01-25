@@ -46,8 +46,10 @@ class APlayer {
             mutex: true,
             showlrc: 0,
             theme: '#b7daff',
-            mode: 'circulation'
+            mode: 'circulation',
+            error: 'Error happens ╥﹏╥'
         };
+
         for (const defaultKey in defaultOption) {
             if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
                 option[defaultKey] = defaultOption[defaultKey];
@@ -558,7 +560,7 @@ class APlayer {
 
             // audio download error: an error occurs
             this.audio.addEventListener('error', () => {
-                this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - Error happens ╥﹏╥`;
+                this.element.getElementsByClassName('aplayer-author')[0].innerHTML = ` - ` + this.option.error;
                 this.trigger('pause');
             });
 
