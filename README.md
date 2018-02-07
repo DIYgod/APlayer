@@ -63,6 +63,12 @@ var ap = new APlayer({
 
 [Read the Docs](http://aplayer.js.org/docs)
 
+## CDN
+
+- [jsDelivr](https://www.jsdelivr.com/package/npm/aplayer)
+- [cdnjs](https://cdnjs.com/libraries/aplayer)
+- [unpkg](https://unpkg.com/aplayer/)
+
 ## Join the Discussion
 
 - [Telegram Group](https://t.me/adplayer)
@@ -86,36 +92,21 @@ var ap = new APlayer({
 
 ## Who use APlayer?
 
-- [Anotherhome](https://www.anotherhome.net/2717)
 - [站长之家](http://www.chinaz.com/15year/index.html)
 - [TheFatRat](http://thefatrat.cn/)
 - [Jelly Rue](http://jellyrue.com/)
-- [LWL的自由天空](https://blog.lwl12.com/read/hermit-x.html)
-- [萨摩公园](https://i-meto.com/meting-typecho/)
-- [ZGQ's Blog](https://blog.izgq.net/archives/456/)
-- [FGHRSH 的博客](https://www.fghrsh.net/post/77.html)
-- [Blessing Studio](https://blessing.studio/generate-aplayer-config-from-netease-automatically/)
-- [暮光博客](https://muguang.me/guff/2645.html)
 - [Justice_Eternal吧曲谱资源站](http://lightmoon.pw)
 - [Justice_Eternal吧曲谱资源站(移动端)](https://justice-eternal.github.io/)
 - [歌词千寻](https://www.lrcgc.com/diy)
-- [SORA](http://mashirosorata.vicp.io/APlayer-Controler%E2%80%94%E2%80%94%E5%8F%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84ap%E6%8E%A7%E5%88%B6%E5%99%A8.html)
 - [iSearch](http://i.oppsu.cn)
 - [LRC歌词编辑器](https://github.com/MoeFE/Lyric)
-- [kn007的个人博客](https://kn007.net/topics/wordpress-blog-use-new-html5-player-aplayer/)
 - [LLSupport](https://www.lovelivesupport.com/)
 - [Аэростатика](https://aerostatica.ru/)
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
-## CDN
-
-- [jsDelivr](https://www.jsdelivr.com/package/npm/aplayer)
-- [cdnjs](https://cdnjs.com/libraries/aplayer)
-- [unpkg](https://unpkg.com/aplayer)
-- [RawGit](https://rawgit.com/MoePlayer/APlayer/master/dist/APlayer.min.js)
-
 ## Donate
 
+- [Donate via OpenCollective](https://opencollective.com/aplayer)
 - [Donate via Paypal](https://www.paypal.me/DIYgod)
 - [Donate via WeChat Pay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1uowywej307s07st8h.jpg)
 - [Donate via Alipay](https://ws4.sinaimg.cn/large/006tKfTcgy1fhu1vf4ih7j307s07sdfm.jpg)
@@ -123,11 +114,31 @@ var ap = new APlayer({
 
 ## Sponsor
 
-- The CDN service is sponsored by [又拍云](https://console.upyun.com/register/?invite=BkLZ2Xqob)
+Thank you to all our sponsors!
 
-- Donate via OpenCollective
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
+          <img width="222px" src="https://imgur.com/apG1uKf.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-  [![OpenCollective](https://opencollective.com/aplayer/backers.svg?width=890)](https://opencollective.com/aplayer)
+## Contributors
+
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/MoePlayer/APlayer/graphs/contributors"><img src="https://opencollective.com/APlayer/contributors.svg?width=890" /></a>
+
+## Backers
+
+Thank you to all our backers!
+
+<a href="https://opencollective.com/APlayer#backers" target="_blank"><img src="https://opencollective.com/APlayer/backers.svg?width=890"></a>
 
 ## Author
 
