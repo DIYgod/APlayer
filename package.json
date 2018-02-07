@@ -8,7 +8,8 @@
     "start": "npm run dev",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
-    "test": "eslint src webpack"
+    "test": "eslint src webpack",
+    "postinstall": "opencollective postinstall"
   },
   "repository": {
     "url": "git+https://github.com/DIYgod/APlayer.git",
@@ -47,5 +48,12 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.5"
+  },
+  "dependencies": {
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/APlayer"
   }
 }
