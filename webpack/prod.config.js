@@ -83,6 +83,14 @@ module.exports = {
                 options: {
                     'limit': 40000
                 }
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader'
+            },
+            {
+                test: /\.art$/,
+                loader: 'art-template-loader'
             }
         ]
     },

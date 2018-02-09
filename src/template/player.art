@@ -1,0 +1,59 @@
+<div class="aplayer-pic">
+    <div class="aplayer-button aplayer-play">
+        <button type="button" class="aplayer-icon aplayer-icon-play">
+            {{@ icons.play }}
+        </button>
+    </div>
+</div>
+<div class="aplayer-info">
+    <div class="aplayer-music">
+        <span class="aplayer-title"></span>
+        <span class="aplayer-author"></span>
+    </div>
+    <div class="aplayer-lrc">
+        <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
+    </div>
+    <div class="aplayer-controller">
+        <div class="aplayer-bar-wrap">
+            <div class="aplayer-bar">
+                <div class="aplayer-loaded" style="width: 0"></div>
+                <div class="aplayer-played" style="width: 0; background: {{ options.theme }};">
+                    <span class="aplayer-thumb" style="border: 1px solid {{ options.theme }};"></span>
+                </div>
+            </div>
+        </div>
+        <div class="aplayer-time">
+            <span class="aplayer-time-inner">
+                - <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
+            </span>
+            <div class="aplayer-volume-wrap">
+                <button type="button" class="aplayer-icon aplayer-icon-volume-down">
+                    {{@ icons.volumeDown }}
+                </button>
+                <div class="aplayer-volume-bar-wrap">
+                    <div class="aplayer-volume-bar">
+                        <div class="aplayer-volume" style="height: 80%; background: {{ options.theme }};"></div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="aplayer-icon aplayer-icon-mode">
+                {{@ icons[mode] }}
+            </button>
+            <button type="button" class="aplayer-icon aplayer-icon-menu">
+                {{@ icons.menu }}
+            </button>
+        </div>
+    </div>
+</div>
+<div class="aplayer-list"{{ if options.listmaxheight }} style="max-height: {{ options.listmaxheight }}"{{ /if }}>
+    <ol>
+        {{each options.music}}
+        <li>
+            <span class="aplayer-list-cur" style="background: {{ options.theme }};"></span>
+            <span class="aplayer-list-index">{{ $index + 1 }}</span>
+            <span class="aplayer-list-title">{{ $value.title }}</span>
+            <span class="aplayer-list-author">{{ $value.author }}</span>
+        </li>
+        {{/each}}
+    </ol>
+</div>
