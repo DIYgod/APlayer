@@ -146,7 +146,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             bottom: 50%;
             right: 50%;
             margin: 0 -15px -15px 0;
-            .aplayer-icon-play {
+            svg {
                 position: absolute;
                 top: 3px;
                 left: 4px;
@@ -161,7 +161,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             border: 2px solid #fff;
             bottom: 4px;
             right: 4px;
-            .aplayer-icon-pause {
+            svg {
                 position: absolute;
                 top: 2px;
                 left: 2px;

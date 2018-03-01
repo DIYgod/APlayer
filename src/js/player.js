@@ -1,3 +1,5 @@
+import Promise from 'promise-polyfill';
+
 import utils from './utils';
 import Icons from './icons';
 import handleOption from './options';
@@ -6,6 +8,7 @@ import Bar from './bar';
 import User from './user';
 import Lrc from './lrc';
 import Controller from './controller';
+import Timer from './timer';
 
 const instances = [];
 
@@ -103,6 +106,12 @@ class APlayer {
 
         this.controller = new Controller(this);
 
+        this.timer = new Timer(this);
+
+        this.paused = true;
+
+        this.initAudio();
+
         if (this.mode === 'random') {
             this.setMusic(this.randomOrder[0]);
         }
@@ -118,6 +127,82 @@ class APlayer {
         }
 
         instances.push(this);
+    }
+
+    initAudio () {
+        this.audio = document.createElement('audio');
+        this.audio.preload = this.options.preload ? this.options.preload : 'auto';
+
+        this.audio.addEventListener('play', () => {
+            if (this.paused) {
+                this.play();
+            }
+        });
+
+        this.audio.addEventListener('pause', () => {
+            if (!this.paused) {
+                this.pause();
+            }
+        });
+
+        // show audio time: the metadata has loaded or changed
+        this.audio.addEventListener('durationchange', () => {
+            if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+                this.template.dtime.innerHTML = utils.secondToTime(this.audio.duration);
+            }
+        });
+
+        // show audio loaded bar: to inform interested parties of progress downloading the media
+        this.audio.addEventListener('progress', () => {
+            const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0;
+            this.bar.set('loaded', percentage, 'width');
+        });
+
+        // audio download error: an error occurs
+        this.audio.addEventListener('error', () => {
+            this.template.author.innerHTML = ` - Error happens ╥﹏╥`;
+        });
+
+        // multiple music play
+        this.audio.addEventListener('ended', () => {
+            if (this.isMultiple()) {
+                if (this.audio.currentTime !== 0) {
+                    if (this.mode === 'random') {
+                        this.setMusic(this.nextRandomNum());
+                        this.play();
+                    }
+                    else if (this.mode === 'single') {
+                        this.setMusic(this.playIndex);
+                        this.play();
+                    }
+                    else if (this.mode === 'order') {
+                        if (this.playIndex < this.options.music.length - 1) {
+                            this.setMusic(++this.playIndex);
+                            this.play();
+                        }
+                        else {
+                            this.pause();
+                        }
+                    }
+                    else if (this.mode === 'circulation') {
+                        this.playIndex = (this.playIndex + 1) % this.options.music.length;
+                        this.setMusic(this.playIndex);
+                        this.play();
+                    }
+                }
+            }
+            else {
+                if (this.mode === 'order') {
+                    this.pause();
+                }
+            }
+        });
+
+        // control volume
+        this.audio.volume = parseInt(this.template.volume.style.height) / 100;
+
+        // loop
+        this.audio.loop = !(this.isMultiple() || this.mode === 'order');
     }
 
     /**
@@ -146,155 +231,11 @@ class APlayer {
         }
         this.template.listItems[indexMusic].classList.add('aplayer-list-light');
 
-        // set the previous audio object
-        if (!utils.isMobile && this.audio) {
-            this.pause();
-            this.audio.currentTime = 0;
-        }
-
         this.template.list.scrollTop = indexMusic * 33;
 
-        // get this audio object
-        if (utils.isMobile && this.audio) {
-            this.audio.src = this.music.url;
-        }
-        else if (!utils.isMobile && this.audios[indexMusic]) {
-            this.audio = this.audios[indexMusic];
-            this.audio.volume = parseInt(this.template.volume.style.height) / 100;
-            this.audio.currentTime = 0;
-            this.audio.src = this.music.url;
-        }
-        else {
-            this.audio = document.createElement("audio");
-            this.audio.src = this.music.url;
-            this.audio.preload = this.options.preload ? this.options.preload : 'auto';
-
-            this.audio.addEventListener('play', () => {
-                if (this.template.button.classList.contains('aplayer-play')) {
-                    this.template.button.classList.remove('aplayer-play');
-                    this.template.button.classList.add('aplayer-pause');
-                    this.template.button.innerHTML = '';
-                    setTimeout(() => {
-                        this.template.button.innerHTML = `
-                                    <button type="button" class="aplayer-icon aplayer-icon-pause">`
-                            + Icons.pause
-                            + `     </button>`;
-                    }, 100);
-
-                    // pause other players (Thanks @Aprikyblue)
-                    if (this.options.mutex) {
-                        for (let i = 0; i < instances.length; i++) {
-                            if (this !== instances[i]) {
-                                instances[i].pause();
-                            }
-                        }
-                    }
-                    if (this.playedTime) {
-                        clearInterval(this.playedTime);
-                    }
-                    this.playedTime = setInterval(() => {
-                        this.bar.set('played', this.audio.currentTime / this.audio.duration, 'width');
-                        this.lrc && this.lrc.update();
-                        this.template.ptime.innerHTML = utils.secondToTime(this.audio.currentTime);
-                        this.trigger('playing');
-                    }, 100);
-                    this.trigger('play');
-                }
-            });
-
-            const pauseHandler = () => {
-                if (this.template.button && (this.template.button.classList.contains('aplayer-pause') || this.ended)) {
-                    this.ended = false;
-                    this.template.button.classList.remove('aplayer-pause');
-                    this.template.button.classList.add('aplayer-play');
-                    this.template.button.innerHTML = '';
-                    setTimeout(() => {
-                        this.template.button.innerHTML = `
-                                    <button type="button" class="aplayer-icon aplayer-icon-play">`
-                            + Icons.play
-                            + `     </button>`;
-                    }, 100);
-                    clearInterval(this.playedTime);
-                    this.trigger('pause');
-                }
-            };
-
-            this.audio.addEventListener('pause', pauseHandler);
-
-            this.audio.addEventListener('abort', pauseHandler);
-
-            // show audio time: the metadata has loaded or changed
-            this.audio.addEventListener('durationchange', () => {
-                if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-                    this.template.dtime.innerHTML = utils.secondToTime(this.audio.duration);
-                }
-            });
-
-            // show audio loaded bar: to inform interested parties of progress downloading the media
-            this.audio.addEventListener('progress', () => {
-                const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0;
-                this.bar.set('loaded', percentage, 'width');
-            });
-
-            // audio download error: an error occurs
-            this.audio.addEventListener('error', () => {
-                this.template.author.innerHTML = ` - Error happens ╥﹏╥`;
-                this.trigger('pause');
-            });
-
-            // audio can play: enough data is available that the media can be played
-            this.audio.addEventListener('canplay', () => {
-                this.trigger('canplay');
-            });
-
-            // multiple music play
-            this.ended = false;
-            this.audio.addEventListener('ended', () => {
-                if (this.isMultiple()) {
-                    if (this.audio.currentTime !== 0) {
-                        if (this.mode === 'random') {
-                            this.setMusic(this.nextRandomNum());
-                            this.play();
-                        }
-                        else if (this.mode === 'single') {
-                            this.setMusic(this.playIndex);
-                            this.play();
-                        }
-                        else if (this.mode === 'order') {
-                            if (this.playIndex < this.options.music.length - 1) {
-                                this.setMusic(++this.playIndex);
-                                this.play();
-                            }
-                            else {
-                                this.ended = true;
-                                this.pause();
-                                this.trigger('ended');
-                            }
-                        }
-                        else if (this.mode === 'circulation') {
-                            this.playIndex = (this.playIndex + 1) % this.options.music.length;
-                            this.setMusic(this.playIndex);
-                            this.play();
-                        }
-                    }
-                }
-                else {
-                    if (this.mode === 'order') {
-                        this.ended = true;
-                        this.pause();
-                        this.trigger('ended');
-                    }
-                }
-            });
-
-            // control volume
-            this.audio.volume = parseInt(this.template.volume.style.height) / 100;
-
-            // loop
-            this.audio.loop = !(this.isMultiple() || this.mode === 'order');
-
-            this.audios[indexMusic] = this.audio;
-        }
+        this.pause();
+        this.audio.currentTime = 0;
+        this.audio.src = this.music.url;
 
         this.lrc && this.lrc.switch(indexMusic);
 
@@ -304,15 +245,46 @@ class APlayer {
         }
     }
 
+    seek (time) {
+        time = Math.max(time, 0);
+        if (this.audio.duration) {
+            time = Math.min(time, this.audio.duration);
+        }
+
+        this.audio.currentTime = time;
+
+        this.bar.set('played', time / this.audio.duration, 'width');
+        this.template.ptime.innerHTML = utils.secondToTime(time);
+    }
+
     /**
      * Play music
      */
-    play (time) {
-        if (Object.prototype.toString.call(time) === '[object Number]') {
-            this.audio.currentTime = time;
+    play () {
+        if (this.paused) {
+            this.paused = false;
+            this.template.button.classList.remove('aplayer-play');
+            this.template.button.classList.add('aplayer-pause');
+            this.template.button.innerHTML = '';
+            setTimeout(() => {
+                this.template.button.innerHTML = Icons.pause;
+            }, 100);
         }
-        if (this.audio.paused) {
-            this.audio.play();
+
+        const playedPromise = Promise.resolve(this.audio.play());
+        playedPromise.catch(() => {
+            this.pause();
+        }).then(() => {
+        });
+
+        this.timer.enable('progress');
+
+        if (this.options.mutex) {
+            for (let i = 0; i < instances.length; i++) {
+                if (this !== instances[i]) {
+                    instances[i].pause();
+                }
+            }
         }
     }
 
@@ -320,9 +292,19 @@ class APlayer {
      * Pause music
      */
     pause () {
-        if (!this.audio.paused) {
-            this.audio.pause();
+        if (!this.paused) {
+            this.paused = true;
+
+            this.template.button.classList.remove('aplayer-pause');
+            this.template.button.classList.add('aplayer-play');
+            this.template.button.innerHTML = '';
+            setTimeout(() => {
+                this.template.button.innerHTML = Icons.play;
+            }, 100);
         }
+
+        this.audio.pause();
+        this.timer.disable('progress');
     }
 
     switchVolumeIcon () {

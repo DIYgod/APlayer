@@ -1,9 +1,5 @@
 <div class="aplayer-pic">
-    <div class="aplayer-button aplayer-play">
-        <button type="button" class="aplayer-icon aplayer-icon-play">
-            {{@ icons.play }}
-        </button>
-    </div>
+    <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>
 </div>
 <div class="aplayer-info">
     <div class="aplayer-music">

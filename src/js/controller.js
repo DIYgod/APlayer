@@ -51,9 +51,7 @@ class Controller {
                 this.player.bar.set('played', 0, 'width');
             }
             else {
-                this.player.bar.set('played', percentage, 'width');
-                this.player.template.ptime.innerHTML = utils.secondToTime(percentage * this.player.audio.duration);
-                this.player.audio.currentTime = this.player.bar.get('played', 'width') * this.player.audio.duration;
+                this.player.seek(percentage * this.player.audio.duration);
             }
         });
 
@@ -70,7 +68,7 @@ class Controller {
             percentage = percentage > 0 ? percentage : 0;
             percentage = percentage < 1 ? percentage : 1;
             this.player.bar.set('played', percentage, 'width');
-            this.player.lrc && this.player.lrc.update(this.player.bar.get('played', 'width') * this.player.audio.duration);
+            this.player.lrc && this.player.lrc.update(percentage * this.player.audio.duration);
             this.player.template.ptime.innerHTML = utils.secondToTime(percentage * this.player.audio.duration);
         };
 
@@ -81,19 +79,14 @@ class Controller {
                 this.player.bar.set('played', 0, 'width');
             }
             else {
-                this.player.audio.currentTime = this.player.bar.get('played', 'width') * this.player.audio.duration;
-                this.player.playedTime = setInterval(() => {
-                    this.player.bar.set('played', this.player.audio.currentTime / this.player.audio.duration, 'width');
-                    this.player.lrc && this.player.lrc.update();
-                    this.player.template.ptime.innerHTML = utils.secondToTime(this.player.audio.currentTime);
-                    this.player.trigger('playing');
-                }, 100);
+                this.player.seek(this.player.bar.get('played', 'width') * this.player.audio.duration);
+                this.player.timer.enable('progress');
             }
         };
 
         this.player.template.thumb.addEventListener('mousedown', () => {
             barWidth = this.player.template.barWrap.clientWidth;
-            clearInterval(this.player.playedTime);
+            this.player.timer.disable('progress');
             document.addEventListener('mousemove', thumbMove);
             document.addEventListener('mouseup', thumbUp);
         });
