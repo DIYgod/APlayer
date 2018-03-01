@@ -5,6 +5,7 @@ import Template from './template';
 import Bar from './bar';
 import User from './user';
 import Lrc from './lrc';
+import Controller from './controller';
 
 const instances = [];
 
@@ -100,146 +101,7 @@ class APlayer {
 
         this.bar = new Bar(this.template);
 
-        // play and pause button
-        this.template.button.addEventListener('click', () => {
-            this.toggle();
-        });
-
-        // click music list: change music
-        this.template.list.addEventListener('click', (e) => {
-            let target;
-            if (e.target.tagName.toUpperCase() === 'LI') {
-                target = e.target;
-            }
-            else {
-                target = e.target.parentElement;
-            }
-            const musicIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
-            if (musicIndex !== this.playIndex) {
-                this.setMusic(musicIndex);
-                this.play();
-            }
-            else {
-                this.toggle();
-            }
-        });
-
-        let barWidth;
-        this.template.barWrap.addEventListener('click', (event) => {
-            const e = event || window.event;
-            barWidth = this.template.barWrap.clientWidth;
-            const percentage = (e.clientX - utils.getElementViewLeft(this.template.barWrap)) / barWidth;
-            if (isNaN(this.audio.duration)) {
-                this.bar.set('played', 0, 'width');
-            }
-            else {
-                this.bar.set('played', percentage, 'width');
-                this.template.ptime.innerHTML = utils.secondToTime(percentage * this.audio.duration);
-                this.audio.currentTime = this.bar.get('played', 'width') * this.audio.duration;
-            }
-        });
-
-        this.template.thumb.addEventListener('mouseover', () => {
-            this.template.thumb.style.background = this.options.theme;
-        });
-        this.template.thumb.addEventListener('mouseout', () => {
-            this.template.thumb.style.background = '#fff';
-        });
-
-        const thumbMove = (event) => {
-            const e = event || window.event;
-            let percentage = (e.clientX - utils.getElementViewLeft(this.template.barWrap)) / barWidth;
-            percentage = percentage > 0 ? percentage : 0;
-            percentage = percentage < 1 ? percentage : 1;
-            this.bar.set('played', percentage, 'width');
-            this.lrc && this.lrc.update(this.bar.get('played', 'width') * this.audio.duration);
-            this.template.ptime.innerHTML = utils.secondToTime(percentage * this.audio.duration);
-        };
-
-        const thumbUp = () => {
-            document.removeEventListener('mouseup', thumbUp);
-            document.removeEventListener('mousemove', thumbMove);
-            if (isNaN(this.audio.duration)) {
-                this.bar.set('played', 0, 'width');
-            }
-            else {
-                this.audio.currentTime = this.bar.get('played', 'width') * this.audio.duration;
-                this.playedTime = setInterval(() => {
-                    this.bar.set('played', this.audio.currentTime / this.audio.duration, 'width');
-                    this.lrc && this.lrc.update();
-                    this.template.ptime.innerHTML = utils.secondToTime(this.audio.currentTime);
-                    this.trigger('playing');
-                }, 100);
-            }
-        };
-
-        this.template.thumb.addEventListener('mousedown', () => {
-            barWidth = this.template.barWrap.clientWidth;
-            clearInterval(this.playedTime);
-            document.addEventListener('mousemove', thumbMove);
-            document.addEventListener('mouseup', thumbUp);
-        });
-
-        // control volume
-        const barHeight = 35;
-        this.template.volumeBarWrap.addEventListener('click', (event) => {
-            const e = event || window.event;
-            let percentage = (barHeight - e.clientY + utils.getElementViewTop(this.template.volumeBar)) / barHeight;
-            percentage = percentage > 0 ? percentage : 0;
-            percentage = percentage < 1 ? percentage : 1;
-            this.volume(percentage);
-        });
-        this.template.volumeButton.addEventListener('click', () => {
-            if (this.audio.muted) {
-                this.audio.muted = false;
-                this.switchVolumeIcon();
-                this.bar.set('volume', this.volume(), 'height');
-            }
-            else {
-                this.audio.muted = true;
-                this.switchVolumeIcon();
-                this.bar.set('volume', 0, 'height');
-            }
-        });
-
-        // mode control
-        this.template.mode.addEventListener('click', () => {
-            if (this.isMultiple()) {
-                if (this.mode === 'random') {
-                    this.mode = 'single';
-                }
-                else if (this.mode === 'single') {
-                    this.mode = 'order';
-                }
-                else if (this.mode === 'order') {
-                    this.mode = 'circulation';
-                }
-                else if (this.mode === 'circulation') {
-                    this.mode = 'random';
-                }
-            }
-            else {
-                if (this.mode === 'circulation') {
-                    this.mode = 'order';
-                }
-                else {
-                    this.mode = 'circulation';
-                }
-            }
-            this.template.mode.innerHTML = Icons[this.mode];
-            this.audio.loop = !(this.isMultiple() || this.mode === 'order');
-        });
-
-        // toggle menu control
-        this.template.list.style.height = this.template.list.offsetHeight + 'px';
-        this.template.menu.addEventListener('click', () => {
-            if (!this.template.list.classList.contains('aplayer-list-hide')) {
-                this.template.list.classList.add('aplayer-list-hide');
-            }
-            else {
-                this.template.list.classList.remove('aplayer-list-hide');
-            }
-        });
+        this.controller = new Controller(this);
 
         if (this.mode === 'random') {
             this.setMusic(this.randomOrder[0]);
