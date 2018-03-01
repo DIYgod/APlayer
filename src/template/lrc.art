@@ -1,0 +1,3 @@
+{{each lyrics}}
+    <p{{ if $index === 0 }} class="aplayer-lrc-current"{{ /if }}>{{$value[1]}}</p>
+{{/each}}

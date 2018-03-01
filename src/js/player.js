@@ -4,6 +4,7 @@ import handleOption from './options';
 import Template from './template';
 import Bar from './bar';
 import User from './user';
+import Lrc from './lrc';
 
 const instances = [];
 
@@ -17,39 +18,10 @@ class APlayer {
      */
     constructor (options) {
         this.options = handleOption(options);
+        this.container = this.options.container;
 
         this.audios = [];
         this.mode = this.options.mode;
-
-        // save lrc
-        this.container = this.options.container;
-        if (this.options.showlrc === 2 || this.options.showlrc === true) {
-            this.savelrc = [];
-            const lrcEle = this.container.getElementsByClassName('aplayer-lrc-content');
-            for (let i = 0; i < lrcEle.length; i++) {
-                this.savelrc.push(lrcEle[i].innerHTML);
-            }
-        }
-        this.lrcs = [];
-
-        /**
-         * Update lrc
-         *
-         * @param {Number} currentTime
-         */
-        this.updateLrc = (currentTime = this.audio.currentTime) => {
-            if (this.lrcIndex > this.lrc.length - 1 || currentTime < this.lrc[this.lrcIndex][0] || (!this.lrc[this.lrcIndex + 1] || currentTime >= this.lrc[this.lrcIndex + 1][0])) {
-                for (let i = 0; i < this.lrc.length; i++) {
-                    if (currentTime >= this.lrc[i][0] && (!this.lrc[i + 1] || currentTime < this.lrc[i + 1][0])) {
-                        this.lrcIndex = i;
-                        this.template.lrc.style.transform = `translateY(${-this.lrcIndex * 16}px)`;
-                        this.template.lrc.style.webkitTransform = `translateY(${-this.lrcIndex * 16}px)`;
-                        this.template.lrc.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
-                        this.template.lrc.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
-                    }
-                }
-            }
-        };
 
         // define APlayer events
         const eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
@@ -96,6 +68,17 @@ class APlayer {
             this.container.classList.add('aplayer-narrow');
         }
 
+        // save lrc
+        this.container = this.options.container;
+        if (this.options.showlrc === 2 || this.options.showlrc === true) {
+            const lrcEle = this.container.getElementsByClassName('aplayer-lrc-content');
+            for (let i = 0; i < lrcEle.length; i++) {
+                if (this.options.music[i]) {
+                    this.options.music[i].lrc = lrcEle[i].innerHTML;
+                }
+            }
+        }
+
         this.template = new Template({
             container: this.container,
             options: this.options,
@@ -104,6 +87,15 @@ class APlayer {
 
         if (this.template.info.offsetWidth < 200) {
             this.template.time.classList.add('aplayer-time-narrow');
+        }
+
+        if (this.options.showlrc) {
+            this.lrc = new Lrc({
+                container: this.template.lrc,
+                async: this.options.showlrc === 3,
+                content: this.options.music.map((item) => item.lrc),
+                player: this,
+            });
         }
 
         this.bar = new Bar(this.template);
@@ -160,9 +152,7 @@ class APlayer {
             percentage = percentage > 0 ? percentage : 0;
             percentage = percentage < 1 ? percentage : 1;
             this.bar.set('played', percentage, 'width');
-            if (this.options.showlrc) {
-                this.updateLrc(this.bar.get('played', 'width') * this.audio.duration);
-            }
+            this.lrc && this.lrc.update(this.bar.get('played', 'width') * this.audio.duration);
             this.template.ptime.innerHTML = utils.secondToTime(percentage * this.audio.duration);
         };
 
@@ -176,9 +166,7 @@ class APlayer {
                 this.audio.currentTime = this.bar.get('played', 'width') * this.audio.duration;
                 this.playedTime = setInterval(() => {
                     this.bar.set('played', this.audio.currentTime / this.audio.duration, 'width');
-                    if (this.options.showlrc) {
-                        this.updateLrc();
-                    }
+                    this.lrc && this.lrc.update();
                     this.template.ptime.innerHTML = utils.secondToTime(this.audio.currentTime);
                     this.trigger('playing');
                 }, 100);
@@ -344,9 +332,7 @@ class APlayer {
                     }
                     this.playedTime = setInterval(() => {
                         this.bar.set('played', this.audio.currentTime / this.audio.duration, 'width');
-                        if (this.options.showlrc) {
-                            this.updateLrc();
-                        }
+                        this.lrc && this.lrc.update();
                         this.template.ptime.innerHTML = utils.secondToTime(this.audio.currentTime);
                         this.trigger('playing');
                     }, 100);
@@ -448,109 +434,7 @@ class APlayer {
             this.audios[indexMusic] = this.audio;
         }
 
-        /**
-         * Parse lrc, suppose multiple time tag
-         *
-         * @param {String} lrc_s - Format:
-         * [mm:ss.xx]lyric
-         * [mm:ss.xxx]lyric
-         * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
-         *
-         * @return {String} [[time, text], [time, text], [time, text], ...]
-         */
-        const parseLrc = (lrc_s) => {
-            const lyric = lrc_s.split('\n');
-            const lrc = [];
-            const lyricLen = lyric.length;
-            for (let i = 0; i < lyricLen; i++) {
-                // match lrc time
-                const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g);
-                // match lrc text
-                const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})\.(\d{2,3})]/g, '').replace(/^\s+|\s+$/g, '');
-
-                if (lrcTimes) {
-                    // handle multiple time tag
-                    const timeLen = lrcTimes.length;
-                    for (let j = 0; j < timeLen; j++) {
-                        const oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j]);
-                        const lrcTime = oneTime[1] * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000);
-                        lrc.push([lrcTime, lrcText]);
-                    }
-                }
-            }
-            // sort by time
-            lrc.sort((a, b) => a[0] - b[0]);
-            return lrc;
-        };
-
-        // fill in lrc
-        if (this.options.showlrc) {
-            const index = indexMusic;
-
-            if (!this.lrcs[index]) {
-                let lrcs = '';
-                if (this.options.showlrc === 1) {
-                    lrcs = this.options.music[index].lrc;
-                }
-                else if (this.options.showlrc === 2 || this.options.showlrc === true) {
-                    lrcs = this.savelrc[index];
-                }
-                else if (this.options.showlrc === 3) {
-                    const xhr = new XMLHttpRequest();
-                    xhr.onreadystatechange = () => {
-                        if (xhr.readyState === 4) {
-                            if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-                                lrcs = xhr.responseText;
-                                this.lrcs[index] = parseLrc(lrcs);
-                            }
-                            else {
-                                console.log('Request was unsuccessful: ' + xhr.status);
-                                this.lrcs[index] = [['00:00', 'Not available']];
-                            }
-                            this.lrc = this.lrcs[index];
-                            let lrcHTML = '';
-                            for (let i = 0; i < this.lrc.length; i++) {
-                                lrcHTML += `<p>${this.lrc[i][1]}</p>`;
-                            }
-                            this.template.lrc.innerHTML = lrcHTML;
-                            if (!this.lrcIndex) {
-                                this.lrcIndex = 0;
-                            }
-                            this.template.lrc.getElementsByTagName('p')[0].classList.add('aplayer-lrc-current');
-                            this.template.lrc.style.transform = 'translateY(0px)';
-                            this.template.lrc.style.webkitTransform = 'translateY(0px)';
-                        }
-                    };
-                    const apiurl = this.options.music[index].lrc;
-                    xhr.open('get', apiurl, true);
-                    xhr.send(null);
-                }
-                if (lrcs) {
-                    this.lrcs[index] = parseLrc(lrcs);
-                }
-                else {
-                    if (this.options.showlrc === 3) {
-                        this.lrcs[index] = [['00:00', 'Loading']];
-                    }
-                    else {
-                        this.lrcs[index] = [['00:00', 'Not available']];
-                    }
-                }
-            }
-
-            this.lrc = this.lrcs[index];
-            let lrcHTML = '';
-            for (let i = 0; i < this.lrc.length; i++) {
-                lrcHTML += `<p>${this.lrc[i][1]}</p>`;
-            }
-            this.template.lrc.innerHTML = lrcHTML;
-            if (!this.lrcIndex) {
-                this.lrcIndex = 0;
-            }
-            this.template.lrc.getElementsByTagName('p')[0].classList.add('aplayer-lrc-current');
-            this.template.lrc.style.transform = 'translateY(0px)';
-            this.template.lrc.style.webkitTransform = 'translateY(0px)';
-        }
+        this.lrc && this.lrc.switch(indexMusic);
 
         // set duration time
         if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
