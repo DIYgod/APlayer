@@ -33,7 +33,7 @@ class APlayer {
         if (!this.isMultiple() && this.mode !== 'circulation' && this.mode !== 'order') {
             this.mode = 'circulation';
         }
-        this.getRandomOrder();
+        this.randomOrder = utils.randomOrder(this.options.music.length);
 
         if (this.options.showlrc) {
             this.container.classList.add('aplayer-withlrc');
@@ -349,34 +349,6 @@ class APlayer {
     }
 
     /**
-     * get random order, using Fisher–Yates shuffle
-     */
-    getRandomOrder (length = this.options.music.length) {
-        function random (min, max) {
-            if (max) {
-                max = min;
-                min = 0;
-            }
-            return min + Math.floor(Math.random() * (max - min + 1));
-        }
-        function shuffle (arr) {
-            const length = arr.length,
-                shuffled = new Array(length);
-            for (let index = 0, rand; index < length; index++) {
-                rand = random(0, index);
-                if (rand !== index) { shuffled[index] = shuffled[rand]; }
-                shuffled[rand] = arr[index];
-            }
-            return shuffled;
-        }
-        if (this.isMultiple()) {
-            this.randomOrder = shuffle([...Array(length)].map(function (item, i) {
-                return i;
-            }));
-        }
-    }
-
-    /**
      * get next random number
      */
     nextRandomNum () {
@@ -423,7 +395,7 @@ class APlayer {
         const songListLength = this.container.querySelectorAll('.aplayer-list li').length;
         this.template.list.style.height = songListLength * 33 + 'px';
 
-        this.getRandomOrder();
+        this.randomOrder = utils.randomOrder(this.options.music.length);
     }
 
     /**
