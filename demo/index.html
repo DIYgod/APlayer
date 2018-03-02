@@ -59,34 +59,31 @@
         <button onclick="ap1.pause()">ap.pause()</button>
         <button onclick="ap1.toggle()">ap.toggle()</button>
         <button onclick="ap1.volume(0.1)">ap.volume(0.1)</button>
-        <button onclick="ap1.addMusic([
+        <button onclick="ap1.addAudio([
             {
                 title: 'あっちゅ～ま青春!',
                 author: '七森中☆ごらく部',
-                url: 'http://devtest.qiniudn.com/あっちゅ～ま青春!.mp3',
-                pic: 'http://devtest.qiniudn.com/あっちゅ～ま青春!.jpg',
-                lrc: 'あっちゅ～ま青春!.lrc'
+                url: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.mp3',
+                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg'
             },
             {
                 title: 'secret base~君がくれたもの~',
                 author: '茅野愛衣',
-                url: 'http://devtest.qiniudn.com/secret base~.mp3',
-                pic: 'http://devtest.qiniudn.com/secret base~.jpg',
-                lrc: 'secret base~君がくれたもの~.lrc'
+                url: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
+                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
             },
             {
                 title: '回レ！雪月花',
                 author: '小倉唯',
-                url: 'http://devtest.qiniudn.com/回レ！雪月花.mp3',
-                pic: 'http://devtest.qiniudn.com/回レ！雪月花.jpg',
-                lrc: '回レ！雪月花.lrc'
+                url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
+                pic: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg'
             }
-        ])">ap.addMusic(...)</button>
+        ])">ap.addAudio(...)</button>
         <button onclick="ap1.destroy()">ap.destroy()</button>
         <h3>With playlist</h3>
         <div id="player4" class="aplayer"></div>
         <p></p>
-        <button onclick="ap4.setMusic(2)">ap.setMusic(2)</button>
+        <button onclick="ap4.setAudio(2)">ap.setAudio(2)</button>
         <h3>With lyrics</h3>
         <div id="player3" class="aplayer"></div>
         <h3>With playlist and lyrics</h3>

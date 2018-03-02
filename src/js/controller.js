@@ -32,7 +32,7 @@ class Controller {
             }
             const musicIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
             if (musicIndex !== this.player.playIndex) {
-                this.player.setMusic(musicIndex);
+                this.player.setAudio(musicIndex);
                 this.player.play();
             }
             else {
