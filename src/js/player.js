@@ -9,6 +9,7 @@ import User from './user';
 import Lrc from './lrc';
 import Controller from './controller';
 import Timer from './timer';
+import Events from './events';
 
 const instances = [];
 
@@ -27,17 +28,7 @@ class APlayer {
         this.audios = [];
         this.mode = this.options.mode;
 
-        // define APlayer events
-        const eventTypes = ['play', 'pause', 'canplay', 'playing', 'ended', 'error'];
-        this.event = {};
-        for (let i = 0; i < eventTypes.length; i++) {
-            this.event[eventTypes[i]] = [];
-        }
-        this.trigger = (type) => {
-            for (let i = 0; i < this.event[type].length; i++) {
-                this.event[type][i]();
-            }
-        };
+        this.events = new Events();
 
         // multiple music
         this.playIndex = 0;
@@ -144,6 +135,12 @@ class APlayer {
                 this.pause();
             }
         });
+
+        for (let i = 0; i < this.events.audioEvents.length; i++) {
+            this.audio.addEventListener(this.events.audioEvents[i], () => {
+                this.events.trigger(this.events.audioEvents[i]);
+            });
+        }
 
         // show audio time: the metadata has loaded or changed
         this.audio.addEventListener('durationchange', () => {
@@ -344,12 +341,10 @@ class APlayer {
     }
 
     /**
-     * attach event
+     * bind events
      */
-    on (name, func) {
-        if (typeof func === 'function') {
-            this.event[name].push(func);
-        }
+    on (name, callback) {
+        this.events.on(name, callback);
     }
 
     /**
