@@ -207,8 +207,10 @@ class APlayer {
 
         this.template.list.scrollTop = this.playIndex * 33;
 
-        this.audio.src = this.options.music[this.playIndex].url;
-        this.seek(0);
+        this.handlePlayPromise(() => {
+            this.audio.src = this.options.music[this.playIndex].url;
+            this.seek(0);
+        });
         if (this.paused) {
             this.pause();
         }
@@ -250,10 +252,11 @@ class APlayer {
             }, 100);
         }
 
-        const playedPromise = Promise.resolve(this.audio.play());
-        playedPromise.catch(() => {
-            this.pause();
-        }).then(() => {
+        this.handlePlayPromise(() => {
+            this.playedPromise = Promise.resolve(this.audio.play());
+            this.playedPromise.catch(() => {
+                this.pause();
+            });
         });
 
         this.timer.enable('progress');
@@ -282,7 +285,9 @@ class APlayer {
             }, 100);
         }
 
-        this.audio.pause();
+        this.handlePlayPromise(() => {
+            this.audio.pause();
+        });
         this.timer.disable('progress');
     }
 
@@ -442,6 +447,17 @@ class APlayer {
             if (this.hasOwnProperty(key)) {
                 delete this[key];
             }
+        }
+    }
+
+    handlePlayPromise (callback) {
+        if (this.playedPromise) {
+            this.playedPromise = this.playedPromise.then(() => {
+                callback();
+            });
+        }
+        else {
+            callback();
         }
     }
 }
