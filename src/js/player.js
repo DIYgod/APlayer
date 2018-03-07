@@ -30,6 +30,7 @@ class APlayer {
 
         this.randomOrder = utils.randomOrder(this.options.music.length);
 
+        this.container.classList.add('aplayer');
         if (this.options.lrc) {
             this.container.classList.add('aplayer-withlrc');
         }
