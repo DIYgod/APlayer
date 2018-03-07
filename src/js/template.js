@@ -5,7 +5,6 @@ class Template {
     constructor (options) {
         this.container = options.container;
         this.options = options.options;
-        this.mode = options.mode;
         this.init();
     }
 
@@ -13,7 +12,6 @@ class Template {
         this.container.innerHTML = tplPlayer({
             options: this.options,
             icons: Icons,
-            mode: this.mode
         });
 
         this.lrc = this.container.querySelector('.aplayer-lrc-contents');
@@ -31,7 +29,8 @@ class Template {
         this.volumeBar = this.container.querySelector('.aplayer-volume-bar');
         this.volumeButton = this.container.querySelector('.aplayer-time button');
         this.volumeBarWrap = this.container.querySelector('.aplayer-volume-bar-wrap');
-        this.mode = this.container.querySelector('.aplayer-icon-mode');
+        this.loop = this.container.querySelector('.aplayer-icon-loop');
+        this.order = this.container.querySelector('.aplayer-icon-order');
         this.menu = this.container.querySelector('.aplayer-icon-menu');
         this.pic = this.container.querySelector('.aplayer-pic');
         this.title = this.container.querySelector('.aplayer-title');

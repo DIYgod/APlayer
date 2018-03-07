@@ -32,8 +32,13 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="aplayer-icon aplayer-icon-mode">
-                {{@ icons[mode] }}
+            {{ if options.music.length > 1 }}
+            <button type="button" class="aplayer-icon aplayer-icon-order">
+                {{ if options.order === 'list' }}{{@ icons.orderList }}{{ else if options.order === 'random' }}{{@ icons.orderRandom }}{{ /if }}
+            </button>
+            {{ /if }}
+            <button type="button" class="aplayer-icon aplayer-icon-loop">
+                {{ if options.loop === 'one' }}{{@ icons.loopOne }}{{ else if options.loop === 'all' }}{{@ icons.loopAll }}{{ else if options.loop === 'none' }}{{@ icons.loopNone }}{{ /if }}
             </button>
             <button type="button" class="aplayer-icon aplayer-icon-menu">
                 {{@ icons.menu }}

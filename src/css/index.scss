@@ -80,7 +80,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     }
 
     &.aplayer-arrow {
-        .aplayer-icon-mode {
+        .aplayer-icon-order,
+        .aplayer-icon-loop {
             display: none;
         }
     }
@@ -266,8 +267,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                         fill: #666;
                     }
 
-                    &.aplayer-icon-mode {
-                        margin-right: 4px;
+                    &.aplayer-icon-loop {
+                        margin-right: 2px;
                     }
 
                     &:hover {

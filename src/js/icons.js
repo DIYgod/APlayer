@@ -3,11 +3,12 @@ import pause from '../assets/pause.svg';
 import volumeUp from '../assets/volume-up.svg';
 import volumeDown from '../assets/volume-down.svg';
 import volumeOff from '../assets/volume-off.svg';
-import circulation from '../assets/circulation.svg';
-import random from '../assets/random.svg';
-import order from '../assets/order.svg';
-import single from '../assets/single.svg';
+import orderRandom from '../assets/order-random.svg';
+import orderList from '../assets/order-list.svg';
 import menu from '../assets/menu.svg';
+import loopAll from '../assets/loop-all.svg';
+import loopOne from '../assets/loop-one.svg';
+import loopNone from '../assets/loop-none.svg';
 
 const Icons = {
     play: play,
@@ -15,11 +16,12 @@ const Icons = {
     volumeUp: volumeUp,
     volumeDown: volumeDown,
     volumeOff: volumeOff,
-    circulation: circulation,
-    random: random,
-    order: order,
-    single: single,
+    orderRandom: orderRandom,
+    orderList: orderList,
     menu: menu,
+    loopAll: loopAll,
+    loopOne: loopOne,
+    loopNone: loopNone,
 };
 
 export default Icons;

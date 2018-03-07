@@ -6,7 +6,6 @@ const ap1 = new APlayer({
     mutex: true,
     theme: '#e6d0b2',
     preload: 'metadata',
-    mode: 'circulation',
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
@@ -43,7 +42,6 @@ const ap2 = new APlayer({
     showlrc: false,
     mutex: true,
     theme: '#e6d0b2',
-    mode: 'circulation',
     music: {
         title: 'Preparation',
         author: 'Hans Zimmer/Richard Harvey',
@@ -59,7 +57,6 @@ const ap3 = new APlayer({
     showlrc: 3,
     mutex: true,
     theme: '#615754',
-    mode: 'circulation',
     music: {
         title: '回レ！雪月花',
         author: '小倉唯',
@@ -76,7 +73,6 @@ const ap4 = new APlayer({
     showlrc: false,
     mutex: true,
     theme: '#ad7a86',
-    mode: 'random',
     music: [
         {
             title: 'あっちゅ～ま青春!',
@@ -106,7 +102,6 @@ const ap5 = new APlayer({
     showlrc: 3,
     mutex: true,
     theme: '#ad7a86',
-    mode: 'random',
     listmaxheight: '80px',
     music: [
         {

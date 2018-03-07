@@ -26,13 +26,8 @@ class APlayer {
         this.container = this.options.container;
         this.audios = [];
         this.playIndex = 0;
-        this.mode = this.options.mode;
         this.paused = true;
 
-        // Assume "circulation" mode if single music is loaded and mode isn't already "circulation" or "order".
-        if (!this.isMultiple() && this.mode !== 'circulation' && this.mode !== 'order') {
-            this.mode = 'circulation';
-        }
         this.randomOrder = utils.randomOrder(this.options.music.length);
 
         if (this.options.showlrc) {
@@ -66,7 +61,6 @@ class APlayer {
         this.template = new Template({
             container: this.container,
             options: this.options,
-            mode: this.mode
         });
 
         if (this.template.info.offsetWidth < 200) {
@@ -88,7 +82,7 @@ class APlayer {
         this.timer = new Timer(this);
 
         this.initAudio();
-        if (this.mode === 'random') {
+        if (this.options.order === 'random') {
             this.setAudio(this.randomOrder[0]);
         }
         else {
@@ -127,7 +121,6 @@ class APlayer {
 
         // show audio time: the metadata has loaded or changed
         this.on('durationchange', () => {
-            console.log('durationchange');
             if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
                 this.template.dtime.innerHTML = utils.secondToTime(this.audio.duration);
             }
@@ -146,36 +139,40 @@ class APlayer {
 
         // multiple music play
         this.on('ended', () => {
-            if (this.isMultiple()) {
-                if (this.audio.currentTime !== 0) {
-                    if (this.mode === 'random') {
+            if (this.options.loop === 'none') {
+                if (this.options.order === 'list') {
+                    if (this.playIndex < this.options.music.length - 1) {
+                        this.setAudio((this.playIndex + 1) % this.options.music.length);
+                        this.play();
+                    }
+                    else {
+                        this.setAudio((this.playIndex + 1) % this.options.music.length);
+                        this.pause();
+                    }
+                }
+                else if (this.options.order === 'random') {
+                    if (this.randomOrder.indexOf(this.playIndex) < this.randomOrder.length - 1) {
                         this.setAudio(this.nextRandomNum());
                         this.play();
                     }
-                    else if (this.mode === 'single') {
-                        this.setAudio(this.playIndex);
-                        this.play();
-                    }
-                    else if (this.mode === 'order') {
-                        if (this.playIndex < this.options.music.length - 1) {
-                            this.setAudio(++this.playIndex);
-                            this.play();
-                        }
-                        else {
-                            this.pause();
-                        }
-                    }
-                    else if (this.mode === 'circulation') {
-                        this.playIndex = (this.playIndex + 1) % this.options.music.length;
-                        this.setAudio(this.playIndex);
-                        this.play();
+                    else {
+                        this.setAudio(this.nextRandomNum());
+                        this.pause();
                     }
                 }
             }
-            else {
-                if (this.mode === 'order') {
-                    this.pause();
+            else if (this.options.loop === 'one') {
+                this.setAudio(this.playIndex);
+                this.play();
+            }
+            else if (this.options.loop === 'all') {
+                if (this.options.order === 'list') {
+                    this.setAudio((this.playIndex + 1) % this.options.music.length);
                 }
+                else if (this.options.order === 'random') {
+                    this.setAudio(this.nextRandomNum());
+                }
+                this.play();
             }
         });
 

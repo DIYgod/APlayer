@@ -8,7 +8,10 @@ class Controller {
         this.initPlayButton();
         this.initList();
         this.initPlayBar();
-        this.initModeButton();
+        if (this.player.isMultiple()) {
+            this.initOrderButton();
+        }
+        this.initLoopButton();
         this.initMenuButton();
         if (!utils.isMobile) {
             this.initVolumeButton();
@@ -115,32 +118,45 @@ class Controller {
         });
     }
 
-    initModeButton () {
-        this.player.template.mode.addEventListener('click', () => {
+    initOrderButton () {
+        this.player.template.order.addEventListener('click', () => {
+            if (this.player.options.order === 'list') {
+                this.player.options.order = 'random';
+                this.player.template.order.innerHTML = Icons.orderRandom;
+            }
+            else if (this.player.options.order === 'random') {
+                this.player.options.order = 'list';
+                this.player.template.order.innerHTML = Icons.orderList;
+            }
+        });
+    }
+
+    initLoopButton () {
+        this.player.template.loop.addEventListener('click', () => {
             if (this.player.isMultiple()) {
-                if (this.player.mode === 'random') {
-                    this.player.mode = 'single';
+                if (this.player.options.loop === 'one') {
+                    this.player.options.loop = 'none';
+                    this.player.template.loop.innerHTML = Icons.loopNone;
                 }
-                else if (this.player.mode === 'single') {
-                    this.player.mode = 'order';
+                else if (this.player.options.loop === 'none') {
+                    this.player.options.loop = 'all';
+                    this.player.template.loop.innerHTML = Icons.loopAll;
                 }
-                else if (this.player.mode === 'order') {
-                    this.player.mode = 'circulation';
-                }
-                else if (this.player.mode === 'circulation') {
-                    this.player.mode = 'random';
+                else if (this.player.options.loop === 'all') {
+                    this.player.options.loop = 'one';
+                    this.player.template.loop.innerHTML = Icons.loopOne;
                 }
             }
             else {
-                if (this.player.mode === 'circulation') {
-                    this.player.mode = 'order';
+                if (this.player.options.loop === 'one') {
+                    this.player.options.loop = 'none';
+                    this.player.template.loop.innerHTML = Icons.loopNone;
                 }
-                else {
-                    this.player.mode = 'circulation';
+                else if (this.player.options.loop === 'none') {
+                    this.player.options.loop = 'one';
+                    this.player.template.loop.innerHTML = Icons.loopOne;
                 }
             }
-            this.player.template.mode.innerHTML = Icons[this.player.mode];
-            this.player.audio.loop = !(this.player.isMultiple() || this.player.mode === 'order');
         });
     }
 

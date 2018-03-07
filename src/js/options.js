@@ -8,7 +8,8 @@ export default (options) => {
         mutex: true,
         showlrc: 0,
         theme: '#b7daff',
-        mode: 'circulation'
+        loop: 'all',
+        order: 'list',
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
