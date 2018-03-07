@@ -30,7 +30,7 @@ class APlayer {
 
         this.randomOrder = utils.randomOrder(this.options.music.length);
 
-        if (this.options.showlrc) {
+        if (this.options.lrc) {
             this.container.classList.add('aplayer-withlrc');
         }
         if (this.options.music.length > 1) {
@@ -49,7 +49,7 @@ class APlayer {
 
         // save lrc
         this.container = this.options.container;
-        if (this.options.showlrc === 2 || this.options.showlrc === true) {
+        if (this.options.lrc === 2 || this.options.lrc === true) {
             const lrcEle = this.container.getElementsByClassName('aplayer-lrc-content');
             for (let i = 0; i < lrcEle.length; i++) {
                 if (this.options.music[i]) {
@@ -67,10 +67,10 @@ class APlayer {
             this.template.time.classList.add('aplayer-time-narrow');
         }
 
-        if (this.options.showlrc) {
+        if (this.options.lrc) {
             this.lrc = new Lrc({
                 container: this.template.lrc,
-                async: this.options.showlrc === 3,
+                async: this.options.lrc === 3,
                 content: this.options.music.map((item) => item.lrc),
                 player: this,
             });

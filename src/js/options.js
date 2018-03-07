@@ -6,7 +6,7 @@ export default (options) => {
         narrow: false,
         autoplay: false,
         mutex: true,
-        showlrc: 0,
+        lrc: 0,
         theme: '#b7daff',
         loop: 'all',
         order: 'list',
