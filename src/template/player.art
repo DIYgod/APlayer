@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<div class="aplayer-list"{{ if options.listmaxheight }} style="max-height: {{ options.listmaxheight }}"{{ /if }}>
+<div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
     <ol>
         {{each options.music}}
         <li>

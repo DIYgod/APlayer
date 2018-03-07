@@ -102,7 +102,7 @@ const ap5 = new APlayer({
     showlrc: 3,
     mutex: true,
     theme: '#ad7a86',
-    listmaxheight: '80px',
+    listFolded: true,
     music: [
         {
             title: 'あっちゅ～ま青春!',
