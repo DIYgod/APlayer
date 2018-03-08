@@ -72,14 +72,17 @@ class Lrc {
      * Parse lrc, suppose multiple time tag
      *
      * @param {String} lrc_s - Format:
+     * [mm:ss]lyric
      * [mm:ss.xx]lyric
      * [mm:ss.xxx]lyric
      * [mm:ss.xx][mm:ss.xx][mm:ss.xx]lyric
+     * [mm:ss.xx]<mm:ss.xx>lyric
      *
      * @return {String} [[time, text], [time, text], [time, text], ...]
      */
     parse (lrc_s) {
         if (lrc_s) {
+            lrc_s = lrc_s.replace(/([^\]^\n])\[/g, (match, p1) => p1 + '\n[');
             const lyric = lrc_s.split('\n');
             const lrc = [];
             const lyricLen = lyric.length;
@@ -87,7 +90,7 @@ class Lrc {
                 // match lrc time
                 const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g);
                 // match lrc text
-                const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, '').replace(/<(\d{2}):(\d{2})(\.(\d{2,3}))?>/g, '').replace(/^\s+|\s+$/g, '');
+                const lrcText = lyric[i].replace(/.*\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, '').replace(/<(\d{2}):(\d{2})(\.(\d{2,3}))?>/g, '').replace(/^\s+|\s+$/g, '');
 
                 if (lrcTimes) {
                     // handle multiple time tag
