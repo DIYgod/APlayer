@@ -87,7 +87,7 @@ class Lrc {
                 // match lrc time
                 const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g);
                 // match lrc text
-                const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, '').replace(/^\s+|\s+$/g, '');
+                const lrcText = lyric[i].replace(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, '').replace(/<(\d{2}):(\d{2})(\.(\d{2,3}))?>/g, '').replace(/^\s+|\s+$/g, '');
 
                 if (lrcTimes) {
                     // handle multiple time tag
