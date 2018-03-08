@@ -320,6 +320,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                     overflow: hidden;
                     transition: all .2s ease-in-out;
 
+                    &.aplayer-volume-bar-wrap-active {
+                        height: 40px;
+                    }
+
                     .aplayer-volume-bar {
                         position: absolute;
                         bottom: 0;
