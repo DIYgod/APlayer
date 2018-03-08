@@ -319,7 +319,7 @@ class APlayer {
             this.switchVolumeIcon();
         }
 
-        return this.audio.volume;
+        return this.audio.muted ? 0 : this.audio.volume;
     }
 
     /**
