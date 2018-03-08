@@ -19,7 +19,7 @@ class Controller {
     }
 
     initPlayButton () {
-        this.player.template.button.addEventListener('click', () => {
+        this.player.template.pic.addEventListener('click', () => {
             this.player.toggle();
         });
     }
