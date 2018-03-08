@@ -26,6 +26,7 @@ class APlayer {
         this.container = this.options.container;
         this.playIndex = 0;
         this.paused = true;
+        this.playedPromise = Promise.resolve();
 
         this.randomOrder = utils.randomOrder(this.options.music.length);
 
@@ -208,13 +209,6 @@ class APlayer {
             this.audio.src = this.options.music[this.playIndex].url;
             this.seek(0);
 
-            if (this.paused) {
-                this.pause();
-            }
-            else {
-                this.play();
-            }
-
             this.lrc && this.lrc.switch(this.playIndex);
 
             // set duration time
@@ -251,7 +245,8 @@ class APlayer {
                 }, 100);
             }
 
-            this.playedPromise = Promise.resolve(this.audio.play()).catch(() => {
+            const playPromise = Promise.resolve(this.audio.play()).catch((err) => {
+                console.error(err);
                 this.pause();
             });
 
@@ -264,6 +259,8 @@ class APlayer {
                     }
                 }
             }
+
+            return playPromise;
         });
     }
 
@@ -448,16 +445,9 @@ class APlayer {
     }
 
     handlePlayPromise (callback) {
-        if (this.playedPromise) {
-            this.playedPromise = this.playedPromise.then(() => {
-                callback();
-            }).catch((err) => {
-                console.error(err);
-            });
-        }
-        else {
-            callback();
-        }
+        this.playedPromise = this.playedPromise.then(callback).catch((err) => {
+            console.error(err);
+        });
     }
 }
 
