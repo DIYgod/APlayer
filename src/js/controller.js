@@ -141,13 +141,13 @@ class Controller {
                 }
             }
             else {
-                if (this.player.options.loop === 'one') {
+                if (this.player.options.loop === 'one' || this.player.options.loop === 'all') {
                     this.player.options.loop = 'none';
                     this.player.template.loop.innerHTML = Icons.loopNone;
                 }
                 else if (this.player.options.loop === 'none') {
-                    this.player.options.loop = 'one';
-                    this.player.template.loop.innerHTML = Icons.loopOne;
+                    this.player.options.loop = 'all';
+                    this.player.template.loop.innerHTML = Icons.loopAll;
                 }
             }
         });

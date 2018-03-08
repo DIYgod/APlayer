@@ -21,5 +21,9 @@ export default (options) => {
         options.music = [options.music];
     }
 
+    if (options.music.length <= 1 && options.loop === 'one') {
+        options.loop = 'all';
+    }
+
     return options;
 };
