@@ -62,6 +62,7 @@ class APlayer {
         this.template = new Template({
             container: this.container,
             options: this.options,
+            randomOrder: this.randomOrder,
         });
 
         if (this.template.info.offsetWidth < 200) {

@@ -5,13 +5,23 @@ class Template {
     constructor (options) {
         this.container = options.container;
         this.options = options.options;
+        this.randomOrder = this.randomOrder;
         this.init();
     }
 
     init () {
+        let pic;
+        if (this.options.order === 'random') {
+            pic = this.options.music[this.randomOrder[0]].pic;
+        }
+        else {
+            pic = this.options.music[0].pic;
+        }
+
         this.container.innerHTML = tplPlayer({
             options: this.options,
             icons: Icons,
+            pic: pic,
         });
 
         this.lrc = this.container.querySelector('.aplayer-lrc-contents');

@@ -1,4 +1,4 @@
-<div class="aplayer-pic">
+<div class="aplayer-pic"{{ if pic  }} style="background-image: url("{{ pic }}");"{{ /if }}>
     <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>
 </div>
 <div class="aplayer-info">
