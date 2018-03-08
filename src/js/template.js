@@ -5,7 +5,7 @@ class Template {
     constructor (options) {
         this.container = options.container;
         this.options = options.options;
-        this.randomOrder = this.randomOrder;
+        this.randomOrder = options.randomOrder;
         this.init();
     }
 
