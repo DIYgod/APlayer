@@ -250,6 +250,7 @@ class APlayer {
                 this.pause();
             });
 
+            this.timer.enable('loading');
             this.timer.enable('progress');
 
             if (this.options.mutex) {
@@ -282,6 +283,7 @@ class APlayer {
 
             this.audio.pause();
 
+            this.timer.disable('loading');
             this.timer.disable('progress');
         });
     }

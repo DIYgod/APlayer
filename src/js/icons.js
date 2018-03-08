@@ -9,6 +9,7 @@ import menu from '../assets/menu.svg';
 import loopAll from '../assets/loop-all.svg';
 import loopOne from '../assets/loop-one.svg';
 import loopNone from '../assets/loop-none.svg';
+import loading from '../assets/loading.svg';
 
 const Icons = {
     play: play,
@@ -22,6 +23,7 @@ const Icons = {
     loopAll: loopAll,
     loopOne: loopOne,
     loopNone: loopNone,
+    loading: loading,
 };
 
 export default Icons;

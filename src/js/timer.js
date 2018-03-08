@@ -15,7 +15,7 @@ class Timer {
             }
         )();
 
-        this.types = ['progress'];
+        this.types = ['loading', 'progress'];
 
         this.init();
     }
@@ -38,6 +38,31 @@ class Timer {
                 if (this.player.template.ptime.innerHTML !== currentTime) {
                     this.player.template.ptime.innerHTML = currentTime;
                 }
+            }
+        }, 100);
+    }
+
+    initloadingChecker () {
+        let lastPlayPos = 0;
+        let currentPlayPos = 0;
+        let bufferingDetected = false;
+        this.loadingChecker = setInterval(() => {
+            if (this.enableloadingChecker) {
+                // whether the audio is buffering
+                currentPlayPos = this.player.audio.currentTime;
+                if (!bufferingDetected
+                    && currentPlayPos === lastPlayPos
+                    && !this.player.audio.paused) {
+                    this.player.container.classList.add('aplayer-loading');
+                    bufferingDetected = true;
+                }
+                if (bufferingDetected
+                    && currentPlayPos > lastPlayPos
+                    && !this.player.audio.paused) {
+                    this.player.container.classList.remove('aplayer-loading');
+                    bufferingDetected = false;
+                }
+                lastPlayPos = currentPlayPos;
             }
         }, 100);
     }
