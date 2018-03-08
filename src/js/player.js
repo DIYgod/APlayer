@@ -24,7 +24,6 @@ class APlayer {
     constructor (options) {
         this.options = handleOption(options);
         this.container = this.options.container;
-        this.audios = [];
         this.playIndex = 0;
         this.paused = true;
 
@@ -184,44 +183,45 @@ class APlayer {
      * Set music
      */
     setAudio (index) {
-        if (typeof index !== 'undefined') {
-            this.playIndex = index;
-        }
-
-        // set html
-        if (this.options.music[this.playIndex].pic) {
-            this.template.pic.style.backgroundImage = `url('${this.options.music[this.playIndex].pic}')`;
-        }
-        else {
-            this.template.pic.style.backgroundImage = '';
-        }
-        this.template.title.innerHTML = this.options.music[this.playIndex].title;
-        this.template.author.innerHTML = this.options.music[this.playIndex].author ? ' - ' + this.options.music[this.playIndex].author : '';
-        const light = this.container.getElementsByClassName('aplayer-list-light')[0];
-        if (light) {
-            light.classList.remove('aplayer-list-light');
-        }
-        this.container.querySelectorAll('.aplayer-list li')[this.playIndex].classList.add('aplayer-list-light');
-
-        this.template.list.scrollTop = this.playIndex * 33;
-
         this.handlePlayPromise(() => {
+            if (typeof index !== 'undefined') {
+                this.playIndex = index;
+            }
+
+            // set html
+            if (this.options.music[this.playIndex].pic) {
+                this.template.pic.style.backgroundImage = `url('${this.options.music[this.playIndex].pic}')`;
+            }
+            else {
+                this.template.pic.style.backgroundImage = '';
+            }
+            this.template.title.innerHTML = this.options.music[this.playIndex].title;
+            this.template.author.innerHTML = this.options.music[this.playIndex].author ? ' - ' + this.options.music[this.playIndex].author : '';
+            const light = this.container.getElementsByClassName('aplayer-list-light')[0];
+            if (light) {
+                light.classList.remove('aplayer-list-light');
+            }
+            this.container.querySelectorAll('.aplayer-list li')[this.playIndex].classList.add('aplayer-list-light');
+
+            this.template.list.scrollTop = this.playIndex * 33;
+
             this.audio.src = this.options.music[this.playIndex].url;
             this.seek(0);
+
+            if (this.paused) {
+                this.pause();
+            }
+            else {
+                this.play();
+            }
+
+            this.lrc && this.lrc.switch(this.playIndex);
+
+            // set duration time
+            if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+                this.template.dtime.innerHTML = this.audio.duration ? utils.secondToTime(this.audio.duration) : '00:00';
+            }
         });
-        if (this.paused) {
-            this.pause();
-        }
-        else {
-            this.play();
-        }
-
-        this.lrc && this.lrc.switch(this.playIndex);
-
-        // set duration time
-        if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-            this.template.dtime.innerHTML = this.audio.duration ? utils.secondToTime(this.audio.duration) : '00:00';
-        }
     }
 
     seek (time) {
@@ -240,53 +240,53 @@ class APlayer {
      * Play music
      */
     play () {
-        if (this.paused) {
-            this.paused = false;
-            this.template.button.classList.remove('aplayer-play');
-            this.template.button.classList.add('aplayer-pause');
-            this.template.button.innerHTML = '';
-            setTimeout(() => {
-                this.template.button.innerHTML = Icons.pause;
-            }, 100);
-        }
-
         this.handlePlayPromise(() => {
-            this.playedPromise = Promise.resolve(this.audio.play());
-            this.playedPromise.catch(() => {
+            if (this.paused) {
+                this.paused = false;
+                this.template.button.classList.remove('aplayer-play');
+                this.template.button.classList.add('aplayer-pause');
+                this.template.button.innerHTML = '';
+                setTimeout(() => {
+                    this.template.button.innerHTML = Icons.pause;
+                }, 100);
+            }
+
+            this.playedPromise = Promise.resolve(this.audio.play()).catch(() => {
                 this.pause();
             });
-        });
 
-        this.timer.enable('progress');
+            this.timer.enable('progress');
 
-        if (this.options.mutex) {
-            for (let i = 0; i < instances.length; i++) {
-                if (this !== instances[i]) {
-                    instances[i].pause();
+            if (this.options.mutex) {
+                for (let i = 0; i < instances.length; i++) {
+                    if (this !== instances[i]) {
+                        instances[i].pause();
+                    }
                 }
             }
-        }
+        });
     }
 
     /**
      * Pause music
      */
     pause () {
-        if (!this.paused) {
-            this.paused = true;
-
-            this.template.button.classList.remove('aplayer-pause');
-            this.template.button.classList.add('aplayer-play');
-            this.template.button.innerHTML = '';
-            setTimeout(() => {
-                this.template.button.innerHTML = Icons.play;
-            }, 100);
-        }
-
         this.handlePlayPromise(() => {
+            if (!this.paused) {
+                this.paused = true;
+
+                this.template.button.classList.remove('aplayer-pause');
+                this.template.button.classList.add('aplayer-play');
+                this.template.button.innerHTML = '';
+                setTimeout(() => {
+                    this.template.button.innerHTML = Icons.play;
+                }, 100);
+            }
+
             this.audio.pause();
+
+            this.timer.disable('progress');
         });
-        this.timer.disable('progress');
     }
 
     switchVolumeIcon () {
@@ -420,7 +420,6 @@ class APlayer {
             }
 
             this.options.music.splice(index, 1);
-            this.audios.splice(index, 1);
 
             list[index].remove();
             for (let i = index; i < list.length; i++) {
@@ -452,6 +451,8 @@ class APlayer {
         if (this.playedPromise) {
             this.playedPromise = this.playedPromise.then(() => {
                 callback();
+            }).catch((err) => {
+                console.error(err);
             });
         }
         else {
