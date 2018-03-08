@@ -14,7 +14,7 @@
             <div class="aplayer-bar">
                 <div class="aplayer-loaded" style="width: 0"></div>
                 <div class="aplayer-played" style="width: 0; background: {{ options.theme }};">
-                    <span class="aplayer-thumb" style="border: 1px solid {{ options.theme }};"></span>
+                    <span class="aplayer-thumb" style="background: {{ options.theme }};"></span>
                 </div>
             </div>
         </div>

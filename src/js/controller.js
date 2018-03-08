@@ -58,13 +58,6 @@ class Controller {
             }
         });
 
-        this.player.template.thumb.addEventListener('mouseover', () => {
-            this.player.template.thumb.style.background = this.player.options.theme;
-        });
-        this.player.template.thumb.addEventListener('mouseout', () => {
-            this.player.template.thumb.style.background = '#fff';
-        });
-
         const thumbMove = (event) => {
             const e = event || window.event;
             let percentage = (e.clientX - utils.getElementViewLeft(this.player.template.barWrap)) / barWidth;
