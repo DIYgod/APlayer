@@ -446,12 +446,8 @@ class APlayer {
         instances.splice(instances.indexOf(this), 1);
         this.pause();
         this.container.innerHTML = '';
-        clearInterval(this.playedTime);
-        for (const key in this) {
-            if (this.hasOwnProperty(key)) {
-                delete this[key];
-            }
-        }
+        this.audio.src = '';
+        this.timer.destroy();
     }
 
     handlePlayPromise (callback) {

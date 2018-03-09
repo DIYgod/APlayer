@@ -21,12 +21,10 @@ class Timer {
     }
 
     init () {
-        for (let i = 0; i < this.types.length; i++) {
-            const type = this.types[i];
-            if (type !== 'fps') {
-                this[`init${type}Checker`]();
-            }
-        }
+        this.types.map((item) => {
+            this[`init${item}Checker`]();
+            return item;
+        });
     }
 
     initprogressChecker () {
@@ -79,8 +77,12 @@ class Timer {
         this[`enable${type}Checker`] = false;
     }
 
-    destroy (type) {
-        this[`${type}Checker`] && clearInterval(this[`${type}Checker`]);
+    destroy () {
+        this.types.map((item) => {
+            this[`enable${item}Checker`] = false;
+            this[`${item}Checker`] && clearInterval(this[`${item}Checker`]);
+            return item;
+        });
     }
 }
 
