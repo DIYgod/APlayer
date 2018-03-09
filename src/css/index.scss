@@ -51,6 +51,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 }
 
 .aplayer {
+    background: #fff;
     font-family: Arial, Helvetica, sans-serif;
     margin: 5px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);

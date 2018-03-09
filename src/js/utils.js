@@ -70,7 +70,7 @@ const utils = {
     /**
      * get random order, using Fisher–Yates shuffle
      */
-    randomOrder: (length = this.options.music.length) => {
+    randomOrder: (length = this.options.audio.length) => {
         function shuffle (arr) {
             for (let i = arr.length - 1; i >= 0; i--) {
                 const randomIndex = Math.floor(Math.random() * (i + 1));

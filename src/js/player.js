@@ -28,13 +28,13 @@ class APlayer {
         this.paused = true;
         this.playedPromise = Promise.resolve();
 
-        this.randomOrder = utils.randomOrder(this.options.music.length);
+        this.randomOrder = utils.randomOrder(this.options.audio.length);
 
         this.container.classList.add('aplayer');
         if (this.options.lrc) {
             this.container.classList.add('aplayer-withlrc');
         }
-        if (this.options.music.length > 1) {
+        if (this.options.audio.length > 1) {
             this.container.classList.add('aplayer-withlist');
         }
         if (utils.isMobile) {
@@ -53,8 +53,8 @@ class APlayer {
         if (this.options.lrc === 2 || this.options.lrc === true) {
             const lrcEle = this.container.getElementsByClassName('aplayer-lrc-content');
             for (let i = 0; i < lrcEle.length; i++) {
-                if (this.options.music[i]) {
-                    this.options.music[i].lrc = lrcEle[i].innerHTML;
+                if (this.options.audio[i]) {
+                    this.options.audio[i].lrc = lrcEle[i].innerHTML;
                 }
             }
         }
@@ -73,7 +73,7 @@ class APlayer {
             this.lrc = new Lrc({
                 container: this.template.lrc,
                 async: this.options.lrc === 3,
-                content: this.options.music.map((item) => item.lrc),
+                content: this.options.audio.map((item) => item.lrc),
                 player: this,
             });
         }
@@ -139,16 +139,16 @@ class APlayer {
             this.template.author.innerHTML = ` - Error happens ╥﹏╥`;
         });
 
-        // multiple music play
+        // multiple audio play
         this.on('ended', () => {
             if (this.options.loop === 'none') {
                 if (this.options.order === 'list') {
-                    if (this.playIndex < this.options.music.length - 1) {
-                        this.switchAudio((this.playIndex + 1) % this.options.music.length);
+                    if (this.playIndex < this.options.audio.length - 1) {
+                        this.switchAudio((this.playIndex + 1) % this.options.audio.length);
                         this.play();
                     }
                     else {
-                        this.switchAudio((this.playIndex + 1) % this.options.music.length);
+                        this.switchAudio((this.playIndex + 1) % this.options.audio.length);
                         this.pause();
                     }
                 }
@@ -169,7 +169,7 @@ class APlayer {
             }
             else if (this.options.loop === 'all') {
                 if (this.options.order === 'list') {
-                    this.switchAudio((this.playIndex + 1) % this.options.music.length);
+                    this.switchAudio((this.playIndex + 1) % this.options.audio.length);
                 }
                 else if (this.options.order === 'random') {
                     this.switchAudio(this.nextRandomNum());
@@ -181,9 +181,6 @@ class APlayer {
         this.volume(this.user.get('volume'), true, true);
     }
 
-    /**
-     * Set music
-     */
     switchAudio (index) {
         this.handlePlayPromise(() => {
             if (typeof index !== 'undefined') {
@@ -191,14 +188,14 @@ class APlayer {
             }
 
             // set html
-            if (this.options.music[this.playIndex].pic) {
-                this.template.pic.style.backgroundImage = `url('${this.options.music[this.playIndex].pic}')`;
+            if (this.options.audio[this.playIndex].cover) {
+                this.template.pic.style.backgroundImage = `url('${this.options.audio[this.playIndex].cover}')`;
             }
             else {
                 this.template.pic.style.backgroundImage = '';
             }
-            this.template.title.innerHTML = this.options.music[this.playIndex].title;
-            this.template.author.innerHTML = this.options.music[this.playIndex].author ? ' - ' + this.options.music[this.playIndex].author : '';
+            this.template.title.innerHTML = this.options.audio[this.playIndex].name;
+            this.template.author.innerHTML = this.options.audio[this.playIndex].artist ? ' - ' + this.options.audio[this.playIndex].artist : '';
             const light = this.container.getElementsByClassName('aplayer-list-light')[0];
             if (light) {
                 light.classList.remove('aplayer-list-light');
@@ -207,7 +204,7 @@ class APlayer {
 
             this.template.list.scrollTop = this.playIndex * 33;
 
-            this.audio.src = this.options.music[this.playIndex].url;
+            this.audio.src = this.options.audio[this.playIndex].url;
             this.seek(0);
 
             let playPromise;
@@ -246,9 +243,6 @@ class APlayer {
         this.template.ptime.innerHTML = utils.secondToTime(time);
     }
 
-    /**
-     * Play music
-     */
     play () {
         this.handlePlayPromise(() => {
             if (this.paused) {
@@ -281,9 +275,6 @@ class APlayer {
         });
     }
 
-    /**
-     * Pause music
-     */
     pause () {
         this.handlePlayPromise(() => {
             if (!this.paused) {
@@ -360,10 +351,10 @@ class APlayer {
     }
 
     /**
-     * get whether multiple music definitions are loaded
+     * get whether multiple audio definitions are loaded
      */
     isMultiple () {
-        return this.options.music.length > 1;
+        return this.options.audio.length > 1;
     }
 
     /**
@@ -385,23 +376,23 @@ class APlayer {
     }
 
     /**
-     * add music dynamically
+     * add audio dynamically
      *
      * @param {Array} newMusic
      */
     addAudio (newMusic) {
         const wasSingle = !this.isMultiple();
 
-        this.options.music = this.options.music.concat(newMusic);
+        this.options.audio = this.options.audio.concat(newMusic);
 
         let newItemHTML = ``;
         for (let i = 0; i < newMusic.length; i++) {
             newItemHTML += `
                 <li>
                     <span class="aplayer-list-cur" style="background: ${this.options.theme};"></span>
-                    <span class="aplayer-list-index">${this.options.music.length - newMusic.length + i + 1}</span>
-                    <span class="aplayer-list-title">${newMusic[i].title}</span>
-                    <span class="aplayer-list-author">${newMusic[i].author}</span>
+                    <span class="aplayer-list-index">${this.options.audio.length - newMusic.length + i + 1}</span>
+                    <span class="aplayer-list-title">${newMusic[i].name}</span>
+                    <span class="aplayer-list-author">${newMusic[i].artist}</span>
                 </li>`;
         }
         this.template.listOl.innerHTML += newItemHTML;
@@ -413,20 +404,20 @@ class APlayer {
         const songListLength = this.container.querySelectorAll('.aplayer-list li').length;
         this.template.list.style.height = songListLength * 33 - 1 + 'px';
 
-        this.randomOrder = utils.randomOrder(this.options.music.length);
+        this.randomOrder = utils.randomOrder(this.options.audio.length);
     }
 
     /**
     * Remove song from playlist
     */
     removeAudio (index) {
-        if (this.options.music[index] && this.options.music.length > 1) {
+        if (this.options.audio[index] && this.options.audio.length > 1) {
             const list = this.container.querySelectorAll('.aplayer-list li');
 
-            this.options.music.splice(index, 1);
+            this.options.audio.splice(index, 1);
 
             if (index === this.playIndex) {
-                if (this.options.music[index + 1]) {
+                if (this.options.audio[index + 1]) {
                     this.switchAudio(index);
                 }
                 else {
@@ -441,7 +432,7 @@ class APlayer {
             for (let i = index; i < list.length; i++) {
                 list[i].getElementsByClassName('aplayer-list-index')[0].textContent = i;
             }
-            if (this.options.music.length === 1) {
+            if (this.options.audio.length === 1) {
                 this.container.classList.remove('aplayer-withlist');
             }
             this.template.list.style.height = parseInt(this.template.list.style.height, 10) - 33 + 'px';

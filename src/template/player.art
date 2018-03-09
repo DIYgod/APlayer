@@ -1,4 +1,4 @@
-<div class="aplayer-pic"{{ if pic  }} style="background-image: url("{{ pic }}");"{{ /if }}>
+<div class="aplayer-pic"{{ if cover  }} style="background-image: url("{{ cover }}");"{{ /if }}>
     <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>
 </div>
 <div class="aplayer-info">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            {{ if options.music.length > 1 }}
+            {{ if options.audio.length > 1 }}
             <button type="button" class="aplayer-icon aplayer-icon-order">
                 {{ if options.order === 'list' }}{{@ icons.orderList }}{{ else if options.order === 'random' }}{{@ icons.orderRandom }}{{ /if }}
             </button>
@@ -50,12 +50,12 @@
 </div>
 <div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
     <ol>
-        {{each options.music}}
+        {{each options.audio}}
         <li>
             <span class="aplayer-list-cur" style="background: {{ options.theme }};"></span>
             <span class="aplayer-list-index">{{ $index + 1 }}</span>
-            <span class="aplayer-list-title">{{ $value.title }}</span>
-            <span class="aplayer-list-author">{{ $value.author }}</span>
+            <span class="aplayer-list-title">{{ $value.name }}</span>
+            <span class="aplayer-list-author">{{ $value.artist }}</span>
         </li>
         {{/each}}
     </ol>

@@ -6,11 +6,11 @@ const ap1 = new APlayer({
     mutex: true,
     theme: '#e6d0b2',
     preload: 'metadata',
-    music: {
-        title: 'Preparation',
-        author: 'Hans Zimmer/Richard Harvey',
+    audio: {
+        name: 'Preparation',
+        artist: 'Hans Zimmer/Richard Harvey',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.mp3',
-        pic: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
+        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
     }
 });
 ap1.on('play', function () {
@@ -42,11 +42,11 @@ const ap2 = new APlayer({
     lrc: false,
     mutex: true,
     theme: '#e6d0b2',
-    music: {
-        title: 'Preparation',
-        author: 'Hans Zimmer/Richard Harvey',
+    audio: {
+        name: 'Preparation',
+        artist: 'Hans Zimmer/Richard Harvey',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.mp3',
-        pic: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
+        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
     }
 });
 
@@ -57,11 +57,11 @@ const ap3 = new APlayer({
     lrc: 3,
     mutex: true,
     theme: '#615754',
-    music: {
-        title: '回レ！雪月花',
-        author: '小倉唯',
+    audio: {
+        name: '回レ！雪月花',
+        artist: '小倉唯',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-        pic: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
+        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
         lrc: "https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc"
     }
 });
@@ -74,24 +74,24 @@ const ap4 = new APlayer({
     mutex: true,
     theme: '#ad7a86',
     order: 'random',
-    music: [
+    audio: [
         {
-            title: 'あっちゅ～ま青春!',
-            author: '七森中☆ごらく部',
+            name: 'あっちゅ～ま青春!',
+            artist: '七森中☆ごらく部',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.mp3',
-            pic: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg'
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg'
         },
         {
-            title: 'secret base~君がくれたもの~',
-            author: '茅野愛衣',
+            name: 'secret base~君がくれたもの~',
+            artist: '茅野愛衣',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
-            pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg'
         },
         {
-            title: '回レ！雪月花',
-            author: '小倉唯',
+            name: '回レ！雪月花',
+            artist: '小倉唯',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-            pic: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg'
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg'
         }
     ]
 });
@@ -104,26 +104,26 @@ const ap5 = new APlayer({
     mutex: true,
     theme: '#ad7a86',
     listFolded: true,
-    music: [
+    audio: [
         {
-            title: 'あっちゅ～ま青春!',
-            author: '七森中☆ごらく部',
+            name: 'あっちゅ～ま青春!',
+            artist: '七森中☆ごらく部',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.mp3',
-            pic: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg',
             lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.lrc'
         },
         {
-            title: 'secret base~君がくれたもの~',
-            author: '茅野愛衣',
+            name: 'secret base~君がくれたもの~',
+            artist: '茅野愛衣',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
-            pic: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg',
             lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.lrc'
         },
         {
-            title: '回レ！雪月花',
-            author: '小倉唯',
+            name: '回レ！雪月花',
+            artist: '小倉唯',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-            pic: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
             lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc'
         }
     ]

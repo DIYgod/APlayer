@@ -17,11 +17,11 @@ export default (options) => {
         }
     }
 
-    if (Object.prototype.toString.call(options.music) !== '[object Array]') {
-        options.music = [options.music];
+    if (Object.prototype.toString.call(options.audio) !== '[object Array]') {
+        options.audio = [options.audio];
     }
 
-    if (options.music.length <= 1 && options.loop === 'one') {
+    if (options.audio.length <= 1 && options.loop === 'one') {
         options.loop = 'all';
     }
 

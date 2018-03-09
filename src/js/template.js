@@ -10,18 +10,18 @@ class Template {
     }
 
     init () {
-        let pic;
+        let cover;
         if (this.options.order === 'random') {
-            pic = this.options.music[this.randomOrder[0]].pic;
+            cover = this.options.audio[this.randomOrder[0]].cover;
         }
         else {
-            pic = this.options.music[0].pic;
+            cover = this.options.audio[0].cover;
         }
 
         this.container.innerHTML = tplPlayer({
             options: this.options,
             icons: Icons,
-            pic: pic,
+            cover: cover,
         });
 
         this.lrc = this.container.querySelector('.aplayer-lrc-contents');

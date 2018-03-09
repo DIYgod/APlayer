@@ -33,9 +33,9 @@ class Controller {
             else {
                 target = e.target.parentElement;
             }
-            const musicIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
-            if (musicIndex !== this.player.playIndex) {
-                this.player.switchAudio(musicIndex);
+            const audioIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
+            if (audioIndex !== this.player.playIndex) {
+                this.player.switchAudio(audioIndex);
                 this.player.play();
             }
             else {
@@ -153,7 +153,7 @@ class Controller {
     }
 
     initMenuButton () {
-        this.player.template.list.style.height = 33 * this.player.options.music.length - 1 + 'px';
+        this.player.template.list.style.height = 33 * this.player.options.audio.length - 1 + 'px';
         this.player.template.menu.addEventListener('click', () => {
             if (!this.player.template.list.classList.contains('aplayer-list-hide')) {
                 this.player.template.list.classList.add('aplayer-list-hide');
