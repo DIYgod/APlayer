@@ -210,12 +210,22 @@ class APlayer {
             this.audio.src = this.options.music[this.playIndex].url;
             this.seek(0);
 
+            let playPromise;
+            if (!this.paused) {
+                playPromise = Promise.resolve(this.audio.play()).catch((err) => {
+                    console.error(err);
+                    this.pause();
+                });
+            }
+
             this.lrc && this.lrc.switch(this.playIndex);
 
             // set duration time
             if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
                 this.template.dtime.innerHTML = this.audio.duration ? utils.secondToTime(this.audio.duration) : '00:00';
             }
+
+            return playPromise;
         });
     }
 
@@ -227,7 +237,12 @@ class APlayer {
 
         this.audio.currentTime = time;
 
-        this.bar.set('played', time / this.audio.duration, 'width');
+        if (isNaN(this.audio.duration)) {
+            this.bar.set('played', 0, 'width');
+        }
+        else {
+            this.bar.set('played', time / this.audio.duration, 'width');
+        }
         this.template.ptime.innerHTML = utils.secondToTime(time);
     }
 
@@ -407,9 +422,12 @@ class APlayer {
     removeAudio (index) {
         if (this.options.music[index] && this.options.music.length > 1) {
             const list = this.container.querySelectorAll('.aplayer-list li');
+
+            this.options.music.splice(index, 1);
+
             if (index === this.playIndex) {
                 if (this.options.music[index + 1]) {
-                    this.switchAudio(index + 1);
+                    this.switchAudio(index);
                 }
                 else {
                     this.switchAudio(index - 1);
@@ -418,8 +436,6 @@ class APlayer {
             if (this.playIndex > index) {
                 this.playIndex--;
             }
-
-            this.options.music.splice(index, 1);
 
             list[index].remove();
             for (let i = index; i < list.length; i++) {
