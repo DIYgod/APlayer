@@ -8,7 +8,9 @@ class Events {
             'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend',
             'timeupdate', 'volumechange', 'waiting'
         ];
-        this.playerEvents = [];
+        this.playerEvents = [
+            'destroy', 'switchaudio', 'addaudio', 'removeaudio'
+        ];
     }
 
     on (name, callback) {

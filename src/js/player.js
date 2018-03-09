@@ -183,6 +183,7 @@ class APlayer {
 
     switchAudio (index) {
         this.handlePlayPromise(() => {
+            this.events.trigger('switchaudio', index);
             if (typeof index !== 'undefined') {
                 this.playIndex = index;
             }
@@ -381,6 +382,7 @@ class APlayer {
      * @param {Array} newMusic
      */
     addAudio (newMusic) {
+        this.events.trigger('addaudio', newMusic);
         const wasSingle = !this.isMultiple();
 
         this.options.audio = this.options.audio.concat(newMusic);
@@ -411,6 +413,7 @@ class APlayer {
     * Remove song from playlist
     */
     removeAudio (index) {
+        this.events.trigger('removeaudio', index);
         if (this.options.audio[index] && this.options.audio.length > 1) {
             const list = this.container.querySelectorAll('.aplayer-list li');
 
@@ -448,6 +451,7 @@ class APlayer {
         this.container.innerHTML = '';
         this.audio.src = '';
         this.timer.destroy();
+        this.events.trigger('destroy');
     }
 
     handlePlayPromise (callback) {
