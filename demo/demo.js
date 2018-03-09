@@ -73,6 +73,7 @@ const ap4 = new APlayer({
     lrc: false,
     mutex: true,
     theme: '#ad7a86',
+    order: 'random',
     music: [
         {
             title: 'あっちゅ～ま青春!',
