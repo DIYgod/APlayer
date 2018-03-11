@@ -1,6 +1,6 @@
 const ap1 = new APlayer({
     element: document.getElementById('player1'),
-    narrow: false,
+    mini: false,
     autoplay: true,
     lrc: false,
     mutex: true,
@@ -37,7 +37,7 @@ ap1.on('error', function () {
 
 const ap2 = new APlayer({
     element: document.getElementById('player2'),
-    narrow: true,
+    mini: true,
     autoplay: false,
     lrc: false,
     mutex: true,
@@ -52,7 +52,7 @@ const ap2 = new APlayer({
 
 const ap3 = new APlayer({
     element: document.getElementById('player3'),
-    narrow: false,
+    mini: false,
     autoplay: false,
     lrc: 3,
     mutex: true,
@@ -68,7 +68,7 @@ const ap3 = new APlayer({
 
 const ap4 = new APlayer({
     element: document.getElementById('player4'),
-    narrow: false,
+    mini: false,
     autoplay: false,
     lrc: false,
     mutex: true,
@@ -98,7 +98,7 @@ const ap4 = new APlayer({
 
 const ap5 = new APlayer({
     element: document.getElementById('player5'),
-    narrow: false,
+    mini: false,
     autoplay: false,
     lrc: 3,
     mutex: true,

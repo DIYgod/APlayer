@@ -3,13 +3,16 @@ export default (options) => {
     // default options
     const defaultOption = {
         container: options.element || document.getElementsByClassName('aplayer')[0],
-        narrow: false,
+        mini: false,
         autoplay: false,
         mutex: true,
         lrc: 0,
+        preload: 'auto',
         theme: '#b7daff',
         loop: 'all',
         order: 'list',
+        volume: 0.7,
+        listFolded: false,
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {

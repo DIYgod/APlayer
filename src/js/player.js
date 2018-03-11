@@ -44,7 +44,7 @@ class APlayer {
         if (this.arrow) {
             this.container.classList.add('aplayer-arrow');
         }
-        if (this.options.narrow) {
+        if (this.options.mini) {
             this.container.classList.add('aplayer-narrow');
         }
 
@@ -101,7 +101,7 @@ class APlayer {
 
     initAudio () {
         this.audio = document.createElement('audio');
-        this.audio.preload = this.options.preload ? this.options.preload : 'auto';
+        this.audio.preload = this.options.preload;
 
         for (let i = 0; i < this.events.audioEvents.length; i++) {
             this.audio.addEventListener(this.events.audioEvents[i], () => {
@@ -178,7 +178,7 @@ class APlayer {
             }
         });
 
-        this.volume(this.user.get('volume'), true, true);
+        this.volume(this.user.get('volume'), true);
     }
 
     switchAudio (index) {
