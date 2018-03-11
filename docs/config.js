@@ -72,8 +72,8 @@ function player () {
 
 function clearPlayer () {
     for (let i = 1; i < 10; i++) {
-        if (window['dp' + (i + 1)]) {
-            window['dp' + (i + 1)].destroy();
+        if (window['ap' + (i + 1)]) {
+            window['ap' + (i + 1)].destroy();
         }
     }
 }
