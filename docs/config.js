@@ -81,13 +81,27 @@ function clearPlayer () {
 function aplayer1 () {
     window.ap1 = new APlayer({
         container: document.getElementById('aplayer1'),
-        theme: '#e6d0b2',
-        audio: {
-            name: 'Preparation',
-            artist: 'Hans Zimmer/Richard Harvey',
-            url: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.mp3',
-            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
-        }
+        theme: '#F57F17',
+        lrc: 3,
+        audio: [{
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc'
+        }, {
+            name: 'トリカゴ',
+            artist: 'XX:me',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc'
+        }, {
+            name: '前前前世',
+            artist: 'RADWIMPS',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc'
+        }]
     });
 }
 
@@ -95,12 +109,12 @@ function aplayer2 () {
     window.ap2 = new APlayer({
         container: document.getElementById('aplayer2'),
         theme: '#e6d0b2',
-        audio: {
-            name: 'Preparation',
-            artist: 'Hans Zimmer/Richard Harvey',
-            url: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.mp3',
-            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
-        }
+        audio: [{
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        }]
     });
 }
 
@@ -118,29 +132,25 @@ function aplayer3 () {
         listFolded: false,
         listMaxHeight: '90px',
         lrc: 3,
-        audio: [
-            {
-                name: 'あっちゅ～ま青春!',
-                artist: '七森中☆ごらく部',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.lrc'
-            },
-            {
-                name: 'secret base~君がくれたもの~',
-                artist: '茅野愛衣',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.lrc'
-            },
-            {
-                name: '回レ！雪月花',
-                artist: '小倉唯',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc'
-            }
-        ]
+        audio: [{
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc'
+        }, {
+            name: 'トリカゴ',
+            artist: 'XX:me',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc'
+        }, {
+            name: '前前前世',
+            artist: 'RADWIMPS',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc'
+        }]
     });
 }
 
@@ -149,11 +159,11 @@ function aplayer4 () {
         container: document.getElementById('aplayer4'),
         lrc: 3,
         audio: [{
-            name: '回レ！雪月花',
-            artist: '小倉唯',
-            url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
-            lrc: "https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc"
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            lrc: "https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc"
         }]
     });
 }
@@ -162,29 +172,25 @@ function aplayer5 () {
     window.ap5 = new APlayer({
         container: document.getElementById('aplayer5'),
         lrc: 3,
-        audio: [
-            {
-                name: 'あっちゅ～ま青春!',
-                artist: '七森中☆ごらく部',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yuruyuri.lrc'
-            },
-            {
-                name: 'secret base~君がくれたもの~',
-                artist: '茅野愛衣',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/secretbase.lrc'
-            },
-            {
-                name: '回レ！雪月花',
-                artist: '小倉唯',
-                url: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.mp3',
-                cover: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.jpg',
-                lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/snowmoonflowers.lrc'
-            }
-        ]
+        audio: [{
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc'
+        }, {
+            name: 'トリカゴ',
+            artist: 'XX:me',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc'
+        }, {
+            name: '前前前世',
+            artist: 'RADWIMPS',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc'
+        }]
     });
 }
 
@@ -192,11 +198,11 @@ function aplayer6 () {
     window.ap6 = new APlayer({
         container: document.getElementById('aplayer6'),
         mini: true,
-        audio: {
-            name: 'Preparation',
-            artist: 'Hans Zimmer/Richard Harvey',
-            url: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.mp3',
-            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/preparation.jpg'
-        }
+        audio: [{
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        }]
     });
 }
