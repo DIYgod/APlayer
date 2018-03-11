@@ -1,0 +1,83 @@
+<h1>APlayer</h1>
+
+<h3>🍭 Wow, such a beautiful HTML5 music player.</h3>
+
+<div class="aplayer-wrap">
+    <div id="aplayer1"></div>
+</div>
+
+<div class="landing-buttons">
+    <a class="landing-button" target="_blank" href="https://github.com/MoePlayer/APlayer">
+        GitHub
+    </a>
+
+    <a class="landing-button" router-link="/home">
+        Docs
+    </a>
+</div>
+
+<style>
+    h1 {
+        margin: 0;
+        margin-top: -50px;
+        font-weight: normal;
+        font-size: 40px;
+        letter-spacing: 1px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        color: #999;
+        font-weight: normal;
+        letter-spacing: 1px;
+    }
+
+    .landing {
+        padding: 10px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: 100%;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    .features {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .landing-button {
+        border: 1px solid #ccc;
+        border-radius: 33px;
+        padding: 10px 30px;
+        background-color: white;
+        display: inline-block;
+        margin-right: 20px;
+        color: #333;
+    }
+
+    .landing-button:hover {
+        border-color: #42b983;
+        color: #42b983;
+        text-decoration: none;
+    }
+
+    .aplayer-wrap {
+        width: 600px;
+        max-width: 100%;
+        margin: 20px 0 40px;
+    }
+</style>
