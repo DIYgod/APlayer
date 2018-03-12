@@ -195,6 +195,12 @@ class APlayer {
             else {
                 this.template.pic.style.backgroundImage = '';
             }
+            if (this.options.audio[this.playIndex].theme) {
+                this.template.pic.style.backgroundColor = this.options.audio[this.playIndex].theme;
+                this.template.played.style.background = this.options.audio[this.playIndex].theme;
+                this.template.thumb.style.background = this.options.audio[this.playIndex].theme;
+                this.template.volume.style.background = this.options.audio[this.playIndex].theme;
+            }
             this.template.title.innerHTML = this.options.audio[this.playIndex].name;
             this.template.author.innerHTML = this.options.audio[this.playIndex].artist ? ' - ' + this.options.audio[this.playIndex].artist : '';
             const light = this.container.getElementsByClassName('aplayer-list-light')[0];
@@ -391,7 +397,7 @@ class APlayer {
         for (let i = 0; i < newMusic.length; i++) {
             newItemHTML += `
                 <li>
-                    <span class="aplayer-list-cur" style="background: ${this.options.theme};"></span>
+                    <span class="aplayer-list-cur" style="background: ${newMusic[i].theme || this.options.theme};"></span>
                     <span class="aplayer-list-index">${this.options.audio.length - newMusic.length + i + 1}</span>
                     <span class="aplayer-list-title">${newMusic[i].name}</span>
                     <span class="aplayer-list-author">${newMusic[i].artist}</span>

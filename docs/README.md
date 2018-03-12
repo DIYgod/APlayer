@@ -48,7 +48,7 @@ const ap = new APlayer({
         name: 'name',
         artist: 'artist',
         url: 'url.mp3',
-        cover: 'cover.jpg',
+        cover: 'cover.jpg'
     }]
 });
 ```
@@ -80,6 +80,7 @@ audio.artist | - | audio artist
 audio.url | - | audio url
 audio.cover | - | audio cover
 audio.lrc | - | [see more details](https://aplayer.js.org/#/home?id=lrc)
+audio.theme | - | main color when switching to this audio, it has priority over the above theme
 mutex | true | prevent to play multiple player at the same time, pause other players when this player start play
 lrc | false | [see more details](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | indicate whether list should folded at first
@@ -111,14 +112,16 @@ const ap = new APlayer({
             artist: 'artist1',
             url: 'url1.mp3',
             cover: 'cover1.jpg',
-            lrc: 'lrc1.lrc'
+            lrc: 'lrc1.lrc',
+            theme: '#ebd0c2'
         },
         {
             name: 'name2',
             artist: 'artist2',
             url: 'url2.mp3',
             cover: 'cover2.jpg',
-            lrc: 'lrc2.lrc'
+            lrc: 'lrc2.lrc',
+            theme: '#46718b'
         }
     ]
 });
@@ -157,7 +160,8 @@ const ap = new APlayer({
           artist: 'artist',
           url: 'url.mp3',
           cover: 'cover.jpg',
-          lrc: 'lrc.lrc'
+          lrc: 'lrc.lrc',
+          theme: '#ebd0c2'
       }
   ]);
   ```
@@ -353,14 +357,16 @@ const ap = new APlayer({
             artist: 'artist1',
             url: 'url1.mp3',
             cover: 'cover1.jpg',
-            lrc: 'lrc1.lrc'
+            lrc: 'lrc1.lrc',
+            theme: '#ebd0c2'
         },
         {
             name: 'name2',
             artist: 'artist2',
             url: 'url2.mp3',
             cover: 'cover2.jpg',
-            lrc: 'lrc2.lrc'
+            lrc: 'lrc2.lrc',
+            theme: '#46718b'
         }
     ]
 });

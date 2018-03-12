@@ -1,4 +1,4 @@
-<div class="aplayer-pic"{{ if cover  }} style="background-image: url("{{ cover }}");"{{ /if }}>
+<div class="aplayer-pic" style="{{ if cover  }}background-image: url(&quot;{{ cover }}&quot;);{{ /if }}background-color: {{ options.theme }};">
     <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>
 </div>
 <div class="aplayer-info">
@@ -52,7 +52,7 @@
     <ol>
         {{each options.audio}}
         <li>
-            <span class="aplayer-list-cur" style="background: {{ options.theme }};"></span>
+            <span class="aplayer-list-cur" style="background: {{ $value.theme || options.theme }};"></span>
             <span class="aplayer-list-index">{{ $index + 1 }}</span>
             <span class="aplayer-list-title">{{ $value.name }}</span>
             <span class="aplayer-list-author">{{ $value.artist }}</span>

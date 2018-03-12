@@ -49,7 +49,7 @@ const ap = new APlayer({
         name: 'name',
         artist: 'artist',
         url: 'url.mp3',
-        cover: 'cover.jpg',
+        cover: 'cover.jpg'
     }]
 });
 ```
@@ -81,6 +81,7 @@ audio.artist | - | 音频艺术家
 audio.url | - | 音频链接
 audio.cover | - | 音频封面
 audio.lrc | - | [详情](https://aplayer.js.org/#/home?id=lrc)
+audio.theme | - | 切换到此音频时的主题色，比上面的 theme 优先级高
 mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
 lrc | false | [详情](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | 列表默认折叠
@@ -112,14 +113,16 @@ const ap = new APlayer({
             artist: 'artist1',
             url: 'url1.mp3',
             cover: 'cover1.jpg',
-            lrc: 'lrc1.lrc'
+            lrc: 'lrc1.lrc',
+            theme: '#ebd0c2'
         },
         {
             name: 'name2',
             artist: 'artist2',
             url: 'url2.mp3',
             cover: 'cover2.jpg',
-            lrc: 'lrc2.lrc'
+            lrc: 'lrc2.lrc',
+            theme: '#46718b'
         }
     ]
 });
@@ -158,7 +161,8 @@ const ap = new APlayer({
           artist: 'artist',
           url: 'url.mp3',
           cover: 'cover.jpg',
-          lrc: 'lrc.lrc'
+          lrc: 'lrc.lrc',
+          theme: '#ebd0c2'
       }
   ]);
   ```
@@ -354,14 +358,16 @@ const ap = new APlayer({
             artist: 'artist1',
             url: 'url1.mp3',
             cover: 'cover1.jpg',
-            lrc: 'lrc1.lrc'
+            lrc: 'lrc1.lrc',
+            theme: '#ebd0c2'
         },
         {
             name: 'name2',
             artist: 'artist2',
             url: 'url2.mp3',
             cover: 'cover2.jpg',
-            lrc: 'lrc2.lrc'
+            lrc: 'lrc2.lrc',
+            theme: '#46718b'
         }
     ]
 });
