@@ -127,6 +127,8 @@ const ap = new APlayer({
 
 ## API
 
++ `APlayer.version`: 静态属性, 返回 APlayer 的版本号
+
 + `ap.play()`: 播放音频
 
 + `ap.pause()`: 暂停音频

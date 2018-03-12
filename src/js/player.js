@@ -459,6 +459,11 @@ class APlayer {
             console.error(err);
         });
     }
+
+    static get version () {
+        /* global APLAYER_VERSION */
+        return APLAYER_VERSION;
+    }
 }
 
 export default APlayer;

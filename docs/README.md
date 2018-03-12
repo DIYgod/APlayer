@@ -126,6 +126,8 @@ const ap = new APlayer({
 
 ## API
 
++ `APlayer.version`: static property, return the version of APlayer
+
 + `ap.play()`: play audio
 
 + `ap.pause()`: pause audio
