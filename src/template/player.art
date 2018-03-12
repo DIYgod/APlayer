@@ -49,7 +49,7 @@
     </div>
 </div>
 <div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
-    <ol>
+    <ol{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
         {{each options.audio}}
         <li>
             <span class="aplayer-list-cur" style="background: {{ $value.theme || options.theme }};"></span>

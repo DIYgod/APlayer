@@ -154,6 +154,7 @@ class Controller {
 
     initMenuButton () {
         this.player.template.list.style.height = 33 * this.player.options.audio.length - 1 + 'px';
+        this.player.template.listOl.style.height = 33 * this.player.options.audio.length - 1 + 'px';
         this.player.template.menu.addEventListener('click', () => {
             if (!this.player.template.list.classList.contains('aplayer-list-hide')) {
                 this.player.template.list.classList.add('aplayer-list-hide');

@@ -17,7 +17,7 @@
 
 ![image](https://i.imgur.com/JDrJXCr.png)
 
-APlayer is a lovely HTML5 music player to help people build audio easily.
+APlayer is a lovely HTML5 music player.
 
 **APlayer supports:**
 

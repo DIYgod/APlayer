@@ -106,7 +106,8 @@ const ap5 = new APlayer({
     lrc: 3,
     mutex: true,
     theme: '#ad7a86',
-    listFolded: true,
+    listFolded: false,
+    listMaxHeight: '80px',
     audio: [{
         name: '光るなら',
         artist: 'Goose house',

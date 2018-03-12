@@ -411,6 +411,7 @@ class APlayer {
         }
         const songListLength = this.container.querySelectorAll('.aplayer-list li').length;
         this.template.list.style.height = songListLength * 33 - 1 + 'px';
+        this.template.listOl.style.height = songListLength * 33 - 1 + 'px';
 
         this.randomOrder = utils.randomOrder(this.options.audio.length);
     }
@@ -445,6 +446,7 @@ class APlayer {
                 this.container.classList.remove('aplayer-withlist');
             }
             this.template.list.style.height = parseInt(this.template.list.style.height, 10) - 33 + 'px';
+            this.template.listOl.style.height = parseInt(this.template.listOl.style.height, 10) - 33 + 'px';
         }
     }
 
