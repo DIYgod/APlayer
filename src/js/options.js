@@ -37,5 +37,9 @@ export default (options) => {
         options.loop = 'all';
     }
 
+    if (options.mini === true) {
+        options.listFolded = true;
+    }
+
     return options;
 };
