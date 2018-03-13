@@ -148,7 +148,7 @@ class APlayer {
 
         // audio download error: an error occurs
         this.on('error', () => {
-            this.template.author.innerHTML = ` - Error happens ╥﹏╥`;
+            this.notice('An audio error has occurred.', 0);
         });
 
         // multiple audio play
@@ -485,6 +485,21 @@ class APlayer {
         }
         else if (mode === 'normal') {
             this.container.classList.remove('aplayer-narrow');
+        }
+    }
+
+    notice (text, time = 2000, opacity = 0.8) {
+        this.template.notice.innerHTML = text;
+        this.template.notice.style.opacity = opacity;
+        if (this.noticeTime) {
+            clearTimeout(this.noticeTime);
+        }
+        this.events.trigger('notice_show', text);
+        if (time) {
+            this.noticeTime = setTimeout(() => {
+                this.template.notice.style.opacity = 0;
+                this.events.trigger('notice_hide');
+            }, time);
         }
     }
 

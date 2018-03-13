@@ -136,7 +136,7 @@ const ap = new APlayer({
 
 + `ap.pause()`: 暂停音频
 
-+ `ap.seek(time: number)`: 跳转到特定时间
++ `ap.seek(time: number)`: 跳转到特定时间，时间的单位为秒
 
   ```js
   ap.seek(100);
@@ -188,6 +188,12 @@ const ap = new APlayer({
 + `ap.setMode(mode: string)`: 设置播放器模式，mode 取值应为 'mini' 或 'normal'
 
 + `ap.mode`: 返回播放器当前模式，'mini' 或 'normal'
+
++ `ap.notice(text: string, time: number, opacity: number)`: 显示通知，时间的单位为毫秒，默认时间 2000 毫秒，默认透明度 0.8，设置时间为 0 可以取消通知自动隐藏
+
+  ```js
+  ap.notice('Amazing player', 2000, 0.8);
+  ```
 
 + `ap.destroy()`: 销毁播放器
 
@@ -243,6 +249,8 @@ ap.on('ended', function () {
 - addaudio
 - removeaudio
 - destroy
+- notice_show
+- notice_hide
 
 ## 歌词
 

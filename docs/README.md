@@ -135,7 +135,7 @@ const ap = new APlayer({
 
 + `ap.pause()`: pause audio
 
-+ `ap.seek(time: number)`: seek to specified time
++ `ap.seek(time: number)`: seek to specified time, the unit of time is second
 
   ```js
   ap.seek(100);
@@ -187,6 +187,12 @@ const ap = new APlayer({
 + `ap.setMode(mode: string)`: set player mode, the value of mode should be 'mini' or 'normal'
 
 + `ap.mode`: return current player mode, 'mini' or 'normal'
+
++ `ap.notice(text: string, time: number, opacity: number)`: show message, the unit of time is millisecond, the default of time is 2000, the default of opacity is 0.8, setting time to 0 can disable notice autohide.
+
+  ```js
+  ap.notice('Amazing player', 2000, 0.8);
+  ```
 
 + `ap.destroy()`: destroy player
 
@@ -242,6 +248,8 @@ Player events
 - addaudio
 - removeaudio
 - destroy
+- notice_show
+- notice_hide
 
 ## LRC
 

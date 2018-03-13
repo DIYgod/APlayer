@@ -47,6 +47,7 @@ class Template {
         this.title = this.container.querySelector('.aplayer-title');
         this.author = this.container.querySelector('.aplayer-author');
         this.dtime = this.container.querySelector('.aplayer-dtime');
+        this.notice = this.container.querySelector('.aplayer-notice');
     }
 }
 
