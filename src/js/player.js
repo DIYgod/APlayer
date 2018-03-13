@@ -121,6 +121,17 @@ class APlayer {
             }
         });
 
+        this.on('timeupdate', () => {
+            if (!this.disableTimeupdate) {
+                this.bar.set('played', this.audio.currentTime / this.audio.duration, 'width');
+                this.lrc && this.lrc.update();
+                const currentTime = utils.secondToTime(this.audio.currentTime);
+                if (this.template.ptime.innerHTML !== currentTime) {
+                    this.template.ptime.innerHTML = currentTime;
+                }
+            }
+        });
+
         // show audio time: the metadata has loaded or changed
         this.on('durationchange', () => {
             if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
@@ -268,7 +279,6 @@ class APlayer {
             });
 
             this.timer.enable('loading');
-            this.timer.enable('progress');
 
             if (this.options.mutex) {
                 for (let i = 0; i < instances.length; i++) {
@@ -298,7 +308,6 @@ class APlayer {
             this.audio.pause();
 
             this.timer.disable('loading');
-            this.timer.disable('progress');
         });
     }
 
