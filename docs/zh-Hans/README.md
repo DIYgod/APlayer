@@ -83,7 +83,7 @@ audio.cover | - | 音频封面
 audio.lrc | - | [详情](https://aplayer.js.org/#/home?id=lrc)
 audio.theme | - | 切换到此音频时的主题色，比上面的 theme 优先级高
 mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
-lrc | false | [详情](https://aplayer.js.org/#/home?id=lrc)
+lrcType | 0 | [详情](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | 列表默认折叠
 listMaxHeight | - | 列表最大高度
 
@@ -106,7 +106,7 @@ const ap = new APlayer({
     mutex: true,
     listFolded: false,
     listMaxHeight: '90px',
-    lrc: 3,
+    lrcType: 3,
     audio: [
         {
             name: 'name1',
@@ -236,7 +236,7 @@ ap.on('ended', function () {
 
 ## 歌词
 
-我们有三种方式来给 APlayer 传递歌词，使用 `lrc` 参数指明使用哪种方式，然后把歌词放到 `audio.lrc` 参数或者 HTML 里。
+我们有三种方式来给 APlayer 传递歌词，使用 `lrcType` 参数指明使用哪种方式，然后把歌词放到 `audio.lrc` 参数或者 HTML 里。
 
 <div class="aplayer-wrap">
     <div id="aplayer4"><button class="docute-button load">点击加载播放器</div>
@@ -249,7 +249,7 @@ ap.on('ended', function () {
 ```js
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    lrc: 3,
+    lrcType: 3,
     audio: {
         name: 'name',
         artist: 'artist',
@@ -267,7 +267,7 @@ const ap = new APlayer({
 ```js
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    lrc: 1,
+    lrcType: 1,
     audio: {
         name: 'name',
         artist: 'artist',
@@ -304,7 +304,7 @@ const ap = new APlayer({
 ```js
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    lrc: 2,
+    lrcType: 2,
     audio: [[
         {
             name: 'name1',
@@ -351,7 +351,7 @@ const ap = new APlayer({
     container: document.getElementById('player'),
     listFolded: false,
     listMaxHeight: '90px',
-    lrc: 3,
+    lrcType: 3,
     audio: [
         {
             name: 'name1',

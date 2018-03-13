@@ -6,7 +6,7 @@ export default (options) => {
         mini: options.narrow || false,
         autoplay: false,
         mutex: true,
-        lrc: options.showlrc || 0,
+        lrcType: options.showlrc || options.lrc || 0,
         preload: 'auto',
         theme: '#b7daff',
         loop: 'all',

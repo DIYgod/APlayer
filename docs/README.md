@@ -82,7 +82,7 @@ audio.cover | - | audio cover
 audio.lrc | - | [see more details](https://aplayer.js.org/#/home?id=lrc)
 audio.theme | - | main color when switching to this audio, it has priority over the above theme
 mutex | true | prevent to play multiple player at the same time, pause other players when this player start play
-lrc | false | [see more details](https://aplayer.js.org/#/home?id=lrc)
+lrcType | 0 | [see more details](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | indicate whether list should folded at first
 listMaxHeight | - | list max height
 
@@ -105,7 +105,7 @@ const ap = new APlayer({
     mutex: true,
     listFolded: false,
     listMaxHeight: '90px',
-    lrc: 3,
+    lrcType: 3,
     audio: [
         {
             name: 'name1',
@@ -241,7 +241,7 @@ Player events
 
 ## LRC
 
-We have three ways to pass LRC to APlayer, indicate the way to pass LRC by option `lrc`, then put lrc to option `audio.lrc` or HTML.
+We have three ways to pass LRC to APlayer, indicate the way to pass LRC by option `lrcType`, then put lrc to option `audio.lrc` or HTML.
 
 <div class="aplayer-wrap">
     <div id="aplayer4"><button class="docute-button load">Click to load player</div>
@@ -254,7 +254,7 @@ The first way, put LRC to a LRC file, LRC file will be loaded when this audio st
 ```js
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    lrc: 3,
+    lrcType: 3,
     audio: {
         name: 'name',
         artist: 'artist',
@@ -272,7 +272,7 @@ The second way, put LRC to a JS string.
 ```js
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    lrc: 1,
+    lrcType: 1,
     audio: {
         name: 'name',
         artist: 'artist',
@@ -309,7 +309,7 @@ The third way, put LRC to HTML.
 ```js
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
-    lrc: 2,
+    lrcType: 2,
     audio: [[
         {
             name: 'name1',
@@ -356,7 +356,7 @@ const ap = new APlayer({
     container: document.getElementById('player'),
     listFolded: false,
     listMaxHeight: '90px',
-    lrc: 3,
+    lrcType: 3,
     audio: [
         {
             name: 'name1',

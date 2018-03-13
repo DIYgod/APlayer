@@ -82,7 +82,7 @@ function aplayer1 () {
     window.ap1 = new APlayer({
         container: document.getElementById('aplayer1'),
         theme: '#F57F17',
-        lrc: 3,
+        lrcType: 3,
         audio: [{
             name: '光るなら',
             artist: 'Goose house',
@@ -133,7 +133,7 @@ function aplayer3 () {
         mutex: true,
         listFolded: false,
         listMaxHeight: '90px',
-        lrc: 3,
+        lrcType: 3,
         audio: [{
             name: '光るなら',
             artist: 'Goose house',
@@ -162,7 +162,7 @@ function aplayer3 () {
 function aplayer4 () {
     window.ap4 = new APlayer({
         container: document.getElementById('aplayer4'),
-        lrc: 3,
+        lrcType: 3,
         audio: [{
             name: '光るなら',
             artist: 'Goose house',
@@ -177,7 +177,7 @@ function aplayer4 () {
 function aplayer5 () {
     window.ap5 = new APlayer({
         container: document.getElementById('aplayer5'),
-        lrc: 3,
+        lrcType: 3,
         audio: [{
             name: '光るなら',
             artist: 'Goose house',

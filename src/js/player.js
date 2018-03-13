@@ -31,7 +31,7 @@ class APlayer {
         this.randomOrder = utils.randomOrder(this.options.audio.length);
 
         this.container.classList.add('aplayer');
-        if (this.options.lrc) {
+        if (this.options.lrcType) {
             this.container.classList.add('aplayer-withlrc');
         }
         if (this.options.audio.length > 1) {
@@ -50,7 +50,7 @@ class APlayer {
 
         // save lrc
         this.container = this.options.container;
-        if (this.options.lrc === 2 || this.options.lrc === true) {
+        if (this.options.lrcType === 2 || this.options.lrcType === true) {
             const lrcEle = this.container.getElementsByClassName('aplayer-lrc-content');
             for (let i = 0; i < lrcEle.length; i++) {
                 if (this.options.audio[i]) {
@@ -69,10 +69,10 @@ class APlayer {
             this.template.time.classList.add('aplayer-time-narrow');
         }
 
-        if (this.options.lrc) {
+        if (this.options.lrcType) {
             this.lrc = new Lrc({
                 container: this.template.lrc,
-                async: this.options.lrc === 3,
+                async: this.options.lrcType === 3,
                 content: this.options.audio.map((item) => item.lrc),
                 player: this,
             });
