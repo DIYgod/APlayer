@@ -62,11 +62,11 @@ class Controller {
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
             this.player.seek(this.player.bar.get('played', 'width') * this.player.audio.duration);
-            this.player.disableTimeupdate = true;
+            this.player.disableTimeupdate = false;
         };
 
         this.player.template.barWrap.addEventListener(utils.nameMap.dragStart, () => {
-            this.player.disableTimeupdate = false;
+            this.player.disableTimeupdate = true;
             document.addEventListener(utils.nameMap.dragMove, thumbMove);
             document.addEventListener(utils.nameMap.dragEnd, thumbUp);
         });
