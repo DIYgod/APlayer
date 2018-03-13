@@ -44,7 +44,7 @@ class Lrc {
                             this.parsed[index] = this.parse(xhr.responseText);
                         }
                         else {
-                            console.log('Request was unsuccessful: ' + xhr.status);
+                            this.player.notice(`LRC file request fails: status ${xhr.status}`);
                             this.parsed[index] = [['00:00', 'Not available']];
                         }
 

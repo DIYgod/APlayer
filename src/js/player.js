@@ -105,8 +105,8 @@ class APlayer {
         this.audio.preload = this.options.preload;
 
         for (let i = 0; i < this.events.audioEvents.length; i++) {
-            this.audio.addEventListener(this.events.audioEvents[i], () => {
-                this.events.trigger(this.events.audioEvents[i]);
+            this.audio.addEventListener(this.events.audioEvents[i], (e) => {
+                this.events.trigger(this.events.audioEvents[i], e);
             });
         }
 
@@ -148,7 +148,7 @@ class APlayer {
 
         // audio download error: an error occurs
         this.on('error', () => {
-            this.notice('An audio error has occurred.', 0);
+            this.notice('An audio error has occurred.');
         });
 
         // multiple audio play
