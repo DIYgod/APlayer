@@ -105,7 +105,7 @@ const ap5 = new APlayer({
     autoplay: false,
     lrc: 3,
     mutex: true,
-    theme: '#ad7a86',
+    theme: '#e9e9e9',
     listFolded: false,
     listMaxHeight: '80px',
     audio: [{
@@ -114,20 +114,25 @@ const ap5 = new APlayer({
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
         cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
         lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
-        theme: '#ebd0c2'
     }, {
         name: 'トリカゴ',
         artist: 'XX:me',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
         cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
         lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc',
-        theme: '#46718b'
     }, {
         name: '前前前世',
         artist: 'RADWIMPS',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
         cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
         lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
-        theme: '#505d6b'
     }]
+});
+const colorThief = new ColorThief();
+ap5.on('switchaudio', (index) => {
+    if (!ap5.options.audio[index].theme) {
+        colorThief.getColorAsync(ap5.options.audio[index].cover, function (color) {
+            ap5.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
+        });
+    }
 });

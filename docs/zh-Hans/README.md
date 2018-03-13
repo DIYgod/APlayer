@@ -394,6 +394,48 @@ const ap = new APlayer({
 });
 ```
 
+## 根据封面自适应主题色
+
+需要额外加载 [color-thief.js](https://github.com/lokesh/color-thief/blob/master/src/color-thief.js)
+
+<div class="aplayer-wrap">
+    <div id="aplayer7"><button class="docute-button load">点击加载播放器</div>
+</div>
+
+```html
+<link rel="stylesheet" href="APlayer.min.css">
+<div id="aplayer"></div>
+<script src="APlayer.min.js"></script>
+<script src="color-thief.js"></script>
+```
+
+```js
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    theme: '#e9e9e9',
+    audio: [{
+        name: 'name1',
+        artist: 'artist1',
+        url: 'url1.mp3',
+        cover: 'cover1.jpg'
+    }, {
+        name: 'name2',
+        artist: 'artist2',
+        url: 'url2.mp3',
+        cover: 'cover2.jpg'
+    }]
+});
+
+const colorThief = new ColorThief();
+ap.on('switchaudio', (index) => {
+    if (!ap.options.audio[index].theme) {
+        colorThief.getColorAsync(ap.options.audio[index].cover, (color) => {
+            ap.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
+        });
+    }
+});
+```
+
 ## CDN
 
 - [jsDelivr](https://www.jsdelivr.com/package/npm/aplayer)
