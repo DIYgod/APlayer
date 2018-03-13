@@ -178,11 +178,15 @@ const ap = new APlayer({
   ap.volume(0.1, true);
   ```
 
-+ `ap.theme(color: string, index: number)`: set player theme, the default of index is current audio index.
++ `ap.theme(color: string, index: number)`: set player theme, the default of index is current audio index
 
   ```js
   ap.theme('#000', 0);
   ```
+
++ `ap.setMode(mode: string)`: set player mode, the value of mode should be 'mini' or 'normal'
+
++ `ap.mode`: return current player mode, 'mini' or 'normal'
 
 + `ap.destroy()`: destroy player
 

@@ -27,6 +27,7 @@ class APlayer {
         this.playIndex = 0;
         this.paused = true;
         this.playedPromise = Promise.resolve();
+        this.mode = 'normal';
 
         this.randomOrder = utils.randomOrder(this.options.audio.length);
 
@@ -45,7 +46,7 @@ class APlayer {
             this.container.classList.add('aplayer-arrow');
         }
         if (this.options.mini) {
-            this.container.classList.add('aplayer-narrow');
+            this.setMode('mini');
         }
 
         // save lrc
@@ -475,6 +476,16 @@ class APlayer {
         this.audio.src = '';
         this.timer.destroy();
         this.events.trigger('destroy');
+    }
+
+    setMode (mode = 'normal') {
+        this.mode = mode;
+        if (mode === 'mini') {
+            this.container.classList.add('aplayer-narrow');
+        }
+        else if (mode === 'normal') {
+            this.container.classList.remove('aplayer-narrow');
+        }
     }
 
     handlePlayPromise (callback) {

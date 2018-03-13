@@ -179,6 +179,16 @@ const ap = new APlayer({
   ap.volume(0.1, true);
   ```
 
++ `ap.theme(color: string, index: number)`: 设置播放器主题色, index 默认为当前音频的 index
+
+  ```js
+  ap.theme('#000', 0);
+  ```
+
++ `ap.setMode(mode: string)`: 设置播放器模式，mode 取值应为 'mini' 或 'normal'
+
++ `ap.mode`: 返回播放器当前模式，'mini' 或 'normal'
+
 + `ap.destroy()`: 销毁播放器
 
 + `ap.audio`: 原生 video
