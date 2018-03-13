@@ -219,7 +219,7 @@ function aplayer6 () {
 
 function aplayer7 () {
     window.ap7 = new APlayer({
-        container: document.getElementById('player7'),
+        container: document.getElementById('aplayer7'),
         audio: [{
             name: '光るなら(HLS)',
             artist: 'Goose house',
