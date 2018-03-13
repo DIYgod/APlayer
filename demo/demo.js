@@ -96,6 +96,13 @@ const ap4 = new APlayer({
         cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
         lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
         theme: '#505d6b'
+    }, {
+        name: '光るなら(HLS)',
+        artist: 'Goose house',
+        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
+        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        theme: '#ebd0c2',
+        type: 'hls'
     }]
 });
 
@@ -134,5 +141,45 @@ ap5.on('switchaudio', (index) => {
         colorThief.getColorAsync(ap5.options.audio[index].cover, function (color) {
             ap5.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
         });
+    }
+});
+
+const ap6 = new APlayer({
+    element: document.getElementById('player6'),
+    mutex: true,
+    audio: [{
+        name: '光るなら(HLS)',
+        artist: 'Goose house',
+        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
+        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        theme: '#ebd0c2',
+        type: 'hls'
+    }]
+});
+const ap7 = new APlayer({
+    element: document.getElementById('player7'),
+    mutex: true,
+    audio: [{
+        name: '光るなら(HLS)',
+        artist: 'Goose house',
+        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
+        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        theme: '#ebd0c2',
+        type: 'customHls',
+    }],
+    customAudioType: {
+        'customHls': function (audioElement, audio, player) {
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(audio.url);
+                hls.attachMedia(audioElement);
+            }
+            else if (audioElement.canPlayType('application/x-mpegURL') || audioElement.canPlayType('application/vnd.apple.mpegURL')) {
+                audioElement.src = audio.url;
+            }
+            else {
+                player.notice('Error: HLS is not supported.');
+            }
+        }
     }
 });

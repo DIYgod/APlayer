@@ -200,16 +200,17 @@ class APlayer {
                 this.playIndex = index;
             }
 
+            const audio = this.options.audio[this.playIndex];
             // set html
-            if (this.options.audio[this.playIndex].cover) {
-                this.template.pic.style.backgroundImage = `url('${this.options.audio[this.playIndex].cover}')`;
+            if (audio.cover) {
+                this.template.pic.style.backgroundImage = `url('${audio.cover}')`;
             }
             else {
                 this.template.pic.style.backgroundImage = '';
             }
             this.theme();
-            this.template.title.innerHTML = this.options.audio[this.playIndex].name;
-            this.template.author.innerHTML = this.options.audio[this.playIndex].artist ? ' - ' + this.options.audio[this.playIndex].artist : '';
+            this.template.title.innerHTML = audio.name;
+            this.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
             const light = this.container.getElementsByClassName('aplayer-list-light')[0];
             if (light) {
                 light.classList.remove('aplayer-list-light');
@@ -218,7 +219,47 @@ class APlayer {
 
             this.template.list.scrollTop = this.playIndex * 33;
 
-            this.audio.src = this.options.audio[this.playIndex].url;
+            // mse
+            if (this.hls) {
+                this.hls.destroy();
+                this.hls = null;
+            }
+            let type = audio.type;
+            if (this.options.customAudioType && this.options.customAudioType[type]) {
+                if (Object.prototype.toString.call(this.options.customAudioType[type]) === '[object Function]') {
+                    this.options.customAudioType[type](this.audio, audio, this);
+                }
+                else {
+                    console.error(`Illegal customType: ${type}`);
+                }
+            }
+            else {
+                if (!type || type === 'auto') {
+                    if (/m3u8(#|\?|$)/i.exec(audio.url)) {
+                        type = 'hls';
+                    }
+                    else {
+                        type = 'normal';
+                    }
+                }
+                if (type === 'hls') {
+                    if (Hls.isSupported()) {
+                        this.hls = new Hls();
+                        this.hls.loadSource(audio.url);
+                        this.hls.attachMedia(this.audio);
+                    }
+                    else if (this.audio.canPlayType('application/x-mpegURL') || this.audio.canPlayType('application/vnd.apple.mpegURL')) {
+                        this.audio.src = audio.url;
+                    }
+                    else {
+                        this.notice('Error: HLS is not supported.');
+                    }
+                }
+                else if (type === 'normal') {
+                    this.audio.src = audio.url;
+                }
+            }
+
             this.seek(0);
 
             let playPromise;

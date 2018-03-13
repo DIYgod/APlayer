@@ -30,6 +30,7 @@ export default (options) => {
         item.name = item.name || item.title;
         item.artist = item.artist || item.author;
         item.cover = item.cover || item.pic;
+        item.type = item.type || 'normal';
         return item;
     });
 

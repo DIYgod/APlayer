@@ -81,6 +81,8 @@ audio.url | - | audio url
 audio.cover | - | audio cover
 audio.lrc | - | [see more details](https://aplayer.js.org/#/home?id=lrc)
 audio.theme | - | main color when switching to this audio, it has priority over the above theme
+audio.type | 'auto' | values: 'auto', 'hls', 'normal' or other custom type, [see more details](https://aplayer.js.org/#/home?id=mse-support)
+customAudioType | - | [see more details](https://aplayer.js.org/#/home?id=mse-support)
 mutex | true | prevent to play multiple player at the same time, pause other players when this player start play
 lrcType | 0 | [see more details](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | indicate whether list should folded at first
@@ -411,12 +413,71 @@ const ap = new APlayer({
 });
 ```
 
+## MSE support
+
+### HLS
+
+It requires the library [hls.js](https://github.com/video-dev/hls.js) and it should be loaded before `APlayer.min.js`.
+
+<div class="aplayer-wrap">
+    <div id="aplayer7"><button class="docute-button load">Click to load player</div>
+</div>
+
+```html
+<link rel="stylesheet" href="APlayer.min.css">
+<div id="aplayer"></div>
+<script src="hls.min.js"></script>
+<script src="APlayer.min.js"></script>
+```
+
+```js
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    audio: [{
+        name: 'HLS',
+        artist: 'artist',
+        url: 'url.m3u8',
+        cover: 'cover.jpg',
+        type: 'hls'
+    }]
+});
+```
+
+```js
+// another way, use customType
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    audio: [{
+        name: 'HLS',
+        artist: 'artist',
+        url: 'url.m3u8',
+        cover: 'cover.jpg',
+        type: 'customHls'
+    }],
+    customAudioType: {
+        'customHls': function (audioElement, audio, player) {
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(audio.url);
+                hls.attachMedia(audioElement);
+            }
+            else if (audioElement.canPlayType('application/x-mpegURL') || audioElement.canPlayType('application/vnd.apple.mpegURL')) {
+                audioElement.src = audio.url;
+            }
+            else {
+                player.notice('Error: HLS is not supported.');
+            }
+        }
+    }
+});
+```
+
 ## Self-adapting theme according to cover
 
 It requires the library [color-thief](https://github.com/lokesh/color-thief/blob/master/src/color-thief.js).
 
 <div class="aplayer-wrap">
-    <div id="aplayer7"><button class="docute-button load">Click to load player</div>
+    <div id="aplayer8"><button class="docute-button load">Click to load player</div>
 </div>
 
 ```html

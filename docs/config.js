@@ -219,7 +219,39 @@ function aplayer6 () {
 
 function aplayer7 () {
     window.ap7 = new APlayer({
-        container: document.getElementById('aplayer7'),
+        container: document.getElementById('player7'),
+        audio: [{
+            name: '光るなら(HLS)',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            theme: '#ebd0c2',
+            type: 'hls'
+        }, {
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            theme: '#ebd0c2'
+        }, {
+            name: 'トリカゴ',
+            artist: 'XX:me',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
+            theme: '#46718b'
+        }, {
+            name: '前前前世',
+            artist: 'RADWIMPS',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
+            theme: '#505d6b'
+        }]
+    });
+}
+
+function aplayer8 () {
+    window.ap8 = new APlayer({
+        container: document.getElementById('aplayer8'),
         theme: '#e9e9e9',
         audio: [{
             name: '光るなら',
@@ -240,10 +272,10 @@ function aplayer7 () {
     });
 
     const colorThief = new ColorThief();
-    window.ap7.on('switchaudio', function (index) {
-        if (!window.ap7.options.audio[index].theme) {
-            colorThief.getColorAsync(window.ap7.options.audio[index].cover, function (color) {
-                window.ap7.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
+    window.ap8.on('switchaudio', function (index) {
+        if (!window.ap8.options.audio[index].theme) {
+            colorThief.getColorAsync(window.ap8.options.audio[index].cover, function (color) {
+                window.ap8.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
             });
         }
     });

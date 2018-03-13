@@ -82,6 +82,8 @@ audio.url | - | 音频链接
 audio.cover | - | 音频封面
 audio.lrc | - | [详情](https://aplayer.js.org/#/home?id=lrc)
 audio.theme | - | 切换到此音频时的主题色，比上面的 theme 优先级高
+audio.type | 'auto' | 可选值: 'auto', 'hls', 'normal' 或其他自定义类型, [详情](https://aplayer.js.org/#/home?id=mse-support)
+customAudioType | - | 自定义类型，[详情](https://aplayer.js.org/#/home?id=mse-support)
 mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
 lrcType | 0 | [详情](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | 列表默认折叠
@@ -412,12 +414,71 @@ const ap = new APlayer({
 });
 ```
 
+## MSE 支持
+
+### HLS
+
+需要在 `APlayer.min.js` 前面加载 [hls.js](https://github.com/video-dev/hls.js)。
+
+<div class="aplayer-wrap">
+    <div id="aplayer7"><button class="docute-button load">点击加载播放器</div>
+</div>
+
+```html
+<link rel="stylesheet" href="APlayer.min.css">
+<div id="aplayer"></div>
+<script src="hls.min.js"></script>
+<script src="APlayer.min.js"></script>
+```
+
+```js
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    audio: [{
+        name: 'HLS',
+        artist: 'artist',
+        url: 'url.m3u8',
+        cover: 'cover.jpg',
+        type: 'hls'
+    }]
+});
+```
+
+```js
+// 另一种方式，使用 customAudioType
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    audio: [{
+        name: 'HLS',
+        artist: 'artist',
+        url: 'url.m3u8',
+        cover: 'cover.jpg',
+        type: 'customHls'
+    }],
+    customAudioType: {
+        'customHls': function (audioElement, audio, player) {
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(audio.url);
+                hls.attachMedia(audioElement);
+            }
+            else if (audioElement.canPlayType('application/x-mpegURL') || audioElement.canPlayType('application/vnd.apple.mpegURL')) {
+                audioElement.src = audio.url;
+            }
+            else {
+                player.notice('Error: HLS is not supported.');
+            }
+        }
+    }
+});
+```
+
 ## 根据封面自适应主题色
 
 需要额外加载 [color-thief.js](https://github.com/lokesh/color-thief/blob/master/src/color-thief.js)
 
 <div class="aplayer-wrap">
-    <div id="aplayer7"><button class="docute-button load">点击加载播放器</div>
+    <div id="aplayer8"><button class="docute-button load">点击加载播放器</div>
 </div>
 
 ```html
