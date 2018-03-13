@@ -206,12 +206,7 @@ class APlayer {
             else {
                 this.template.pic.style.backgroundImage = '';
             }
-            if (this.options.audio[this.playIndex].theme) {
-                this.template.pic.style.backgroundColor = this.options.audio[this.playIndex].theme;
-                this.template.played.style.background = this.options.audio[this.playIndex].theme;
-                this.template.thumb.style.background = this.options.audio[this.playIndex].theme;
-                this.template.volume.style.background = this.options.audio[this.playIndex].theme;
-            }
+            this.theme();
             this.template.title.innerHTML = this.options.audio[this.playIndex].name;
             this.template.author.innerHTML = this.options.audio[this.playIndex].artist ? ' - ' + this.options.audio[this.playIndex].artist : '';
             const light = this.container.getElementsByClassName('aplayer-list-light')[0];
@@ -242,6 +237,17 @@ class APlayer {
 
             return playPromise;
         });
+    }
+
+    theme (color = this.options.audio[this.playIndex].theme, index = this.playIndex) {
+        this.options.audio[index].theme = color;
+        this.template.listCurs[index].style.backgroundColor = color;
+        if (index === this.playIndex) {
+            this.template.pic.style.backgroundColor = color;
+            this.template.played.style.background = color;
+            this.template.thumb.style.background = color;
+            this.template.volume.style.background = color;
+        }
     }
 
     seek (time) {

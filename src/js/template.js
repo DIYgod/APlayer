@@ -32,6 +32,7 @@ class Template {
         this.button = this.container.querySelector('.aplayer-button');
         this.list = this.container.querySelector('.aplayer-list');
         this.listOl = this.container.querySelector('.aplayer-list ol');
+        this.listCurs = this.container.querySelectorAll('.aplayer-list-cur');
         this.played = this.container.querySelector('.aplayer-played');
         this.loaded = this.container.querySelector('.aplayer-loaded');
         this.thumb = this.container.querySelector('.aplayer-thumb');
