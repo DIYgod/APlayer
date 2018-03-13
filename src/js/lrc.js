@@ -39,7 +39,7 @@ class Lrc {
                 this.parsed[index] = [['00:00', 'Loading']];
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
-                    if (xhr.readyState === 4) {
+                    if (index === this.player.playIndex && xhr.readyState === 4) {
                         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
                             this.parsed[index] = this.parse(xhr.responseText);
                         }
