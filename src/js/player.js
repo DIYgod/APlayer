@@ -355,6 +355,7 @@ class APlayer {
 
             this.audio.pause();
 
+            this.container.classList.remove('aplayer-loading');
             this.timer.disable('loading');
         });
     }
