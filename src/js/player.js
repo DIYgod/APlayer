@@ -466,11 +466,11 @@ class APlayer {
             this.container.classList.add('aplayer-withlist');
             this.audio.loop = false;
         }
-        const songListLength = this.container.querySelectorAll('.aplayer-list li').length;
-        this.template.list.style.height = songListLength * 33 - 1 + 'px';
-        this.template.listOl.style.height = songListLength * 33 - 1 + 'px';
+        this.template.list.style.height = this.options.audio.length * 33 - 1 + 'px';
+        this.template.listOl.style.height = this.options.audio.length * 33 - 1 + 'px';
 
         this.randomOrder = utils.randomOrder(this.options.audio.length);
+        this.template.listCurs = this.container.querySelectorAll('.aplayer-list-cur');
     }
 
     /**
@@ -502,8 +502,10 @@ class APlayer {
             if (this.options.audio.length === 1) {
                 this.container.classList.remove('aplayer-withlist');
             }
-            this.template.list.style.height = parseInt(this.template.list.style.height, 10) - 33 + 'px';
-            this.template.listOl.style.height = parseInt(this.template.listOl.style.height, 10) - 33 + 'px';
+            this.template.list.style.height = this.options.audio.length * 33 - 1 + 'px';
+            this.template.listOl.style.height = this.options.audio.length * 33 - 1 + 'px';
+
+            this.template.listCurs = this.container.querySelectorAll('.aplayer-list-cur');
         }
     }
 
