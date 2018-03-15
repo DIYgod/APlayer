@@ -39,12 +39,11 @@ search: zh-Hans
 
 ## 谁在用 APlayer?
 
+- [bilibili](https://www.bilibili.com/): 国内知名的视频弹幕网站
 - [Jelly Rue](http://jellyrue.com/): Jelly Rue, an indie pop-rock band from Tartu.
 - [LLSupport](https://www.lovelivesupport.com/): This site provides a lot of information about LoveLive
 - [站长之家](http://www.chinaz.com/15year/index.html): 针对中文站点提供资讯、技术、资源、服务
-- [Justice_Eternal吧曲谱资源站](http://lightmoon.pw): 一个非营利的、兴趣驱动的曲谱编辑、发布与整理解决方案
-- [Justice_Eternal吧曲谱资源站(移动端)](http://jefun.top/): 一个非营利的、兴趣驱动的曲谱编辑、发布与整理解决方案
-- [歌词千寻](https://www.lrcgc.com/diy): 歌词千寻LRC歌词编辑器
+- [歌词千寻](https://www.lrcgc.com/diy): 每日更新的LRC歌词网站
 - [iSearch](http://i.oppsu.cn): 一个提供 iTunes 搜索,试听,高清专辑封面获取,查看最新音乐动态等综合性平台
 - [LRC歌词编辑器](https://github.com/MoeFE/Lyric): 一款非常实用的在线LRC歌词编辑器
 - [Аэростатика](https://aerostatica.ru/)
