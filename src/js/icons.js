@@ -4,8 +4,9 @@ const keys = context.keys();
 const Icons = {};
 
 for (let i = 0; i < keys.length; i += 1) {
-  const key = keys[i].replace(/-[a-z]/g, i => i.toUpperCase());
-  Icons[key] = context(keys[i]);
+    const key = keys[i].replace(/-([a-z])/g, (_, i) => i.toUpperCase()).match(/[\w\d]+(?=\.)/)[0];
+    Icons[key] = context(keys[i]);
 }
+console.log(Icons);
 
 export default Icons;
