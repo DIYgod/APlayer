@@ -53,13 +53,10 @@
 </div>
 <div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
     <ol{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
-        {{each options.audio}}
-        <li>
-            <span class="aplayer-list-cur" style="background-color: {{ $value.theme || options.theme }};"></span>
-            <span class="aplayer-list-index">{{ $index + 1 }}</span>
-            <span class="aplayer-list-title">{{ $value.name }}</span>
-            <span class="aplayer-list-author">{{ $value.artist }}</span>
-        </li>
-        {{/each}}
+        {{ include './list-item.art' getObject({
+            theme: options.theme,
+            audio: options.audio,
+            index: 1
+        }) }}
     </ol>
 </div>

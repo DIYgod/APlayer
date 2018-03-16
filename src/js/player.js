@@ -10,6 +10,7 @@ import Lrc from './lrc';
 import Controller from './controller';
 import Timer from './timer';
 import Events from './events';
+import tplListItem from '../template/list-item.art';
 
 const instances = [];
 
@@ -449,23 +450,16 @@ class APlayer {
         this.events.trigger('addaudio', newMusic);
         const wasSingle = !this.isMultiple();
 
-        this.options.audio = this.options.audio.concat(newMusic);
+        this.template.listOl.innerHTML += tplListItem({
+            theme: this.options.theme,
+            audio: newMusic,
+            index: this.options.audio.length + 1
+        });
 
-        let newItemHTML = ``;
-        for (let i = 0; i < newMusic.length; i++) {
-            newItemHTML += `
-                <li>
-                    <span class="aplayer-list-cur" style="background: ${newMusic[i].theme || this.options.theme};"></span>
-                    <span class="aplayer-list-index">${this.options.audio.length - newMusic.length + i + 1}</span>
-                    <span class="aplayer-list-title">${newMusic[i].name}</span>
-                    <span class="aplayer-list-author">${newMusic[i].artist}</span>
-                </li>`;
-        }
-        this.template.listOl.innerHTML += newItemHTML;
+        this.options.audio = this.options.audio.concat(newMusic);
 
         if (wasSingle && this.isMultiple()) {
             this.container.classList.add('aplayer-withlist');
-            this.audio.loop = false;
         }
         this.template.list.style.height = this.options.audio.length * 33 - 1 + 'px';
         this.template.listOl.style.height = this.options.audio.length * 33 - 1 + 'px';

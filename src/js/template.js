@@ -22,6 +22,7 @@ class Template {
             options: this.options,
             icons: Icons,
             cover: cover,
+            getObject: (obj) => obj,
         });
 
         this.lrc = this.container.querySelector('.aplayer-lrc-contents');

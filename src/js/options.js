@@ -27,8 +27,8 @@ export default (options) => {
     }
 
     options.audio.map((item) => {
-        item.name = item.name || item.title;
-        item.artist = item.artist || item.author;
+        item.name = item.name || item.title || 'Audio name';
+        item.artist = item.artist || item.author || 'Audio artist';
         item.cover = item.cover || item.pic;
         item.type = item.type || 'normal';
         return item;
