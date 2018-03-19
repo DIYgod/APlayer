@@ -1,29 +1,10 @@
-import play from '../assets/play.svg';
-import pause from '../assets/pause.svg';
-import volumeUp from '../assets/volume-up.svg';
-import volumeDown from '../assets/volume-down.svg';
-import volumeOff from '../assets/volume-off.svg';
-import orderRandom from '../assets/order-random.svg';
-import orderList from '../assets/order-list.svg';
-import menu from '../assets/menu.svg';
-import loopAll from '../assets/loop-all.svg';
-import loopOne from '../assets/loop-one.svg';
-import loopNone from '../assets/loop-none.svg';
-import loading from '../assets/loading.svg';
+const context = require.context('../assets/', false, /\.svg/);
+const keys = context.keys();
+const Icons = {};
 
-const Icons = {
-    play: play,
-    pause: pause,
-    volumeUp: volumeUp,
-    volumeDown: volumeDown,
-    volumeOff: volumeOff,
-    orderRandom: orderRandom,
-    orderList: orderList,
-    menu: menu,
-    loopAll: loopAll,
-    loopOne: loopOne,
-    loopNone: loopNone,
-    loading: loading,
-};
+for (let i = 0; i < keys.length; i += 1) {
+    const key = keys[i].replace(/-([a-z])/g, (_, i) => i.toUpperCase()).match(/[\w\d]+(?=\.)/)[0];
+    Icons[key] = context(keys[i]);
+}
 
 export default Icons;
