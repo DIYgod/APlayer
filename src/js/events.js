@@ -22,10 +22,10 @@ class Events {
         }
     }
 
-    trigger (name, info) {
+    trigger (name, data) {
         if (this.events[name] && this.events[name].length) {
             for (let i = 0; i < this.events[name].length; i++) {
-                this.events[name][i](info);
+                this.events[name][i](data);
             }
         }
     }
