@@ -195,91 +195,83 @@ class APlayer {
     }
 
     switchAudio (index) {
-        this.handlePlayPromise(() => {
-            this.events.trigger('switchaudio', index);
-            if (typeof index !== 'undefined') {
-                this.playIndex = index;
-            }
+        this.events.trigger('switchaudio', index);
+        if (typeof index !== 'undefined') {
+            this.playIndex = index;
+        }
 
-            const audio = this.options.audio[this.playIndex];
-            // set html
-            if (audio.cover) {
-                this.template.pic.style.backgroundImage = `url('${audio.cover}')`;
+        const audio = this.options.audio[this.playIndex];
+        // set html
+        if (audio.cover) {
+            this.template.pic.style.backgroundImage = `url('${audio.cover}')`;
+        }
+        else {
+            this.template.pic.style.backgroundImage = '';
+        }
+        this.theme();
+        this.template.title.innerHTML = audio.name;
+        this.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
+        const light = this.container.getElementsByClassName('aplayer-list-light')[0];
+        if (light) {
+            light.classList.remove('aplayer-list-light');
+        }
+        this.container.querySelectorAll('.aplayer-list li')[this.playIndex].classList.add('aplayer-list-light');
+
+        this.template.list.scrollTop = this.playIndex * 33;
+
+        // mse
+        if (this.hls) {
+            this.hls.destroy();
+            this.hls = null;
+        }
+        let type = audio.type;
+        if (this.options.customAudioType && this.options.customAudioType[type]) {
+            if (Object.prototype.toString.call(this.options.customAudioType[type]) === '[object Function]') {
+                this.options.customAudioType[type](this.audio, audio, this);
             }
             else {
-                this.template.pic.style.backgroundImage = '';
+                console.error(`Illegal customType: ${type}`);
             }
-            this.theme();
-            this.template.title.innerHTML = audio.name;
-            this.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
-            const light = this.container.getElementsByClassName('aplayer-list-light')[0];
-            if (light) {
-                light.classList.remove('aplayer-list-light');
-            }
-            this.container.querySelectorAll('.aplayer-list li')[this.playIndex].classList.add('aplayer-list-light');
-
-            this.template.list.scrollTop = this.playIndex * 33;
-
-            // mse
-            if (this.hls) {
-                this.hls.destroy();
-                this.hls = null;
-            }
-            let type = audio.type;
-            if (this.options.customAudioType && this.options.customAudioType[type]) {
-                if (Object.prototype.toString.call(this.options.customAudioType[type]) === '[object Function]') {
-                    this.options.customAudioType[type](this.audio, audio, this);
+        }
+        else {
+            if (!type || type === 'auto') {
+                if (/m3u8(#|\?|$)/i.exec(audio.url)) {
+                    type = 'hls';
                 }
                 else {
-                    console.error(`Illegal customType: ${type}`);
+                    type = 'normal';
                 }
             }
-            else {
-                if (!type || type === 'auto') {
-                    if (/m3u8(#|\?|$)/i.exec(audio.url)) {
-                        type = 'hls';
-                    }
-                    else {
-                        type = 'normal';
-                    }
+            if (type === 'hls') {
+                if (Hls.isSupported()) {
+                    this.hls = new Hls();
+                    this.hls.loadSource(audio.url);
+                    this.hls.attachMedia(this.audio);
                 }
-                if (type === 'hls') {
-                    if (Hls.isSupported()) {
-                        this.hls = new Hls();
-                        this.hls.loadSource(audio.url);
-                        this.hls.attachMedia(this.audio);
-                    }
-                    else if (this.audio.canPlayType('application/x-mpegURL') || this.audio.canPlayType('application/vnd.apple.mpegURL')) {
-                        this.audio.src = audio.url;
-                    }
-                    else {
-                        this.notice('Error: HLS is not supported.');
-                    }
-                }
-                else if (type === 'normal') {
+                else if (this.audio.canPlayType('application/x-mpegURL') || this.audio.canPlayType('application/vnd.apple.mpegURL')) {
                     this.audio.src = audio.url;
                 }
+                else {
+                    this.notice('Error: HLS is not supported.');
+                }
             }
-
-            this.seek(0);
-
-            let playPromise;
-            if (!this.paused) {
-                playPromise = Promise.resolve(this.audio.play()).catch((err) => {
-                    console.error(err);
-                    this.pause();
-                });
+            else if (type === 'normal') {
+                this.audio.src = audio.url;
             }
+        }
 
-            this.lrc && this.lrc.switch(this.playIndex);
+        this.seek(0);
 
-            // set duration time
-            if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-                this.template.dtime.innerHTML = this.audio.duration ? utils.secondToTime(this.audio.duration) : '00:00';
-            }
+        if (!this.paused) {
+            this.audio.play();
+        }
 
-            return playPromise;
-        });
+        this.lrc && this.lrc.switch(this.playIndex);
+
+        // set duration time
+        if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+            this.template.dtime.innerHTML = this.audio.duration ? utils.secondToTime(this.audio.duration) : '00:00';
+        }
     }
 
     theme (color = this.options.audio[this.playIndex].theme, index = this.playIndex) {
@@ -311,54 +303,52 @@ class APlayer {
     }
 
     play () {
-        this.handlePlayPromise(() => {
-            if (this.paused) {
-                this.paused = false;
-                this.template.button.classList.remove('aplayer-play');
-                this.template.button.classList.add('aplayer-pause');
-                this.template.button.innerHTML = '';
-                setTimeout(() => {
-                    this.template.button.innerHTML = Icons.pause;
-                }, 100);
-            }
+        if (this.paused) {
+            this.paused = false;
+            this.template.button.classList.remove('aplayer-play');
+            this.template.button.classList.add('aplayer-pause');
+            this.template.button.innerHTML = '';
+            setTimeout(() => {
+                this.template.button.innerHTML = Icons.pause;
+            }, 100);
+        }
 
-            const playPromise = Promise.resolve(this.audio.play()).catch((err) => {
-                console.error(err);
-                this.pause();
+        const playPromise = this.audio.play();
+        if (playPromise) {
+            playPromise.catch((e) => {
+                if (e.name === 'NotAllowedError') {
+                    this.pause();
+                }
             });
+        }
 
-            this.timer.enable('loading');
+        this.timer.enable('loading');
 
-            if (this.options.mutex) {
-                for (let i = 0; i < instances.length; i++) {
-                    if (this !== instances[i]) {
-                        instances[i].pause();
-                    }
+        if (this.options.mutex) {
+            for (let i = 0; i < instances.length; i++) {
+                if (this !== instances[i]) {
+                    instances[i].pause();
                 }
             }
-
-            return playPromise;
-        });
+        }
     }
 
     pause () {
-        this.handlePlayPromise(() => {
-            if (!this.paused) {
-                this.paused = true;
+        if (!this.paused) {
+            this.paused = true;
 
-                this.template.button.classList.remove('aplayer-pause');
-                this.template.button.classList.add('aplayer-play');
-                this.template.button.innerHTML = '';
-                setTimeout(() => {
-                    this.template.button.innerHTML = Icons.play;
-                }, 100);
-            }
+            this.template.button.classList.remove('aplayer-pause');
+            this.template.button.classList.add('aplayer-play');
+            this.template.button.innerHTML = '';
+            setTimeout(() => {
+                this.template.button.innerHTML = Icons.play;
+            }, 100);
+        }
 
-            this.audio.pause();
+        this.audio.pause();
 
-            this.container.classList.remove('aplayer-loading');
-            this.timer.disable('loading');
-        });
+        this.container.classList.remove('aplayer-loading');
+        this.timer.disable('loading');
     }
 
     switchVolumeIcon () {
@@ -539,12 +529,6 @@ class APlayer {
                 this.events.trigger('notice_hide');
             }, time);
         }
-    }
-
-    handlePlayPromise (callback) {
-        this.playedPromise = this.playedPromise.then(callback).catch((err) => {
-            console.error(err);
-        });
     }
 
     static get version () {
