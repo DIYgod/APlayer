@@ -10,12 +10,14 @@ class Template {
     }
 
     init () {
-        let cover;
-        if (this.options.order === 'random') {
-            cover = this.options.audio[this.randomOrder[0]].cover;
-        }
-        else {
-            cover = this.options.audio[0].cover;
+        let cover = '';
+        if (this.options.audio.length) {
+            if (this.options.order === 'random') {
+                cover = this.options.audio[this.randomOrder[0]].cover;
+            }
+            else {
+                cover = this.options.audio[0].cover;
+            }
         }
 
         this.container.innerHTML = tplPlayer({

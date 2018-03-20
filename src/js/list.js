@@ -52,6 +52,7 @@ class List {
     add (audios) {
         this.player.events.trigger('listadd', audios);
         const wasSingle = !(this.audios.length > 1);
+        const wasEmpty = this.audios.length === 0;
 
         this.player.template.listOl.innerHTML += tplListItem({
             theme: this.player.options.theme,
@@ -71,6 +72,15 @@ class List {
         this.player.template.listCurs = this.player.container.querySelectorAll('.aplayer-list-cur');
 
         this.player.template.listCurs[this.audios.length - 1].style.backgroundColor = audios.theme || this.player.options.theme;
+
+        if (wasEmpty) {
+            if (this.player.options.order === 'random') {
+                this.switch(this.player.randomOrder[0]);
+            }
+            else {
+                this.switch(0);
+            }
+        }
     }
 
     remove (index) {
@@ -113,33 +123,34 @@ class List {
 
     switch (index) {
         this.player.events.trigger('listswitch', index);
-        if (typeof index !== 'undefined') {
+
+        if (typeof index !== 'undefined' && this.audios[index]) {
             this.index = index;
-        }
 
-        const audio = this.audios[this.index];
+            const audio = this.audios[this.index];
 
-        // set html
-        this.player.template.pic.style.backgroundImage = audio.cover ? `url('${audio.cover}')` : '';
-        this.player.theme(this.audios[this.index].theme || this.player.options.theme, this.index, false);
-        this.player.template.title.innerHTML = audio.name;
-        this.player.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
+            // set html
+            this.player.template.pic.style.backgroundImage = audio.cover ? `url('${audio.cover}')` : '';
+            this.player.theme(this.audios[this.index].theme || this.player.options.theme, this.index, false);
+            this.player.template.title.innerHTML = audio.name;
+            this.player.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
 
-        const light = this.player.container.getElementsByClassName('aplayer-list-light')[0];
-        if (light) {
-            light.classList.remove('aplayer-list-light');
-        }
-        this.player.container.querySelectorAll('.aplayer-list li')[this.index].classList.add('aplayer-list-light');
+            const light = this.player.container.getElementsByClassName('aplayer-list-light')[0];
+            if (light) {
+                light.classList.remove('aplayer-list-light');
+            }
+            this.player.container.querySelectorAll('.aplayer-list li')[this.index].classList.add('aplayer-list-light');
 
-        this.player.template.list.scrollTop = this.index * 33;
+            this.player.template.list.scrollTop = this.index * 33;
 
-        this.player.setAudio(audio);
+            this.player.setAudio(audio);
 
-        this.player.lrc && this.player.lrc.switch(this.index);
+            this.player.lrc && this.player.lrc.switch(this.index);
 
-        // set duration time
-        if (this.player.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-            this.player.template.dtime.innerHTML = utils.secondToTime(this.player.duration);
+            // set duration time
+            if (this.player.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+                this.player.template.dtime.innerHTML = utils.secondToTime(this.player.duration);
+            }
         }
     }
 

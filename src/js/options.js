@@ -14,7 +14,7 @@ export default (options) => {
         volume: 0.7,
         listFolded: false,
         listMaxHeight: options.listmaxheight,
-        audio: options.music,
+        audio: options.music || [],
         storageName: 'aplayer-setting'
     };
     for (const defaultKey in defaultOption) {

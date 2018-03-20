@@ -296,7 +296,7 @@ class APlayer {
         const playPromise = this.audio.play();
         if (playPromise) {
             playPromise.catch((e) => {
-                console.error(e);
+                console.warn(e);
                 if (e.name === 'NotAllowedError' ||
                     e.name === 'NotSupportedError') {
                     this.setUIPaused();

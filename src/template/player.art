@@ -4,7 +4,7 @@
     </div>
     <div class="aplayer-info">
         <div class="aplayer-music">
-            <span class="aplayer-title"></span>
+            <span class="aplayer-title">No audio</span>
             <span class="aplayer-author"></span>
         </div>
         <div class="aplayer-lrc">
