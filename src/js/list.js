@@ -75,37 +75,39 @@ class List {
 
     remove (index) {
         this.player.events.trigger('listremove', index);
-        if (this.audios[index] && this.audios.length > 1) {
-            const list = this.player.container.querySelectorAll('.aplayer-list li');
-            list[index].remove();
+        if (this.audios[index]) {
+            if (this.audios.length > 1) {
+                const list = this.player.container.querySelectorAll('.aplayer-list li');
+                list[index].remove();
 
-            this.audios.splice(index, 1);
+                this.audios.splice(index, 1);
 
-            if (index === this.index) {
-                if (this.audios[index + 1]) {
-                    this.switch(index);
+                if (index === this.index) {
+                    if (this.audios[index]) {
+                        this.switch(index);
+                    }
+                    else {
+                        this.switch(index - 1);
+                    }
                 }
-                else {
-                    this.switch(index - 1);
+                if (this.index > index) {
+                    this.index--;
                 }
-            }
-            if (this.index > index) {
-                this.index--;
-            }
 
-            for (let i = index; i < list.length; i++) {
-                list[i].getElementsByClassName('aplayer-list-index')[0].textContent = i;
-            }
-            if (this.audios.length === 1) {
-                this.player.container.classList.remove('aplayer-withlist');
-            }
-            this.player.template.list.style.height = this.audios.length * 33 - 1 + 'px';
-            this.player.template.listOl.style.height = this.audios.length * 33 - 1 + 'px';
+                for (let i = index; i < list.length; i++) {
+                    list[i].getElementsByClassName('aplayer-list-index')[0].textContent = i;
+                }
+                if (this.audios.length === 1) {
+                    this.player.container.classList.remove('aplayer-withlist');
+                }
+                this.player.template.list.style.height = this.audios.length * 33 - 1 + 'px';
+                this.player.template.listOl.style.height = this.audios.length * 33 - 1 + 'px';
 
-            this.player.template.listCurs = this.player.container.querySelectorAll('.aplayer-list-cur');
-        }
-        else {
-            // TODO
+                this.player.template.listCurs = this.player.container.querySelectorAll('.aplayer-list-cur');
+            }
+            else {
+                this.clear();
+            }
         }
     }
 
@@ -136,9 +138,25 @@ class List {
         this.player.lrc && this.player.lrc.switch(this.index);
 
         // set duration time
-        if (this.player.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-            this.player.template.dtime.innerHTML = this.player.audio.duration ? utils.secondToTime(this.player.audio.duration) : '00:00';
+        if (this.player.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+            this.player.template.dtime.innerHTML = utils.secondToTime(this.player.duration);
         }
+    }
+
+    clear () {
+        this.player.events.trigger('listclear');
+        this.index = 0;
+        this.player.container.classList.remove('aplayer-withlist');
+        this.player.pause();
+        this.audios = [];
+        this.player.audio.src = '';
+        this.player.template.listOl.innerHTML = '';
+        this.player.template.pic.style.backgroundImage = '';
+        this.player.theme(this.player.options.theme, this.index);
+        this.player.template.title.innerHTML = 'No audio';
+        this.player.template.author.innerHTML = '';
+        this.player.bar.set('loaded', 0, 'width');
+        this.player.template.dtime.innerHTML = utils.secondToTime(0);
     }
 }
 

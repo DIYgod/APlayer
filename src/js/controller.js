@@ -27,8 +27,8 @@ class Controller {
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
-            this.player.lrc && this.player.lrc.update(percentage * this.player.audio.duration);
-            this.player.template.ptime.innerHTML = utils.secondToTime(percentage * this.player.audio.duration);
+            this.player.lrc && this.player.lrc.update(percentage * this.player.duration);
+            this.player.template.ptime.innerHTML = utils.secondToTime(percentage * this.player.duration);
         };
 
         const thumbUp = (e) => {
@@ -38,7 +38,7 @@ class Controller {
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
-            this.player.seek(this.player.bar.get('played', 'width') * this.player.audio.duration);
+            this.player.seek(this.player.bar.get('played', 'width') * this.player.duration);
             this.player.disableTimeupdate = false;
         };
 
@@ -102,7 +102,7 @@ class Controller {
 
     initLoopButton () {
         this.player.template.loop.addEventListener('click', () => {
-            if (this.player.isMultiple()) {
+            if (this.player.list.audios.length > 1) {
                 if (this.player.options.loop === 'one') {
                     this.player.options.loop = 'none';
                     this.player.template.loop.innerHTML = Icons.loopNone;

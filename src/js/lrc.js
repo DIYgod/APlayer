@@ -39,7 +39,7 @@ class Lrc {
                 this.parsed[index] = [['00:00', 'Loading']];
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
-                    if (index === this.player.playIndex && xhr.readyState === 4) {
+                    if (index === this.player.list.index && xhr.readyState === 4) {
                         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
                             this.parsed[index] = this.parse(xhr.responseText);
                         }
@@ -47,7 +47,6 @@ class Lrc {
                             this.player.notice(`LRC file request fails: status ${xhr.status}`);
                             this.parsed[index] = [['00:00', 'Not available']];
                         }
-
                         this.container.innerHTML = tplLrc({
                             lyrics: this.parsed[index]
                         });

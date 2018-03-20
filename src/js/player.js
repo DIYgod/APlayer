@@ -125,7 +125,7 @@ class APlayer {
 
         this.on('timeupdate', () => {
             if (!this.disableTimeupdate) {
-                this.bar.set('played', this.audio.currentTime / this.audio.duration, 'width');
+                this.bar.set('played', this.audio.currentTime / this.duration, 'width');
                 this.lrc && this.lrc.update();
                 const currentTime = utils.secondToTime(this.audio.currentTime);
                 if (this.template.ptime.innerHTML !== currentTime) {
@@ -136,20 +136,22 @@ class APlayer {
 
         // show audio time: the metadata has loaded or changed
         this.on('durationchange', () => {
-            if (this.audio.duration !== 1) {           // compatibility: Android browsers will output 1 at first
-                this.template.dtime.innerHTML = utils.secondToTime(this.audio.duration);
+            if (this.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+                this.template.dtime.innerHTML = utils.secondToTime(this.duration);
             }
         });
 
         // show audio loaded bar: to inform interested parties of progress downloading the media
         this.on('progress', () => {
-            const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.audio.duration : 0;
+            const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.duration : 0;
             this.bar.set('loaded', percentage, 'width');
         });
 
         // audio download error: an error occurs
         this.on('error', () => {
-            this.notice('An audio error has occurred.');
+            if (this.list.audios.length) {
+                this.notice('An audio error has occurred.');
+            }
         });
 
         // multiple audio play
@@ -242,8 +244,8 @@ class APlayer {
     }
 
     theme (color = this.list.audios[this.list.index].theme || this.options.theme, index = this.list.index) {
-        this.list.audios[index].theme = color;
-        this.template.listCurs[index].style.backgroundColor = color;
+        this.list.audios[index] && (this.list.audios[index].theme = color);
+        this.template.listCurs[index] && (this.template.listCurs[index].style.backgroundColor = color);
         if (index === this.list.index) {
             this.template.pic.style.backgroundColor = color;
             this.template.played.style.background = color;
@@ -254,19 +256,14 @@ class APlayer {
 
     seek (time) {
         time = Math.max(time, 0);
-        if (this.audio.duration) {
-            time = Math.min(time, this.audio.duration);
-        }
-
+        time = Math.min(time, this.duration);
         this.audio.currentTime = time;
-
-        if (isNaN(this.audio.duration)) {
-            this.bar.set('played', 0, 'width');
-        }
-        else {
-            this.bar.set('played', time / this.audio.duration, 'width');
-        }
+        this.bar.set('played', time / this.duration, 'width');
         this.template.ptime.innerHTML = utils.secondToTime(time);
+    }
+
+    get duration () {
+        return isNaN(this.audio.duration) ? 0 : this.audio.duration;
     }
 
     setUIPlaying () {
