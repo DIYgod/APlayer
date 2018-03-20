@@ -5,7 +5,7 @@ import Icons from './icons';
 import handleOption from './options';
 import Template from './template';
 import Bar from './bar';
-import User from './user';
+import Storage from './storage';
 import Lrc from './lrc';
 import Controller from './controller';
 import Timer from './timer';
@@ -79,7 +79,7 @@ class APlayer {
             });
         }
         this.events = new Events();
-        this.user = new User(this);
+        this.storage = new Storage(this);
         this.bar = new Bar(this.template);
         this.controller = new Controller(this);
         this.timer = new Timer(this);
@@ -191,7 +191,7 @@ class APlayer {
             }
         });
 
-        this.volume(this.user.get('volume'), true);
+        this.volume(this.storage.get('volume'), true);
     }
 
     setAudio (audio) {
@@ -349,7 +349,7 @@ class APlayer {
             percentage = Math.min(percentage, 1);
             this.bar.set('volume', percentage, 'height');
             if (!nostorage) {
-                this.user.set('volume', percentage);
+                this.storage.set('volume', percentage);
             }
 
             this.audio.volume = percentage;
