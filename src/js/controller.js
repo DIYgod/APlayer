@@ -6,11 +6,8 @@ class Controller {
         this.player = player;
 
         this.initPlayButton();
-        this.initList();
         this.initPlayBar();
-        if (this.player.isMultiple()) {
-            this.initOrderButton();
-        }
+        this.initOrderButton();
         this.initLoopButton();
         this.initMenuButton();
         if (!utils.isMobile) {
@@ -21,26 +18,6 @@ class Controller {
     initPlayButton () {
         this.player.template.pic.addEventListener('click', () => {
             this.player.toggle();
-        });
-    }
-
-    initList () {
-        this.player.template.list.addEventListener('click', (e) => {
-            let target;
-            if (e.target.tagName.toUpperCase() === 'LI') {
-                target = e.target;
-            }
-            else {
-                target = e.target.parentElement;
-            }
-            const audioIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
-            if (audioIndex !== this.player.playIndex) {
-                this.player.switchAudio(audioIndex);
-                this.player.play();
-            }
-            else {
-                this.player.toggle();
-            }
         });
     }
 
@@ -156,12 +133,7 @@ class Controller {
         this.player.template.list.style.height = 33 * this.player.options.audio.length - 1 + 'px';
         this.player.template.listOl.style.height = 33 * this.player.options.audio.length - 1 + 'px';
         this.player.template.menu.addEventListener('click', () => {
-            if (!this.player.template.list.classList.contains('aplayer-list-hide')) {
-                this.player.template.list.classList.add('aplayer-list-hide');
-            }
-            else {
-                this.player.template.list.classList.remove('aplayer-list-hide');
-            }
+            this.player.list.toggle();
         });
     }
 }
