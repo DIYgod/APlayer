@@ -121,7 +121,7 @@ class List {
 
         // set html
         this.player.template.pic.style.backgroundImage = audio.cover ? `url('${audio.cover}')` : '';
-        this.player.theme(this.audios[this.index].theme || this.player.options.theme, this.index);
+        this.player.theme(this.audios[this.index].theme || this.player.options.theme, this.index, false);
         this.player.template.title.innerHTML = audio.name;
         this.player.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
 
@@ -152,7 +152,7 @@ class List {
         this.player.audio.src = '';
         this.player.template.listOl.innerHTML = '';
         this.player.template.pic.style.backgroundImage = '';
-        this.player.theme(this.player.options.theme, this.index);
+        this.player.theme(this.player.options.theme, this.index, false);
         this.player.template.title.innerHTML = 'No audio';
         this.player.template.author.innerHTML = '';
         this.player.bar.set('loaded', 0, 'width');

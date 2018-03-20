@@ -88,6 +88,7 @@ mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播�
 lrcType | 0 | [详情](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | 列表默认折叠
 listMaxHeight | - | 列表最大高度
+storageName | 'aplayer-setting' | 存储播放器设置的 localStorage key
 
 例如:
 
@@ -147,33 +148,6 @@ const ap = new APlayer({
 + `ap.toggle()`: 切换播放和暂停
 
 + `ap.on(event: string, handler: function)`: 绑定音频和播放器事件，[详情](https://aplayer.js.org/#/home?id=event-binding)
-
-+ `ap.switchAudio(index: number)`: 切换音频列表
-
-  ```js
-  ap.switchAudio(1);
-  ```
-
-+ `ap.addAudio(audio)`: 向列表添加新的音频
-
-  ```js
-  ap.addAudio([
-      {
-          name: 'name',
-          artist: 'artist',
-          url: 'url.mp3',
-          cover: 'cover.jpg',
-          lrc: 'lrc.lrc',
-          theme: '#ebd0c2'
-      }
-  ]);
-  ```
-
-+ `ap.removeAudio(index: number)`: 从列表删除音频
-
-  ```js
-  ap.removeAudio(1);
-  ```
   
 + `ap.volume(percentage: number, nostorage: boolean)`: 设置音频音量
 
@@ -198,6 +172,41 @@ const ap = new APlayer({
   ```
 
 + `ap.destroy()`: 销毁播放器
+
++ `ap.list`
+
+  + `ap.list.show()`: 显示播放列表
+
+  + `ap.list.hide()`: 隐藏播放列表
+
+  + `ap.list.toggle()`: 显示/隐藏播放列表
+
+  + `ap.list.add(audios: array | object)`: 添加一个或几个新音频到播放列表
+
+  ```js
+  ap.list.add([{
+      name: 'name',
+      artist: 'artist',
+      url: 'url.mp3',
+      cover: 'cover.jpg',
+      lrc: 'lrc.lrc',
+      theme: '#ebd0c2'
+  }]);
+  ```
+
+  + `ap.list.remove(index: number)`: 移除播放列表中的一个音频
+
+  ```js
+  ap.list.remove(1);
+  ```
+
+  + `ap.list.switch()`: 切换到播放列表里的其他音频
+
+  ```js
+  ap.list.switch(1);
+  ```
+
+  + `ap.list.clear()`: 清空播放列表
 
 + `ap.audio`: 原生 video
 
@@ -247,12 +256,15 @@ ap.on('ended', function () {
 
 播放器事件
 
-- switchaudio
-- addaudio
-- removeaudio
+- listshow
+- listhide
+- listadd
+- listremove
+- listswitch
+- listclear
+- noticeshow
+- noticehide
 - destroy
-- notice_show
-- notice_hide
 
 ## 歌词
 
@@ -506,12 +518,16 @@ const ap = new APlayer({
 });
 
 const colorThief = new ColorThief();
-ap.on('switchaudio', (index) => {
-    if (!ap.options.audio[index].theme) {
-        colorThief.getColorAsync(ap.options.audio[index].cover, (color) => {
+const setTheme = (index) => {
+    if (!ap.list.audios[index].theme) {
+        colorThief.getColorAsync(ap.list.audios[index].cover, function (color) {
             ap.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
         });
     }
+};
+setTheme(ap.list.index);
+ap.on('listswitch', (index) => {
+    setTheme(index);
 });
 ```
 

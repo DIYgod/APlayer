@@ -87,6 +87,7 @@ mutex | true | prevent to play multiple player at the same time, pause other pla
 lrcType | 0 | [see more details](https://aplayer.js.org/#/home?id=lrc)
 listFolded | false | indicate whether list should folded at first
 listMaxHeight | - | list max height
+storageName | 'aplayer-setting' | localStorage key that store player setting
 
 For example:
 
@@ -147,33 +148,6 @@ const ap = new APlayer({
 
 + `ap.on(event: string, handler: function)`: bind audio and player events, [see more details](https://aplayer.js.org/#/home?id=event-binding)
 
-+ `ap.switchAudio(index: number)`: switch audio list
-
-  ```js
-  ap.switchAudio(1);
-  ```
-
-+ `ap.addAudio(audio)`: add new audios to the list
-
-  ```js
-  ap.addAudio([
-      {
-          name: 'name',
-          artist: 'artist',
-          url: 'url.mp3',
-          cover: 'cover.jpg',
-          lrc: 'lrc.lrc',
-          theme: '#ebd0c2'
-      }
-  ]);
-  ```
-
-+ `ap.removeAudio(index: number)`: remove audio from the list
-
-  ```js
-  ap.removeAudio(1);
-  ```
-
 + `ap.volume(percentage: number, nostorage: boolean)`: set audio volume
 
   ```js
@@ -197,6 +171,41 @@ const ap = new APlayer({
   ```
 
 + `ap.destroy()`: destroy player
+
++ `ap.list`
+
+  + `ap.list.show()`: show list
+
+  + `ap.list.hide()`: hide list
+
+  + `ap.list.toggle()`: toggle list between show and hide
+
+  + `ap.list.add(audios: array | object)`: add new audios to the list
+
+  ```js
+  ap.list.add([{
+      name: 'name',
+      artist: 'artist',
+      url: 'url.mp3',
+      cover: 'cover.jpg',
+      lrc: 'lrc.lrc',
+      theme: '#ebd0c2'
+  }]);
+  ```
+
+  + `ap.list.remove(index: number)`: remove an audio from the list
+
+  ```js
+  ap.list.remove(1);
+  ```
+
+  + `ap.list.switch()`: switch to an audio in the list
+
+  ```js
+  ap.list.switch(1);
+  ```
+
+  + `ap.list.clear()`: remove all audios from the list
 
 + `ap.audio`: native audio
 
@@ -246,12 +255,15 @@ Video events
 
 Player events
 
-- switchaudio
-- addaudio
-- removeaudio
+- listshow
+- listhide
+- listadd
+- listremove
+- listswitch
+- listclear
+- noticeshow
+- noticehide
 - destroy
-- notice_show
-- notice_hide
 
 ## LRC
 
@@ -505,12 +517,16 @@ const ap = new APlayer({
 });
 
 const colorThief = new ColorThief();
-ap.on('switchaudio', (index) => {
-    if (!ap.options.audio[index].theme) {
-        colorThief.getColorAsync(ap.options.audio[index].cover, (color) => {
+const setTheme = (index) => {
+    if (!ap.list.audios[index].theme) {
+        colorThief.getColorAsync(ap.list.audios[index].cover, function (color) {
             ap.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
         });
     }
+};
+setTheme(ap.list.index);
+ap.on('listswitch', (index) => {
+    setTheme(index);
 });
 ```
 

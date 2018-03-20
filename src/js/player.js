@@ -243,8 +243,10 @@ class APlayer {
         }
     }
 
-    theme (color = this.list.audios[this.list.index].theme || this.options.theme, index = this.list.index) {
-        this.list.audios[index] && (this.list.audios[index].theme = color);
+    theme (color = this.list.audios[this.list.index].theme || this.options.theme, index = this.list.index, isReset = true) {
+        if (isReset) {
+            this.list.audios[index] && (this.list.audios[index].theme = color);
+        }
         this.template.listCurs[index] && (this.template.listCurs[index].style.backgroundColor = color);
         if (index === this.list.index) {
             this.template.pic.style.backgroundColor = color;

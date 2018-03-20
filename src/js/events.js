@@ -9,7 +9,7 @@ class Events {
             'timeupdate', 'volumechange', 'waiting'
         ];
         this.playerEvents = [
-            'destroy', 'switchaudio', 'addaudio', 'removeaudio', 'notice_show', 'notice_hide'
+            'destroy', 'listshow', 'listhide', 'listadd', 'listremove', 'listswitch', 'listclear', 'noticeshow', 'noticehide'
         ];
     }
 

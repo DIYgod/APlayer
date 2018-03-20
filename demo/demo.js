@@ -136,12 +136,16 @@ const ap5 = new APlayer({
     }]
 });
 const colorThief = new ColorThief();
-ap5.on('switchaudio', (index) => {
-    if (!ap5.options.audio[index].theme) {
-        colorThief.getColorAsync(ap5.options.audio[index].cover, function (color) {
+const setTheme = (index) => {
+    if (!ap5.list.audios[index].theme) {
+        colorThief.getColorAsync(ap5.list.audios[index].cover, function (color) {
             ap5.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
         });
     }
+};
+setTheme(ap5.list.index);
+ap5.on('listswitch', (index) => {
+    setTheme(index);
 });
 
 const ap6 = new APlayer({
