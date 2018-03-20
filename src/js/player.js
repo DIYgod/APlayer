@@ -113,13 +113,13 @@ class APlayer {
 
         this.on('play', () => {
             if (this.paused) {
-                this.play();
+                this.setUIPlaying();
             }
         });
 
         this.on('pause', () => {
             if (!this.paused) {
-                this.pause();
+                this.setUIPaused();
             }
         });
 
@@ -302,7 +302,7 @@ class APlayer {
         this.template.ptime.innerHTML = utils.secondToTime(time);
     }
 
-    play () {
+    setUIPlaying () {
         if (this.paused) {
             this.paused = false;
             this.template.button.classList.remove('aplayer-play');
@@ -311,15 +311,6 @@ class APlayer {
             setTimeout(() => {
                 this.template.button.innerHTML = Icons.pause;
             }, 100);
-        }
-
-        const playPromise = this.audio.play();
-        if (playPromise) {
-            playPromise.catch((e) => {
-                if (e.name === 'NotAllowedError') {
-                    this.pause();
-                }
-            });
         }
 
         this.timer.enable('loading');
@@ -333,7 +324,22 @@ class APlayer {
         }
     }
 
-    pause () {
+    play () {
+        this.setUIPlaying();
+
+        const playPromise = this.audio.play();
+        if (playPromise) {
+            playPromise.catch((e) => {
+                console.error(e);
+                if (e.name === 'NotAllowedError' ||
+                    e.name === 'NotSupportedError') {
+                    this.setUIPaused();
+                }
+            });
+        }
+    }
+
+    setUIPaused () {
         if (!this.paused) {
             this.paused = true;
 
@@ -345,10 +351,13 @@ class APlayer {
             }, 100);
         }
 
-        this.audio.pause();
-
         this.container.classList.remove('aplayer-loading');
         this.timer.disable('loading');
+    }
+
+    pause () {
+        this.setUIPaused();
+        this.audio.pause();
     }
 
     switchVolumeIcon () {
