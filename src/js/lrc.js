@@ -83,7 +83,7 @@ class Lrc {
         if (lrc_s) {
             lrc_s = lrc_s.replace(/([^\]^\n])\[/g, (match, p1) => p1 + '\n[');
             const lyric = lrc_s.split('\n');
-            const lrc = [];
+            let lrc = [];
             const lyricLen = lyric.length;
             for (let i = 0; i < lyricLen; i++) {
                 // match lrc time
@@ -105,6 +105,7 @@ class Lrc {
                 }
             }
             // sort by time
+            lrc = lrc.filter((item) => item[1]);
             lrc.sort((a, b) => a[0] - b[0]);
             return lrc;
         }

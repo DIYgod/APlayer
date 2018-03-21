@@ -187,3 +187,19 @@ const ap7 = new APlayer({
         }
     }
 });
+
+let ap8;
+$.ajax({
+    url: 'https://api.i-meto.com/meting/api?server=netease&type=playlist&id=35798529',
+    success: function (list) {
+        ap8 = new APlayer({
+            element: document.getElementById('player8'),
+            mutex: true,
+            theme: '#ad7a86',
+            order: 'random',
+            lrcType: 3,
+            fixed: true,
+            audio: JSON.parse(list)
+        });
+    }
+});

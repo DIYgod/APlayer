@@ -13,6 +13,8 @@ class Controller {
         if (!utils.isMobile) {
             this.initVolumeButton();
         }
+        this.initMiniSwitcher();
+        this.initSkipButton();
     }
 
     initPlayButton () {
@@ -64,7 +66,7 @@ class Controller {
         });
 
         const thumbMove = (e) => {
-            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - utils.getElementViewTop(this.player.template.volumeBar)) / this.player.template.volumeBar.clientHeight;
+            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - utils.getElementViewTop(this.player.template.volumeBar, this.player.options.fixed)) / this.player.template.volumeBar.clientHeight;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.volume(percentage);
@@ -74,7 +76,7 @@ class Controller {
             this.player.template.volumeBarWrap.classList.remove('aplayer-volume-bar-wrap-active');
             document.removeEventListener(utils.nameMap.dragEnd, thumbUp);
             document.removeEventListener(utils.nameMap.dragMove, thumbMove);
-            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - utils.getElementViewTop(this.player.template.volumeBar)) / this.player.template.volumeBar.clientHeight;
+            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - utils.getElementViewTop(this.player.template.volumeBar, this.player.options.fixed)) / this.player.template.volumeBar.clientHeight;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.volume(percentage);
@@ -130,10 +132,26 @@ class Controller {
     }
 
     initMenuButton () {
-        this.player.template.list.style.height = 33 * this.player.options.audio.length - 1 + 'px';
-        this.player.template.listOl.style.height = 33 * this.player.options.audio.length - 1 + 'px';
         this.player.template.menu.addEventListener('click', () => {
             this.player.list.toggle();
+        });
+    }
+
+    initMiniSwitcher () {
+        this.player.template.miniSwitcher.addEventListener('click', () => {
+            this.player.setMode(this.player.mode === 'mini' ? 'normal' : 'mini');
+        });
+    }
+
+    initSkipButton () {
+        this.player.template.skipBackButton.addEventListener('click', () => {
+            this.player.skipBack();
+        });
+        this.player.template.skipForwardButton.addEventListener('click', () => {
+            this.player.skipForward();
+        });
+        this.player.template.skipPlayButton.addEventListener('click', () => {
+            this.player.toggle();
         });
     }
 }

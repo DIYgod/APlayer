@@ -32,7 +32,7 @@ class APlayer {
         this.randomOrder = utils.randomOrder(this.options.audio.length);
 
         this.container.classList.add('aplayer');
-        if (this.options.lrcType) {
+        if (this.options.lrcType && !this.options.fixed) {
             this.container.classList.add('aplayer-withlrc');
         }
         if (this.options.audio.length > 1) {
@@ -44,9 +44,6 @@ class APlayer {
         this.arrow = this.container.offsetWidth <= 300;
         if (this.arrow) {
             this.container.classList.add('aplayer-arrow');
-        }
-        if (this.options.mini) {
-            this.setMode('mini');
         }
 
         // save lrc
@@ -66,6 +63,14 @@ class APlayer {
             randomOrder: this.randomOrder,
         });
 
+        if (this.options.fixed) {
+            this.container.classList.add('aplayer-fixed');
+            this.template.body.style.width = this.template.body.offsetWidth - 18 + 'px';
+        }
+        if (this.options.mini) {
+            this.setMode('mini');
+            this.template.info.style.display = 'block';
+        }
         if (this.template.info.offsetWidth < 200) {
             this.template.time.classList.add('aplayer-time-narrow');
         }
@@ -150,6 +155,15 @@ class APlayer {
         // audio download error: an error occurs
         this.on('error', () => {
             if (this.list.audios.length) {
+                this.notice('An audio error has occurred, player will skip forward in 2 seconds.');
+                setTimeout(() => {
+                    this.skipForward();
+                    if (!this.paused) {
+                        this.play();
+                    }
+                }, 2000);
+            }
+            else {
                 this.notice('An audio error has occurred.');
             }
         });
@@ -169,11 +183,11 @@ class APlayer {
                 }
                 else if (this.options.order === 'random') {
                     if (this.randomOrder.indexOf(this.list.index) < this.randomOrder.length - 1) {
-                        this.list.switch(this.nextRandomNum());
+                        this.list.switch(this.nextIndex());
                         this.play();
                     }
                     else {
-                        this.list.switch(this.nextRandomNum());
+                        this.list.switch(this.nextIndex());
                         this.pause();
                     }
                 }
@@ -183,12 +197,7 @@ class APlayer {
                 this.play();
             }
             else if (this.options.loop === 'all') {
-                if (this.options.order === 'list') {
-                    this.list.switch((this.list.index + 1) % this.list.audios.length);
-                }
-                else if (this.options.order === 'random') {
-                    this.list.switch(this.nextRandomNum());
-                }
+                this.skipForward();
                 this.play();
             }
         });
@@ -277,6 +286,7 @@ class APlayer {
             setTimeout(() => {
                 this.template.button.innerHTML = Icons.pause;
             }, 100);
+            this.template.skipPlayButton.innerHTML = Icons.pause;
         }
 
         this.timer.enable('loading');
@@ -297,8 +307,7 @@ class APlayer {
         if (playPromise) {
             playPromise.catch((e) => {
                 console.warn(e);
-                if (e.name === 'NotAllowedError' ||
-                    e.name === 'NotSupportedError') {
+                if (e.name === 'NotAllowedError') {
                     this.setUIPaused();
                 }
             });
@@ -315,6 +324,7 @@ class APlayer {
             setTimeout(() => {
                 this.template.button.innerHTML = Icons.play;
             }, 100);
+            this.template.skipPlayButton.innerHTML = Icons.play;
         }
 
         this.container.classList.remove('aplayer-loading');
@@ -381,24 +391,6 @@ class APlayer {
         }
     }
 
-    /**
-     * get next random number
-     */
-    nextRandomNum () {
-        if (this.list.audios.length > 1) {
-            const index = this.randomOrder.indexOf(this.list.index);
-            if (index === this.randomOrder.length - 1) {
-                return this.randomOrder[0];
-            }
-            else {
-                return this.randomOrder[index + 1];
-            }
-        }
-        else {
-            return 0;
-        }
-    }
-
     // abandoned
     switchAudio (index) {
         this.list.switch(index);
@@ -442,13 +434,61 @@ class APlayer {
         if (this.noticeTime) {
             clearTimeout(this.noticeTime);
         }
-        this.events.trigger('notice_show', text);
+        this.events.trigger('noticeshow', text);
         if (time) {
             this.noticeTime = setTimeout(() => {
                 this.template.notice.style.opacity = 0;
-                this.events.trigger('notice_hide');
+                this.events.trigger('noticehide');
             }, time);
         }
+    }
+
+    prevIndex () {
+        if (this.list.audios.length > 1) {
+            if (this.options.order === 'list') {
+                return this.list.index - 1 < 0 ? this.list.audios.length - 1 : this.list.index - 1;
+            }
+            else if (this.options.order === 'random') {
+                const index = this.randomOrder.indexOf(this.list.index);
+                if (index === 0) {
+                    return this.randomOrder[this.randomOrder.length - 1];
+                }
+                else {
+                    return this.randomOrder[index - 1];
+                }
+            }
+        }
+        else {
+            return 0;
+        }
+    }
+
+    nextIndex () {
+        if (this.list.audios.length > 1) {
+            if (this.options.order === 'list') {
+                return (this.list.index + 1) % this.list.audios.length;
+            }
+            else if (this.options.order === 'random') {
+                const index = this.randomOrder.indexOf(this.list.index);
+                if (index === this.randomOrder.length - 1) {
+                    return this.randomOrder[0];
+                }
+                else {
+                    return this.randomOrder[index + 1];
+                }
+            }
+        }
+        else {
+            return 0;
+        }
+    }
+
+    skipBack () {
+        this.list.switch(this.prevIndex());
+    }
+
+    skipForward () {
+        this.list.switch(this.nextIndex());
     }
 
     static get version () {

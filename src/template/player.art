@@ -1,3 +1,4 @@
+{{ if !options.fixed }}
 <div class="aplayer-body">
     <div class="aplayer-pic" style="{{ if cover  }}background-image: url(&quot;{{ cover }}&quot;);{{ /if }}background-color: {{ options.theme }};">
         <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>
@@ -25,6 +26,15 @@
                 <span class="aplayer-time-inner">
                     <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
                 </span>
+                <span class="aplayer-icon aplayer-icon-back">
+                    {{@ icons.skip }}
+                </span>
+                <span class="aplayer-icon aplayer-icon-play">
+                    {{@ icons.play }}
+                </span>
+                <span class="aplayer-icon aplayer-icon-forward">
+                    {{@ icons.skip }}
+                </span>
                 <div class="aplayer-volume-wrap">
                     <button type="button" class="aplayer-icon aplayer-icon-volume-down">
                         {{@ icons.volumeDown }}
@@ -48,6 +58,7 @@
         </div>
     </div>
     <div class="aplayer-notice"></div>
+    <div class="aplayer-miniswitcher"><button class="aplayer-icon">{{@ icons.right }}</button></div>
 </div>
 <div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
     <ol{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
@@ -58,3 +69,75 @@
         }) }}
     </ol>
 </div>
+{{ else }}
+<div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
+    <ol{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
+        {{ include './list-item.art' getObject({
+            theme: options.theme,
+            audio: options.audio,
+            index: 1
+        }) }}
+    </ol>
+</div>
+<div class="aplayer-body">
+    <div class="aplayer-pic" style="{{ if cover  }}background-image: url(&quot;{{ cover }}&quot;);{{ /if }}background-color: {{ options.theme }};">
+        <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>
+    </div>
+    <div class="aplayer-info" style="display: none;">
+        <div class="aplayer-music">
+            <span class="aplayer-title">No audio</span>
+            <span class="aplayer-author"></span>
+        </div>
+        <div class="aplayer-controller">
+            <div class="aplayer-bar-wrap">
+                <div class="aplayer-bar">
+                    <div class="aplayer-loaded" style="width: 0"></div>
+                    <div class="aplayer-played" style="width: 0; background: {{ options.theme }};">
+                        <span class="aplayer-thumb" style="background: {{ options.theme }};">
+                            <span class="aplayer-loading-icon">{{@ icons.loading }}</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="aplayer-time">
+                <span class="aplayer-time-inner">
+                    <span class="aplayer-ptime">00:00</span> / <span class="aplayer-dtime">00:00</span>
+                </span>
+                <span class="aplayer-icon aplayer-icon-back">
+                    {{@ icons.skip }}
+                </span>
+                <span class="aplayer-icon aplayer-icon-play">
+                    {{@ icons.play }}
+                </span>
+                <span class="aplayer-icon aplayer-icon-forward">
+                    {{@ icons.skip }}
+                </span>
+                <div class="aplayer-volume-wrap">
+                    <button type="button" class="aplayer-icon aplayer-icon-volume-down">
+                        {{@ icons.volumeDown }}
+                    </button>
+                    <div class="aplayer-volume-bar-wrap">
+                        <div class="aplayer-volume-bar">
+                            <div class="aplayer-volume" style="height: 80%; background: {{ options.theme }};"></div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="aplayer-icon aplayer-icon-order">
+                    {{ if options.order === 'list' }}{{@ icons.orderList }}{{ else if options.order === 'random' }}{{@ icons.orderRandom }}{{ /if }}
+                </button>
+                <button type="button" class="aplayer-icon aplayer-icon-loop">
+                    {{ if options.loop === 'one' }}{{@ icons.loopOne }}{{ else if options.loop === 'all' }}{{@ icons.loopAll }}{{ else if options.loop === 'none' }}{{@ icons.loopNone }}{{ /if }}
+                </button>
+                <button type="button" class="aplayer-icon aplayer-icon-menu">
+                    {{@ icons.menu }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="aplayer-notice"></div>
+    <div class="aplayer-miniswitcher"><button class="aplayer-icon">{{@ icons.right }}</button></div>
+</div>
+<div class="aplayer-lrc">
+    <div class="aplayer-lrc-contents" style="transform: translateY(0); -webkit-transform: translateY(0);"></div>
+</div>
+{{/if}}

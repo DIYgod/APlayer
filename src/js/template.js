@@ -33,6 +33,7 @@ class Template {
         this.time = this.container.querySelector('.aplayer-time');
         this.barWrap = this.container.querySelector('.aplayer-bar-wrap');
         this.button = this.container.querySelector('.aplayer-button');
+        this.body = this.container.querySelector('.aplayer-body');
         this.list = this.container.querySelector('.aplayer-list');
         this.listOl = this.container.querySelector('.aplayer-list ol');
         this.listCurs = this.container.querySelectorAll('.aplayer-list-cur');
@@ -51,6 +52,10 @@ class Template {
         this.author = this.container.querySelector('.aplayer-author');
         this.dtime = this.container.querySelector('.aplayer-dtime');
         this.notice = this.container.querySelector('.aplayer-notice');
+        this.miniSwitcher = this.container.querySelector('.aplayer-miniswitcher');
+        this.skipBackButton = this.container.querySelector('.aplayer-icon-back');
+        this.skipForwardButton = this.container.querySelector('.aplayer-icon-forward');
+        this.skipPlayButton = this.container.querySelector('.aplayer-icon-play');
     }
 }
 

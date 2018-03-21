@@ -1,5 +1,6 @@
 import tplListItem from '../template/list-item.art';
 import utils from './utils';
+import smoothScroll from 'smoothscroll';
 
 class List {
     constructor (player) {
@@ -33,6 +34,7 @@ class List {
     show () {
         this.player.events.trigger('listshow');
         this.player.template.list.classList.remove('aplayer-list-hide');
+        this.player.template.listOl.scrollTop = this.index * 33;
     }
 
     hide () {
@@ -65,8 +67,6 @@ class List {
         if (wasSingle && this.audios.length > 1) {
             this.player.container.classList.add('aplayer-withlist');
         }
-        this.player.template.list.style.height = this.audios.length * 33 - 1 + 'px';
-        this.player.template.listOl.style.height = this.audios.length * 33 - 1 + 'px';
 
         this.player.randomOrder = utils.randomOrder(this.audios.length);
         this.player.template.listCurs = this.player.container.querySelectorAll('.aplayer-list-cur');
@@ -110,8 +110,6 @@ class List {
                 if (this.audios.length === 1) {
                     this.player.container.classList.remove('aplayer-withlist');
                 }
-                this.player.template.list.style.height = this.audios.length * 33 - 1 + 'px';
-                this.player.template.listOl.style.height = this.audios.length * 33 - 1 + 'px';
 
                 this.player.template.listCurs = this.player.container.querySelectorAll('.aplayer-list-cur');
             }
@@ -141,11 +139,12 @@ class List {
             }
             this.player.container.querySelectorAll('.aplayer-list li')[this.index].classList.add('aplayer-list-light');
 
-            this.player.template.list.scrollTop = this.index * 33;
+            smoothScroll(this.index * 33, 500, null, this.player.template.listOl);
 
             this.player.setAudio(audio);
 
             this.player.lrc && this.player.lrc.switch(this.index);
+            this.player.lrc && this.player.lrc.update(0);
 
             // set duration time
             if (this.player.duration !== 1) {           // compatibility: Android browsers will output 1 at first

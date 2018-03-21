@@ -12,7 +12,7 @@
             max-width: 32rem;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 50px;
+            margin-bottom: 150px;
         }
         h1 {
             font-size: 54px;
@@ -96,10 +96,14 @@
         <h3>HLS</h3>
         <div id="player6" class="aplayer"></div>
         <div id="player7" class="aplayer"></div>
+        <div id="player8" class="aplayer"></div>
     </div>
     <script>
-        var vConsole = new VConsole();
+        if (/mobile/i.test(window.navigator.userAgent)) {
+            new VConsole();
+        }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
     <script src="demo.js"></script>
 </body>
 </html>

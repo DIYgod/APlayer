@@ -10,6 +10,8 @@ import loopAll from '../assets/loop-all.svg';
 import loopOne from '../assets/loop-one.svg';
 import loopNone from '../assets/loop-none.svg';
 import loading from '../assets/loading.svg';
+import right from '../assets/right.svg';
+import skip from '../assets/skip.svg';
 
 const Icons = {
     play: play,
@@ -24,6 +26,8 @@ const Icons = {
     loopOne: loopOne,
     loopNone: loopNone,
     loading: loading,
+    right: right,
+    skip: skip,
 };
 
 export default Icons;

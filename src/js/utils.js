@@ -39,7 +39,7 @@ const utils = {
         return actualLeft - elementScrollLeft;
     },
 
-    getElementViewTop: (element) => {
+    getElementViewTop: (element, noScrollTop) => {
         let actualTop = element.offsetTop;
         let current = element.offsetParent;
         let elementScrollTop = 0;
@@ -48,7 +48,7 @@ const utils = {
             current = current.offsetParent;
         }
         elementScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
-        return actualTop - elementScrollTop;
+        return noScrollTop ? actualTop : actualTop - elementScrollTop;
     },
 
     isMobile: isMobile,
