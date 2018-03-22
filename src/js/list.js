@@ -52,7 +52,9 @@ class List {
     }
 
     add (audios) {
-        this.player.events.trigger('listadd', audios);
+        this.player.events.trigger('listadd', {
+            audios: audios,
+        });
         const wasSingle = !(this.audios.length > 1);
         const wasEmpty = this.audios.length === 0;
 
@@ -84,7 +86,9 @@ class List {
     }
 
     remove (index) {
-        this.player.events.trigger('listremove', index);
+        this.player.events.trigger('listremove', {
+            index: index,
+        });
         if (this.audios[index]) {
             if (this.audios.length > 1) {
                 const list = this.player.container.querySelectorAll('.aplayer-list li');
@@ -120,7 +124,9 @@ class List {
     }
 
     switch (index) {
-        this.player.events.trigger('listswitch', index);
+        this.player.events.trigger('listswitch', {
+            index: index,
+        });
 
         if (typeof index !== 'undefined' && this.audios[index]) {
             this.index = index;

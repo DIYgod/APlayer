@@ -12,6 +12,7 @@ import loopNone from '../assets/loop-none.svg';
 import loading from '../assets/loading.svg';
 import right from '../assets/right.svg';
 import skip from '../assets/skip.svg';
+import lrc from '../assets/lrc.svg';
 
 const Icons = {
     play: play,
@@ -28,6 +29,7 @@ const Icons = {
     loading: loading,
     right: right,
     skip: skip,
+    lrc: lrc,
 };
 
 export default Icons;

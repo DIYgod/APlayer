@@ -9,7 +9,10 @@ class Events {
             'timeupdate', 'volumechange', 'waiting'
         ];
         this.playerEvents = [
-            'destroy', 'listshow', 'listhide', 'listadd', 'listremove', 'listswitch', 'listclear', 'noticeshow', 'noticehide'
+            'destroy',
+            'listshow', 'listhide', 'listadd', 'listremove', 'listswitch', 'listclear',
+            'noticeshow', 'noticehide',
+            'lrcshow', 'lrchide',
         ];
     }
 

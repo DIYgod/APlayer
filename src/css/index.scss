@@ -150,7 +150,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
         .aplayer-icon-back,
         .aplayer-icon-play,
-        .aplayer-icon-forward {
+        .aplayer-icon-forward,
+        .aplayer-icon-lrc {
             display: inline-block;
         }
 
@@ -230,8 +231,15 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     .aplayer-icon-order,
     .aplayer-icon-back,
     .aplayer-icon-play,
-    .aplayer-icon-forward {
+    .aplayer-icon-forward,
+    .aplayer-icon-lrc {
         display: none;
+    }
+
+    .aplayer-icon-lrc-inactivity {
+        svg {
+            opacity: 0.4;
+        }
     }
 
     .aplayer-icon-forward {
@@ -545,6 +553,10 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                 height: initial !important;
                 min-height: 16px;
             }
+        }
+
+        &.aplayer-lrc-hide {
+            display: none;
         }
 
         .aplayer-lrc-contents {

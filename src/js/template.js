@@ -28,6 +28,7 @@ class Template {
         });
 
         this.lrc = this.container.querySelector('.aplayer-lrc-contents');
+        this.lrcWrap = this.container.querySelector('.aplayer-lrc');
         this.ptime = this.container.querySelector('.aplayer-ptime');
         this.info = this.container.querySelector('.aplayer-info');
         this.time = this.container.querySelector('.aplayer-time');
@@ -56,6 +57,7 @@ class Template {
         this.skipBackButton = this.container.querySelector('.aplayer-icon-back');
         this.skipForwardButton = this.container.querySelector('.aplayer-icon-forward');
         this.skipPlayButton = this.container.querySelector('.aplayer-icon-play');
+        this.lrcButton = this.container.querySelector('.aplayer-icon-lrc');
     }
 }
 

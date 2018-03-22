@@ -54,6 +54,9 @@
                 <button type="button" class="aplayer-icon aplayer-icon-menu">
                     {{@ icons.menu }}
                 </button>
+                <button type="button" class="aplayer-icon aplayer-icon-lrc">
+                    {{@ icons.lrc }}
+                </button>
             </div>
         </div>
     </div>
@@ -130,6 +133,9 @@
                 </button>
                 <button type="button" class="aplayer-icon aplayer-icon-menu">
                     {{@ icons.menu }}
+                </button>
+                <button type="button" class="aplayer-icon aplayer-icon-lrc">
+                    {{@ icons.lrc }}
                 </button>
             </div>
         </div>

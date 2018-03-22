@@ -91,6 +91,7 @@ class APlayer {
         this.list = new List(this);
 
         this.initAudio();
+        this.bindEvents();
         if (this.options.order === 'random') {
             this.list.switch(this.randomOrder[0]);
         }
@@ -116,6 +117,10 @@ class APlayer {
             });
         }
 
+        this.volume(this.storage.get('volume'), true);
+    }
+
+    bindEvents () {
         this.on('play', () => {
             if (this.paused) {
                 this.setUIPlaying();
@@ -153,10 +158,11 @@ class APlayer {
         });
 
         // audio download error: an error occurs
+        let skipTime;
         this.on('error', () => {
             if (this.list.audios.length) {
                 this.notice('An audio error has occurred, player will skip forward in 2 seconds.');
-                setTimeout(() => {
+                skipTime = setTimeout(() => {
                     this.skipForward();
                     if (!this.paused) {
                         this.play();
@@ -166,6 +172,9 @@ class APlayer {
             else {
                 this.notice('An audio error has occurred.');
             }
+        });
+        this.events.on('listswitch', () => {
+            skipTime && clearTimeout(skipTime);
         });
 
         // multiple audio play
@@ -201,8 +210,6 @@ class APlayer {
                 this.play();
             }
         });
-
-        this.volume(this.storage.get('volume'), true);
     }
 
     setAudio (audio) {
@@ -434,7 +441,9 @@ class APlayer {
         if (this.noticeTime) {
             clearTimeout(this.noticeTime);
         }
-        this.events.trigger('noticeshow', text);
+        this.events.trigger('noticeshow', {
+            text: text,
+        });
         if (time) {
             this.noticeTime = setTimeout(() => {
                 this.template.notice.style.opacity = 0;

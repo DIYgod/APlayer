@@ -11,6 +11,25 @@ class Lrc {
         this.current = [];
     }
 
+    show () {
+        this.player.events.trigger('lrcshow');
+        this.player.template.lrcWrap.classList.remove('aplayer-lrc-hide');
+    }
+
+    hide () {
+        this.player.events.trigger('lrchide');
+        this.player.template.lrcWrap.classList.add('aplayer-lrc-hide');
+    }
+
+    toggle () {
+        if (this.player.template.lrcWrap.classList.contains('aplayer-lrc-hide')) {
+            this.show();
+        }
+        else {
+            this.hide();
+        }
+    }
+
     update (currentTime = this.player.audio.currentTime) {
         if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || (!this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0])) {
             for (let i = 0; i < this.current.length; i++) {
