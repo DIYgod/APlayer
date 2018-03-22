@@ -79,7 +79,6 @@ class APlayer {
             this.lrc = new Lrc({
                 container: this.template.lrc,
                 async: this.options.lrcType === 3,
-                content: this.options.audio.map((item) => item.lrc),
                 player: this,
             });
         }

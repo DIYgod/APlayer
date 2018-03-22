@@ -5,7 +5,6 @@ class Lrc {
         this.container = options.container;
         this.async = options.async;
         this.player = options.player;
-        this.content = options.content;
         this.parsed = [];
         this.index = 0;
         this.current = [];
@@ -47,8 +46,8 @@ class Lrc {
     switch (index) {
         if (!this.parsed[index]) {
             if (!this.async) {
-                if (this.content[index]) {
-                    this.parsed[index] = this.parse(this.content[index]);
+                if (this.player.list.audios[index].lrc) {
+                    this.parsed[index] = this.parse(this.player.list.audios[index].lrc);
                 }
                 else {
                     this.parsed[index] = [['00:00', 'Not available']];
@@ -73,7 +72,7 @@ class Lrc {
                         this.current = this.parsed[index];
                     }
                 };
-                const apiurl = this.content[index];
+                const apiurl = this.player.list.audios[index].lrc;
                 xhr.open('get', apiurl, true);
                 xhr.send(null);
             }

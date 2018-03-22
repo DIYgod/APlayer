@@ -55,6 +55,18 @@ class List {
         this.player.events.trigger('listadd', {
             audios: audios,
         });
+
+        if (Object.prototype.toString.call(audios) !== '[object Array]') {
+            audios = [audios];
+        }
+        audios.map((item) => {
+            item.name = item.name || item.title || 'Audio name';
+            item.artist = item.artist || item.author || 'Audio artist';
+            item.cover = item.cover || item.pic;
+            item.type = item.type || 'normal';
+            return item;
+        });
+
         const wasSingle = !(this.audios.length > 1);
         const wasEmpty = this.audios.length === 0;
 
@@ -95,6 +107,7 @@ class List {
                 list[index].remove();
 
                 this.audios.splice(index, 1);
+                this.lrc.parsed.splice(index, 1);
 
                 if (index === this.index) {
                     if (this.audios[index]) {
@@ -165,6 +178,7 @@ class List {
         this.player.container.classList.remove('aplayer-withlist');
         this.player.pause();
         this.audios = [];
+        this.lrc.parsed = [];
         this.player.audio.src = '';
         this.player.template.listOl.innerHTML = '';
         this.player.template.pic.style.backgroundImage = '';

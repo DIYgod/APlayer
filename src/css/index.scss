@@ -85,7 +85,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         box-shadow: none;
 
         .aplayer-list {
-            margin-bottom: 66px;
+            margin-bottom: 65px;
+            border: 1px solid #eee;
+            border-bottom: none;
         }
 
         .aplayer-body {

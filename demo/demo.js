@@ -144,8 +144,8 @@ const setTheme = (index) => {
     }
 };
 setTheme(ap5.list.index);
-ap5.on('listswitch', (index) => {
-    setTheme(index);
+ap5.on('listswitch', (data) => {
+    setTheme(data.index);
 });
 
 const ap6 = new APlayer({
@@ -188,18 +188,17 @@ const ap7 = new APlayer({
     }
 });
 
-let ap8;
+const ap8 = new APlayer({
+    element: document.getElementById('player8'),
+    mutex: true,
+    theme: '#ad7a86',
+    order: 'random',
+    lrcType: 3,
+    fixed: true,
+});
 $.ajax({
     url: 'https://api.i-meto.com/meting/api?server=netease&type=playlist&id=35798529',
     success: function (list) {
-        ap8 = new APlayer({
-            element: document.getElementById('player8'),
-            mutex: true,
-            theme: '#ad7a86',
-            order: 'random',
-            lrcType: 3,
-            fixed: true,
-            audio: JSON.parse(list)
-        });
+        ap8.list.add(JSON.parse(list));
     }
 });
