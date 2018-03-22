@@ -68,6 +68,7 @@ const ap = new APlayer(options);
 名称 | 默认值 | 描述
 ----|-------|----
 container | document.querySelector('.aplayer') | 播放器容器元素
+fixed | false | 开启吸底模式, [详情](https://aplayer.js.org/#/home?id=fixed-mode)
 mini | false | 开启迷你模式, [详情](https://aplayer.js.org/#/home?id=mini-mode)
 autoplay | false | 音频自动播放
 theme | '#b7daff' | 主题色
@@ -171,7 +172,19 @@ const ap = new APlayer({
   ap.notice('Amazing player', 2000, 0.8);
   ```
 
++ `ap.skipBack()`: 切换到下一首音频
+
++ `ap.skipForward()`: 切换到上一首音频
+
 + `ap.destroy()`: 销毁播放器
+
++ `ap.lrc`
+
+  + `ap.lrc.show()`: 显示歌词
+
+  + `ap.lrc.hide()`: 隐藏歌词
+
+  + `ap.lrc.toggle()`: 显示/隐藏歌词
 
 + `ap.list`
 
@@ -265,6 +278,8 @@ ap.on('ended', function () {
 - noticeshow
 - noticehide
 - destroy
+- lrcshow
+- lrchide
 
 ## 歌词
 
@@ -404,10 +419,32 @@ const ap = new APlayer({
     ]
 });
 ```
+## 吸底模式
+
+APlayer 可以通过吸底模式固定在页面底部，这种模式跟普通模式有很大不同。
+
+<div class="aplayer-wrap">
+    <div id="aplayer9"><button class="docute-button load">点击加载播放器</div>
+</div>
+
+```js
+const ap = new APlayer({
+    container: document.getElementById('player'),
+    fixed: true,
+    audio: [{
+        name: 'name',
+        artist: 'artist',
+        url: 'url.mp3',
+        cover: 'cover.jpg',
+    }]
+});
+```
 
 ## 迷你模式
 
 如果你没有足够空间来放置正常模式的播放器，那么你可以考虑使用迷你模式。
+
+请注意迷你模式与吸底模式冲突。
 
 <div class="aplayer-wrap">
     <div id="aplayer6"><button class="docute-button load">点击加载播放器</div>

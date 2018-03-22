@@ -67,6 +67,7 @@ const ap = new APlayer(options);
 Name | Default | Description
 ----|-------|----
 container | document.querySelector('.aplayer') | player container
+fixed | false | enable fixed mode, [see more details](https://aplayer.js.org/#/home?id=fixed-mode)
 mini | false | enable mini mode, [see more details](https://aplayer.js.org/#/home?id=mini-mode)
 autoplay | false | audio autoplay
 theme | '#b7daff' | main color
@@ -170,7 +171,19 @@ const ap = new APlayer({
   ap.notice('Amazing player', 2000, 0.8);
   ```
 
++ `ap.skipBack()`: skip to previous audio
+
++ `ap.skipForward()`: skip to next audio
+
 + `ap.destroy()`: destroy player
+
++ `ap.lrc`
+
+  + `ap.lrc.show()`: show lrc
+
+  + `ap.lrc.hide()`: hide lrc
+
+  + `ap.lrc.toggle()`: toggle lrc between show and hide
 
 + `ap.list`
 
@@ -264,6 +277,8 @@ Player events
 - noticeshow
 - noticehide
 - destroy
+- lrcshow
+- lrchide
 
 ## LRC
 
@@ -404,9 +419,32 @@ const ap = new APlayer({
 });
 ```
 
+## Fixed mode
+
+APlayer can be fixed to page bottom via fixed mode, fixed mode is a very different mode, enjoy it!
+
+<div class="aplayer-wrap">
+    <div id="aplayer9"><button class="docute-button load">Click to load player</div>
+</div>
+
+```js
+const ap = new APlayer({
+    container: document.getElementById('player'),
+    fixed: true,
+    audio: [{
+        name: 'name',
+        artist: 'artist',
+        url: 'url.mp3',
+        cover: 'cover.jpg',
+    }]
+});
+```
+
 ## Mini mode
 
 If you don't have enough space for normal player, mini mode might be your choice.
+
+Please note that mini mode is conflicted with fixed mode.
 
 <div class="aplayer-wrap">
     <div id="aplayer6"><button class="docute-button load">Click to load player</div>
@@ -525,8 +563,8 @@ const setTheme = (index) => {
     }
 };
 setTheme(ap.list.index);
-ap.on('listswitch', (index) => {
-    setTheme(index);
+ap.on('listswitch', (data) => {
+    setTheme(data.index);
 });
 ```
 

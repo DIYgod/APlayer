@@ -56,6 +56,7 @@ function player () {
         context.event.on('landing:updated', function () {
             console.log('landing:updated');
             clearPlayer();
+            aplayer0();
             aplayer1();
         });
         context.event.on('content:updated', function () {
@@ -72,8 +73,8 @@ function player () {
 
 function clearPlayer () {
     for (let i = 0; i < 10; i++) {
-        if (window['ap' + (i + 1)]) {
-            window['ap' + (i + 1)].destroy();
+        if (window['ap' + i]) {
+            window['ap' + i].destroy();
         }
     }
 }
@@ -104,6 +105,36 @@ function aplayer1 () {
             cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
             lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
             theme: '#505d6b'
+        }]
+    });
+}
+
+function aplayer0 () {
+    window.ap0 = new APlayer({
+        container: document.getElementById('aplayer0'),
+        fixed: true,
+        lrcType: 3,
+        audio: [{
+            name: '前前前世',
+            artist: 'RADWIMPS',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
+            theme: '#505d6b'
+        }, {
+            name: 'トリカゴ',
+            artist: 'XX:me',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc',
+            theme: '#46718b'
+        }, {
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+            theme: '#ebd0c2'
         }]
     });
 }
@@ -278,5 +309,35 @@ function aplayer8 () {
                 window.ap8.theme(`rgb(${color[0]}, ${color[1]}, ${color[2]})`, index);
             });
         }
+    });
+}
+
+function aplayer9 () {
+    window.ap9 = new APlayer({
+        container: document.getElementById('aplayer9'),
+        fixed: true,
+        lrcType: 3,
+        audio: [{
+            name: '光るなら',
+            artist: 'Goose house',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+            theme: '#ebd0c2'
+        }, {
+            name: 'トリカゴ',
+            artist: 'XX:me',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc',
+            theme: '#46718b'
+        }, {
+            name: '前前前世',
+            artist: 'RADWIMPS',
+            url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
+            cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
+            theme: '#505d6b'
+        }]
     });
 }
