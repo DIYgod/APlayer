@@ -112,7 +112,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             margin: 0;
             z-index: 98;
             pointer-events: none;
-            text-shadow: 0 0 1px #fff, 0 0 10px #fff;
+            text-shadow: -1px -1px 0 #fff;
 
             &:before,
             &:after {
