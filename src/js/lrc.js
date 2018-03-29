@@ -131,6 +131,15 @@ class Lrc {
             return [];
         }
     }
+
+    remove (index) {
+        this.parsed.splice(index, 1);
+    }
+
+    clear () {
+        this.parsed = [];
+        this.container.innerHTML = '';
+    }
 }
 
 export default Lrc;

@@ -159,7 +159,7 @@ class APlayer {
         // audio download error: an error occurs
         let skipTime;
         this.on('error', () => {
-            if (this.list.audios.length) {
+            if (this.list.audios.length > 1) {
                 this.notice('An audio error has occurred, player will skip forward in 2 seconds.');
                 skipTime = setTimeout(() => {
                     this.skipForward();
@@ -168,7 +168,7 @@ class APlayer {
                     }
                 }, 2000);
             }
-            else {
+            else if (this.list.audios.length === 1) {
                 this.notice('An audio error has occurred.');
             }
         });

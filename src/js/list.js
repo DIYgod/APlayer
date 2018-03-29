@@ -107,7 +107,7 @@ class List {
                 list[index].remove();
 
                 this.audios.splice(index, 1);
-                this.lrc.parsed.splice(index, 1);
+                this.player.lrc && this.player.lrc.remove(index);
 
                 if (index === this.index) {
                     if (this.audios[index]) {
@@ -178,7 +178,7 @@ class List {
         this.player.container.classList.remove('aplayer-withlist');
         this.player.pause();
         this.audios = [];
-        this.lrc.parsed = [];
+        this.player.lrc && this.player.lrc.clear();
         this.player.audio.src = '';
         this.player.template.listOl.innerHTML = '';
         this.player.template.pic.style.backgroundImage = '';
