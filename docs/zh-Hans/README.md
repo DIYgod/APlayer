@@ -221,7 +221,7 @@ const ap = new APlayer({
 
   + `ap.list.clear()`: 清空播放列表
 
-+ `ap.audio`: 原生 video
++ `ap.audio`: 原生 audio
 
  + `ap.audio.currentTime`: 返回音频当前播放时间
 
