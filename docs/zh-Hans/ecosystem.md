@@ -28,7 +28,7 @@ search: zh-Hans
 - [APlayerHandle](https://github.com/kn007/APlayerHandle): WordPress
 - [APlayer_for_Z-BlogPHP](https://github.com/fghrsh/APlayer_for_Z-BlogPHP): Z-BlogPHP
 - [react-aplayer](https://github.com/sabrinaluo/react-aplayer): React
-- [vue-aplayer](https://github.com/SevenOutman/vue-aplayer): Vue
+- [Vue-APlayer](https://github.com/SevenOutman/vue-aplayer): Vue
 - [vue-aplayer](https://github.com/MoeFE/vue-aplayer): Vue
 - [php-aplayer](https://github.com/Daryl-L/php-aplayer): PHP
 
