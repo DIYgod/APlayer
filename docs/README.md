@@ -240,7 +240,7 @@ ap.on('ended', function () {
 });
 ```
 
-Video events
+Audio events
 
 - abort
 - canplay
@@ -578,4 +578,4 @@ ap.on('listswitch', (data) => {
 
 ### Why can't player autoplay in some mobile browsers?
 
-Most mobile browsers forbid video autoplay, you wont be able to achieve it without hacks.
+Most mobile browsers forbid audio autoplay, you wont be able to achieve it without hacks.
