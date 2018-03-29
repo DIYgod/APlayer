@@ -107,7 +107,6 @@ class List {
                 list[index].remove();
 
                 this.audios.splice(index, 1);
-                this.lrc.parsed.splice(index, 1);
 
                 if (index === this.index) {
                     if (this.audios[index]) {
