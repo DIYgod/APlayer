@@ -63,6 +63,7 @@ Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlay
 ## Who use APlayer?
 
 - [bilibili](https://www.bilibili.com/): 国内知名的视频弹幕网站
+- [黑客派](https://hacpai.com/): 程序员和设计师的聚集地，一个活跃的小众社区
 - [浙江大学CC98论坛](https://zh.wikipedia.org/wiki/CC98%E8%AE%BA%E5%9D%9B): 浙江大学校网内规模最大的论坛，中国各大学中较活跃的BBS之一
 - [Jelly Rue](http://jellyrue.com/): Jelly Rue, an indie pop-rock band from Tartu.
 - [Opus](http://www.opusopus.co/): An artist-exploration data visualization application
