@@ -56,8 +56,8 @@ const ap = new APlayer({
 Work with module bundler:
 
 ```js
-import 'APlayer/dist/APlayer.min.css';
-import APlayer from 'APlayer';
+import 'aplayer/dist/APlayer.min.css';
+import APlayer from 'aplayer';
 
 const ap = new APlayer(options);
 ```
