@@ -1,0 +1,19 @@
+{
+  "name": "smoothscroll",
+  "version": "0.4.0",
+  "description": "A teeny tiny smooth scroll script with ease-in-out effect and no jQuery.",
+  "main": "smoothscroll.js",
+  "author": "Alice Lieutier <alice@lieutier.me> (http://alice.lieutier.me)",
+  "license": "MIT",
+  "homepage": "https://github.com/alicelieutier/smoothScroll#readme",
+  "repository": "https://github.com/alicelieutier/smoothScroll.git",
+  "keywords": [
+    "smooth scroll",
+    "scroll",
+    "no jQuery",
+    "anchor"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

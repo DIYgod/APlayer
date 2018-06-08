@@ -1,6 +1,6 @@
 import tplListItem from '../template/list-item.art';
 import utils from './utils';
-import smoothScroll from 'smoothscroll';
+import smoothScroll from '../lib/smoothscroll';
 
 class List {
     constructor (player) {
