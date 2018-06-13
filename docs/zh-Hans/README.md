@@ -172,9 +172,9 @@ const ap = new APlayer({
   ap.notice('Amazing player', 2000, 0.8);
   ```
 
-+ `ap.skipBack()`: 切换到下一首音频
++ `ap.skipBack()`: 切换到上一首音频
 
-+ `ap.skipForward()`: 切换到上一首音频
++ `ap.skipForward()`: 切换到下一首音频
 
 + `ap.destroy()`: 销毁播放器
 
