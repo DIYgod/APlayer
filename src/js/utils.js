@@ -16,41 +16,6 @@ const utils = {
         return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':');
     },
 
-    /**
-     * control play progress
-     */
-    // get element's view position
-    getElementViewLeft: (element) => {
-        let actualLeft = element.offsetLeft;
-        let current = element.offsetParent;
-        const elementScrollLeft = document.body.scrollLeft + document.documentElement.scrollLeft;
-        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
-            while (current !== null) {
-                actualLeft += current.offsetLeft;
-                current = current.offsetParent;
-            }
-        }
-        else {
-            while (current !== null && current !== element) {
-                actualLeft += current.offsetLeft;
-                current = current.offsetParent;
-            }
-        }
-        return actualLeft - elementScrollLeft;
-    },
-
-    getElementViewTop: (element, noScrollTop) => {
-        let actualTop = element.offsetTop;
-        let current = element.offsetParent;
-        let elementScrollTop = 0;
-        while (current !== null) {
-            actualTop += current.offsetTop;
-            current = current.offsetParent;
-        }
-        elementScrollTop = document.body.scrollTop + document.documentElement.scrollTop;
-        return noScrollTop ? actualTop : actualTop - elementScrollTop;
-    },
-
     isMobile: isMobile,
 
     storage: {

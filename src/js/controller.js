@@ -26,7 +26,7 @@ class Controller {
 
     initPlayBar () {
         const thumbMove = (e) => {
-            let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.barWrap)) / this.player.template.barWrap.clientWidth;
+            let percentage = ((e.clientX || e.changedTouches[0].clientX) - this.player.template.barWrap.getBoundingClientRect().left) / this.player.template.barWrap.clientWidth;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
@@ -37,11 +37,11 @@ class Controller {
         const thumbUp = (e) => {
             document.removeEventListener(utils.nameMap.dragEnd, thumbUp);
             document.removeEventListener(utils.nameMap.dragMove, thumbMove);
-            let percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getElementViewLeft(this.player.template.barWrap)) / this.player.template.barWrap.clientWidth;
+            let percentage = ((e.clientX || e.changedTouches[0].clientX) - this.player.template.barWrap.getBoundingClientRect().left) / this.player.template.barWrap.clientWidth;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.bar.set('played', percentage, 'width');
-            this.player.seek(this.player.bar.get('played', 'width') * this.player.duration);
+            this.player.seek(percentage * this.player.duration);
             this.player.disableTimeupdate = false;
         };
 
@@ -55,9 +55,7 @@ class Controller {
     initVolumeButton () {
         this.player.template.volumeButton.addEventListener('click', () => {
             if (this.player.audio.muted) {
-                this.player.audio.muted = false;
-                this.player.switchVolumeIcon();
-                this.player.bar.set('volume', this.player.volume(), 'height');
+                this.player.volume(this.player.audio.volume, true);
             }
             else {
                 this.player.audio.muted = true;
@@ -67,7 +65,7 @@ class Controller {
         });
 
         const thumbMove = (e) => {
-            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - utils.getElementViewTop(this.player.template.volumeBar, this.player.options.fixed)) / this.player.template.volumeBar.clientHeight;
+            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - this.player.template.volumeBar.getBoundingClientRect().top) / this.player.template.volumeBar.clientHeight;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.volume(percentage);
@@ -77,7 +75,7 @@ class Controller {
             this.player.template.volumeBarWrap.classList.remove('aplayer-volume-bar-wrap-active');
             document.removeEventListener(utils.nameMap.dragEnd, thumbUp);
             document.removeEventListener(utils.nameMap.dragMove, thumbMove);
-            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - utils.getElementViewTop(this.player.template.volumeBar, this.player.options.fixed)) / this.player.template.volumeBar.clientHeight;
+            let percentage = 1 - ((e.clientY || e.changedTouches[0].clientY) - this.player.template.volumeBar.getBoundingClientRect().top) / this.player.template.volumeBar.clientHeight;
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
             this.player.volume(percentage);
