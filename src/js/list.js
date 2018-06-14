@@ -7,6 +7,8 @@ class List {
         this.player = player;
         this.index = 0;
         this.audios = this.player.options.audio;
+        this.showing = true;
+        this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
 
         this.bindEvents();
     }
@@ -32,18 +34,23 @@ class List {
     }
 
     show () {
+        this.showing = true;
+        this.player.template.list.scrollTop = this.index * 33;
+        this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
         this.player.events.trigger('listshow');
-        this.player.template.list.classList.remove('aplayer-list-hide');
-        this.player.template.listOl.scrollTop = this.index * 33;
     }
 
     hide () {
-        this.player.events.trigger('listhide');
-        this.player.template.list.classList.add('aplayer-list-hide');
+        this.showing = false;
+        this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
+        setTimeout(() => {
+            this.player.template.list.style.height = '0px';
+            this.player.events.trigger('listhide');
+        }, 0);
     }
 
     toggle () {
-        if (!this.player.template.list.classList.contains('aplayer-list-hide')) {
+        if (this.showing) {
             this.hide();
         }
         else {
@@ -70,7 +77,7 @@ class List {
         const wasSingle = !(this.audios.length > 1);
         const wasEmpty = this.audios.length === 0;
 
-        this.player.template.listOl.innerHTML += tplListItem({
+        this.player.template.list.innerHTML += tplListItem({
             theme: this.player.options.theme,
             audio: audios,
             index: this.audios.length + 1
@@ -158,7 +165,7 @@ class List {
             }
             this.player.container.querySelectorAll('.aplayer-list li')[this.index].classList.add('aplayer-list-light');
 
-            smoothScroll(this.index * 33, 500, null, this.player.template.listOl);
+            smoothScroll(this.index * 33, 500, null, this.player.template.list);
 
             this.player.setAudio(audio);
 
@@ -180,7 +187,7 @@ class List {
         this.audios = [];
         this.player.lrc && this.player.lrc.clear();
         this.player.audio.src = '';
-        this.player.template.listOl.innerHTML = '';
+        this.player.template.list.innerHTML = '';
         this.player.template.pic.style.backgroundImage = '';
         this.player.theme(this.player.options.theme, this.index, false);
         this.player.template.title.innerHTML = 'No audio';

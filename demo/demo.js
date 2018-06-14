@@ -46,7 +46,7 @@ const ap2 = new APlayer({
         artist: 'Goose house',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
         cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-        lrc: "https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc",
+        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
         theme: '#ebd0c2'
     }]
 });
@@ -62,7 +62,7 @@ const ap3 = new APlayer({
         artist: 'Goose house',
         url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
         cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-        lrc: "https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc",
+        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
         theme: '#ebd0c2'
     }]
 });
@@ -114,7 +114,7 @@ const ap5 = new APlayer({
     mutex: true,
     theme: '#e9e9e9',
     listFolded: false,
-    listMaxHeight: '80px',
+    listMaxHeight: 80,
     audio: [{
         name: '光るなら',
         artist: 'Goose house',

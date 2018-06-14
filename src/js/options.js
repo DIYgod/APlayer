@@ -14,7 +14,7 @@ export default (options) => {
         order: 'list',
         volume: 0.7,
         listFolded: options.fixed,
-        listMaxHeight: options.listmaxheight || '250px',
+        listMaxHeight: options.listmaxheight || 250,
         audio: options.music || [],
         storageName: 'aplayer-setting'
     };
@@ -23,6 +23,8 @@ export default (options) => {
             options[defaultKey] = defaultOption[defaultKey];
         }
     }
+
+    options.listMaxHeight = parseFloat(options.listMaxHeight);
 
     if (Object.prototype.toString.call(options.audio) !== '[object Array]') {
         options.audio = [options.audio];

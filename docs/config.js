@@ -163,7 +163,7 @@ function aplayer3 () {
         volume: 0.7,
         mutex: true,
         listFolded: false,
-        listMaxHeight: '90px',
+        listMaxHeight: 90,
         lrcType: 3,
         audio: [{
             name: '光るなら',
@@ -199,7 +199,7 @@ function aplayer4 () {
             artist: 'Goose house',
             url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
             cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-            lrc: "https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc",
+            lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
             theme: '#ebd0c2'
         }]
     });

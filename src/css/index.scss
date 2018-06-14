@@ -576,77 +576,70 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         will-change: height;
         display: none;
         overflow: hidden;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow-y: auto;
 
-        &.aplayer-list-hide {
-            max-height: 0 !important;
+        &::-webkit-scrollbar {
+            width: 5px;
         }
 
-        ol {
-            list-style-type: none;
+        &::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            background-color: #eee;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: #ccc;
+        }
+
+        li {
+            position: relative;
+            height: 32px;
+            line-height: 32px;
+            padding: 0 15px;
+            font-size: 12px;
+            border-top: 1px solid #e9e9e9;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            overflow: hidden;
             margin: 0;
-            padding: 0;
-            overflow-y: auto;
 
-            &::-webkit-scrollbar {
-                width: 5px;
+            &:first-child {
+                border-top: none;
             }
 
-            &::-webkit-scrollbar-thumb {
-                border-radius: 3px;
-                background-color: #eee;
+            &:hover {
+                background: #efefef;
             }
 
-            &::-webkit-scrollbar-thumb:hover {
-                background-color: #ccc;
-            }
-
-            li {
-                position: relative;
-                height: 32px;
-                line-height: 32px;
-                padding: 0 15px;
-                font-size: 12px;
-                border-top: 1px solid #e9e9e9;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                overflow: hidden;
-                margin: 0;
-
-                &:first-child {
-                    border-top: none;
-                }
-
-                &:hover {
-                    background: #efefef;
-                }
-
-                &.aplayer-list-light {
-                    background: #e9e9e9;
-
-                    .aplayer-list-cur {
-                        display: inline-block;
-                    }
-                }
+            &.aplayer-list-light {
+                background: #e9e9e9;
 
                 .aplayer-list-cur {
-                    display: none;
-                    width: 3px;
-                    height: 22px;
-                    position: absolute;
-                    left: 0;
-                    top: 5px;
-                    cursor: pointer;
+                    display: inline-block;
                 }
-                .aplayer-list-index {
-                    color: #666;
-                    margin-right: 12px;
-                    cursor: pointer;
-                }
-                .aplayer-list-author {
-                    color: #666;
-                    float: right;
-                    cursor: pointer;
-                }
+            }
+
+            .aplayer-list-cur {
+                display: none;
+                width: 3px;
+                height: 22px;
+                position: absolute;
+                left: 0;
+                top: 5px;
+                cursor: pointer;
+            }
+            .aplayer-list-index {
+                color: #666;
+                margin-right: 12px;
+                cursor: pointer;
+            }
+            .aplayer-list-author {
+                color: #666;
+                float: right;
+                cursor: pointer;
             }
         }
     }

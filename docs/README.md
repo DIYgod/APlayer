@@ -108,7 +108,7 @@ const ap = new APlayer({
     volume: 0.7,
     mutex: true,
     listFolded: false,
-    listMaxHeight: '90px',
+    listMaxHeight: 90,
     lrcType: 3,
     audio: [
         {
@@ -396,7 +396,7 @@ APlayer will show a playlist when it has more than one audio, option `listFolded
 const ap = new APlayer({
     container: document.getElementById('player'),
     listFolded: false,
-    listMaxHeight: '90px',
+    listMaxHeight: 90,
     lrcType: 3,
     audio: [
         {

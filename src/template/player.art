@@ -63,25 +63,21 @@
     <div class="aplayer-notice"></div>
     <div class="aplayer-miniswitcher"><button class="aplayer-icon">{{@ icons.right }}</button></div>
 </div>
-<div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
-    <ol{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
-        {{ include './list-item.art' getObject({
-            theme: options.theme,
-            audio: options.audio,
-            index: 1
-        }) }}
-    </ol>
-</div>
+<ol class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}">
+    {{ include './list-item.art' getObject({
+        theme: options.theme,
+        audio: options.audio,
+        index: 1
+    }) }}
+</ol>
 {{ else }}
-<div class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}"{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
-    <ol{{ if options.listMaxHeight }} style="max-height: {{ options.listMaxHeight }}"{{ /if }}>
-        {{ include './list-item.art' getObject({
-            theme: options.theme,
-            audio: options.audio,
-            index: 1
-        }) }}
-    </ol>
-</div>
+<ol class="aplayer-list{{ if options.listFolded }} aplayer-list-hide{{ /if }}">
+    {{ include './list-item.art' getObject({
+        theme: options.theme,
+        audio: options.audio,
+        index: 1
+    }) }}
+</ol>
 <div class="aplayer-body">
     <div class="aplayer-pic" style="{{ if cover  }}background-image: url(&quot;{{ cover }}&quot;);{{ /if }}background-color: {{ options.theme }};">
         <div class="aplayer-button aplayer-play">{{@ icons.play }}</div>

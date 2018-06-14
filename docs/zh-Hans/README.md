@@ -109,7 +109,7 @@ const ap = new APlayer({
     volume: 0.7,
     mutex: true,
     listFolded: false,
-    listMaxHeight: '90px',
+    listMaxHeight: 90,
     lrcType: 3,
     audio: [
         {
@@ -397,7 +397,7 @@ const ap = new APlayer({
 const ap = new APlayer({
     container: document.getElementById('player'),
     listFolded: false,
-    listMaxHeight: '90px',
+    listMaxHeight: 90,
     lrcType: 3,
     audio: [
         {
