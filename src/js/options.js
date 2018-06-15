@@ -8,7 +8,7 @@ export default (options) => {
         autoplay: false,
         mutex: true,
         lrcType: options.showlrc || options.lrc || 0,
-        preload: 'auto',
+        preload: 'metadata',
         theme: '#b7daff',
         loop: 'all',
         order: 'list',
