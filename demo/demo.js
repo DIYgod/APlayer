@@ -8,8 +8,8 @@ const ap1 = new APlayer({
     audio: [{
         name: '光るなら',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
         theme: '#ebd0c2'
     }]
 });
@@ -44,9 +44,9 @@ const ap2 = new APlayer({
     audio: [{
         name: '光るなら',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.lrc',
         theme: '#ebd0c2'
     }]
 });
@@ -60,9 +60,9 @@ const ap3 = new APlayer({
     audio: [{
         name: '光るなら',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.lrc',
         theme: '#ebd0c2'
     }]
 });
@@ -78,29 +78,29 @@ const ap4 = new APlayer({
     audio: [{
         name: '光るなら',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.lrc',
         theme: '#ebd0c2'
     }, {
         name: 'トリカゴ',
         artist: 'XX:me',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/darling.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/darling.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/darling.lrc',
         theme: '#46718b'
     }, {
         name: '前前前世',
         artist: 'RADWIMPS',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/yourname.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/yourname.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/yourname.lrc',
         theme: '#505d6b'
     }, {
         name: '光るなら(HLS)',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hls/hikarunara.m3u8',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
         theme: '#ebd0c2',
         type: 'hls'
     }]
@@ -118,21 +118,21 @@ const ap5 = new APlayer({
     audio: [{
         name: '光るなら',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.lrc',
     }, {
         name: 'トリカゴ',
         artist: 'XX:me',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/darling.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/darling.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/darling.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/darling.lrc',
     }, {
         name: '前前前世',
         artist: 'RADWIMPS',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.mp3',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.jpg',
-        lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/yourname.lrc',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/yourname.mp3',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/yourname.jpg',
+        lrc: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/yourname.lrc',
     }]
 });
 const colorThief = new ColorThief();
@@ -154,8 +154,8 @@ const ap6 = new APlayer({
     audio: [{
         name: '光るなら(HLS)',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hls/hikarunara.m3u8',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
         theme: '#ebd0c2',
         type: 'hls'
     }]
@@ -166,8 +166,8 @@ const ap7 = new APlayer({
     audio: [{
         name: '光るなら(HLS)',
         artist: 'Goose house',
-        url: 'https://moeplayer.b0.upaiyun.com/aplayer/hls/hikarunara.m3u8',
-        cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        url: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hls/hikarunara.m3u8',
+        cover: 'https://cn-east-17-aplayer-35525609.oss.dogecdn.com/hikarunara.jpg',
         theme: '#ebd0c2',
         type: 'customHls',
     }],
