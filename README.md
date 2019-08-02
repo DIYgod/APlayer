@@ -73,6 +73,7 @@ Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlay
 - [iSearch](http://i.oppsu.cn): 一个提供 iTunes 搜索,试听,高清专辑封面获取,查看最新音乐动态等综合性平台
 - [LRC歌词编辑器](https://github.com/MoeFE/Lyric): 一款非常实用的在线LRC歌词编辑器
 - [Аэростатика](https://aerostatica.ru/)
+- [HealthDig](https://healthdig.co): 每天只需两分钟的重点新闻资讯
 - Feel free to submit yours in [`Let me know!`](https://github.com/MoePlayer/APlayer/issues/79)
 
 ## Current Premium Sponsors
