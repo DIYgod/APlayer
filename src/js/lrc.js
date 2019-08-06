@@ -81,8 +81,8 @@ class Lrc {
         this.container.innerHTML = tplLrc({
             lyrics: this.parsed[index]
         });
-        this.update(0);
         this.current = this.parsed[index];
+        this.update(0);
     }
 
     /**
