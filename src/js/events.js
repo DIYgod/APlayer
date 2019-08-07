@@ -12,7 +12,7 @@ class Events {
             'destroy',
             'listshow', 'listhide', 'listadd', 'listremove', 'listswitch', 'listclear',
             'noticeshow', 'noticehide',
-            'lrcshow', 'lrchide',
+            'lrcshow', 'lrchide', 'lrcchange',
         ];
     }
 

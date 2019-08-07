@@ -28,6 +28,7 @@ class APlayer {
         this.paused = true;
         this.playedPromise = Promise.resolve();
         this.mode = 'normal';
+		this.darkMode = false;
 
         this.randomOrder = utils.randomOrder(this.options.audio.length);
 
@@ -74,13 +75,23 @@ class APlayer {
         if (this.template.info.offsetWidth < 200) {
             this.template.time.classList.add('aplayer-time-narrow');
         }
+		
+		if(this.options.darkMode){
+			this.setDarkMode(true);
+		}
 
         if (this.options.lrcType) {
             this.lrc = new Lrc({
                 container: this.template.lrc,
                 async: this.options.lrcType === 3,
                 player: this,
+				external: this.options.lrcExternal === true,
+				offset: this.options.lrcOffset || -0.15,
             });
+			
+			if(this.options.hideLrc){
+				this.lrc.hide();
+			}
         }
         this.events = new Events();
         this.storage = new Storage(this);
@@ -433,6 +444,15 @@ class APlayer {
             this.container.classList.remove('aplayer-narrow');
         }
     }
+	
+	setDarkMode (darkMode = true) {
+		this.darkMode = darkMode;
+		if(darkMode){
+			this.container.classList.add('aplayer-dark');
+		} else {
+			this.container.classList.remove('aplayer-dark');
+		}
+	}
 
     notice (text, time = 2000, opacity = 0.8) {
         this.template.notice.innerHTML = text;
