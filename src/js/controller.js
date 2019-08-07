@@ -156,15 +156,14 @@ class Controller {
 
     initLrcButton () {
         this.player.template.lrcButton.addEventListener('click', () => {
-            if (this.player.template.lrcButton.classList.contains('aplayer-icon-lrc-inactivity')) {
-                this.player.template.lrcButton.classList.remove('aplayer-icon-lrc-inactivity');
-                this.player.lrc && this.player.lrc.show();
-            }
-            else {
-                this.player.template.lrcButton.classList.add('aplayer-icon-lrc-inactivity');
-                this.player.lrc && this.player.lrc.hide();
-            }
-        });
+			this.player.lrc.show();
+		});
+		this.player.events.on('lrcshow', () => {
+			this.player.template.lrcButton.classList.remove('aplayer-icon-lrc-inactivity');
+		});
+		this.player.events.on('lrchide', () => {
+			this.player.template.lrcButton.classList.add('aplayer-icon-lrc-inactivity');
+		});
     }
 }
 

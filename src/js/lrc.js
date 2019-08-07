@@ -5,23 +5,32 @@ class Lrc {
         this.container = options.container;
         this.async = options.async;
         this.player = options.player;
+		this.external = options.external;
+		this.offset = options.offset;
         this.parsed = [];
         this.index = 0;
         this.current = [];
+		this.visible = true;
+		
+		if(this.external){
+			this.player.template.lrcWrap.classList.add('aplayer-lrc-hide');
+		}
     }
 
     show () {
         this.player.events.trigger('lrcshow');
-        this.player.template.lrcWrap.classList.remove('aplayer-lrc-hide');
+		this.visibie = true;
+		if(!this.external) this.player.template.lrcWrap.classList.remove('aplayer-lrc-hide');
     }
 
     hide () {
         this.player.events.trigger('lrchide');
-        this.player.template.lrcWrap.classList.add('aplayer-lrc-hide');
+		this.visibie = false;
+        if(!this.external) this.player.template.lrcWrap.classList.add('aplayer-lrc-hide');
     }
 
     toggle () {
-        if (this.player.template.lrcWrap.classList.contains('aplayer-lrc-hide')) {
+        if (!this.visible) {
             this.show();
         }
         else {
@@ -30,14 +39,19 @@ class Lrc {
     }
 
     update (currentTime = this.player.audio.currentTime) {
-        if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || (!this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0])) {
+        if (this.index > this.current.length - 1 ||
+			currentTime < this.current[this.index][0] ||
+			(this.current[this.index + 1] && currentTime >= this.current[this.index + 1][0])) {
             for (let i = 0; i < this.current.length; i++) {
                 if (currentTime >= this.current[i][0] && (!this.current[i + 1] || currentTime < this.current[i + 1][0])) {
                     this.index = i;
-                    this.container.style.transform = `translateY(${-this.index * 16}px)`;
-                    this.container.style.webkitTransform = `translateY(${-this.index * 16}px)`;
-                    this.container.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
-                    this.container.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
+					if(!this.external){
+						this.player.events.trigger('lrcchange', this.current[this.index]);
+						this.container.style.transform = `translateY(${-this.index * 16}px)`;
+						this.container.style.webkitTransform = `translateY(${-this.index * 16}px)`;
+						this.container.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
+						this.container.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
+					}
                 }
             }
         }
@@ -117,7 +131,7 @@ class Lrc {
                         const min2sec = oneTime[1] * 60;
                         const sec2sec = parseInt(oneTime[2]);
                         const msec2sec = oneTime[4] ? parseInt(oneTime[4]) / ((oneTime[4] + '').length === 2 ? 100 : 1000) : 0;
-                        const lrcTime = min2sec + sec2sec + msec2sec;
+                        const lrcTime = Math.max(0, min2sec + sec2sec + msec2sec + this.offset);
                         lrc.push([lrcTime, lrcText]);
                     }
                 }
