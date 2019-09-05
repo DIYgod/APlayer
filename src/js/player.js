@@ -151,6 +151,10 @@ class APlayer {
         });
 
         // show audio loaded bar: to inform interested parties of progress downloading the media
+        this.on('canplay', () => {
+            const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.duration : 0;
+            this.bar.set('loaded', percentage, 'width');
+        });
         this.on('progress', () => {
             const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.duration : 0;
             this.bar.set('loaded', percentage, 'width');
