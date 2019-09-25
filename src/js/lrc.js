@@ -1,7 +1,7 @@
 import tplLrc from '../template/lrc.art';
 
 class Lrc {
-    constructor (options) {
+    constructor(options) {
         this.container = options.container;
         this.async = options.async;
         this.player = options.player;
@@ -10,26 +10,25 @@ class Lrc {
         this.current = [];
     }
 
-    show () {
+    show() {
         this.player.events.trigger('lrcshow');
         this.player.template.lrcWrap.classList.remove('aplayer-lrc-hide');
     }
 
-    hide () {
+    hide() {
         this.player.events.trigger('lrchide');
         this.player.template.lrcWrap.classList.add('aplayer-lrc-hide');
     }
 
-    toggle () {
+    toggle() {
         if (this.player.template.lrcWrap.classList.contains('aplayer-lrc-hide')) {
             this.show();
-        }
-        else {
+        } else {
             this.hide();
         }
     }
 
-    update (currentTime = this.player.audio.currentTime) {
+    update(currentTime = this.player.audio.currentTime) {
         if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || (!this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0])) {
             for (let i = 0; i < this.current.length; i++) {
                 if (currentTime >= this.current[i][0] && (!this.current[i + 1] || currentTime < this.current[i + 1][0])) {
@@ -43,30 +42,27 @@ class Lrc {
         }
     }
 
-    switch (index) {
+    switch(index) {
         if (!this.parsed[index]) {
             if (!this.async) {
                 if (this.player.list.audios[index].lrc) {
                     this.parsed[index] = this.parse(this.player.list.audios[index].lrc);
-                }
-                else {
+                } else {
                     this.parsed[index] = [['00:00', 'Not available']];
                 }
-            }
-            else {
+            } else {
                 this.parsed[index] = [['00:00', 'Loading']];
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
                     if (index === this.player.list.index && xhr.readyState === 4) {
-                        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
                             this.parsed[index] = this.parse(xhr.responseText);
-                        }
-                        else {
+                        } else {
                             this.player.notice(`LRC file request fails: status ${xhr.status}`);
                             this.parsed[index] = [['00:00', 'Not available']];
                         }
                         this.container.innerHTML = tplLrc({
-                            lyrics: this.parsed[index]
+                            lyrics: this.parsed[index],
                         });
                         this.update(0);
                         this.current = this.parsed[index];
@@ -79,7 +75,7 @@ class Lrc {
         }
 
         this.container.innerHTML = tplLrc({
-            lyrics: this.parsed[index]
+            lyrics: this.parsed[index],
         });
         this.update(0);
         this.current = this.parsed[index];
@@ -97,7 +93,7 @@ class Lrc {
      *
      * @return {String} [[time, text], [time, text], [time, text], ...]
      */
-    parse (lrc_s) {
+    parse(lrc_s) {
         if (lrc_s) {
             lrc_s = lrc_s.replace(/([^\]^\n])\[/g, (match, p1) => p1 + '\n[');
             const lyric = lrc_s.split('\n');
@@ -107,7 +103,10 @@ class Lrc {
                 // match lrc time
                 const lrcTimes = lyric[i].match(/\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g);
                 // match lrc text
-                const lrcText = lyric[i].replace(/.*\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, '').replace(/<(\d{2}):(\d{2})(\.(\d{2,3}))?>/g, '').replace(/^\s+|\s+$/g, '');
+                const lrcText = lyric[i]
+                    .replace(/.*\[(\d{2}):(\d{2})(\.(\d{2,3}))?]/g, '')
+                    .replace(/<(\d{2}):(\d{2})(\.(\d{2,3}))?>/g, '')
+                    .replace(/^\s+|\s+$/g, '');
 
                 if (lrcTimes) {
                     // handle multiple time tag
@@ -126,17 +125,16 @@ class Lrc {
             lrc = lrc.filter((item) => item[1]);
             lrc.sort((a, b) => a[0] - b[0]);
             return lrc;
-        }
-        else {
+        } else {
             return [];
         }
     }
 
-    remove (index) {
+    remove(index) {
         this.parsed.splice(index, 1);
     }
 
-    clear () {
+    clear() {
         this.parsed = [];
         this.container.innerHTML = '';
     }

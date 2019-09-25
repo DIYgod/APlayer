@@ -1,5 +1,4 @@
 export default (options) => {
-
     // default options
     const defaultOption = {
         container: options.element || document.getElementsByClassName('aplayer')[0],
@@ -16,7 +15,7 @@ export default (options) => {
         listFolded: options.fixed,
         listMaxHeight: options.listmaxheight || 250,
         audio: options.music || [],
-        storageName: 'aplayer-setting'
+        storageName: 'aplayer-setting',
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {

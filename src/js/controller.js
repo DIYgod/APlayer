@@ -2,7 +2,7 @@ import utils from './utils';
 import Icons from './icons';
 
 class Controller {
-    constructor (player) {
+    constructor(player) {
         this.player = player;
 
         this.initPlayButton();
@@ -18,13 +18,13 @@ class Controller {
         this.initLrcButton();
     }
 
-    initPlayButton () {
+    initPlayButton() {
         this.player.template.pic.addEventListener('click', () => {
             this.player.toggle();
         });
     }
 
-    initPlayBar () {
+    initPlayBar() {
         const thumbMove = (e) => {
             let percentage = ((e.clientX || e.changedTouches[0].clientX) - this.player.template.barWrap.getBoundingClientRect().left) / this.player.template.barWrap.clientWidth;
             percentage = Math.max(percentage, 0);
@@ -52,12 +52,11 @@ class Controller {
         });
     }
 
-    initVolumeButton () {
+    initVolumeButton() {
         this.player.template.volumeButton.addEventListener('click', () => {
             if (this.player.audio.muted) {
                 this.player.volume(this.player.audio.volume, true);
-            }
-            else {
+            } else {
                 this.player.audio.muted = true;
                 this.player.switchVolumeIcon();
                 this.player.bar.set('volume', 0, 'height');
@@ -88,41 +87,36 @@ class Controller {
         });
     }
 
-    initOrderButton () {
+    initOrderButton() {
         this.player.template.order.addEventListener('click', () => {
             if (this.player.options.order === 'list') {
                 this.player.options.order = 'random';
                 this.player.template.order.innerHTML = Icons.orderRandom;
-            }
-            else if (this.player.options.order === 'random') {
+            } else if (this.player.options.order === 'random') {
                 this.player.options.order = 'list';
                 this.player.template.order.innerHTML = Icons.orderList;
             }
         });
     }
 
-    initLoopButton () {
+    initLoopButton() {
         this.player.template.loop.addEventListener('click', () => {
             if (this.player.list.audios.length > 1) {
                 if (this.player.options.loop === 'one') {
                     this.player.options.loop = 'none';
                     this.player.template.loop.innerHTML = Icons.loopNone;
-                }
-                else if (this.player.options.loop === 'none') {
+                } else if (this.player.options.loop === 'none') {
                     this.player.options.loop = 'all';
                     this.player.template.loop.innerHTML = Icons.loopAll;
-                }
-                else if (this.player.options.loop === 'all') {
+                } else if (this.player.options.loop === 'all') {
                     this.player.options.loop = 'one';
                     this.player.template.loop.innerHTML = Icons.loopOne;
                 }
-            }
-            else {
+            } else {
                 if (this.player.options.loop === 'one' || this.player.options.loop === 'all') {
                     this.player.options.loop = 'none';
                     this.player.template.loop.innerHTML = Icons.loopNone;
-                }
-                else if (this.player.options.loop === 'none') {
+                } else if (this.player.options.loop === 'none') {
                     this.player.options.loop = 'all';
                     this.player.template.loop.innerHTML = Icons.loopAll;
                 }
@@ -130,19 +124,19 @@ class Controller {
         });
     }
 
-    initMenuButton () {
+    initMenuButton() {
         this.player.template.menu.addEventListener('click', () => {
             this.player.list.toggle();
         });
     }
 
-    initMiniSwitcher () {
+    initMiniSwitcher() {
         this.player.template.miniSwitcher.addEventListener('click', () => {
             this.player.setMode(this.player.mode === 'mini' ? 'normal' : 'mini');
         });
     }
 
-    initSkipButton () {
+    initSkipButton() {
         this.player.template.skipBackButton.addEventListener('click', () => {
             this.player.skipBack();
         });
@@ -154,13 +148,12 @@ class Controller {
         });
     }
 
-    initLrcButton () {
+    initLrcButton() {
         this.player.template.lrcButton.addEventListener('click', () => {
             if (this.player.template.lrcButton.classList.contains('aplayer-icon-lrc-inactivity')) {
                 this.player.template.lrcButton.classList.remove('aplayer-icon-lrc-inactivity');
                 this.player.lrc && this.player.lrc.show();
-            }
-            else {
+            } else {
                 this.player.template.lrcButton.classList.add('aplayer-icon-lrc-inactivity');
                 this.player.lrc && this.player.lrc.hide();
             }

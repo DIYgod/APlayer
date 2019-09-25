@@ -3,7 +3,7 @@ import utils from './utils';
 import smoothScroll from 'smoothscroll';
 
 class List {
-    constructor (player) {
+    constructor(player) {
         this.player = player;
         this.index = 0;
         this.audios = this.player.options.audio;
@@ -13,34 +13,32 @@ class List {
         this.bindEvents();
     }
 
-    bindEvents () {
+    bindEvents() {
         this.player.template.list.addEventListener('click', (e) => {
             let target;
             if (e.target.tagName.toUpperCase() === 'LI') {
                 target = e.target;
-            }
-            else {
+            } else {
                 target = e.target.parentElement;
             }
             const audioIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
             if (audioIndex !== this.index) {
                 this.switch(audioIndex);
                 this.player.play();
-            }
-            else {
+            } else {
                 this.player.toggle();
             }
         });
     }
 
-    show () {
+    show() {
         this.showing = true;
         this.player.template.list.scrollTop = this.index * 33;
         this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
         this.player.events.trigger('listshow');
     }
 
-    hide () {
+    hide() {
         this.showing = false;
         this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
         setTimeout(() => {
@@ -49,16 +47,15 @@ class List {
         }, 0);
     }
 
-    toggle () {
+    toggle() {
         if (this.showing) {
             this.hide();
-        }
-        else {
+        } else {
             this.show();
         }
     }
 
-    add (audios) {
+    add(audios) {
         this.player.events.trigger('listadd', {
             audios: audios,
         });
@@ -80,7 +77,7 @@ class List {
         this.player.template.list.innerHTML += tplListItem({
             theme: this.player.options.theme,
             audio: audios,
-            index: this.audios.length + 1
+            index: this.audios.length + 1,
         });
 
         this.audios = this.audios.concat(audios);
@@ -97,14 +94,13 @@ class List {
         if (wasEmpty) {
             if (this.player.options.order === 'random') {
                 this.switch(this.player.randomOrder[0]);
-            }
-            else {
+            } else {
                 this.switch(0);
             }
         }
     }
 
-    remove (index) {
+    remove(index) {
         this.player.events.trigger('listremove', {
             index: index,
         });
@@ -119,8 +115,7 @@ class List {
                 if (index === this.index) {
                     if (this.audios[index]) {
                         this.switch(index);
-                    }
-                    else {
+                    } else {
                         this.switch(index - 1);
                     }
                 }
@@ -136,14 +131,13 @@ class List {
                 }
 
                 this.player.template.listCurs = this.player.container.querySelectorAll('.aplayer-list-cur');
-            }
-            else {
+            } else {
                 this.clear();
             }
         }
     }
 
-    switch (index) {
+    switch(index) {
         this.player.events.trigger('listswitch', {
             index: index,
         });
@@ -173,13 +167,14 @@ class List {
             this.player.lrc && this.player.lrc.update(0);
 
             // set duration time
-            if (this.player.duration !== 1) {           // compatibility: Android browsers will output 1 at first
+            if (this.player.duration !== 1) {
+                // compatibility: Android browsers will output 1 at first
                 this.player.template.dtime.innerHTML = utils.secondToTime(this.player.duration);
             }
         }
     }
 
-    clear () {
+    clear() {
         this.player.events.trigger('listclear');
         this.index = 0;
         this.player.container.classList.remove('aplayer-withlist');

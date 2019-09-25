@@ -2,20 +2,19 @@ import Icons from './icons';
 import tplPlayer from '../template/player.art';
 
 class Template {
-    constructor (options) {
+    constructor(options) {
         this.container = options.container;
         this.options = options.options;
         this.randomOrder = options.randomOrder;
         this.init();
     }
 
-    init () {
+    init() {
         let cover = '';
         if (this.options.audio.length) {
             if (this.options.order === 'random') {
                 cover = this.options.audio[this.randomOrder[0]].cover;
-            }
-            else {
+            } else {
                 cover = this.options.audio[0].cover;
             }
         }

@@ -1,7 +1,10 @@
 language: node_js
 
 node_js:
-  - "node"
+  - lts/*
+
+script:
+  - npm run build
 
 cache:
   yarn: true
