@@ -46,7 +46,6 @@ class APlayer {
         }
 
         // save lrc
-        this.container = this.options.container;
         if (this.options.lrcType === 2 || this.options.lrcType === true) {
             const lrcEle = this.container.getElementsByClassName('aplayer-lrc-content');
             for (let i = 0; i < lrcEle.length; i++) {
