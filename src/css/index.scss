@@ -20,7 +20,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     svg {
         width: 100%;
         height: 100%;
-        
+
         path,
         circle {
             fill: #fff;
@@ -59,7 +59,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
     &.aplayer-narrow {
         width: $aplayer-height;
-        
+
         .aplayer-info {
             display: none;
         }
@@ -113,6 +113,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             z-index: 98;
             pointer-events: none;
             text-shadow: -1px -1px 0 #fff;
+            transition: opacity 0.5s;
 
             &:before,
             &:after {
@@ -218,7 +219,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         background-color: transparent;
         outline: none;
         cursor: pointer;
-        opacity: .8;
+        opacity: 0.8;
         vertical-align: middle;
         padding: 0;
         font-size: 12px;
@@ -226,7 +227,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         display: inline-block;
 
         path {
-            transition: all .2s ease-in-out;
+            transition: all 0.2s ease-in-out;
         }
     }
 
@@ -391,7 +392,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                             width: 10px;
                             border-radius: 50%;
                             cursor: pointer;
-                            transition: all .3s ease-in-out;
+                            transition: all 0.3s ease-in-out;
                             transform: scale(0);
                         }
                     }
@@ -463,7 +464,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                     height: 0;
                     z-index: 99;
                     overflow: hidden;
-                    transition: all .2s ease-in-out;
+                    transition: all 0.2s ease-in-out;
 
                     &.aplayer-volume-bar-wrap-active {
                         height: 40px;
@@ -518,9 +519,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             width: 100%;
             height: 10%;
             content: ' ';
-            background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-            background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+            background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
         }
 
@@ -533,9 +534,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             width: 100%;
             height: 33%;
             content: ' ';
-            background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 100%);
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0.8) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.8) 100%);
+            background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 100%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ccffffff',GradientType=0 );
         }
 
@@ -653,7 +654,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         font-size: 12px;
         border-radius: 4px;
         padding: 5px 10px;
-        transition: all .3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         overflow: hidden;
         color: #fff;
         pointer-events: none;
@@ -692,15 +693,19 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 }
 
 @keyframes aplayer-roll {
-    0%{left:0}
-    100%{left: -100%}
+    0% {
+        left: 0;
+    }
+    100% {
+        left: -100%;
+    }
 }
 
 @keyframes rotate {
     0% {
-        transform: rotate(0)
+        transform: rotate(0);
     }
     100% {
-        transform: rotate(360deg)
+        transform: rotate(360deg);
     }
 }

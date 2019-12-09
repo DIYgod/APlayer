@@ -64,6 +64,21 @@ class APlayer {
         if (this.options.fixed) {
             this.container.classList.add('aplayer-fixed');
             this.template.body.style.width = this.template.body.offsetWidth - 18 + 'px';
+
+            document.addEventListener(
+                'scroll',
+                // 防抖优化
+                utils.debounce(() => {
+                    const inHeight = window.innerHeight,
+                        bottom = document.body.getBoundingClientRect().bottom;
+                    const isBottom = bottom - inHeight <= 30;
+                    if (isBottom) {
+                        this.container.querySelector('.aplayer.aplayer-fixed .aplayer-lrc').style = 'opacity: 0';
+                    } else {
+                        this.container.querySelector('.aplayer.aplayer-fixed .aplayer-lrc').style = '';
+                    }
+                }, 50)
+            );
         }
         if (this.options.mini) {
             this.setMode('mini');
