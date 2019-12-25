@@ -3357,9 +3357,9 @@ eslint-visitor-keys@^1.1.0:
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
 eslint@^6.4.0:
-  version "6.7.2"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.7.2.tgz#c17707ca4ad7b2d8af986a33feba71e18a9fecd1"
-  integrity sha512-qMlSWJaCSxDFr8fBPvJM9kJwbazrhNcBU3+DszDW1OlEwKBBRWsJc7NJFelvwQpanHCR14cOLD41x8Eqvo3Nng==
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.8.0.tgz#62262d6729739f9275723824302fb227c8c93ffb"
+  integrity sha512-K+Iayyo2LtyYhDSYwz5D5QdWw0hCacNzyq1Y821Xna2xSJj7cijoLLYmLxTQgcgZ9mC61nryMy9S7GRbYpI5Ig==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.10.0"
@@ -5601,10 +5601,10 @@ mini-css-extract-plugin@0.6.0:
     schema-utils "^1.0.0"
     webpack-sources "^1.1.0"
 
-mini-css-extract-plugin@0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-0.8.2.tgz#a875e169beb27c88af77dd962771c9eedc3da161"
-  integrity sha512-a3Y4of27Wz+mqK3qrcd3VhYz6cU0iW5x3Sgvqzbj+XmlrSizmvu8QQMl5oMYJjgHOC4iyt+w7l4umP+dQeW3bw==
+mini-css-extract-plugin@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-0.9.0.tgz#47f2cf07aa165ab35733b1fc97d4c46c0564339e"
+  integrity sha512-lp3GeY7ygcgAmVIcRPBVhIkf8Us7FZjA+ILpal44qLdSu11wmjKQ3d9k15lfD7pO4esu9eUIAW7qiYIBppv40A==
   dependencies:
     loader-utils "^1.1.0"
     normalize-url "1.9.1"
@@ -8216,9 +8216,9 @@ strip-loader@^0.1.2:
     loader-utils "^0.2.6"
 
 style-loader@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.0.2.tgz#433d72eab8d1dd7d64c648b8ad7d9cbff3184111"
-  integrity sha512-xehHGWeCPrr+R/bU82To0j7L7ENzH30RHYmMhmAumbuIpQ/bHmv3SAj1aTRfBSszkXoqNtpKnJyWXEDydS+KeA==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.1.1.tgz#8290d915dffe820916790cdcab5aa58c38ab605c"
+  integrity sha512-oIVF12trRq0od4Yojg7q0K3Lq/O6Ix/AYgVosykrVg+kWxxxUyk8KhKCCmekyGSUiVK1xxlAQymLWWdh6S9lOg==
   dependencies:
     loader-utils "^1.2.3"
     schema-utils "^2.0.1"
