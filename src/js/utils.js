@@ -1,4 +1,4 @@
-const isMobile = /mobile/i.test(window.navigator.userAgent);
+const isMobile = typeof window !== 'undefined' ? /mobile/i.test(window.navigator.userAgent) : false;
 
 const utils = {
     /**
@@ -45,7 +45,7 @@ const utils = {
             return arr;
         }
         return shuffle(
-            [...Array(length)].map(function(item, i) {
+            [...Array(length)].map(function (item, i) {
                 return i;
             })
         );

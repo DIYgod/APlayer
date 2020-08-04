@@ -2,15 +2,17 @@ class Timer {
     constructor(player) {
         this.player = player;
 
-        window.requestAnimationFrame = (() =>
-            window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function(callback) {
-                window.setTimeout(callback, 1000 / 60);
-            })();
+        if (typeof window !== 'undefined') {
+            window.requestAnimationFrame = (() =>
+                window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimationFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                })();
+        }
 
         this.types = ['loading'];
 
