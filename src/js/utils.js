@@ -19,10 +19,16 @@ const utils = {
 
     storage: {
         set: (key, value) => {
-            localStorage.setItem(key, value);
+            try {
+                localStorage.setItem(key, value);
+            } catch (e) {}
         },
 
-        get: (key) => localStorage.getItem(key),
+        get: (key) => {
+            try {
+                localStorage.getItem(key)
+            } catch (e) {}
+        }
     },
 
     nameMap: {
