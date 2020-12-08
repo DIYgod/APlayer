@@ -87,6 +87,7 @@ audio.type | 'auto' | 可选值: 'auto', 'hls', 'normal' 或其他自定义类�
 customAudioType | - | 自定义类型，[详情](https://aplayer.js.org/#/home?id=mse-support)
 mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
 lrcType | 0 | [详情](https://aplayer.js.org/#/home?id=lrc)
+computedLrc | (responseJSON) => string | 当 lrcType 等于 3 时, 如果歌词 api 是一个 json 可以使用此方法进行处理
 listFolded | false | 列表默认折叠
 listMaxHeight | - | 列表最大高度
 storageName | 'aplayer-setting' | 存储播放器设置的 localStorage key
@@ -111,6 +112,7 @@ const ap = new APlayer({
     listFolded: false,
     listMaxHeight: 90,
     lrcType: 3,
+    computedLrc: resJson =>resJson.lrc?.lyric,
     audio: [
         {
             name: 'name1',
@@ -303,6 +305,22 @@ const ap = new APlayer({
         url: 'demo.mp3',
         cover: 'demo.jpg',
         lrc: 'lrc.lrc'
+    }
+});
+```
+当 lrcType 等于 3 时, 如果歌词 api 是一个 json 可以使用此方法进行处理
+
+```js
+const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    lrcType: 3,
+    audio: {
+        name: 'name',
+        artist: 'artist',
+        url: 'demo.mp3',
+        cover: 'demo.jpg',
+        lrc: 'http://localhost:3000/lyric?id=280761',
+        computedLrc: resJson =>resJson.lrc?.lyric,
     }
 });
 ```

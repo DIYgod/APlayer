@@ -29,7 +29,7 @@ class Lrc {
     }
 
     update(currentTime = this.player.audio.currentTime) {
-        if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || (!this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0])) {
+        if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || !this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0]) {
             for (let i = 0; i < this.current.length; i++) {
                 if (currentTime >= this.current[i][0] && (!this.current[i + 1] || currentTime < this.current[i + 1][0])) {
                     this.index = i;
@@ -56,7 +56,12 @@ class Lrc {
                 xhr.onreadystatechange = () => {
                     if (index === this.player.list.index && xhr.readyState === 4) {
                         if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
-                            this.parsed[index] = this.parse(xhr.responseText);
+                            const options = this.player.options;
+                            let text = xhr.responseText;
+                            if (options.computedLrc) {
+                                text = options.computedLrc(JSON.parse(xhr.responseText));
+                            }
+                            this.parsed[index] = this.parse(text);
                         } else {
                             this.player.notice(`LRC file request fails: status ${xhr.status}`);
                             this.parsed[index] = [['00:00', 'Not available']];
