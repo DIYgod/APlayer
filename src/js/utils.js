@@ -26,9 +26,9 @@ const utils = {
 
         get: (key) => {
             try {
-                localStorage.getItem(key)
+                return localStorage.getItem(key);
             } catch (e) {
-                return '{}'
+                return '{}';
             }
         }
     },
