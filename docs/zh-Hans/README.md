@@ -87,7 +87,7 @@ audio.type | 'auto' | 可选值: 'auto', 'hls', 'normal' 或其他自定义类�
 customAudioType | - | 自定义类型，[详情](https://aplayer.js.org/#/home?id=mse-support)
 mutex | true | 互斥，阻止多个播放器同时播放，当前播放器播放时暂停其他播放器
 lrcType | 0 | [详情](https://aplayer.js.org/#/home?id=lrc)
-listFolded | false | 列表默认折叠
+listFolded | true | 列表默认折叠
 listMaxHeight | - | 列表最大高度
 storageName | 'aplayer-setting' | 存储播放器设置的 localStorage key
 

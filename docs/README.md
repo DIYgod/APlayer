@@ -86,7 +86,7 @@ audio.type | 'auto' | values: 'auto', 'hls', 'normal' or other custom type, [see
 customAudioType | - | [see more details](https://aplayer.js.org/#/home?id=mse-support)
 mutex | true | prevent to play multiple player at the same time, pause other players when this player start play
 lrcType | 0 | [see more details](https://aplayer.js.org/#/home?id=lrc)
-listFolded | false | indicate whether list should folded at first
+listFolded | true | indicate whether list should folded at first
 listMaxHeight | - | list max height
 storageName | 'aplayer-setting' | localStorage key that store player setting
 
