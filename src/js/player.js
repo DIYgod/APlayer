@@ -256,7 +256,6 @@ class APlayer {
                 }
             }
             if (notIncluded) {
-                console.log('showdetails');
                 this.events.trigger('showdetails');
             }
             /*
