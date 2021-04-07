@@ -268,6 +268,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             z-index: 99;
             background: #fff;
             transition: all 0.3s ease;
+            border-top: 1px solid #e9e9e9;
             max-width: 850px;
         }
 
