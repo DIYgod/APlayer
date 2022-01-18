@@ -48,6 +48,7 @@ Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlay
 -   [Vue-APlayer](https://github.com/SevenOutman/vue-aplayer): Vue
 -   [vue-aplayer](https://github.com/MoeFE/vue-aplayer): Vue
 -   [php-aplayer](https://github.com/Daryl-L/php-aplayer): PHP
+-   [yew-aplayer](https://github.com/GalAster/yew-aplayer): Wasm bind + Yew
 
 ### Tooling
 
