@@ -10,23 +10,22 @@ If you run a business and are using APlayer in a revenue-generating product, it 
 
 If you are an individual user and have enjoyed the productivity of using APlayer, consider donating as a sign of appreciation - like buying me coffee once in a while :)
 
-You can support APlayer development via the following methods:
+You can support APlayer via donations.
 
-## One-time Donations
+### Recurring Donation
 
-We accept donations through these channels:
+-   Become a Sponser on [GitHub](https://github.com/sponsors/DIYgod)
+-   Become a Sponser on [Patreon](https://www.patreon.com/DIYgod)
+-   Become a Sponser on [爱发电](https://afdian.net/@diygod)
+-   Contact us directly: i@diygod.me
 
-- [Paypal](https://www.paypal.me/DIYgod)
-- [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
-- [Alipay](https://i.imgur.com/wv1Pj2k.png)
-- Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+### One-time Donation
 
-## Recurring Pledges
+We accept donations via the following ways:
 
-Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the APlayer GitHub repository and this website.
-
-- Become a backer or sponsor via [OpenCollective](https://opencollective.com/aplayer)
-- E-mail us: i#html.love
+-   [WeChat Pay](https://diygod.me/images/wx.jpg)
+-   [Alipay](https://diygod.me/images/zfb.jpg)
+-   [Paypal](https://www.paypal.me/DIYgod)
 
 ## Current Premium Sponsors
 
@@ -35,13 +34,6 @@ Recurring pledges come with exclusive perks, e.g. having your name or your compa
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
-
-### OpenCollective backers
-
-![](https://opencollective.com/APlayer/backers.svg?width=890)
 
 ## APlayer contributors
 
