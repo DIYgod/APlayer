@@ -3,6 +3,11 @@
     <span class="aplayer-list-cur" style="background-color: {{ $value.theme || theme }};"></span>
     <span class="aplayer-list-index">{{ $index + index }}</span>
     <span class="aplayer-list-title">{{ $value.name }}</span>
+    {{if $value.removeable}} 
+    <span class="aplayer-list-remove" data-index="{{$index}}">✖</span> 
+    {{else}}
+    <span class="aplayer-list-occupied"></span> 
+    {{/if}}
     <span class="aplayer-list-author">{{ $value.artist }}</span>
 </li>
 {{/each}}

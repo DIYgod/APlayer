@@ -16,6 +16,7 @@ export default (options) => {
         listMaxHeight: options.listmaxheight || 250,
         audio: options.music || [],
         storageName: 'aplayer-setting',
+        audioRequest: null,
     };
     for (const defaultKey in defaultOption) {
         if (defaultOption.hasOwnProperty(defaultKey) && !options.hasOwnProperty(defaultKey)) {
@@ -34,6 +35,7 @@ export default (options) => {
         item.artist = item.artist || item.author || 'Audio artist';
         item.cover = item.cover || item.pic;
         item.type = item.type || 'normal';
+        item.removeable = item.removeable || false;
         return item;
     });
 

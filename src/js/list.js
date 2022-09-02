@@ -16,7 +16,11 @@ class List {
     bindEvents() {
         this.player.template.list.addEventListener('click', (e) => {
             let target;
-            if (e.target.tagName.toUpperCase() === 'LI') {
+            if (e.target.className === 'aplayer-list-remove') {
+                const index = e.target.dataset.index;
+                this.remove(index);
+                return false;
+            } else if (e.target.tagName.toUpperCase() === 'LI') {
                 target = e.target;
             } else {
                 target = e.target.parentElement;

@@ -81,14 +81,16 @@ const ap4 = new APlayer({
         url: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.mp3',
         cover: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.jpg',
         lrc: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.lrc',
-        theme: '#ebd0c2'
+        theme: '#ebd0c2',
+        removeable:true
     }, {
         name: 'トリカゴ',
         artist: 'XX:me',
         url: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/darling.mp3',
         cover: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/darling.jpg',
         lrc: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/darling.lrc',
-        theme: '#46718b'
+        theme: '#46718b',
+        removeable:true
     }, {
         name: '前前前世',
         artist: 'RADWIMPS',
@@ -99,11 +101,19 @@ const ap4 = new APlayer({
     }, {
         name: '光るなら(HLS)',
         artist: 'Goose house',
-        url: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hls/hikarunara.m3u8',
         cover: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.jpg',
         theme: '#ebd0c2',
         type: 'hls'
-    }]
+    }],
+    audioRequest:function(audio){
+        return new Promise((resolve, reject) =>{
+            //sync request audio url
+            if(!audio.url){
+                audio.url = "https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hls/hikarunara.m3u8";
+            }
+            resolve(audio);
+        });
+    }
 });
 
 const ap5 = new APlayer({
@@ -121,6 +131,7 @@ const ap5 = new APlayer({
         url: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.mp3',
         cover: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.jpg',
         lrc: 'https://cn-south-17-aplayer-46154810.oss.dogecdn.com/hikarunara.lrc',
+        removeable:true
     }, {
         name: 'トリカゴ',
         artist: 'XX:me',

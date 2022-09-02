@@ -28,6 +28,8 @@ class APlayer {
         this.playedPromise = Promise.resolve();
         this.mode = 'normal';
 
+        this.audioRequest = this.options.audioRequest;
+
         this.randomOrder = utils.randomOrder(this.options.audio.length);
 
         this.container.classList.add('aplayer');
@@ -215,11 +217,16 @@ class APlayer {
         });
     }
 
-    setAudio(audio) {
+    async setAudio(audio) {
         if (this.hls) {
             this.hls.destroy();
             this.hls = null;
         }
+
+        if (this.audioRequest) {
+            audio = await this.audioRequest(audio);
+        }
+
         let type = audio.type;
         if (this.options.customAudioType && this.options.customAudioType[type]) {
             if (Object.prototype.toString.call(this.options.customAudioType[type]) === '[object Function]') {
