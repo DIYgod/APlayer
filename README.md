@@ -1,6 +1,13 @@
-<p align="center">
-<img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fhu01y9uy7j305k04s3yc.jpg" alt="ADPlayer" width="100">
-</p>
+## FORK NEW:
+
+-   **support playlist removeable**
+
+    remove the audio from the playlist
+
+-   **audioRequest option**
+
+    The request the audio url before it's play, not during initialization
+
 <h1 align="center">APlayer</h1>
 
 > Wow, such a lovely HTML5 music player
