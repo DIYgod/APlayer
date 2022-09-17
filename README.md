@@ -48,6 +48,7 @@ Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlay
 -   [Vue-APlayer](https://github.com/SevenOutman/vue-aplayer): Vue
 -   [vue-aplayer](https://github.com/MoeFE/vue-aplayer): Vue
 -   [php-aplayer](https://github.com/Daryl-L/php-aplayer): PHP
+-   [aplayer-hugo-module](https://github.com/Runzelee/aplayer-hugo-module): Hugo
 
 ### Tooling
 
@@ -78,13 +79,6 @@ Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlay
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
-
-### OpenCollective backers
-
-![](https://opencollective.com/APlayer/backers.svg?width=890)
 
 ## Contributors
 
@@ -96,21 +90,22 @@ This project exists thanks to all the people who contribute.
 
 APlayer is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
 
-## One-time Donations
+You can support APlayer via donations.
 
-We accept donations through these channels:
+### Recurring Donation
 
+-   Become a Sponser on [GitHub](https://github.com/sponsors/DIYgod)
+-   Become a Sponser on [Patreon](https://www.patreon.com/DIYgod)
+-   Become a Sponser on [爱发电](https://afdian.net/@diygod)
+-   Contact us directly: i@diygod.me
+
+### One-time Donation
+
+We accept donations via the following ways:
+
+-   [WeChat Pay](https://diygod.me/images/wx.jpg)
+-   [Alipay](https://diygod.me/images/zfb.jpg)
 -   [Paypal](https://www.paypal.me/DIYgod)
--   [WeChat Pay](https://i.imgur.com/aq6PtWa.png)
--   [Alipay](https://i.imgur.com/wv1Pj2k.png)
--   Bitcoin: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
-
-## Recurring Pledges
-
-Recurring pledges come with exclusive perks, e.g. having your name or your company logo listed in the APlayer GitHub repository and this website.
-
--   Become a backer or sponsor via [OpenCollective](https://opencollective.com/aplayer)
--   E-mail us: i#html.love
 
 ## Author
 

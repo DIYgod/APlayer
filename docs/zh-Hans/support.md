@@ -11,23 +11,22 @@ APlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 
 如果你是个人开发者并且享受 APlayer 带来的高开发效率，可以用捐助来表示你的谢意 —— 比如偶尔给我买杯咖啡 :)
 
-你可以通过下列的方法来赞助 APlayer 的开发。
-
-## 一次性赞助
-
-我们通过以下方式接受赞助：
-
-- [微信支付](https://i.imgur.com/aq6PtWa.png)
-- [支付宝](https://i.imgur.com/wv1Pj2k.png)
-- [Paypal](https://www.paypal.me/DIYgod)
-- 比特币: 13CwQLHzPYm2tewNMSJBeArbbRM5NSmCD1
+你可以通过下列的方法来赞助 APlayer 的开发.
 
 ## 周期性赞助
 
-周期性赞助可以获得额外的回报，比如你的名字或你的公司 logo 会出现在 APlayer 的 GitHub 仓库和现在我们的官网中。
+-   通过 [GitHub](https://github.com/sponsors/DIYgod) 赞助
+-   通过 [Patreon](https://www.patreon.com/DIYgod) 赞助
+-   通过 [爱发电](https://afdian.net/@diygod) 赞助
+-   给我们发邮件联系赞助事宜: <i@diygod.me>
 
-- 通过 [OpenCollective](https://opencollective.com/aplayer) 赞助成为 backer 或 sponsor 
-- 给我们发邮件联系赞助事宜: i#html.love
+## 一次性赞助
+
+我们通过以下方式接受赞助:
+
+-   [微信支付](https://diygod.me/images/wx.jpg)
+-   [支付宝](https://diygod.me/images/zfb.jpg)
+-   [Paypal](https://www.paypal.me/DIYgod)
 
 ## 当前的顶级赞助商
 
@@ -36,13 +35,6 @@ APlayer 是采用 MIT 许可的开源项目，使用完全免费。 但是随着
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
     <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
 </a>
-<a href="https://console.upyun.com/register/?invite=BkLZ2Xqob" target="_blank">
-    <img width="222px" src="https://imgur.com/apG1uKf.png">
-</a>
-
-### OpenCollective backers
-
-![](https://opencollective.com/APlayer/backers.svg?width=890)
 
 ## APlayer 贡献者
 

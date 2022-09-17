@@ -30,6 +30,7 @@ Let's make APlayer better, feel free to submit yours in [`Let me know!`](https:/
 - [Vue-APlayer](https://github.com/SevenOutman/vue-aplayer): Vue
 - [vue-aplayer](https://github.com/MoeFE/vue-aplayer): Vue
 - [php-aplayer](https://github.com/Daryl-L/php-aplayer): PHP
+- [aplayer-hugo-module](https://github.com/Runzelee/aplayer-hugo-module): Hugo
 
 ### Tooling
 
