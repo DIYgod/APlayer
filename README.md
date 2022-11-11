@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fhu01y9uy7j305k04s3yc.jpg" alt="ADPlayer" width="100">
+<img src="https://i.imgur.com/LnPvZvO.png" alt="ADPlayer" width="100">
 </p>
 <h1 align="center">APlayer</h1>
 
@@ -77,7 +77,7 @@ Using APlayer on your project? [Let me know!](https://github.com/MoePlayer/APlay
 ### Special Sponsors
 
 <a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img width="222px" src="https://i.imgur.com/BBKXPAp.png">
+    <img width="222px" src="https://player.dogecloud.com/img/logo_with_product3.png">
 </a>
 
 ## Contributors
