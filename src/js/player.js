@@ -158,6 +158,7 @@ class APlayer {
 
         // show audio loaded bar: to inform interested parties of progress downloading the media
         this.on('canplay', () => {
+            this.switchSpeed(this.options.speed);
             const percentage = this.audio.buffered.length ? this.audio.buffered.end(this.audio.buffered.length - 1) / this.duration : 0;
             this.bar.set('loaded', percentage, 'width');
         });
@@ -368,6 +369,11 @@ class APlayer {
 
         return this.audio.muted ? 0 : this.audio.volume;
     }
+    switchSpeed(speed) {
+        const _speed = speed * 1;
+        this.options.speed = _speed;
+        this.audio.playbackRate = _speed;
+    }
 
     /**
      * bind events
@@ -391,7 +397,6 @@ class APlayer {
     switchAudio(index) {
         this.list.switch(index);
     }
-
     // abandoned
     addAudio(audios) {
         this.list.add(audios);
