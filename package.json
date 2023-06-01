@@ -74,7 +74,6 @@
     },
     "dependencies": {
         "balloon-css": "^1.0.3",
-        "promise-polyfill": "8.2.0",
-        "smoothscroll": "0.4.0"
+        "promise-polyfill": "8.2.0"
     }
 }
