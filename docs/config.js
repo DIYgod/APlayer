@@ -47,9 +47,18 @@ docute.init({
             url: 'https://aplayer.js.org'
         }),
         evanyou(),
-        player()
+        player(),
+        insertUmamiJS('8c8b314e-99d9-4ac4-bee9-0e9826bb2b1c', 'https://umami.diygod.dev/script.js')
     ]
 });
+
+function insertUmamiJS(id, url) {
+    var script = document.createElement('script');
+    script.setAttribute("data-website-id",id);
+    script.src = url;
+    script.async = true;
+    document.head.appendChild(script);
+}
 
 function player () {
     return function (context) {
