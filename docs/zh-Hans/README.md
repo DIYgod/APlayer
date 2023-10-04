@@ -54,8 +54,8 @@ const ap = new APlayer({
 使用模块管理器:
 
 ```js
-import 'APlayer/dist/APlayer.min.css';
-import APlayer from 'APlayer';
+import 'aplayer/dist/APlayer.min.css';
+import APlayer from 'aplayer';
 
 const ap = new APlayer(options);
 ```
