@@ -1,6 +1,5 @@
 import tplListItem from '../template/list-item.art';
 import utils from './utils';
-import smoothScroll from 'smoothscroll';
 
 class List {
     constructor(player) {
@@ -159,7 +158,7 @@ class List {
             }
             this.player.container.querySelectorAll('.aplayer-list li')[this.index].classList.add('aplayer-list-light');
 
-            smoothScroll(this.index * 33, 500, null, this.player.template.list);
+            this.player.template.list.scrollTop = this.index * 33;
 
             this.player.setAudio(audio);
 
