@@ -1,3 +1,3 @@
 {{each lyrics}}
-    <p{{ if $index === 0 }} class="aplayer-lrc-current"{{ /if }}>{{$value[1]}}</p>
+    <p{{ if $index === 0 }} class="aplayer-lrc-current"{{ /if }} style="font-size: {{ fontSize }}px !important; height: {{ fontSize + 4 }}px; line-height: {{ fontSize + 4 }}px !important;">{{$value[1]}}</p>
 {{/each}}

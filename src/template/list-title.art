@@ -1,0 +1,6 @@
+<div class="aplayer-list-title-wrap">
+    <span class="aplayer-list-title">播放列表</span>
+    <button type="button" class="aplayer-icon aplayer-list-clear">
+        {{@ icons.delete }}
+    </button>
+</div>

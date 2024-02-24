@@ -1,5 +1,7 @@
 import tplListItem from '../template/list-item.art';
+import tplListTitle from '../template/list-title.art';
 import utils from './utils';
+import Icons from './icons';
 import smoothScroll from 'smoothscroll';
 
 class List {
@@ -8,7 +10,16 @@ class List {
         this.index = 0;
         this.audios = this.player.options.audio;
         this.showing = true;
+        if (this.player.options.listFolded) {
+            this.showing = false;
+        }
         this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
+
+        if (this.player.options.fixedBar) {
+            this.player.template.list.style.height = '0px';
+            this.initListClearButton();
+            this.addClickListener();
+        }
 
         this.bindEvents();
     }
@@ -20,6 +31,10 @@ class List {
                 target = e.target;
             } else {
                 target = e.target.parentElement;
+                // When click the list title.
+                if (target.tagName.toUpperCase() !== 'LI') {
+                    return;
+                }
             }
             const audioIndex = parseInt(target.getElementsByClassName('aplayer-list-index')[0].innerHTML) - 1;
             if (audioIndex !== this.index) {
@@ -31,11 +46,35 @@ class List {
         });
     }
 
+    addClickListener() {
+        document.addEventListener('click', (e) => {
+            if (e.path.indexOf(this.player.template.list) < 0 && e.path.indexOf(this.player.template.menu) < 0) {
+                this.hide();
+            }
+        });
+    }
+
+    initListClearButton() {
+        this.player.template.list.addEventListener('click', (e) => {
+            if (e.target.tagName.toUpperCase() === 'BUTTON') {
+                this.hide();
+                this.clear();
+            } else {
+                const target = e.target.parentElement;
+                if (target.tagName.toUpperCase() === 'BUTTON' || target.tagName.toUpperCase() === 'SVG') {
+                    this.hide();
+                    this.clear();
+                }
+            }
+        });
+    }
+
     show() {
         this.showing = true;
         this.player.template.list.scrollTop = this.index * 33;
         this.player.template.list.style.height = `${Math.min(this.player.template.list.scrollHeight, this.player.options.listMaxHeight)}px`;
         this.player.events.trigger('listshow');
+        this.player.template.list.classList.add('list-show');
     }
 
     hide() {
@@ -44,6 +83,7 @@ class List {
         setTimeout(() => {
             this.player.template.list.style.height = '0px';
             this.player.events.trigger('listhide');
+            this.player.template.list.classList.remove('list-show');
         }, 0);
     }
 
@@ -98,6 +138,12 @@ class List {
                 this.switch(0);
             }
         }
+        if (this.player.options.fixedBar) {
+            this.updateListNum();
+        }
+        if (this.player.options.storeList) {
+            this.updateListStorage();
+        }
     }
 
     remove(index) {
@@ -134,6 +180,12 @@ class List {
             } else {
                 this.clear();
             }
+            if (this.player.options.fixedBar) {
+                this.updateListNum();
+            }
+            if (this.player.options.storeList) {
+                this.updateListStorage();
+            }
         }
     }
 
@@ -148,7 +200,7 @@ class List {
             const audio = this.audios[this.index];
 
             // set html
-            this.player.template.pic.style.backgroundImage = audio.cover ? `url('${audio.cover}')` : '';
+            this.player.template.pic.style.backgroundImage = audio.cover ? `url('${audio.cover}')` : this.player.options.defaultCover !== '' ? `url(${this.player.options.defaultCover})` : '';
             this.player.theme(this.audios[this.index].theme || this.player.options.theme, this.index, false);
             this.player.template.title.innerHTML = audio.name;
             this.player.template.author.innerHTML = audio.artist ? ' - ' + audio.artist : '';
@@ -171,6 +223,9 @@ class List {
                 // compatibility: Android browsers will output 1 at first
                 this.player.template.dtime.innerHTML = utils.secondToTime(this.player.duration);
             }
+            if (this.player.options.storeList) {
+                this.updateListStorage();
+            }
         }
     }
 
@@ -182,13 +237,40 @@ class List {
         this.audios = [];
         this.player.lrc && this.player.lrc.clear();
         this.player.audio.src = '';
-        this.player.template.list.innerHTML = '';
-        this.player.template.pic.style.backgroundImage = '';
+        if (this.player.options.fixedBar) {
+            this.player.template.list.innerHTML = tplListTitle({
+                icons: Icons,
+            });
+        } else {
+            this.player.template.list.innerHTML = '';
+        }
+        if (this.player.options.defaultCover) {
+            this.player.template.pic.style.backgroundImage = `url(${this.player.options.defaultCover})`;
+        }
         this.player.theme(this.player.options.theme, this.index, false);
-        this.player.template.title.innerHTML = 'No audio';
+        this.player.template.title.innerHTML = this.player.options.defaultTitle;
         this.player.template.author.innerHTML = '';
         this.player.bar.set('loaded', 0, 'width');
         this.player.template.dtime.innerHTML = utils.secondToTime(0);
+        if (this.player.options.fixedBar) {
+            this.updateListNum();
+        }
+        if (this.player.options.storeList) {
+            this.updateListStorage();
+        }
+    }
+
+    updateListStorage() {
+        this.player.storage.set('list', this.audios);
+        this.player.storage.set('listIndex', this.index);
+    }
+
+    updateListNum() {
+        if (this.audios.length > 99) {
+            this.player.template.listLength.innerHTML = '99+';
+        } else {
+            this.player.template.listLength.innerHTML = this.audios.length;
+        }
     }
 }
 

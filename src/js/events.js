@@ -27,7 +27,7 @@ class Events {
             'volumechange',
             'waiting',
         ];
-        this.playerEvents = ['destroy', 'listshow', 'listhide', 'listadd', 'listremove', 'listswitch', 'listclear', 'noticeshow', 'noticehide', 'lrcshow', 'lrchide'];
+        this.playerEvents = ['destroy', 'listshow', 'listhide', 'listadd', 'listremove', 'listswitch', 'listclear', 'noticeshow', 'noticehide', 'lrcshow', 'lrchide', 'showdetails'];
     }
 
     on(name, callback) {

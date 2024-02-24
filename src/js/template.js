@@ -39,6 +39,7 @@ class Template {
         this.played = this.container.querySelector('.aplayer-played');
         this.loaded = this.container.querySelector('.aplayer-loaded');
         this.thumb = this.container.querySelector('.aplayer-thumb');
+        this.volumeWrap = this.container.querySelector('.aplayer-volume-wrap');
         this.volume = this.container.querySelector('.aplayer-volume');
         this.volumeBar = this.container.querySelector('.aplayer-volume-bar');
         this.volumeButton = this.container.querySelector('.aplayer-time button');
@@ -56,6 +57,10 @@ class Template {
         this.skipForwardButton = this.container.querySelector('.aplayer-icon-forward');
         this.skipPlayButton = this.container.querySelector('.aplayer-icon-play');
         this.lrcButton = this.container.querySelector('.aplayer-icon-lrc');
+        if (this.options.fixedBar) {
+            this.listLength = this.container.querySelector('.list-length');
+            this.leftController = this.container.querySelector('.aplayer-controller-left');
+        }
     }
 }
 

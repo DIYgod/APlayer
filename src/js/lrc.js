@@ -5,6 +5,18 @@ class Lrc {
         this.container = options.container;
         this.async = options.async;
         this.player = options.player;
+        this.fontSize = parseInt(this.player.options.lrcFontSize);
+        this.aplayerHeightLrc = this.fontSize * 2 + 6 + 60;
+        if (this.fontSize !== 12) {
+            this.player.template.lrc.parentElement.style.height = `${this.fontSize * 2 + 6}px`;
+        }
+        if (!this.player.options.fixed && !this.player.options.fixedBar) {
+            this.player.template.pic.style.height = `${this.aplayerHeightLrc}px`;
+            this.player.template.pic.style.width = `${this.aplayerHeightLrc}px`;
+            this.player.template.info.style.marginLeft = `${this.aplayerHeightLrc}px`;
+            this.player.template.info.style.height = `${this.aplayerHeightLrc}px`;
+            this.player.template.body.style.height = `${this.aplayerHeightLrc}px`;
+        }
         this.parsed = [];
         this.index = 0;
         this.current = [];
@@ -29,12 +41,12 @@ class Lrc {
     }
 
     update(currentTime = this.player.audio.currentTime) {
-        if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || (!this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0])) {
+        if (this.index > this.current.length - 1 || currentTime < this.current[this.index][0] || !this.current[this.index + 1] || currentTime >= this.current[this.index + 1][0]) {
             for (let i = 0; i < this.current.length; i++) {
                 if (currentTime >= this.current[i][0] && (!this.current[i + 1] || currentTime < this.current[i + 1][0])) {
                     this.index = i;
-                    this.container.style.transform = `translateY(${-this.index * 16}px)`;
-                    this.container.style.webkitTransform = `translateY(${-this.index * 16}px)`;
+                    this.container.style.transform = `translateY(${-this.index * (this.fontSize + 4)}px)`;
+                    this.container.style.webkitTransform = `translateY(${-this.index * (this.fontSize + 4)}px)`;
                     this.container.getElementsByClassName('aplayer-lrc-current')[0].classList.remove('aplayer-lrc-current');
                     this.container.getElementsByTagName('p')[i].classList.add('aplayer-lrc-current');
                 }
@@ -48,21 +60,24 @@ class Lrc {
                 if (this.player.list.audios[index].lrc) {
                     this.parsed[index] = this.parse(this.player.list.audios[index].lrc);
                 } else {
-                    this.parsed[index] = [['00:00', 'Not available']];
+                    this.parsed[index] = [['00:00', this.player.options.defaultLrcErrText]];
                 }
             } else {
-                this.parsed[index] = [['00:00', 'Loading']];
+                this.parsed[index] = [['00:00', this.player.options.defaultLrcLoadingText]];
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
                     if (index === this.player.list.index && xhr.readyState === 4) {
                         if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
                             this.parsed[index] = this.parse(xhr.responseText);
                         } else {
-                            this.player.notice(`LRC file request fails: status ${xhr.status}`);
-                            this.parsed[index] = [['00:00', 'Not available']];
+                            if (this.player.options.lrcErrNotice) {
+                                this.player.notice(`LRC file request fails: status ${xhr.status}`);
+                            }
+                            this.parsed[index] = [['00:00', this.player.options.defaultLrcErrText]];
                         }
                         this.container.innerHTML = tplLrc({
                             lyrics: this.parsed[index],
+                            fontSize: this.fontSize,
                         });
                         this.update(0);
                         this.current = this.parsed[index];
@@ -76,6 +91,7 @@ class Lrc {
 
         this.container.innerHTML = tplLrc({
             lyrics: this.parsed[index],
+            fontSize: this.fontSize,
         });
         this.current = this.parsed[index];
         this.update(0);

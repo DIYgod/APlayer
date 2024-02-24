@@ -184,6 +184,215 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         }
     }
 
+    /* fixedBar - START */
+    &.aplayer-fixed-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        width: 100%;
+        height: $aplayer-height;
+        z-index: 99;
+        box-shadow: none;
+        overflow: visible;
+        border-top: 1px solid #e9e9e9;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+
+        &.aplayer-withlrc {
+            .aplayer-pic {
+                height: 54px;
+                width: 54px;
+            }
+            .aplayer-info {
+                margin-left: 248px;
+                height: $aplayer-height;
+            }
+        }
+
+        .aplayer-list {
+            position: absolute;
+            right: 20px;
+            display: block;
+            bottom: 60px;
+            width: 300px;
+            z-index: 110;
+            background-color: #fff;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+
+            &.list-show{
+                border: 1px solid #eee;
+            }
+
+            .aplayer-list-title-wrap{
+                position: relative;
+                height: 32px;
+                line-height: 32px;
+                padding: 0 15px;
+                font-size: 12px;
+                transition: all .2s ease;
+                overflow: hidden;
+                margin: 0;
+
+                .aplayer-list-clear{
+                    position: absolute;
+                    top: 7px;
+                    right: 10px;
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                    color: #999;
+                    transition: all .2s ease;
+                    opacity: .8;
+                    font-size: 12px;
+
+                    path{
+                        fill: #666;
+                    }
+    
+                    &:hover path {
+                        fill: #000;
+                    }
+                }
+            }
+        }
+
+        .aplayer-body {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            padding: 0;
+            height: $aplayer-height;
+            z-index: 99;
+            background: #fff;
+            transition: all 0.3s ease;
+            border-top: 1px solid #e9e9e9;
+            box-sizing: border-box;
+            max-width: 850px;
+        }
+
+        .aplayer-controller-left{
+            position: relative;
+            float: left;
+            text-align: center;
+            width: 200px;
+            height: $aplayer-height;
+
+            .aplayer-icon-back,
+            .aplayer-icon-play,
+            .aplayer-icon-forward{
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                color: #999;
+                transition: all .2s ease;
+                opacity: .8;
+                vertical-align: middle;
+                font-size: 12px;
+                padding-top: 10px;
+
+                path{
+                    fill: #666;
+                }
+
+                &:hover path {
+                    fill: #000;
+                }
+            }
+
+            .aplayer-icon-play{
+                width: 45px;
+                height: 45px;
+            }
+
+            .aplayer-icon-forward{
+                padding-top: 0;
+                padding-bottom: 10px;
+            }
+        }
+
+        .aplayer-pic{
+            height: 54px;
+            width: 54px;
+            cursor: default;
+            margin: 6px 0 6px ;
+            border-radius: 5px;
+
+            .aplayer-button{
+                display: none;
+            }
+        }
+
+        .aplayer-lrc {
+            display: block;
+            position: fixed;
+            width: 100%;
+            bottom: 76px;
+            left: 0;
+            right: 0;
+            margin: 0;
+            z-index: 98;
+            pointer-events: none;
+            text-shadow: -1px -1px 0 #fff;
+
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+
+        .aplayer-info {
+            margin-left: 248px;
+
+            .aplayer-music {
+                width: calc(100% - 205px);
+            }
+        }
+
+        .aplayer-miniswitcher {
+            display: none;
+        }
+
+        .aplayer-icon-lrc {
+            display: inline-block;
+        }
+
+        .aplayer-icon-menu {
+            position: absolute;
+            display: inline-block;
+            bottom: 27px;
+            width: 50px;
+            height: 25px;
+            border-radius: 5px;
+            border: 1px solid #e9e9e9;
+            text-align: left;
+
+            svg{
+                margin-left: 3px;
+                width: 20px;
+            }
+
+            .list-length{
+                position: absolute;
+                width: 20px;
+                right: 5px;
+                top: 5px;
+                text-align: center;
+                color: #666;
+                font-size: 14px;
+            }
+        }
+
+        .aplayer-icon-menu {
+            right: 0;
+        }
+    }
+    /* fixedBar - END */
+
     &.aplayer-mobile {
         .aplayer-icon-volume-down {
             display: none;
@@ -542,8 +751,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
         p {
             font-size: 12px;
             color: #666;
-            line-height: 16px !important;
-            height: 16px !important;
+            /*line-height: 16px !important;*/
+            /*height: 16px !important;*/
             padding: 0 !important;
             margin: 0 !important;
             transition: all 0.5s ease-out;
@@ -554,7 +763,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                 opacity: 1;
                 overflow: visible;
                 height: initial !important;
-                min-height: 16px;
+                min-height: initial !important;
             }
         }
 

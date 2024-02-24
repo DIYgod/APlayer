@@ -5,7 +5,9 @@ class Controller {
     constructor(player) {
         this.player = player;
 
-        this.initPlayButton();
+        if (!this.player.options.fixedBar) {
+            this.initPlayButton();
+        }
         this.initPlayBar();
         this.initOrderButton();
         this.initLoopButton();

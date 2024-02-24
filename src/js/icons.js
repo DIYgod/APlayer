@@ -1,5 +1,6 @@
 import play from '../assets/play.svg';
 import pause from '../assets/pause.svg';
+import deleteList from '../assets/delete.svg';
 import volumeUp from '../assets/volume-up.svg';
 import volumeDown from '../assets/volume-down.svg';
 import volumeOff from '../assets/volume-off.svg';
@@ -17,6 +18,7 @@ import lrc from '../assets/lrc.svg';
 const Icons = {
     play: play,
     pause: pause,
+    delete: deleteList,
     volumeUp: volumeUp,
     volumeDown: volumeDown,
     volumeOff: volumeOff,

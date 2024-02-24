@@ -31,7 +31,7 @@ class APlayer {
         this.randomOrder = utils.randomOrder(this.options.audio.length);
 
         this.container.classList.add('aplayer');
-        if (this.options.lrcType && !this.options.fixed) {
+        if (this.options.lrcType && !this.options.fixed && !this.options.fixedBar) {
             this.container.classList.add('aplayer-withlrc');
         }
         if (this.options.audio.length > 1) {
@@ -69,6 +69,9 @@ class APlayer {
             this.setMode('mini');
             this.template.info.style.display = 'block';
         }
+        if (this.options.fixedBar) {
+            this.container.classList.add('aplayer-fixed-bar');
+        }
         if (this.template.info.offsetWidth < 200) {
             this.template.time.classList.add('aplayer-time-narrow');
         }
@@ -94,6 +97,24 @@ class APlayer {
         } else {
             this.list.switch(0);
         }
+
+        // read list storage
+        if (this.options.storeList) {
+            const listStorage = this.storage.get('list');
+            const listIndex = this.storage.get('listIndex');
+            if (listStorage) {
+                this.list.clear();
+                if (listStorage.length > 0) {
+                    this.list.add(listStorage);
+                    this.list.switch(listIndex);
+                }
+            }
+        }
+
+        if (this.options.fixedBar) {
+            this.list.updateListNum();
+        }
+        this.addDetailsClickListener();
 
         // autoplay
         if (this.options.autoplay) {
@@ -212,6 +233,35 @@ class APlayer {
                 this.skipForward();
                 this.play();
             }
+        });
+    }
+
+    addDetailsClickListener() {
+        this.container.addEventListener('click', (e) => {
+            let notIncluded = true;
+            const t = this.template;
+            const elementList = [t.barWrap, t.list, t.volumeWrap, t.volumeBarWrap, t.loop, t.order, t.menu, t.miniSwitcher, t.skipBackButton, t.skipForwardButton, t.skipPlayButton, t.lrcButton];
+            for (const i in elementList) {
+                if (e.path.indexOf(elementList[i]) >= 0) {
+                    notIncluded = false;
+                    break;
+                }
+            }
+            if (e.path.indexOf(this.template.pic) >= 0 && !this.options.fixedBar) {
+                notIncluded = false;
+            }
+            if (this.options.fixedBar) {
+                if (e.path.indexOf(this.template.leftController) >= 0) {
+                    notIncluded = false;
+                }
+            }
+            if (notIncluded) {
+                this.events.trigger('showdetails');
+            }
+            /*
+            if(e.path.indexOf(this.player.template.list) < 0 && e.path.indexOf(this.player.template.menu) < 0){
+                this.hide()
+            }*/
         });
     }
 
