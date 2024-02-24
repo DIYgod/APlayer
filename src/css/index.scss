@@ -101,6 +101,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             padding-right: 18px;
             transition: all 0.3s ease;
             max-width: 400px;
+            width: calc(100% - 18px) !important;
+            padding-right: 0px;
         }
 
         .aplayer-lrc {
@@ -128,12 +130,23 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             border-top: 1px solid #e9e9e9;
 
             .aplayer-music {
-                width: calc(100% - 105px);
+                width: calc(100% - 100px);
+    
+                .aplayer-title {
+                    display: block;
+                    margin-top: -2px;
+                }
+    
+                .aplayer-author {
+                    color: #666;
+                    display: block;
+                }
             }
         }
 
         .aplayer-miniswitcher {
             display: block;
+            margin-right: -18px;
         }
 
         &.aplayer-narrow {
@@ -318,7 +331,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 
     .aplayer-info {
         margin-left: $aplayer-height;
-        padding: 14px 7px 0 10px;
+        padding: 12px 7px 0 1px;
         height: $aplayer-height;
         box-sizing: border-box;
 
@@ -330,7 +343,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             user-select: text;
             cursor: default;
             padding-bottom: 2px;
-            height: 20px;
+            height: 33px;
+            margin-bottom: 5px;
+            margin-top: -3px;
 
             .aplayer-title {
                 font-size: 14px;
@@ -347,7 +362,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
             display: flex;
 
             .aplayer-bar-wrap {
-                margin: 0 0 0 5px;
+                margin: 0px 10px 0 5px;
                 padding: 4px 0;
                 cursor: pointer !important;
                 flex: 1;
@@ -406,6 +421,8 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
                 color: #999;
                 font-size: 11px;
                 padding-left: 7px;
+                margin-right: 0px;
+                padding-left: 0px;
 
                 .aplayer-time-inner {
                     vertical-align: middle;
