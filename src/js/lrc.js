@@ -48,10 +48,10 @@ class Lrc {
                 if (this.player.list.audios[index].lrc) {
                     this.parsed[index] = this.parse(this.player.list.audios[index].lrc);
                 } else {
-                    this.parsed[index] = [['00:00', 'Not available']];
+                    this.parsed[index] = [[0, 'Not available']];
                 }
             } else {
-                this.parsed[index] = [['00:00', 'Loading']];
+                this.parsed[index] = [[0, 'Loading']];
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
                     if (index === this.player.list.index && xhr.readyState === 4) {
@@ -59,7 +59,7 @@ class Lrc {
                             this.parsed[index] = this.parse(xhr.responseText);
                         } else {
                             this.player.notice(`LRC file request fails: status ${xhr.status}`);
-                            this.parsed[index] = [['00:00', 'Not available']];
+                            this.parsed[index] = [[0, 'Not available']];
                         }
                         this.container.innerHTML = tplLrc({
                             lyrics: this.parsed[index],
