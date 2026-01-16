@@ -4,6 +4,7 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const gitRevisionPlugin = new GitRevisionPlugin();
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
     mode: 'production',
@@ -13,7 +14,7 @@ module.exports = {
     devtool: 'source-map',
 
     entry: {
-        APlayer: './src/js/index.js',
+        APlayer: './src/index_vue.js',
     },
 
     output: {
@@ -28,12 +29,16 @@ module.exports = {
 
     resolve: {
         modules: ['node_modules'],
-        extensions: ['.js', '.scss'],
+        extensions: ['.js', '.scss', '.vue'],
     },
 
     module: {
         strictExportPresence: true,
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
             {
                 test: /\.js$/,
                 use: [
@@ -63,7 +68,25 @@ module.exports = {
                             plugins: [autoprefixer, cssnano],
                         },
                     },
-                    'sass-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass'),
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [autoprefixer, cssnano],
+                        },
+                    },
                 ],
             },
             {
@@ -89,6 +112,7 @@ module.exports = {
             APLAYER_VERSION: `"${require('../package.json').version}"`,
             GIT_HASH: JSON.stringify(gitRevisionPlugin.version()),
         }),
+        new VueLoaderPlugin(),
     ],
 
     node: {
