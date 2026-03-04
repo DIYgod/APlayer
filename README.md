@@ -8,9 +8,6 @@
 [![npm](https://img.shields.io/npm/v/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
 [![npm](https://img.shields.io/npm/l/aplayer.svg?style=flat-square)](https://github.com/MoePlayer/APlayer/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/aplayer.svg?style=flat-square)](https://www.npmjs.com/package/aplayer)
-[![size](https://badge-size.herokuapp.com/MoePlayer/APlayer/master/dist/APlayer.min.js?compression=gzip&style=flat-square)](https://github.com/MoePlayer/APlayer/tree/master/dist)
-[![Travis](https://img.shields.io/travis/MoePlayer/APlayer.svg?style=flat-square)](https://travis-ci.org/MoePlayer/APlayer)
-[![devDependency Status](https://img.shields.io/david/dev/MoePlayer/aplayer.svg?style=flat-square)](https://david-dm.org/MoePlayer/APlayer#info=devDependencies)
 [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square)](https://github.com/MoePlayer/APlayer#donate)
 
 ## Introduction
